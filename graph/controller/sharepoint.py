@@ -2,8 +2,10 @@ from fastapi import APIRouter, Depends, HTTPException, Request, File, UploadFile
 from datetime import date, datetime
 from pydantic import BaseModel
 from graph import verify_api_key, get_graph_token
+from config import API_KEY, TENANT_ID, CLIENT_ID, CLIENT_SECRET, GRAPH_URL, FOLDER, SITE_ID, DRIVE_ID
+import httpx
 
-router = APIRouter(prefix="/sharepoint", tags=["Sharepoint"])
+router = APIRouter(prefix="/sharepoint")
 
 @router.get("/projekte/{short}/dateien/{filename}/inhalt", dependencies=[Depends(verify_api_key)], tags=["SharePoint"])
 async def get_file_content(short: str, filename: str):

@@ -35,3 +35,26 @@ try:
     app.include_router(sharepoint_router)
 except Exception as e:
     print(f"⚠️ Fehler beim Einbinden von sharepoint_router: {e}")
+
+def custom_openapi():
+    if app.openapi_schema:
+        return app.openapi_schema
+
+    openapi_schema = get_openapi(
+        title="OttoCore API",
+        version="1.0.1",
+        description="Die Grapg API Kapselung für KI-Assistent Otto",
+        routes=app.routes,
+    )
+
+    openapi_schema["servers"] = [
+        {
+            "url": "https://graph.isarlabs.de",
+            "description": "Produktivserver"
+        }
+    ]
+
+    app.openapi_schema = openapi_schema
+    return app.openapi_schema
+
+app.openapi = custom_openapi

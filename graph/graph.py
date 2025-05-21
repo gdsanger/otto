@@ -2,9 +2,10 @@
 # © Christian Angermeier 2025
 
 from fastapi import Header, Depends, HTTPException
-from config import API_KEY
+from config import API_KEY, TENANT_ID, CLIENT_ID, CLIENT_SECRET, GRAPH_URL
 from fastapi.security.api_key import APIKeyHeader
 import logging
+import httpx
 
 API_KEY_NAME = "x-api-key"
 api_key_header = APIKeyHeader(name=API_KEY_NAME, auto_error=False)

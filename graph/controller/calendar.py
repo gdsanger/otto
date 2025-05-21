@@ -2,6 +2,8 @@ from fastapi import APIRouter, Depends, HTTPException, Request
 from datetime import date, datetime
 from pydantic import BaseModel
 from graph import verify_api_key, get_graph_token
+from config import API_KEY, TENANT_ID, CLIENT_ID, CLIENT_SECRET, GRAPH_URL, MAIL_FROM
+import httpx
 
 router = APIRouter(prefix="/kalender", tags=["Kalender"])
 
