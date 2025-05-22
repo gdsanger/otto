@@ -3,6 +3,7 @@ import json
 from datetime import datetime
 from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render, redirect
+from .helpers import login_required
 from django.views.decorators.csrf import csrf_exempt
 from core.const import prio_liste
 import os
@@ -14,6 +15,7 @@ OTTO_API_KEY = os.getenv("OTTO_API_KEY")
 OTTO_API_URL = os.getenv("OTTO_API_URL")
 
 
+@login_required
 def task_listview(request):
     res = requests.get(f"{OTTO_API_URL}/tasks", headers={"x-api-key": OTTO_API_KEY})
     tasks = res.json() if res.status_code == 200 else []
@@ -46,6 +48,7 @@ def task_listview(request):
     })
 
 
+@login_required
 @csrf_exempt
 def update_task_status(request):
     if request.method == "POST":
@@ -65,6 +68,7 @@ def update_task_status(request):
     return JsonResponse({"error": "Ungültige Methode."}, status=405)
 
 
+@login_required
 @csrf_exempt
 def update_task_person(request):
     if request.method == "POST":
@@ -84,6 +88,7 @@ def update_task_person(request):
     return JsonResponse({"error": "Ungültige Methode."}, status=405)
 
 
+@login_required
 @csrf_exempt
 def update_task_details(request):
     if request.method == "POST":
@@ -110,6 +115,7 @@ def update_task_details(request):
     return JsonResponse({"error": "Ungültige Methode."}, status=405)
 
 
+@login_required
 @csrf_exempt
 def delete_task(request):
     if request.method == "POST":
@@ -125,6 +131,7 @@ def delete_task(request):
     return JsonResponse({"error": "Ungültige Methode."}, status=405)
 
 
+@login_required
 @csrf_exempt
 def task_detail_or_update(request, task_id):
     if request.method == "POST":
