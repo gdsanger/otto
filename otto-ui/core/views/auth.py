@@ -15,11 +15,15 @@ def login_view(request):
         username = request.POST.get("username")
         password = request.POST.get("password")
 
-        res = requests.get(f"{OTTO_API_URL}/users", headers={"x-api-key": OTTO_API_KEY})
-        users = res.json() if res.status_code == 200 else []
+        res = requests.get(
+            f"{OTTO_API_URL}/users",
+            params={"username": username},
+            headers={"x-api-key": OTTO_API_KEY},
+        )
+        user = res.json() if res.status_code == 200 else None
 
-        user = next((u for u in users if u.get("username") == username), None)
         if user and bcrypt.checkpw(password.encode(), user.get("password", "").encode()):
+            user.pop("password", None)
             request.session["user"] = user
             return redirect("/")
         else:
