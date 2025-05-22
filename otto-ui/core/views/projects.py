@@ -3,6 +3,7 @@ import json
 from datetime import datetime
 from django.http import JsonResponse
 from django.shortcuts import render
+from .helpers import login_required
 from django.views.decorators.csrf import csrf_exempt
 from core.const import status_liste, prio_liste
 import os
@@ -14,6 +15,7 @@ OTTO_API_KEY = os.getenv("OTTO_API_KEY")
 OTTO_API_URL = os.getenv("OTTO_API_URL")
 
 
+@login_required
 def project_listview(request):
     res = requests.get(f"{OTTO_API_URL}/projekte", headers={"x-api-key": OTTO_API_KEY})
     projekte = res.json() if res.status_code == 200 else []
@@ -32,6 +34,7 @@ def project_listview(request):
     })
 
 
+@login_required
 @csrf_exempt
 def project_detailview(request, project_id):
     if request.method == "POST":

@@ -3,6 +3,7 @@ import json
 from datetime import datetime
 from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render
+from .helpers import login_required
 from django.views.decorators.csrf import csrf_exempt
 from core.const import mandanten_liste
 import os
@@ -14,6 +15,7 @@ OTTO_API_KEY = os.getenv("OTTO_API_KEY")
 OTTO_API_URL = os.getenv("OTTO_API_URL")
 
 
+@login_required
 def meeting_listview(request):
     res = requests.get(f"{OTTO_API_URL}/meetings", headers={"x-api-key": OTTO_API_KEY})
     meetings = res.json() if res.status_code == 200 else []
@@ -31,6 +33,7 @@ def meeting_listview(request):
     return render(request, "core/meeting_listview.html", {"meetings": filtered})
 
 
+@login_required
 @csrf_exempt
 def meeting_detailview(request, meeting_id):
     meeting_res = requests.get(f"{OTTO_API_URL}/meetings/{meeting_id}", headers={"x-api-key": OTTO_API_KEY})
