@@ -24,5 +24,22 @@
           });
       });
     });
+    document.querySelectorAll('.task-new').forEach(btn => {
+      btn.addEventListener('click', e => {
+        e.preventDefault();
+        const params = [];
+        if (btn.dataset.projectId) params.push('project_id=' + btn.dataset.projectId);
+        if (btn.dataset.meetingId) params.push('meeting_id=' + btn.dataset.meetingId);
+        const query = params.length ? '?' + params.join('&') : '';
+
+        fetch(`/task/new/${query}`)
+          .then(res => res.text())
+          .then(html => {
+            document.getElementById('taskModalContent').innerHTML = html;
+            const modal = new bootstrap.Modal(document.getElementById('taskModal'));
+            modal.show();
+          });
+      });
+    });
   });
 </script>

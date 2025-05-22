@@ -13,6 +13,7 @@ urlpatterns = [
     path('task/update_status/', views.update_task_status, name='update_task_status'),
     path('task/update_person/', views.update_task_person, name='update_task_person'),
     path("task/delete/", views.delete_task, name="delete_task"),
+    path("task/new/", views.task_create, name="task_create"),
     path("task/<str:task_id>/", views.task_detail_or_update, name="task_detail"),
     path('meeting/', views.meeting_listview, name='meeting_liste'),
     path('meeting/<str:meeting_id>/', views.meeting_detailview, name='meeting_detail'),

@@ -17,7 +17,8 @@
             <tr>
                 <th>Bezeichnung</th>
                 <th>Datum</th>
-                <th>Mandant</th>               
+                <th>Mandant</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -25,7 +26,10 @@
             <tr>
                 <td><a href="/meeting/{{ metting.id }}">{{ metting.name }}</a></td>
                 <td>{{ metting.datum|iso_to_date }}</td>
-                <td>{{ metting.mandant }}</td>               
+                <td>{{ metting.mandant }}</td>
+                <td class="text-end">
+                    <button class="btn btn-sm btn-outline-primary task-new" data-meeting-id="{{ metting.id }}">+</button>
+                </td>
             </tr>
             {% empty %}
             <tr>
