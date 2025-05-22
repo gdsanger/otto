@@ -19,9 +19,11 @@ class UserUpdate(BaseModel):
     password: Optional[str] = None
 
 def serialize(user):
-    user["id"] = str(user["_id"])
-    user.pop("_id", None)
-    return user
+    sanitized = user.copy()
+    sanitized["id"] = str(sanitized.get("_id"))
+    sanitized.pop("_id", None)
+    sanitized.pop("password", None)
+    return sanitized
 
 @router.get("/users")
 async def get_users(username: Optional[str] = None):
@@ -31,7 +33,7 @@ async def get_users(username: Optional[str] = None):
             raise HTTPException(status_code=404, detail="User not found")
         return serialize(user)
     cursor = users.find()
-    return [serialize(u async for u in cursor)]
+    return [serialize(u) async for u in cursor]
 
 @router.post("/users")
 async def create_user(user: UserIn):
