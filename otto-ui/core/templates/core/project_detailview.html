@@ -99,6 +99,7 @@
           <th>Status</th>
           <th>Termin</th>
           <th>Zuständig</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -116,6 +117,12 @@
             <input type="date" class="form-control form-control-sm auto-save" data-task-id="{{ task.id }}" data-field="termin" value="{{ task.termin|slice:":10" }}">
           </td>
           <td>{{ task.zuständig }}</td>
+          <td>
+            <form hx-post="/task/delete/" hx-confirm="Wirklich löschen?" hx-target="closest tr" hx-swap="outerHTML">
+              <input type="hidden" name="task_id" value="{{ task.id }}">
+              <button type="submit" class="btn btn-sm btn-outline-danger">🗑️</button>
+            </form>
+          </td>
         </tr>
         {% endfor %}
       </tbody>

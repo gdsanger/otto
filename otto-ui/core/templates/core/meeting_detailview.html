@@ -66,6 +66,7 @@
           <th>Status</th>
           <th>Prio</th>
           <th>Verantwortlich</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -75,9 +76,16 @@
           <td>{{ task.status }}</td>
           <td>{{ task.prio }}</td>
           <td>{{ task.zuständig }}</td>
+          <td>
+            <form hx-post="/task/delete/" hx-confirm="Wirklich löschen?" hx-target="closest tr" hx-swap="outerHTML">
+              <input type="hidden" name="task_id" value="{{ task.id }}">
+              <button type="submit" class="btn btn-sm btn-outline-danger">🗑️</button>
+            </form>
+          </td>
         </tr>
         {% endfor %}
         <tr>
+          <td>          </td>
           <td>          </td>
           <td>          </td>
           <td>          </td>
