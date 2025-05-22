@@ -1,0 +1,86 @@
+# besprechungen.py – Teil des Otto KI-Systems
+# © Christian Angermeier 2025
+
+from fastapi import FastAPI, Depends, Header, Request, HTTPException, status, Body, Query, APIRouter
+from model import Besprechung, Besprechungstermin, InputBesprechungstermin
+from mongo import besprechungen_collection, termine_collection
+from bson import ObjectId
+from helper import verify_api_key
+from pydantic import BaseModel
+
+router = APIRouter()
+
+class InsertResponse(BaseModel):
+    inserted_id: str
+
+# 📌 Besprechung anlegen
+@router.post("/besprechungen", dependencies=[Depends(verify_api_key)], tags=["Besprechungen"])
+async def create_besprechung(b: Besprechung):
+    b_dict = b.dict()
+    b_dict.setdefault("mandant", None)  # Optionales Feld für Mandant
+    result = await besprechungen_collection.insert_one(b_dict)
+    return {"inserted_id": str(result.inserted_id)}
+
+# 📋 Alle Besprechungen abrufen
+@router.get("/besprechungen", dependencies=[Depends(verify_api_key)], tags=["Besprechungen"])
+async def list_besprechungen():
+    cursor = besprechungen_collection.find()
+    result = []
+    async for b in cursor:
+        b["id"] = str(b["_id"])
+        del b["_id"]
+        result.append(b)
+    return {"besprechungen": result}
+
+@router.post(
+    "/besprechungen/{besprechung_id}/termine",
+    dependencies=[Depends(verify_api_key)],
+    tags=["Besprechungen"],
+    response_model=InsertResponse
+)
+async def create_termin(besprechung_id: str, t: InputBesprechungstermin):
+    try:
+        oid = ObjectId(besprechung_id)
+    except:
+        raise HTTPException(status_code=400, detail="Ungültige ID")
+    t_dict = t.dict()
+    t_dict["besprechung_id"] = besprechung_id  # ✅ ID manuell einfügen
+    result = await termine_collection.insert_one(t_dict)
+    return {"inserted_id": str(result.inserted_id)}
+
+# 🧾 Termine für eine Besprechung abrufen
+@router.get("/besprechungen/{besprechung_id}/termine", dependencies=[Depends(verify_api_key)], tags=["Besprechungen"])
+async def list_termine(besprechung_id: str):
+    termine = []
+    cursor = termine_collection.find({"besprechung_id": besprechung_id})
+    async for t in cursor:
+        t["id"] = str(t["_id"])
+        del t["_id"]
+        termine.append(t)
+    return {"termine": termine}
+
+@router.put("/besprechungen/{besprechung_id}", dependencies=[Depends(verify_api_key)], tags=["Besprechungen"])
+async def update_besprechung(besprechung_id: str, b: Besprechung):
+    try:
+        oid = ObjectId(besprechung_id)
+    except InvalidId:
+        raise HTTPException(status_code=400, detail="Ungültige ID")
+    b_dict = b.dict()
+    b_dict.setdefault("mandant", None)
+    result = await besprechungen_collection.replace_one({"_id": oid}, b_dict)
+    if result.matched_count == 0:
+        raise HTTPException(status_code=404, detail="Besprechung nicht gefunden")
+    return {"status": "aktualisiert"}
+
+@router.delete("/besprechungen/{besprechung_id}", dependencies=[Depends(verify_api_key)], tags=["Besprechungen"])
+async def delete_besprechung(besprechung_id: str):
+    try:
+        oid = ObjectId(besprechung_id)
+    except InvalidId:
+        raise HTTPException(status_code=400, detail="Ungültige ID")
+
+    result = await besprechungen_collection.delete_one({"_id": oid})
+    if result.deleted_count == 0:
+        raise HTTPException(status_code=404, detail="Besprechung nicht gefunden")
+
+    return {"status": "gelöscht"}

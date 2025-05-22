@@ -1,0 +1,28 @@
+<div class="modal fade" id="taskModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-body p-0" id="taskModalContent">
+        <div class="text-center p-5">⏳ Lade Task...</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.task-open').forEach(link => {
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        const taskId = link.dataset.taskId;
+
+        fetch(`/task/${taskId}/`)
+          .then(res => res.text())
+          .then(html => {
+            document.getElementById('taskModalContent').innerHTML = html;
+            const modal = new bootstrap.Modal(document.getElementById('taskModal'));
+            modal.show();
+          });
+      });
+    });
+  });
+</script>

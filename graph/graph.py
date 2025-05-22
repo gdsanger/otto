@@ -4,6 +4,8 @@
 from fastapi import Header, Depends, HTTPException
 from config import API_KEY, TENANT_ID, CLIENT_ID, CLIENT_SECRET, GRAPH_URL
 from fastapi.security.api_key import APIKeyHeader
+from datetime import datetime
+import pytz
 import logging
 import httpx
 
@@ -30,3 +32,11 @@ async def get_graph_token():
         response = await client.post(url, data=data, headers=headers)
         response.raise_for_status()
         return response.json()["access_token"]
+
+def utc_to_local(utc_string: str, target_tz: str = "Europe/Berlin") -> datetime:
+    utc = pytz.UTC
+    local_tz = pytz.timezone(target_tz)
+    dt = datetime.fromisoformat(utc_string)
+    if dt.tzinfo is None:
+        dt = dt.replace(tzinfo=utc)
+    return dt.astimezone(local_tz)

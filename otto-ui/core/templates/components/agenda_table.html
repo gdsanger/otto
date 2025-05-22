@@ -1,0 +1,24 @@
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Thema</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for punkt in agenda %}
+    <tr>
+      <td>{{ forloop.counter }}</td>
+      <td>
+        <input type="text" name="agenda" class="form-control" value="{{ punkt }}">
+      </td>
+    </tr>
+    {% endfor %}
+    {% if agenda|length == 0 %}
+    <tr>
+      <td>1</td>
+      <td><input type="text" name="agenda" class="form-control"></td>
+    </tr>
+    {% endif %}
+  </tbody>
+</table>

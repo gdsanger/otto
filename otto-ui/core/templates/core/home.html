@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1>Willkommen bei Kiplaner!</h1>
+    <button class="btn btn-primary" hx-get="/" hx-swap="outerHTML">Neu laden mit HTMX</button>
+</div>
+{% endblock %}

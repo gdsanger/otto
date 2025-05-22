@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container-fluid">
+  <h2 class="mb-4">Projekte</h2>
+
+  <form method="get" class="mb-3 d-flex gap-2">
+    <div class="input-group">
+      <input type="text" name="q" class="form-control" placeholder="Suche nach Projektname oder Status..." value="{{ request.GET.q }}">
+      <button class="btn btn-outline-secondary" type="submit">Suchen</button>
+    </div>
+    {% if request.GET.q %}
+    <a href="/projekt" class="btn btn-outline-danger">Zurücksetzen</a>
+    {% endif %}
+  </form>
+
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Status</th>
+        <th>Prio</th>
+        <th>Bearbeiter</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for projekt in projekte %}
+      <tr>
+       <td class="align-middle">
+        <a href="/project/{{ projekt.id }}/">{{ projekt.name }}</a>
+      </td>
+        <td>
+          <select class="form-select form-select-sm projekt-update" data-id="{{ projekt.id }}" data-field="status">
+            {% for s in status_liste %}
+              <option value="{{ s }}" {% if s == projekt.status %}selected{% endif %}>{{ s }}</option>
+            {% endfor %}
+          </select>
+        </td>
+        <td>
+          <select class="form-select form-select-sm projekt-update" data-id="{{ projekt.id }}" data-field="prio">
+            {% for p in prio_liste %}
+              <option value="{{ p }}" {% if p == projekt.prio %}selected{% endif %}>{{ p }}</option>
+            {% endfor %}
+          </select>
+        </td>
+        <td>
+          <select class="form-select form-select-sm projekt-update" data-id="{{ projekt.id }}" data-field="bearbeiter">
+            {% for person in personen %}
+              <option value="{{ person.id }}" {% if person.id in projekt.bearbeiter %}selected{% endif %}>{{ person.name }}</option>
+            {% endfor %}
+          </select>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <div id="saveSuccess" class="alert alert-success mt-3 d-none">Gespeichert!</div>
+</div>
+
+<script>
+  function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+      const cookies = document.cookie.split(';');
+      for (let i = 0; i < cookies.length; i++) {
+        const cookie = cookies[i].trim();
+        if (cookie.substring(0, name.length + 1) === (name + '=')) {
+          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+          break;
+        }
+      }
+    }
+    return cookieValue;
+  }
+
+  document.querySelectorAll('.projekt-update').forEach(select => {
+    select.addEventListener('change', () => {
+      const id = select.dataset.id;
+      const field = select.dataset.field;
+      const value = select.value;
+
+      fetch(`/project/${id}/`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRFToken': getCookie('csrftoken'),
+        },
+        body: JSON.stringify({ [field]: value })
+      }).then(r => {
+        if (r.ok) {
+          const box = document.getElementById('saveSuccess');
+          box.classList.remove('d-none');
+          setTimeout(() => box.classList.add('d-none'), 2000);
+        }
+      });
+    });
+  });
+</script>
+{% endblock %}

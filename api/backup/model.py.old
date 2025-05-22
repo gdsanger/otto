@@ -1,0 +1,53 @@
+# model.py – Teil des Otto KI-Systems
+# © Christian Angermeier 2025
+
+from pydantic import BaseModel, EmailStr, Field
+from typing import List, Optional, Literal
+from datetime import datetime, date
+
+
+
+class Besprechung(BaseModel):
+    name: str
+    typ: str = "Serie"  # "Serie" oder "Einzeltermin"
+    rhythmus: Literal["wöchentlich", "14-täglich", "monatlich", "einmalig", "individuell"]
+    tag: Optional[str] = None  # z. B. "Montag"
+    von: Optional[str] = None  # z. B. "10:00"
+    bis: Optional[str] = None  # z. B. "11:00"
+    teilnehmer: List[str] = []  # enthält die Mongo-ID der Personen
+    beschreibung: Optional[str] = None
+    standard_agenda: Optional[List[str]] = []
+    aktiv: bool = True
+    mandant: Optional[str] = None  # 🆕 Mandant-Feld ergänzt
+
+class BesprechungAufgabe(BaseModel):
+    beschreibung: str
+    status: str = "offen"
+    zuständig: Optional[str] = None
+    termin: Optional[date] = None
+
+class Besprechungstermin(BaseModel):
+    besprechung_id: Optional[str] = Field(default=None, exclude=True)
+    datum: datetime
+    agenda: List[str] = []
+    notizen: Optional[str] = None
+    aufgaben: List[BesprechungAufgabe] = []
+    wiedervorlage: Optional[datetime] = None
+
+class InputBesprechungstermin(BaseModel):   
+    datum: datetime
+    agenda: List[str] = []
+    notizen: Optional[str] = None
+    aufgaben: List[BesprechungAufgabe] = []
+    wiedervorlage: Optional[datetime] = None
+
+
+
+
+
+
+    
+
+
+
+

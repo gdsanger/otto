@@ -1,0 +1,116 @@
+{% block content %}
+<div class="container mb-3">
+    <div class="card">
+<div class="card-header">
+  <h3>Aufgabe bearbeiten</h2>
+
+</div>
+<div class="card-body">
+<form id="taskForm" data-task-id="{{ task.id }}">
+        {% csrf_token %}
+        <input type="hidden" name="task_id" value="{{ task.id }}">
+
+        <div class="mb-3">
+            <label class="form-label">Betreff</label>
+            <input class="form-control" type="text" name="betreff" value="{{ task.betreff }}">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Beschreibung</label>
+            <textarea class="form-control" name="beschreibung">{{ task.beschreibung }}</textarea>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Projekt</label>
+            <select class="form-select" name="project_id">
+                <option value="">-- Kein Projekt --</option>
+                {% for projekt in projekte %}
+                    <option value="{{ projekt.id }}" {% if task.project_id == projekt.id %}selected{% endif %}>{{ projekt.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Meeting</label>
+            <select class="form-select" name="meeting_id">
+                <option value="">-- Kein Meeting --</option>
+                {% for meeting in meetings %}
+                    <option value="{{ meeting.id }}" {% if task.meeting_id == meeting.id %}selected{% endif %}>{{ meeting.name }}{% if meeting.datum_formatiert %} ({{ meeting.datum_formatiert }}){% endif %}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Zuständig</label>
+            <select class="form-select" name="person_id">
+                {% for person in personen %}
+                    <option value="{{ person.id }}" {% if task.person_id == person.id %}selected{% endif %}>{{ person.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Status</label>
+            <select class="form-select" name="status">
+                {% for status in status_liste %}
+                    <option value="{{ status }}" {% if task.status == status %}selected{% endif %}>{{ status }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Priorität</label>
+            <select class="form-select" name="prio">
+                {% for p in prio_liste %}
+                    <option value="{{ p }}" {% if task.prio == p %}selected{% endif %}>{{ p }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Aufwand (Stunden)</label>
+            <input class="form-control" type="number" name="aufwand" value="{{ task.aufwand }}">
+        </div>
+
+        <button class="btn btn-primary" type="submit">Speichern</button>        
+    </form>  
+</div>
+
+</div>
+<script>
+document.addEventListener('submit', function(e) {
+  if (e.target.id === 'taskForm') {
+    e.preventDefault();
+    const form = e.target;
+    const formData = new FormData(form);
+    const jsonData = {};
+
+    formData.forEach((value, key) => {
+      if (jsonData[key]) {
+        if (!Array.isArray(jsonData[key])) {
+          jsonData[key] = [jsonData[key]];
+        }
+        jsonData[key].push(value);
+      } else {
+        jsonData[key] = value;
+      }
+    });
+
+    const taskId = form.dataset.taskId;
+    fetch(`/task/${taskId}/`, {
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRFToken': getCookie('csrftoken'),
+      },
+      body: JSON.stringify(jsonData),
+    }).then(res => {
+      if (res.ok) {
+        bootstrap.Modal.getInstance(document.getElementById('taskModal')).hide();
+        // Optional: Projekt-/Meeting-View aktualisieren
+       
+      }
+    });
+  }
+});
+</script>
+{% endblock %}

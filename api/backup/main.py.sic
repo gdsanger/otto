@@ -1,0 +1,148 @@
+# main.py – Teil des Otto KI-Systems
+# © Christian Angermeier 2025
+
+from fastapi import FastAPI, Depends, Header, Request, HTTPException, status, Body, Query
+from graph_mailer import send_mail_via_graph, ensure_folder_exists
+from config import API_KEY
+from fastapi.security.api_key import APIKeyHeader
+from zammad import router as ticket_router
+from besprechungen import router as besprechung_router
+from coder import router as coder_router
+from personen import router as personen_router
+from sharepoint import router as sharepoint_router
+from model import Projekt, ProjektListe, Person, PersonenListe, MailRequest
+from typing import List, Optional
+from mongo import projekte_collection, personen_collection
+from bson import ObjectId
+from fastapi.openapi.utils import get_openapi
+from config import GRAPH_URL, SITE_ID, DRIVE_ID, FOLDER
+from email import policy
+from email.parser import BytesParser
+from helper import verify_api_key
+import tempfile
+import os
+from docx import Document
+import logging
+from graph_mailer import get_graph_token
+import httpx
+from bson.errors import InvalidId
+
+app = FastAPI()
+app.include_router(ticket_router)
+app.include_router(besprechung_router)
+app.include_router(coder_router)
+app.include_router(personen_router)
+app.include_router(sharepoint_router)
+
+def custom_openapi():
+    if app.openapi_schema:
+        return app.openapi_schema
+
+    openapi_schema = get_openapi(
+        title="OttoCore API",
+        version="1.0.0",
+        description="Die zentrale API für KI-Assistent Otto",
+        routes=app.routes,
+    )
+
+    openapi_schema["servers"] = [
+        {
+            "url": "https://otto.isarlabs.de",
+            "description": "Produktivserver"
+        }
+    ]
+
+    app.openapi_schema = openapi_schema
+    return app.openapi_schema
+
+app.openapi = custom_openapi
+
+@app.get("/")
+async def root():
+    return {"message": "KI-Drehkreuz läuft"}
+
+@app.get("/projekte/", dependencies=[Depends(verify_api_key)], tags=["Mongo"])
+async def lade_projekte():
+    logging.info("GET /projekte wurde aufgerufen")
+    cursor = projekte_collection.find()
+    daten = []
+
+    async for projekt in cursor:
+        projekt_dict = serialize_mongo(projekt)
+
+        # Stakeholder auflösen (optional)
+        if "stakeholder_ids" in projekt_dict and projekt_dict["stakeholder_ids"]:
+            ids = [ObjectId(pid) for pid in projekt_dict["stakeholder_ids"]]
+            personen_cursor = personen_collection.find({"_id": {"$in": ids}})
+            stakeholder = []
+            async for p in personen_cursor:
+                stakeholder.append({
+                    "id": str(p["_id"]),
+                    "name": p.get("name"),
+                    "email": p.get("email"),
+                    "mandant": p.get("mandant"),
+                    "position": p.get("position")
+                })
+            projekt_dict["stakeholder"] = stakeholder
+
+        daten.append(projekt_dict)
+    return daten
+
+@app.post("/send_gpt_mail/")
+async def send_gpt_mail(req: MailRequest):
+    status = await send_mail_via_graph(req.subject, req.body, req.to, req.cc)
+    return {"status": status}
+
+@app.post("/projekte/", dependencies=[Depends(verify_api_key)], tags=["Mongo"])
+async def speichere_projekte(projekt_liste: ProjektListe = Body(...)):
+    logging.info("POST /projekte wurde aufgerufen")
+
+    for projekt in projekt_liste.projekte:
+        for pid in projekt.stakeholder_ids:
+            if not await personen_collection.find_one({"_id": ObjectId(pid)}):
+                raise HTTPException(status_code=400, detail=f"Ungültige Personen-ID: {pid}")
+
+    result = await projekte_collection.insert_many([p.dict() for p in projekt_liste.projekte])
+    inserted_ids = [str(i) for i in result.inserted_ids]
+
+    for projekt in projekt_liste.projekte:
+        if projekt.short:
+            await ensure_folder_exists(projekt.short)
+
+    return {"inserted_ids": inserted_ids}
+
+@app.put("/projekte/{projekt_id}", dependencies=[Depends(verify_api_key)], tags=["Mongo"])
+async def update_projekt(projekt_id: str, projekt: Projekt):
+    try:
+        oid = ObjectId(projekt_id)
+    except InvalidId:
+        raise HTTPException(status_code=400, detail="Ungültige ID")
+
+    for pid in projekt.stakeholder_ids:
+        if not await personen_collection.find_one({"_id": ObjectId(pid)}):
+            raise HTTPException(status_code=400, detail=f"Ungültige Personen-ID: {pid}")
+
+    result = await projekte_collection.replace_one({"_id": oid}, projekt.dict())
+    if projekt.short:
+        await ensure_folder_exists(projekt.short)
+    if result.matched_count == 0:
+        raise HTTPException(status_code=404, detail="Projekt nicht gefunden")
+    return {"status": "aktualisiert"}
+
+@app.delete("/projekte/{projekt_id}", dependencies=[Depends(verify_api_key)], tags=["Mongo"])
+async def delete_projekt(projekt_id: str):
+    try:
+        oid = ObjectId(projekt_id)
+    except InvalidId:
+        raise HTTPException(status_code=400, detail="Ungültige ID")
+
+    result = await projekte_collection.delete_one({"_id": oid})
+    if result.deleted_count == 0:
+        raise HTTPException(status_code=404, detail="Projekt nicht gefunden")
+    return {"status": "gelöscht"}
+
+def serialize_mongo(doc):
+    doc = dict(doc)
+    doc["id"] = str(doc["_id"])
+    del doc["_id"]
+    return doc

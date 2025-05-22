@@ -1,0 +1,50 @@
+<div class="tokenbox">
+  <div class="selected-tokens mb-2" id="token-container">
+    {% for p in personen|dictsort:"name" %}
+      {% if p.id|stringformat:"s" in selected %}
+        <span class="badge bg-primary me-1" data-id="{{ p.id }}">{{ p.name }}
+          <input type="hidden" name="personen_ids" value="{{ p.id }}">
+          <button type="button" class="btn-close btn-close-white btn-sm ms-1 remove-token" data-id="{{ p.id }}"></button>
+        </span>
+      {% endif %}
+    {% endfor %}
+  </div>
+  <select class="form-select add-token">
+    <option disabled selected>Person hinzufügen...</option>
+    {% for p in personen|dictsort:"name" %}
+      {% if p.id|stringformat:"s" not in selected %}
+        <option value="{{ p.id }}">{{ p.name }}</option>
+      {% endif %}
+    {% endfor %}
+  </select>
+</div>
+
+<script>
+  document.querySelectorAll('.add-token').forEach(select => {
+    select.addEventListener('change', e => {
+      const id = e.target.value;
+      const name = e.target.options[e.target.selectedIndex].text;
+
+      // Neuen Token hinzufügen
+      const badge = document.createElement('span');
+      badge.className = 'badge bg-primary me-1';
+      badge.setAttribute('data-id', id);
+      badge.innerHTML = `${name} <input type="hidden" name="personen_ids" value="${id}">` +
+        `<button type="button" class="btn-close btn-close-white btn-sm ms-1 remove-token" data-id="${id}"></button>`;
+
+      document.getElementById('token-container').appendChild(badge);
+      e.target.selectedIndex = 0;
+
+      // Event-Handler für neuen Remove-Button
+      badge.querySelector('.remove-token').addEventListener('click', ev => {
+        ev.currentTarget.closest('span').remove();
+      });
+    });
+  });
+
+  document.querySelectorAll('.remove-token').forEach(btn => {
+    btn.addEventListener('click', e => {
+      e.currentTarget.closest('span').remove();
+    });
+  });
+</script>

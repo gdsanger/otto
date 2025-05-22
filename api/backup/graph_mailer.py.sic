@@ -1,0 +1,87 @@
+import httpx
+from config import CLIENT_ID, CLIENT_SECRET, TENANT_ID, MAIL_FROM, MAIL_TO, SITE_ID, DRIVE_ID, FOLDER
+from typing import Optional
+
+async def get_graph_token():
+    url = f"https://login.microsoftonline.com/{TENANT_ID}/oauth2/v2.0/token"
+    headers = { "Content-Type": "application/x-www-form-urlencoded" }
+    data = {
+        "client_id": CLIENT_ID,
+        "client_secret": CLIENT_SECRET,
+        "scope": "https://graph.microsoft.com/.default",
+        "grant_type": "client_credentials"
+    }
+
+    async with httpx.AsyncClient() as client:
+        response = await client.post(url, data=data, headers=headers)
+        response.raise_for_status()
+        return response.json()["access_token"]
+
+async def send_mail_via_graph(subject: str, body: str, to: str, cc: Optional[str] = None):
+    token = await get_graph_token()
+    url = f"https://graph.microsoft.com/v1.0/users/{MAIL_FROM}/sendMail"
+    headers = {
+        "Authorization": f"Bearer {token}",
+        "Content-Type": "application/json"
+    }
+
+    # Empfänger verarbeiten
+    recipients = [
+        {"emailAddress": {"address": addr.strip()}}
+        for addr in to.split(",") if addr.strip()
+    ]
+
+    mail_data = {
+        "message": {
+            "subject": subject,
+            "body": {
+                "contentType": "HTML",
+                "content": body
+            },
+            "toRecipients": recipients
+        },
+        "saveToSentItems": "true"
+    }
+
+    # Optional: CC verarbeiten, wenn vorhanden
+    if cc:
+        cc_recipients = [
+            {"emailAddress": {"address": addr.strip()}}
+            for addr in cc.split(",") if addr.strip()
+        ]
+        if cc_recipients:
+            mail_data["message"]["ccRecipients"] = cc_recipients
+    import json
+    print(json.dumps(mail_data, indent=2))
+    # Senden
+    async with httpx.AsyncClient() as client:
+        response = await client.post(url, headers=headers, json=mail_data)
+        response.raise_for_status()
+        return response.status_code
+
+async def ensure_folder_exists(shortname: str):
+    token = await get_graph_token()
+    path = f"{FOLDER.rstrip('/')}/{shortname}"
+    check_url = f"{GRAPH_URL}/sites/{SITE_ID}/drives/{DRIVE_ID}/root:/{path}"
+    headers = {"Authorization": f"Bearer {token}"}
+
+    async with httpx.AsyncClient() as client:
+        check = await client.get(check_url, headers=headers)
+
+        if check.status_code == 200:
+            print(f"✔️ Ordner '{shortname}' existiert bereits.")
+            return
+        elif check.status_code == 404:
+            print(f"➕ Ordner '{shortname}' wird erstellt …")
+            create_url = f"{GRAPH_URL}/sites/{SITE_ID}/drives/{DRIVE_ID}/root:/{path}"
+            response = await client.put(
+                create_url,
+                headers={**headers, "Content-Type": "application/json"},
+                json={"folder": {}, "@microsoft.graph.conflictBehavior": "fail"}
+            )
+            if response.status_code in (200, 201):
+                print(f"✅ Ordner '{shortname}' erfolgreich erstellt.")
+            else:
+                print(f"❌ Fehler bei Ordner '{shortname}': {response.status_code} – {response.text}")
+        else:
+            print(f"⚠️ Fehler beim Prüfen von '{shortname}': {check.status_code} – {check.text}")

@@ -1,0 +1,69 @@
+from fastapi import APIRouter, HTTPException, Depends
+from typing import List
+from model.task import Task
+from helper import verify_api_key, serialize_mongo
+from mongo import db
+from datetime import datetime, date
+from bson import ObjectId
+
+router = APIRouter()
+
+
+def convert_dates(task_dict):
+    for key in ["termin"]:
+        if isinstance(task_dict.get(key), date):
+            task_dict[key] = datetime.combine(task_dict[key], datetime.min.time())
+    return task_dict
+
+@router.get("/tasks", dependencies=[Depends(verify_api_key)], tags=["Task"])
+async def list_tasks():
+    cursor = db.tasks.find()
+    tasks = []
+    async for task in cursor:
+        t = serialize_mongo(task)
+        tasks.append(t)
+    return tasks
+
+@router.post("/tasks", dependencies=[Depends(verify_api_key)], tags=["Task"])
+async def create_task(task: Task):
+    if not await db.personen.find_one({"_id": ObjectId(task.person_id)}):
+        raise HTTPException(status_code=400, detail=f"Person mit ID '{task.person_id}' nicht gefunden.")
+
+    task_dict = convert_dates(task.dict())
+    result = await db.tasks.insert_one(task_dict)
+    return {"status": "ok", "id": str(result.inserted_id)}
+
+@router.get("/tasks/{task_id}", response_model=Task, dependencies=[Depends(verify_api_key)], tags=["Task"])
+async def get_task(task_id: str):
+    task = await db.tasks.find_one({"_id": ObjectId(task_id)})
+    if not task:
+        raise HTTPException(status_code=404, detail="Task not found")
+    return serialize_mongo(task)
+
+@router.put("/tasks/{task_id}", dependencies=[Depends(verify_api_key)], tags=["Task"])
+async def update_task(task_id: str, task: Task):
+    if not await db.personen.find_one({"_id": ObjectId(task.person_id)}):
+        raise HTTPException(status_code=400, detail=f"Person mit ID '{task.person_id}' nicht gefunden.")
+
+    task_dict = convert_dates(task.dict())
+    result = await db.tasks.update_one({"_id": ObjectId(task_id)}, {"$set": task_dict})
+    if result.matched_count == 0:
+        raise HTTPException(status_code=404, detail="Task not found")
+    return {"status": "updated"}
+
+@router.delete("/tasks/{task_id}", dependencies=[Depends(verify_api_key)], tags=["Task"])
+async def delete_task(task_id: str):
+    result = await db.tasks.delete_one({"_id": ObjectId(task_id)})
+    if result.deleted_count == 0:
+        raise HTTPException(status_code=404, detail="Task not found")
+    return {"status": "deleted"}
+
+@router.get("/project/{project_id}/tasks", dependencies=[Depends(verify_api_key)], tags=["Projekt"])
+async def get_tasks_by_project(project_id: str):
+    cursor = db.tasks.find({"project_id": project_id})
+    return [serialize_mongo(task) async for task in cursor]
+
+@router.get("/meeting/{meeting_id}/tasks", dependencies=[Depends(verify_api_key)], tags=["Meeting"])
+async def get_tasks_by_meeting(meeting_id: str):
+    cursor = db.tasks.find({"meeting_id": meeting_id})
+    return [serialize_mongo(task) async for task in cursor]

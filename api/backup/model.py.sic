@@ -1,0 +1,118 @@
+# model.py – Teil des Otto KI-Systems
+# © Christian Angermeier 2025
+
+from pydantic import BaseModel, EmailStr, Field
+from typing import List, Optional, Literal
+from datetime import datetime, date
+
+class MailRequest(BaseModel):
+    subject: str
+    body: str
+    to: str
+    cc: Optional[str] = None
+
+class Besprechung(BaseModel):
+    name: str
+    typ: str = "Serie"  # "Serie" oder "Einzeltermin"
+    rhythmus: Literal["wöchentlich", "14-täglich", "monatlich", "einmalig", "individuell"]
+    tag: Optional[str] = None  # z. B. "Montag"
+    von: Optional[str] = None  # z. B. "10:00"
+    bis: Optional[str] = None  # z. B. "11:00"
+    teilnehmer: List[str] = []  # enthält die Mongo-ID der Personen
+    beschreibung: Optional[str] = None
+    standard_agenda: Optional[List[str]] = []
+    aktiv: bool = True
+
+class BesprechungAufgabe(BaseModel):
+    beschreibung: str
+    status: str = "offen"
+    zuständig: Optional[str] = None
+    termin: Optional[date] = None
+
+class Besprechungstermin(BaseModel):
+    besprechung_id: Optional[str] = Field(default=None, exclude=True)
+    datum: datetime
+    agenda: List[str] = []
+    notizen: Optional[str] = None
+    aufgaben: List[BesprechungAufgabe] = []
+    wiedervorlage: Optional[datetime] = None
+
+class InputBesprechungstermin(BaseModel):   
+    datum: datetime
+    agenda: List[str] = []
+    notizen: Optional[str] = None
+    aufgaben: List[BesprechungAufgabe] = []
+    wiedervorlage: Optional[datetime] = None
+
+class Aufgabe(BaseModel):
+    beschreibung: str
+    zuständig: Optional[str] = None
+    zuständig_id: Optional[str] = None
+    aufwand: Optional[int] = 0
+    notizen: Optional[str] = None
+    prio: Optional[str] = None
+    termin: Optional[str] | Literal[""] = None
+    wiedervorlage: Optional[date] = None
+    status: Optional[str] = None
+
+class Projekt(BaseModel):
+    name: str
+    short: Optional[str]
+    klassifikation: str
+    status: str
+    bearbeiter: List[str]
+    devops_project_id: Optional[str] = Field(
+        default=None,
+        title="Azure DevOps Project ID ",
+        description="Die eindeutige ID des verknüpften DevOps-Projekts"
+    )
+    geplante_fertigstellung: Optional[str] = None
+    wiedervorlage: Optional[date] = None
+    beschreibung: Optional[str] = None
+    stakeholder_ids: Optional[List[str]] = []
+    beteiligte: Optional[List[str]] = []
+    aufgaben: List[Aufgabe]
+
+class ProjektListe(BaseModel):
+    projekte: List[Projekt]
+    
+class FileContentResponse(BaseModel):
+    path: str
+    content: str
+
+class Person(BaseModel):
+    name: str
+    email: EmailStr
+    mandant: str
+    position: Optional[str] = None
+    anrede: Optional[Literal
+    [
+        "Du", 
+        "Sie"
+    ]] = "Du"
+    sprache: Optional[Literal[
+        "Deutsch",
+        "Englisch"
+    ]] = "Deutsch"
+
+    rolle: Optional[Literal[
+        "user",        # darf eigene Aufgaben sehen / kommentieren
+        "agent",       # darf Aufgaben übernehmen / abschließen
+        "koordinator", # darf Aufgaben zuweisen, umpriorisieren
+        "admin",       # darf System konfigurieren, Rollen ändern
+        "otto"         # interne Systemrolle für KI-Aktionen
+    ]] = "user"
+
+class PersonenListe(BaseModel):
+    personen: List[Person]
+
+class Message(BaseModel):
+    message_id: str
+    subject: str
+    body: str
+    sender: str
+    recipient: str
+    date: datetime
+    direction: str  # "in" oder "out"
+    projekt_id: Optional[str] = None
+    aufgabe_id: Optional[str] = None

@@ -1,0 +1,56 @@
+# zammad.py – Teil des Otto KI-Systems
+# © Christian Angermeier 2025
+
+from fastapi import APIRouter, FastAPI, HTTPException
+import httpx
+import os
+from config import ZAMMAD_URL, ZAMMAD_TOKEN, ZAMMAD_USER, ZAMMAD_PASSWORD
+import traceback
+from zammad_py import ZammadAPI
+
+
+router = APIRouter()
+app = FastAPI()
+
+headers = {
+    "Authorization": f"Token token={ZAMMAD_TOKEN}",
+    "Content-Type": "application/json"
+}
+
+client = ZammadAPI(url=ZAMMAD_URL, username=ZAMMAD_USER, password=ZAMMAD_PASSWORD)
+
+@router.get("/new_tickets", tags=["Tickets"])
+async def get_open_tickets():
+    try:
+        result = []
+        tickets = client.ticket.search('state.name:(new)')
+
+        for ticket in tickets:
+            try:
+                articles = client.ticket_article.all(ticket["id"])
+                note = next(
+                    (a["body"] for a in articles if a["type"] in ["email", "note"] and not a["internal"]),
+                    None
+                )
+            except Exception:
+                note = None
+
+            result.append({
+                "id": ticket.get("id"),
+                "number": ticket.get("number"),
+                "title": ticket.get("title"),
+                "state": ticket.get("state"),
+                "priority": ticket.get("priority"),
+                "group": ticket.get("group"),
+                "customer_id": ticket.get("customer_id"),
+                "owner_id": ticket.get("owner_id"),
+                "created_at": ticket.get("created_at"),
+                "updated_at": ticket.get("updated_at"),
+                "note": note
+            })
+
+        return result
+
+    except Exception as e:
+        tb = traceback.format_exc()
+        raise HTTPException(status_code=500, detail=f"{str(e)}\n{tb}")

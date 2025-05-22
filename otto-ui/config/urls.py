@@ -1,0 +1,19 @@
+from django.contrib import admin
+from django.urls import path
+from core import views
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', views.home, name='home'),
+    path('projekt/', views.project_listview, name='projekt_liste'),
+    path("project/<str:project_id>/", views.project_detailview, name="project_detailview"),
+    path('task/', views.task_listview, name='task_liste'),
+    path('task/update/', views.update_task_details, name='update_task_details'),
+    path('task/update_status/', views.update_task_status, name='update_task_status'),
+    path('task/update_person/', views.update_task_person, name='update_task_person'),
+    path("task/delete/", views.delete_task, name="delete_task"),
+    path("task/<str:task_id>/", views.task_detail_or_update, name="task_detail"),
+    path('meeting/', views.meeting_listview, name='meeting_liste'),
+    path('meeting/<str:meeting_id>/', views.meeting_detailview, name='meeting_detail'),
+
+]

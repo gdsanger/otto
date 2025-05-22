@@ -1,0 +1,225 @@
+{% extends "base.html" %}
+{% load static %}
+{% load format_tags %}
+{% block content %}
+<div class="container py-4">  
+  <form id="projektForm">
+    {% csrf_token %}
+    <div class="card">
+        <div class="card-header">
+            {{ projekt.name }}
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-12">
+                    <div class="mb-3">
+                        <label class="form-label">Name</label>
+                        <input type="text" name="name" class="form-control" value="{{ projekt.name }}">
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="mb-3">
+                        <label class="form-label">Beschreibung</label>
+                        <textarea name="beschreibung" class="form-control">{{ projekt.beschreibung }}</textarea>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="mb-4">
+                        <label class="form-label">Stakeholder</label>
+                        {% include "components/person_tokenbox.html" with personen=personen selected=projekt.stakeholder_ids %}
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="mb-4">
+                        <label class="form-label">Bearbeiter</label>
+                        <select name="bearbeiter" class="form-select">
+                            <option value="">– bitte wählen –</option>
+                            {% for person in personen %}
+                            <option value="{{ person.id }}" {% if person.id == projekt.bearbeiter|default:'' %}selected{% endif %}>
+                                {{ person.name }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>  
+                 <div class="col-6">
+                     <div class="mb-3">
+                        <label class="form-label">Status</label>
+                         <select class="form-select" name="status">
+                        {% for status1 in status_liste %}
+                            <option value="{{ status1 }}" {% if projekt.status == status1 %}selected{% endif %}>{{ status1 }}</option>
+                        {% endfor %}
+            </select>
+                    </div>
+                 </div>   
+                  <div class="col-6">
+                    <div class="mb-3">
+                        <label class="form-label">Geplante Fertigstellung</label>
+                        <input type="date" name="geplante_fertigstellung" class="form-control" value="{{ projekt.geplante_fertigstellung|default_if_none:'' }}">
+                    </div>
+                  </div>    
+                   <div class="col-6">
+                    <div class="mb-3">
+                        <label class="form-label">Prio</label>
+                         <select class="form-select" name="prio">
+                        {% for prio in prio_liste %}
+                            <option value="{{ prio }}" {% if projekt.prio == prio %}selected{% endif %}>{{ prio }}</option>
+                        {% endfor %}
+            </select>
+                    </div>
+                  </div>                
+            </div>
+        </div>
+        <div class="card-footer">
+        <button type="submit" class="btn btn-success">Speichern</button>          
+        </div>
+    </div>
+  <div id="saveSuccess" class="alert alert-success mt-3 d-none">Gespeichert!</div>
+
+   
+  </form>
+
+  <hr class="my-4">
+
+  <ul class="nav nav-tabs" id="tabs" role="tablist">  
+    <li class="nav-item" role="presentation">
+      <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#tasks" type="button" role="tab">Tasks</button>
+    </li>  
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" data-bs-toggle="tab" data-bs-target="#files" type="button" role="tab">Dateien</button>
+    </li>
+  </ul>
+<div class="tab-content mt-3">
+     <div class="tab-pane fade show active" id="tasks" role="tabpanel">
+  {% if tasks %}
+    <table class="table table-sm table-striped">
+      <thead>
+        <tr>
+          <th>Betreff</th>
+          <th>Status</th>
+          <th>Termin</th>
+          <th>Zuständig</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for task in tasks %}
+        <tr id="task-{{ task.id }}">
+          <td><a href="#" class="task-open" data-task-id="{{ task.id }}">{{ task.betreff }}</a></td>
+          <td>
+            <select class="form-select form-select-sm auto-save" data-task-id="{{ task.id }}" data-field="status">
+              {% for s in status_liste %}
+                <option value="{{ s }}" {% if s == task.status %}selected{% endif %}>{{ s }}</option>
+              {% endfor %}
+            </select>
+          </td>
+          <td>
+            <input type="date" class="form-control form-control-sm auto-save" data-task-id="{{ task.id }}" data-field="termin" value="{{ task.termin|slice:":10" }}">
+          </td>
+          <td>{{ task.zuständig }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p>Keine Tasks vorhanden.</p>
+  {% endif %}
+</div>
+
+   <div class="tab-pane fade" id="files" role="tabpanel">
+    {% if dateien %}
+        <ul>
+        {% for f in dateien %}
+            <li><a href="{{ f.url }}" target="_blank">{{ f.name }} ({{ f.size|filesizeformat }})</a></li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>Keine Dateien vorhanden.</p>
+    {% endif %}
+    </div>
+  </div>
+
+<script>
+  function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+      const cookies = document.cookie.split(';');
+      for (let i = 0; i < cookies.length; i++) {
+        const cookie = cookies[i].trim();
+        if (cookie.substring(0, name.length + 1) === (name + '=')) {
+          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+          break;
+        }
+      }
+    }
+    return cookieValue;
+  }
+
+  const form = document.getElementById('projektForm');
+  const successBox = document.getElementById('saveSuccess');
+  const errorBox = document.createElement('div');
+  errorBox.className = 'alert alert-danger mt-3 d-none';
+  form.appendChild(errorBox);
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    const formData = new FormData(form);
+    const jsonData = {};
+
+    formData.forEach((value, key) => {
+      if (jsonData[key]) {
+        if (!Array.isArray(jsonData[key])) {
+          jsonData[key] = [jsonData[key]];
+        }
+        jsonData[key].push(value);
+      } else {
+        jsonData[key] = value;
+      }
+    });
+
+    fetch('', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRFToken': getCookie('csrftoken'),
+      },
+      body: JSON.stringify(jsonData),
+    }).then(r => {
+      if (r.ok) {
+        successBox.classList.remove('d-none');
+        errorBox.classList.add('d-none');
+        setTimeout(() => successBox.classList.add('d-none'), 3000);
+      } else {
+        r.json().then(data => {
+          errorBox.textContent = data.error || 'Unbekannter Fehler';
+          errorBox.classList.remove('d-none');
+        });
+      }
+    }).catch(err => {
+      errorBox.textContent = 'Netzwerkfehler: ' + err.message;
+      errorBox.classList.remove('d-none');
+    });
+  });
+
+ document.querySelectorAll('.auto-save').forEach(el => {
+    el.addEventListener('change', e => {
+      const taskId = el.dataset.taskId;
+      const field = el.dataset.field;
+      const value = el.value;
+
+      fetch(`/task/${taskId}/`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRFToken': getCookie('csrftoken'),
+        },
+        body: JSON.stringify({ [field]: value })
+      }).then(r => {
+        if (!r.ok) {
+          alert('Fehler beim Speichern');
+        }
+      });
+    });
+  });
+</script>
+{% include "components/task_modal.html" %}
+{% endblock %}

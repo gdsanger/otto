@@ -1,0 +1,31 @@
+from fastapi import APIRouter, HTTPException, Depends
+from datetime import date
+from typing import List
+from model.tagesplan import Tagesplan
+from mongo import get_tagesplan_collection
+from helper import verify_api_key, serialize_mongo
+
+router = APIRouter(prefix="/tagesplan", tags=["Tagesplan"])
+collection = get_tagesplan_collection()
+
+@router.get("/{datum}", response_model=Tagesplan, dependencies=[Depends(verify_api_key)], tags=["Tagesplaner"])
+def get_tagesplan(datum: date, person_id: str):
+    doc = collection.find_one({"datum": datum.isoformat(), "person_id": person_id})
+    if not doc:
+        raise HTTPException(status_code=404, detail="Kein Tagesplan gefunden")
+    return doc
+
+@router.post("/", response_model=Tagesplan, dependencies=[Depends(verify_api_key)], tags=["Tagesplaner"])
+def create_tagesplan(plan: Tagesplan):
+    existing = collection.find_one({"datum": plan.datum.isoformat(), "person_id": plan.person_id})
+    if existing:
+        raise HTTPException(status_code=409, detail="Tagesplan für diesen Tag existiert bereits")
+    collection.insert_one(plan.dict())
+    return plan
+
+@router.put("/{datum}", response_model=Tagesplan, dependencies=[Depends(verify_api_key)], tags=["Tagesplaner"])
+def update_tagesplan(datum: date, person_id: str, plan: Tagesplan):
+    result = collection.replace_one({"datum": datum.isoformat(), "person_id": person_id}, plan.dict(), upsert=True)
+    if result.matched_count == 0:
+        raise HTTPException(status_code=404, detail="Plan wurde neu erstellt")
+    return plan

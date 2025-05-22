@@ -1,0 +1,148 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container py-4">
+  <h2 class="mb-4">Meeting bearbeiten</h2>
+
+  <form id="meetingForm">
+    {% csrf_token %}
+    <div class="mb-3">
+      <label class="form-label">Bezeichnung</label>
+      <input type="text" name="name" class="form-control" value="{{ meeting.name }}">
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Beschreibung</label>
+      <textarea name="beschreibung" class="form-control">{{ meeting.beschreibung }}</textarea>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col">
+        <label class="form-label">Datum</label>
+        <input type="date" name="datum" class="form-control" value="{{ meeting.datum|slice:":10" }}">
+      </div>
+      <div class="col">
+        <label class="form-label">Zeit von</label>
+        <input type="time" name="von" class="form-control" value="{{ meeting.von }}">
+      </div>
+      <div class="col">
+        <label class="form-label">Zeit bis</label>
+        <input type="time" name="bis" class="form-control" value="{{ meeting.bis }}">
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Mandant</label>
+      <select name="mandant" class="form-select">
+        {% for mandant in mandanten %}
+          <option value="{{ mandant }}" {% if meeting.mandant == mandant %}selected{% endif %}>{{ mandant }}</option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <div class="mb-4">
+      <label class="form-label">Teilnehmer</label>
+      {% include "components/person_tokenbox.html" with personen=personen selected=meeting.teilnehmer %}
+    </div>
+
+    <div class="mb-4">
+      <label class="form-label">Agenda</label>
+     <textarea id="editor" name="themen" class="form-control">{{ meeting.themen|safe }}</textarea>
+    </div>
+
+    <button type="submit" class="btn btn-success">Speichern</button>
+    <div id="saveSuccess" class="alert alert-success mt-3 d-none">Gespeichert!</div>
+  </form>
+
+  <hr class="my-4">
+
+  <h4>Tasks</h4>
+  {% if meeting.tasks %}
+    <table class="table table-sm table-striped">
+      <thead>
+        <tr>
+          <th>Betreff</th>
+          <th>Status</th>
+          <th>Prio</th>
+          <th>Verantwortlich</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for task in meeting.tasks %}
+        <tr>
+          <td><a href="#" class="task-open" data-task-id="{{ task.id }}">{{ task.betreff }}</a></td>
+          <td>{{ task.status }}</td>
+          <td>{{ task.prio }}</td>
+          <td>{{ task.zuständig }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p>Keine Tasks vorhanden.</p>
+  {% endif %}
+</div>
+<script src="https://cdn.tiny.cloud/1/kpams0ubmp1xidkpbry2j9afcgmlfpiv96ybkly1llpyi875/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+<script>
+   tinymce.init({
+    selector: '#editor',
+    plugins: 'lists advlist link image table code charmap autolink codesample link searchreplace fullscreen emoticons',
+    toolbar: 'link | undo redo | bold italic | alignleft aligncenter alignright | code codesample searchreplace fullscreen emoticons',
+    license_key: "gpl",
+    height: 300
+  });
+  function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+      const cookies = document.cookie.split(';');
+      for (let i = 0; i < cookies.length; i++) {
+        const cookie = cookies[i].trim();
+        if (cookie.substring(0, name.length + 1) === (name + '=')) {
+          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+          break;
+        }
+      }
+    }
+    return cookieValue;
+  }
+
+  document.getElementById('meetingForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    tinymce.triggerSave(); // Holt Inhalt aus dem Editor
+
+    const form = e.target;
+    const formData = new FormData(form);
+    const jsonData = {};
+
+    formData.forEach((value, key) => {
+      if (jsonData[key]) {
+        if (!Array.isArray(jsonData[key])) {
+          jsonData[key] = [jsonData[key]];
+        }
+        jsonData[key].push(value);
+      } else {
+        jsonData[key] = value;
+      }
+    });
+
+    console.log("Sende Daten an Backend:", jsonData);
+
+    fetch('', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRFToken': getCookie('csrftoken'),
+      },
+      body: JSON.stringify(jsonData),
+    }).then(r => {
+      if (r.ok) {
+        document.getElementById('saveSuccess').classList.remove('d-none');
+        setTimeout(() => document.getElementById('saveSuccess').classList.add('d-none'), 2000);
+      }
+    });
+  });
+</script>
+{% include "components/task_modal.html" %}
+{% endblock %}
