@@ -58,7 +58,7 @@
   <hr class="my-4">
 
   <h4>Tasks</h4>
-  {% if meeting.tasks %}
+ 
     <table class="table table-sm table-striped">
       <thead>
         <tr>
@@ -77,11 +77,14 @@
           <td>{{ task.zuständig }}</td>
         </tr>
         {% endfor %}
+        <tr>
+          <td>          </td>
+          <td>          </td>
+          <td>          </td>
+          <td>          </td>
+        </tr>
       </tbody>
-    </table>
-  {% else %}
-    <p>Keine Tasks vorhanden.</p>
-  {% endif %}
+    </table> 
 </div>
 <script src="https://cdn.tiny.cloud/1/kpams0ubmp1xidkpbry2j9afcgmlfpiv96ybkly1llpyi875/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
 <script>
