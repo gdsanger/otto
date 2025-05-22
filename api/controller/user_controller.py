@@ -2,6 +2,7 @@ from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 from passlib.hash import bcrypt
 from typing import Optional
+from datetime import datetime
 from bson import ObjectId
 from mongo import users
 
@@ -62,3 +63,19 @@ async def update_user(user_id: str, update: UserUpdate):
 
     await users.update_one({"_id": ObjectId(user_id)}, {"$set": update_data})
     return {"ok": True}
+
+
+class LoginCredentials(BaseModel):
+    username: str
+    password: str
+
+
+@router.post("/login")
+async def login(credentials: LoginCredentials):
+    user = await users.find_one({"username": credentials.username})
+    if not user or not bcrypt.verify(credentials.password, user.get("password", "")):
+        raise HTTPException(status_code=401, detail="Invalid credentials")
+
+    await users.update_one({"_id": user["_id"]}, {"$set": {"last_login": datetime.utcnow()}})
+    return serialize(user)
+
