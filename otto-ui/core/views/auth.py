@@ -1,5 +1,4 @@
 import requests
-import bcrypt
 import os
 from django.shortcuts import render, redirect
 from dotenv import load_dotenv
@@ -15,15 +14,13 @@ def login_view(request):
         username = request.POST.get("username")
         password = request.POST.get("password")
 
-        res = requests.get(
-            f"{OTTO_API_URL}/users",
-            params={"username": username},
+        res = requests.post(
+            f"{OTTO_API_URL}/login",
+            json={"username": username, "password": password},
             headers={"x-api-key": OTTO_API_KEY},
         )
-        user = res.json() if res.status_code == 200 else None
-
-        if user and bcrypt.checkpw(password.encode(), user.get("password", "").encode()):
-            user.pop("password", None)
+        if res.status_code == 200:
+            user = res.json()
             request.session["user"] = user
             return redirect("/")
         else:
