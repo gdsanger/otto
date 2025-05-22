@@ -9,7 +9,7 @@ load_dotenv()
 
 # System
 BASE_DIR = Path("/home/anger")
-API_KEY = "6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8"
+API_KEY = os.getenv("API_KEY")
 
 # Azure / GarphAPI
 CLIENT_ID = os.getenv("CLIENT_ID")
@@ -21,9 +21,3 @@ SITE_ID = "6de60bff-46b2-4c09-b690-651e0d0ab8f3"
 DRIVE_ID = "b!_wvmbbJGCUy2kGUeDQq48wGoU_ggXVtOoCg4ZWpY2DYICqDfnPOvSrDLdC6yvpNC"
 FOLDER = "Otto/Projekte/"
 GRAPH_URL = "https://graph.microsoft.com/v1.0"
-
-# Zammad einstellungen
-ZAMMAD_URL = "https://uis-support.eoe.university"
-ZAMMAD_USER = "christian.angermeier@isartec.de"
-ZAMMAD_PASSWORD = "++Sah12Giga#4135"
-ZAMMAD_TOKEN = "mQ-kpgGUF1_v5CF7RRf5EgFGJJ3EuC09K6H7ckGe6oOItccevdHMGqkEpZ9-dqLc"

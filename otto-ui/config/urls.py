@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.urls import path
 from core import views
+from core.views.auth import login_view, logout_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -15,5 +16,6 @@ urlpatterns = [
     path("task/<str:task_id>/", views.task_detail_or_update, name="task_detail"),
     path('meeting/', views.meeting_listview, name='meeting_liste'),
     path('meeting/<str:meeting_id>/', views.meeting_detailview, name='meeting_detail'),
-
+    path('login/', login_view, name='login'),
+    path('logout/', logout_view, name='logout'),
 ]

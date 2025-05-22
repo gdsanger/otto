@@ -1,21 +1,11 @@
 # main.py – Teil des Otto KI-Systems
 # © Christian Angermeier 2025
-
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi import FastAPI, Depends, Header, Request, HTTPException, status, Body, Query
 from config import API_KEY
 from fastapi.security.api_key import APIKeyHeader
 from typing import List, Optional
 from mongo import projekte_collection, personen_collection
-
-# Api Controller
-from controller.meeting_controller import router as meeting_router
-from controller.project_controller import router as project_router
-from controller.coder_controller import router as coder_router
-from controller.personen_controller import router as personen_router
-from controller.task_controller import router as task_router
-from controller.tagesplan_controller import router as tagesplan_router
-
-
 from bson import ObjectId
 from fastapi.openapi.utils import get_openapi
 from config import GRAPH_URL, SITE_ID, DRIVE_ID, FOLDER
@@ -32,6 +22,13 @@ from openapi_gpt import router as openapi_gpt_router
 
 app = FastAPI()
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Oder gezielt: ["https://data.isarlabs.de"]
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 # Dynamisch Router einbinden mit Fehlerbehandlung
 try:
     from controller.project_controller import router as project_router
@@ -52,16 +49,16 @@ except Exception as e:
     print(f"⚠️ Fehler beim Einbinden von meeting_controller: {e}")
 
 try:
-    from controller.coder_controller import router as coder_router
-    app.include_router(coder_router)
-except Exception as e:
-    print(f"⚠️ Fehler beim Einbinden von coder_controller: {e}")
-
-try:
     from controller.task_controller import router as task_router
     app.include_router(task_router)
 except Exception as e:
     print(f"⚠️ Fehler beim Einbinden von task_controller: {e}")
+
+try:
+    from controller.user_controller import router as user_router
+    app.include_router(user_router)
+except Exception as e:
+    print(f"⚠️ Fehler beim Einbinden von user_controller: {e}")
 
 def custom_openapi():
     if app.openapi_schema:
@@ -69,14 +66,14 @@ def custom_openapi():
 
     openapi_schema = get_openapi(
         title="OttoCore API",
-        version="1.0.0",
+        version="1.0.1",
         description="Die zentrale API für KI-Assistent Otto",
         routes=app.routes,
     )
 
     openapi_schema["servers"] = [
         {
-            "url": "https://otto.isarlabs.de",
+            "url": "https://data.isarlabs.de",
             "description": "Produktivserver"
         }
     ]

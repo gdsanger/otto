@@ -1,0 +1,45 @@
+from fastapi import APIRouter, HTTPException
+from pydantic import BaseModel
+from passlib.hash import bcrypt
+from datetime import datetime
+from bson import ObjectId
+from api.mongo import mongo
+
+router = APIRouter()
+
+class UserIn(BaseModel):
+    name: str
+    username: str
+    email: str
+    password: str
+
+class UserUpdate(BaseModel):
+    name: str = None
+    email: str = None
+    password: str = None
+
+@router.post("/users")
+def create_user(user: UserIn):
+    if mongo.users.find_one({"username": user.username}):
+        raise HTTPException(status_code=400, detail="Username bereits vergeben")
+
+    hashed_pw = bcrypt.hash(user.password)
+    user_dict = user.dict()
+    user_dict["password"] = hashed_pw
+    user_dict["last_login"] = None
+    mongo.users.insert_one(user_dict)
+    user_dict.pop("password")
+    return user_dict
+
+@router.put("/users/{user_id}")
+def update_user(user_id: str, update: UserUpdate):
+    user = mongo.users.find_one({"_id": ObjectId(user_id)})
+    if not user:
+        raise HTTPException(status_code=404, detail="Benutzer nicht gefunden")
+
+    update_data = {k: v for k, v in update.dict().items() if v is not None}
+    if "password" in update_data:
+        update_data["password"] = bcrypt.hash(update_data["password"])
+
+    mongo.users.update_one({"_id": ObjectId(user_id)}, {"$set": update_data})
+    return {"ok": True}

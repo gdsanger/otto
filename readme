@@ -1,0 +1,10 @@
+Das ist das Startverzeichnis von Otto. Die einzelnen System sind in Unterordern gegliedert:
+
+/api
+Hier ist die API für den Zugriff auf die Mongo Datenbank und die enthällt nur Nutzdaten, keine GraphAPI und kein Coder
+
+/graph
+Hier ist die API Kapselung für die GraphAPi
+
+/otto-ui
+Hier ist die Django HTMX Aweb App die als UI für das ganze System dient

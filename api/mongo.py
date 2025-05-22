@@ -12,9 +12,8 @@ client = AsyncIOMotorClient("mongodb://localhost:27017")
 db = client.otto  # DB-Name
 projekte_collection = db.projekte
 personen_collection = db.personen
-# besprechungen_collection = db.besprechungen
-# termine_collection = db.termine
 meeting_collection = db.meeting
+users = db["users"]
 
 def get_tagesplan_collection() -> Collection:
     return db["tagesplaene"]
