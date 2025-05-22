@@ -1,6 +1,6 @@
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
-from passlib.hash import bcrypt
+import os
 from typing import Optional
 from datetime import datetime
 from bson import ObjectId
@@ -42,9 +42,9 @@ async def create_user(user: UserIn):
     if existing:
         raise HTTPException(status_code=400, detail=f"Username bereits vergeben {existing}")
 
-    hashed_pw = bcrypt.hash(user.password)
+    # Das Kennwort wird bereits vom Client gehasht 
     user_dict = user.dict()
-    user_dict["password"] = hashed_pw
+    user_dict["password"] = user.password
     user_dict["last_login"] = None
     result = await users.insert_one(user_dict)
     user_dict["_id"] = result.inserted_id
@@ -59,7 +59,8 @@ async def update_user(user_id: str, update: UserUpdate):
 
     update_data = {k: v for k, v in update.dict().items() if v is not None}
     if "password" in update_data:
-        update_data["password"] = bcrypt.hash(update_data["password"])
+        # Passwort ist bereits vom Client gehasht
+        update_data["password"] = update_data["password"]
 
     await users.update_one({"_id": ObjectId(user_id)}, {"$set": update_data})
     return {"ok": True}
@@ -73,7 +74,7 @@ class LoginCredentials(BaseModel):
 @router.post("/login")
 async def login(credentials: LoginCredentials):
     user = await users.find_one({"username": credentials.username})
-    if not user or not bcrypt.verify(credentials.password, user.get("password", "")):
+    if not user or credentials.password != user.get("password", ""):
         raise HTTPException(status_code=401, detail="Invalid credentials")
 
     await users.update_one({"_id": user["_id"]}, {"$set": {"last_login": datetime.utcnow()}})
