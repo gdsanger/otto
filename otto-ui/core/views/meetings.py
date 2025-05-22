@@ -5,7 +5,7 @@ from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render
 from .helpers import login_required
 from django.views.decorators.csrf import csrf_exempt
-from core.const import mandanten_liste
+from core.const import mandanten_liste, prio_liste, status_liste
 import os
 from dotenv import load_dotenv
 
@@ -75,5 +75,7 @@ def meeting_detailview(request, meeting_id):
     return render(request, "core/meeting_detailview.html", {
         "meeting": meeting,
         "personen": personen,
-        "mandanten": mandanten_liste
+        "mandanten": mandanten_liste,
+        "status_liste": status_liste,
+        "prio_liste": prio_liste
     })

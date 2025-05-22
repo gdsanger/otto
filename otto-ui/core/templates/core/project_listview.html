@@ -50,10 +50,7 @@
               <option value="{{ person.id }}" {% if person.id in projekt.bearbeiter %}selected{% endif %}>{{ person.name }}</option>
             {% endfor %}
           </select>
-        </td>
-        <td class="text-end">
-          <button class="btn btn-sm btn-outline-primary task-new" data-project-id="{{ projekt.id }}">+</button>
-        </td>
+        </td>        
       </tr>
       {% endfor %}
     </tbody>

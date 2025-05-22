@@ -3,96 +3,143 @@
 
 {% block content %}
 <div class="container py-4">
-  <h2 class="mb-4">Meeting bearbeiten</h2>
+  <!-- Toolbar oben -->
 
-  <form id="meetingForm">
-    {% csrf_token %}
-    <div class="mb-3">
-      <label class="form-label">Bezeichnung</label>
-      <input type="text" name="name" class="form-control" value="{{ meeting.name }}">
-    </div>
-
-    <div class="mb-3">
-      <label class="form-label">Beschreibung</label>
-      <textarea name="beschreibung" class="form-control">{{ meeting.beschreibung }}</textarea>
-    </div>
-
-    <div class="row mb-3">
-      <div class="col">
-        <label class="form-label">Datum</label>
-        <input type="date" name="datum" class="form-control" value="{{ meeting.datum|slice:":10" }}">
-      </div>
-      <div class="col">
-        <label class="form-label">Zeit von</label>
-        <input type="time" name="von" class="form-control" value="{{ meeting.von }}">
-      </div>
-      <div class="col">
-        <label class="form-label">Zeit bis</label>
-        <input type="time" name="bis" class="form-control" value="{{ meeting.bis }}">
+    <div class="btn-toolbar mb-3" role="toolbar" aria-label="Toolbar with button groups">
+      <div class="btn-group me-2" role="group" aria-label="First group">
+      <button type="submit" form="meetingForm" class="btn btn-outline-primary">
+        💾 Speichern
+      </button>
       </div>
     </div>
 
-    <div class="mb-3">
-      <label class="form-label">Mandant</label>
-      <select name="mandant" class="form-select">
-        {% for mandant in mandanten %}
-          <option value="{{ mandant }}" {% if meeting.mandant == mandant %}selected{% endif %}>{{ mandant }}</option>
-        {% endfor %}
-      </select>
+  <!-- Meeting-Formular als Card -->
+  <div class="card mb-4">
+    <div class="card-header">
+      <h3 class="mb-0">{{ meeting.name }}</h2>
     </div>
+    <div class="card-body">
+      <form id="meetingForm">
+        {% csrf_token %}
+        <div class="mb-3">
+          <label class="form-label">Bezeichnung</label>
+          <input type="text" name="name" class="form-control" value="{{ meeting.name }}">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Beschreibung</label>
+          <textarea name="beschreibung" class="form-control">{{ meeting.beschreibung }}</textarea>
+        </div>
+        <div class="row mb-3">
+          <div class="col">
+            <label class="form-label">Datum</label>
+            <input type="date" name="datum" class="form-control" value="{{ meeting.datum|slice:":10" }}">
+          </div>
+          <div class="col">
+            <label class="form-label">Zeit von</label>
+            <input type="time" name="von" class="form-control" value="{{ meeting.von }}">
+          </div>
+          <div class="col">
+            <label class="form-label">Zeit bis</label>
+            <input type="time" name="bis" class="form-control" value="{{ meeting.bis }}">
+          </div>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Mandant</label>
+          <select name="mandant" class="form-select">
+            {% for mandant in mandanten %}
+              <option value="{{ mandant }}" {% if meeting.mandant == mandant %}selected{% endif %}>{{ mandant }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="mb-4">
+          <label class="form-label">Teilnehmer</label>
+          {% include "components/person_tokenbox.html" with personen=personen selected=meeting.teilnehmer %}
+        </div>
 
-    <div class="mb-4">
-      <label class="form-label">Teilnehmer</label>
-      {% include "components/person_tokenbox.html" with personen=personen selected=meeting.teilnehmer %}
+        <!-- Agenda als Bootstrap Card -->
+        <div class="mb-4">
+          <div class="card">
+            <div class="card-header">
+              <label class="form-label mb-0">Agenda</label>
+            </div>
+            <div class="card-body p-2">
+              <textarea id="editor" name="themen" class="form-control">{{ meeting.themen|safe }}</textarea>
+            </div>
+          </div>
+        </div>
+        <div id="saveSuccess" class="alert alert-success mt-3 d-none">Gespeichert!</div>
+      </form>
     </div>
-
-    <div class="mb-4">
-      <label class="form-label">Agenda</label>
-     <textarea id="editor" name="themen" class="form-control">{{ meeting.themen|safe }}</textarea>
-    </div>
-
-    <button type="submit" class="btn btn-success">Speichern</button>
-    <div id="saveSuccess" class="alert alert-success mt-3 d-none">Gespeichert!</div>
-  </form>
+  </div>
 
   <hr class="my-4">
-
-  <h4>Tasks</h4>
- 
-    <table class="table table-sm table-striped">
-      <thead>
-        <tr>
-          <th>Betreff</th>
-          <th>Status</th>
-          <th>Prio</th>
-          <th>Verantwortlich</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for task in meeting.tasks %}
-        <tr>
-          <td><a href="#" class="task-open" data-task-id="{{ task.id }}">{{ task.betreff }}</a></td>
-          <td>{{ task.status }}</td>
-          <td>{{ task.prio }}</td>
-          <td>{{ task.zuständig }}</td>
-          <td>
-            <form hx-post="/task/delete/" hx-confirm="Wirklich löschen?" hx-target="closest tr" hx-swap="outerHTML">
-              <input type="hidden" name="task_id" value="{{ task.id }}">
-              <button type="submit" class="btn btn-sm btn-outline-danger">🗑️</button>
-            </form>
-          </td>
-        </tr>
-        {% endfor %}
-        <tr>
-          <td>          </td>
-          <td>          </td>
-          <td>          </td>
-          <td>          </td>
-          <td>          </td>
-        </tr>
-      </tbody>
-    </table> 
+  <div class="card mb-4">
+    <div class="card-header">
+      Aufgaben
+    </div>
+    <div class="card-body p-2">
+      <table class="table table-sm table-striped mb-0">
+        <thead>
+          <tr>
+            <th>Betreff</th>
+            <th>Status</th>
+            <th>Prio</th>
+            <th>Verantwortlich</th>
+            <th>Aktion</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for task in meeting.tasks %}
+          <tr>
+            <td><a href="#" class="task-open" data-task-id="{{ task.id }}">{{ task.betreff }}</a></td>
+            <td>{{ task.status }}</td>
+            <td>{{ task.prio }}</td>
+            <td>{{ task.zuständig }}</td>
+            <td>
+              <button type="button" class="btn btn-sm btn-outline-danger" data-task-id="{{ task.id }}">🗑️</button>
+            </td>
+          </tr>
+          {% endfor %}       
+        </tbody>
+      </table>
+    </div>
+  </div>
+    <!-- Neues Task-Formular -->
+    <form id="newTaskForm" class="row g-2 align-items-end mt-3">
+      <div class="col-md-4">
+        <input type="text" name="betreff" class="form-control" placeholder="Neuer Task: Betreff" required>
+      </div>
+      <div class="col-md-2">
+        <select name="status" class="form-select">
+          {% for s in status_liste %}
+            <option value="{{ s }}">{{ s }}</option>
+          {% empty %}
+            <option disabled>Keine Statuswerte</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="col-md-2">
+        <select name="prio" class="form-select">
+          {% for p in prio_liste %}
+            <option value="{{ p }}">{{ p }}</option>
+          {% empty %}
+            <option disabled>Keine Prio-Werte</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="col-md-3">
+        <select name="zuständig" class="form-select">
+          <option value="">Verantwortlich wählen</option>
+          {% for person in personen %}
+            <option value="{{ person.id }}">{{ person.name }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="col-md-1">
+        <button type="submit" class="btn btn-primary">Hinzufügen</button>
+      </div>
+    </form>
+    <div id="taskAddSuccess" class="alert alert-success mt-2 d-none">Task hinzugefügt!</div>
 </div>
 <script src="https://cdn.tiny.cloud/1/kpams0ubmp1xidkpbry2j9afcgmlfpiv96ybkly1llpyi875/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
 <script>
@@ -151,6 +198,55 @@
       if (r.ok) {
         document.getElementById('saveSuccess').classList.remove('d-none');
         setTimeout(() => document.getElementById('saveSuccess').classList.add('d-none'), 2000);
+      }
+    });
+  });
+
+  // Neues Task-Formular Handling
+  document.getElementById('newTaskForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const form = e.target;
+    const formData = new FormData(form);
+    const jsonData = {};
+    formData.forEach((value, key) => {
+      jsonData[key] = value;
+    });
+    fetch('add_task/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRFToken': getCookie('csrftoken'),
+      },
+      body: JSON.stringify(jsonData),
+    }).then(function(r) {
+      if (r.ok) {
+        document.getElementById('taskAddSuccess').classList.remove('d-none');
+        setTimeout(function() { document.getElementById('taskAddSuccess').classList.add('d-none'); }, 2000);
+        form.reset();
+        // Optional: Seite neu laden oder Task dynamisch einfügen
+        location.reload();
+      }
+    });
+  });
+
+  // Task löschen mit Rückfrage
+  document.querySelectorAll('.delete-task-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      const taskId = this.getAttribute('data-task-id');
+      if (confirm('Soll diese Aufgabe wirklich gelöscht werden?')) {
+        fetch(`/core/task_delete/${taskId}/`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': getCookie('csrftoken'),
+          },
+        }).then(function(r) {
+          if (r.ok) {
+            location.reload();
+          } else {
+            alert('Fehler beim Löschen der Aufgabe.');
+          }
+        });
       }
     });
   });
