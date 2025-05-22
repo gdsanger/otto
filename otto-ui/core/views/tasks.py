@@ -20,6 +20,11 @@ def task_listview(request):
     res = requests.get(f"{OTTO_API_URL}/tasks", headers={"x-api-key": OTTO_API_KEY})
     tasks = res.json() if res.status_code == 200 else []
     q = request.GET.get("q", "").lower()
+    try:
+        page = int(request.GET.get("page", 1))
+    except ValueError:
+        page = 1
+    per_page = 25
     personen_res = requests.get(f"{OTTO_API_URL}/personen", headers={"x-api-key": OTTO_API_KEY})
     personen = personen_res.json() if personen_res.status_code == 200 else []
 
@@ -40,11 +45,24 @@ def task_listview(request):
     for t in offene_tasks:
         t["termin_formatiert"] = t["termin_dt"].strftime("%d.%m.%Y") if t["termin_dt"] else "-"
 
+    total_pages = max(1, (len(offene_tasks) + per_page - 1) // per_page)
+    if page < 1:
+        page = 1
+    if page > total_pages:
+        page = total_pages
+    start = (page - 1) * per_page
+    end = start + per_page
+    paginated_tasks = offene_tasks[start:end]
+
     status_liste = ["offen", "in Arbeit", "laufend", "wartet", "abgeschlossen"]
+    page_numbers = range(1, total_pages + 1)
     return render(request, "core/task_listview.html", {
-        "tasks": offene_tasks,
+        "tasks": paginated_tasks,
         "status_liste": status_liste,
-        "personen": personen
+        "personen": personen,
+        "page": page,
+        "total_pages": total_pages,
+        "page_numbers": page_numbers,
     })
 
 
