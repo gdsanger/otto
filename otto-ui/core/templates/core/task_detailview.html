@@ -6,7 +6,7 @@
 
 </div>
 <div class="card-body">
-<form id="taskForm" data-task-id="{{ task.id }}">
+<form id="taskForm" data-task-id="{{ task.id }}" data-target-url="{% if task.id %}/task/{{ task.id }}/{% else %}/task/new/{% endif %}">
         {% csrf_token %}
         <input type="hidden" name="task_id" value="{{ task.id }}">
 
@@ -96,8 +96,8 @@ document.addEventListener('submit', function(e) {
       }
     });
 
-    const taskId = form.dataset.taskId;
-    fetch(`/task/${taskId}/`, {
+    const url = form.dataset.targetUrl;
+    fetch(url, {
       headers: {
         'Content-Type': 'application/json',
         'X-CSRFToken': getCookie('csrftoken'),
