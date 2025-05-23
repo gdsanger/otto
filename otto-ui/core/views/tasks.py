@@ -24,7 +24,7 @@ def task_listview(request):
         page = int(request.GET.get("page", 1))
     except ValueError:
         page = 1
-    per_page = 25
+    per_page = 20
     personen_res = requests.get(f"{OTTO_API_URL}/personen", headers={"x-api-key": OTTO_API_KEY})
     personen = personen_res.json() if personen_res.status_code == 200 else []
 

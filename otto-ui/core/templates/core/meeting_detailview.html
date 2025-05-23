@@ -103,43 +103,7 @@
         </tbody>
       </table>
     </div>
-  </div>
-    <!-- Neues Task-Formular -->
-    <form id="newTaskForm" class="row g-2 align-items-end mt-3">
-      <div class="col-md-4">
-        <input type="text" name="betreff" class="form-control" placeholder="Neuer Task: Betreff" required>
-      </div>
-      <div class="col-md-2">
-        <select name="status" class="form-select">
-          {% for s in status_liste %}
-            <option value="{{ s }}">{{ s }}</option>
-          {% empty %}
-            <option disabled>Keine Statuswerte</option>
-          {% endfor %}
-        </select>
-      </div>
-      <div class="col-md-2">
-        <select name="prio" class="form-select">
-          {% for p in prio_liste %}
-            <option value="{{ p }}">{{ p }}</option>
-          {% empty %}
-            <option disabled>Keine Prio-Werte</option>
-          {% endfor %}
-        </select>
-      </div>
-      <div class="col-md-3">
-        <select name="zuständig" class="form-select">
-          <option value="">Verantwortlich wählen</option>
-          {% for person in personen %}
-            <option value="{{ person.id }}">{{ person.name }}</option>
-          {% endfor %}
-        </select>
-      </div>
-      <div class="col-md-1">
-        <button type="submit" class="btn btn-primary">Hinzufügen</button>
-      </div>
-    </form>
-    <div id="taskAddSuccess" class="alert alert-success mt-2 d-none">Task hinzugefügt!</div>
+  </div>  
 </div>
 <script src="https://cdn.tiny.cloud/1/kpams0ubmp1xidkpbry2j9afcgmlfpiv96ybkly1llpyi875/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
 <script>
@@ -185,6 +149,19 @@
       }
     });
 
+    // Teilnehmer-IDs als 'teilnehmer' senden
+    if (jsonData['personen_ids']) {
+      // Stelle sicher, dass personen_ids ein Array ist
+      const teilnehmerIds = Array.isArray(jsonData['personen_ids']) 
+        ? jsonData['personen_ids'] 
+        : [jsonData['personen_ids']];
+      jsonData['teilnehmer'] = teilnehmerIds;
+      delete jsonData['personen_ids'];
+    } else {
+      // Keine Teilnehmer ausgewählt, setze leeres Array
+      jsonData['teilnehmer'] = [];
+    }
+
     console.log("Sende Daten an Backend:", jsonData);
 
     fetch('', {
@@ -198,38 +175,34 @@
       if (r.ok) {
         document.getElementById('saveSuccess').classList.remove('d-none');
         setTimeout(() => document.getElementById('saveSuccess').classList.add('d-none'), 2000);
+        r.json().then(data => {
+          // Nur weiterleiten, wenn eine neue ID zurückkommt (Meeting wurde neu angelegt)
+          if (data.id) {
+            window.location.href = '/meeting/' + data.id + '/';
+          }
+          // Bei bestehendem Meeting: kein Redirect, nur Feedback
+        }).catch(err => {
+          // Fallback, wenn keine JSON-Antwort kommt
+          console.log('Antwort empfangen, aber kein JSON:', err);
+        });
+      } else {
+        console.error('Fehler beim Speichern:', r.status);
+        r.text().then(text => {
+          try {
+            const data = JSON.parse(text);
+            alert(data.error || 'Fehler beim Speichern');
+          } catch (e) {
+            alert('Fehler beim Speichern: ' + r.status);
+          }
+        });
       }
+    }).catch(err => {
+      console.error('Netzwerkfehler:', err);
+      alert('Netzwerkfehler: ' + err.message);
     });
   });
 
-  // Neues Task-Formular Handling
-  document.getElementById('newTaskForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    const form = e.target;
-    const formData = new FormData(form);
-    const jsonData = {};
-    formData.forEach((value, key) => {
-      jsonData[key] = value;
-    });
-    fetch('add_task/', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'X-CSRFToken': getCookie('csrftoken'),
-      },
-      body: JSON.stringify(jsonData),
-    }).then(function(r) {
-      if (r.ok) {
-        document.getElementById('taskAddSuccess').classList.remove('d-none');
-        setTimeout(function() { document.getElementById('taskAddSuccess').classList.add('d-none'); }, 2000);
-        form.reset();
-        // Optional: Seite neu laden oder Task dynamisch einfügen
-        location.reload();
-      }
-    });
-  });
-
-  // Task löschen mit Rückfrage
+    // Task löschen mit Rückfrage
   document.querySelectorAll('.delete-task-btn').forEach(function(btn) {
     btn.addEventListener('click', function() {
       const taskId = this.getAttribute('data-task-id');

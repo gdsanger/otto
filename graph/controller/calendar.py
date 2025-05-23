@@ -14,9 +14,17 @@ async def get_termine_fuer_datum(datum: date = Query(...)):
     try:
         events = await get_day_events(datetime.combine(datum, datetime.min.time()))
         for event in events:
-            event["start"]["dateTime"] = utc_to_local(event["start"]["dateTime"])
-            event["end"]["dateTime"] = utc_to_local(event["end"]["dateTime"])
-        return {"datum": datum.isoformat(), "termine": events}
+            if "dateTime" in event["start"]:
+                event["start"]["dateTime"] = utc_to_local(event["start"]["dateTime"])
+                event["end"]["dateTime"] = utc_to_local(event["end"]["dateTime"])
+        return {"datum": datum.isoformat(), "termine": [
+            {
+                "betreff": e.get("subject"),
+                "start": e["start"],
+                "end": e["end"],
+                "ganztag": e.get("isAllDay", False)
+            } for e in events
+        ]}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
@@ -42,7 +50,6 @@ async def neuen_termin_erstellen(eintrag: TerminEintrag):
             end = { "dateTime": end_dt.isoformat(), "timeZone": "Europe/Berlin" }
             is_all_day = False
 
-        # Hier dein Kalendereintrag auslösen:
         await create_calendar_event(
             title=eintrag.titel,
             start=start,
@@ -60,20 +67,20 @@ async def create_calendar_event(title, start, end, all_day):
     url = f"{GRAPH_URL}/users/{MAIL_FROM}/events"
     headers = {
         "Authorization": f"Bearer {token}",
-        "Content-Type": "application/json",        
+        "Content-Type": "application/json"
     }
 
     if all_day:
         payload = {
             "subject": title,
-            "start": { 
+            "start": {
                 "dateTime": start['date']+"T00:00:00",
                 "timeZone": "UTC"
-             },
-            "end": { 
+            },
+            "end": {
                 "dateTime": end['date']+"T00:00:00",
                 "timeZone": "UTC"
-                 },
+            },
             "isAllDay": True
         }
     else:
@@ -95,7 +102,6 @@ async def create_calendar_event(title, start, end, all_day):
         response.raise_for_status()
         return response.json()
 
-
 async def get_day_events(date: datetime) -> list:
     token = await get_graph_token()
     start = date.strftime("%Y-%m-%dT00:00:00")
@@ -104,10 +110,12 @@ async def get_day_events(date: datetime) -> list:
     params = {
         "startDateTime": start,
         "endDateTime": end,
-        "$orderby": "start/dateTime"
+        "$orderby": "start/dateTime",
+        "$top": 100
     }
     headers = {
-        "Authorization": f"Bearer {token}"
+        "Authorization": f"Bearer {token}",
+        "Prefer": 'outlook.timezone="UTC"'
     }
 
     async with httpx.AsyncClient() as client:
@@ -141,4 +149,3 @@ async def add_focus_block(start, end, subject="Fokuszeit"):
         raise Exception(f"Fehler beim Erstellen des Events: {response.status_code} – {response.text}")
 
     return response.json()
-

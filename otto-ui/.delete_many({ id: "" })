@@ -1,0 +1,1580 @@
+Mai 22 10:10:59 iun-dcn-cdb-01 systemd[1]: Started otto-data.service - Otto Data API (FastAPI).
+Mai 22 10:10:59 iun-dcn-cdb-01 (uvicorn)[61478]: [0;1;31m[0;1;39m[0;1;31motto-data.service: Failed to determine user credentials: No such process[0m
+Mai 22 10:10:59 iun-dcn-cdb-01 systemd[1]: [0;1;39m[0;1;31m[0;1;39motto-data.service: Main process exited, code=exited, status=217/USER[0m
+Mai 22 10:10:59 iun-dcn-cdb-01 systemd[1]: [0;1;38;5;185m[0;1;39m[0;1;38;5;185motto-data.service: Failed with result 'exit-code'.[0m
+Mai 22 10:10:59 iun-dcn-cdb-01 systemd[1]: otto-data.service: Scheduled restart job, restart counter is at 1.
+Mai 22 10:10:59 iun-dcn-cdb-01 systemd[1]: Started otto-data.service - Otto Data API (FastAPI).
+Mai 22 10:10:59 iun-dcn-cdb-01 (uvicorn)[61479]: [0;1;31m[0;1;39m[0;1;31motto-data.service: Failed to determine user credentials: No such process[0m
+Mai 22 10:10:59 iun-dcn-cdb-01 systemd[1]: [0;1;39m[0;1;31m[0;1;39motto-data.service: Main process exited, code=exited, status=217/USER[0m
+Mai 22 10:10:59 iun-dcn-cdb-01 systemd[1]: [0;1;38;5;185m[0;1;39m[0;1;38;5;185motto-data.service: Failed with result 'exit-code'.[0m
+Mai 22 10:11:00 iun-dcn-cdb-01 systemd[1]: otto-data.service: Scheduled restart job, restart counter is at 2.
+Mai 22 10:11:00 iun-dcn-cdb-01 systemd[1]: Started otto-data.service - Otto Data API (FastAPI).
+Mai 22 10:11:00 iun-dcn-cdb-01 (uvicorn)[61480]: [0;1;31m[0;1;39m[0;1;31motto-data.service: Failed to determine user credentials: No such process[0m
+Mai 22 10:11:00 iun-dcn-cdb-01 systemd[1]: [0;1;39m[0;1;31m[0;1;39motto-data.service: Main process exited, code=exited, status=217/USER[0m
+Mai 22 10:11:00 iun-dcn-cdb-01 systemd[1]: [0;1;38;5;185m[0;1;39m[0;1;38;5;185motto-data.service: Failed with result 'exit-code'.[0m
+Mai 22 10:11:00 iun-dcn-cdb-01 systemd[1]: otto-data.service: Scheduled restart job, restart counter is at 3.
+Mai 22 10:11:00 iun-dcn-cdb-01 systemd[1]: Started otto-data.service - Otto Data API (FastAPI).
+Mai 22 10:11:00 iun-dcn-cdb-01 (uvicorn)[61481]: [0;1;31m[0;1;39m[0;1;31motto-data.service: Failed to determine user credentials: No such process[0m
+Mai 22 10:11:00 iun-dcn-cdb-01 systemd[1]: [0;1;39m[0;1;31m[0;1;39motto-data.service: Main process exited, code=exited, status=217/USER[0m
+Mai 22 10:11:00 iun-dcn-cdb-01 systemd[1]: [0;1;38;5;185m[0;1;39m[0;1;38;5;185motto-data.service: Failed with result 'exit-code'.[0m
+Mai 22 10:11:00 iun-dcn-cdb-01 systemd[1]: otto-data.service: Scheduled restart job, restart counter is at 4.
+Mai 22 10:11:00 iun-dcn-cdb-01 systemd[1]: Started otto-data.service - Otto Data API (FastAPI).
+Mai 22 10:11:00 iun-dcn-cdb-01 (uvicorn)[61482]: [0;1;31m[0;1;39m[0;1;31motto-data.service: Failed to determine user credentials: No such process[0m
+Mai 22 10:11:00 iun-dcn-cdb-01 systemd[1]: [0;1;39m[0;1;31m[0;1;39motto-data.service: Main process exited, code=exited, status=217/USER[0m
+Mai 22 10:11:00 iun-dcn-cdb-01 systemd[1]: [0;1;38;5;185m[0;1;39m[0;1;38;5;185motto-data.service: Failed with result 'exit-code'.[0m
+Mai 22 10:11:00 iun-dcn-cdb-01 systemd[1]: otto-data.service: Scheduled restart job, restart counter is at 5.
+Mai 22 10:11:00 iun-dcn-cdb-01 systemd[1]: [0;1;38;5;185m[0;1;39m[0;1;38;5;185motto-data.service: Start request repeated too quickly.[0m
+Mai 22 10:11:00 iun-dcn-cdb-01 systemd[1]: [0;1;38;5;185m[0;1;39m[0;1;38;5;185motto-data.service: Failed with result 'exit-code'.[0m
+Mai 22 10:11:00 iun-dcn-cdb-01 systemd[1]: [0;1;31m[0;1;39m[0;1;31mFailed to start otto-data.service - Otto Data API (FastAPI).[0m
+Mai 22 10:12:46 iun-dcn-cdb-01 systemd[1]: Started otto-data.service - Otto Data API (FastAPI).
+Mai 22 10:12:46 iun-dcn-cdb-01 uvicorn[61615]: INFO:     Will watch for changes in these directories: ['/opt/otto/api']
+Mai 22 10:12:46 iun-dcn-cdb-01 uvicorn[61615]: INFO:     Uvicorn running on http://localhost:8502 (Press CTRL+C to quit)
+Mai 22 10:12:46 iun-dcn-cdb-01 uvicorn[61615]: INFO:     Started reloader process [61615] using StatReload
+Mai 22 10:12:47 iun-dcn-cdb-01 uvicorn[61617]: INFO:     Started server process [61617]
+Mai 22 10:12:47 iun-dcn-cdb-01 uvicorn[61617]: INFO:     Waiting for application startup.
+Mai 22 10:12:47 iun-dcn-cdb-01 uvicorn[61617]: INFO:     Application startup complete.
+Mai 22 10:12:55 iun-dcn-cdb-01 uvicorn[61617]: INFO:     79.211.179.31:0 - "GET /docs HTTP/1.0" 200 OK
+Mai 22 10:12:55 iun-dcn-cdb-01 uvicorn[61617]: INFO:     79.211.179.31:0 - "GET /openapi.json HTTP/1.0" 200 OK
+Mai 22 10:13:13 iun-dcn-cdb-01 uvicorn[61617]: INFO:     79.211.179.31:0 - "GET /users?username=anger HTTP/1.0" 200 OK
+Mai 22 10:14:05 iun-dcn-cdb-01 uvicorn[61615]: WARNING:  StatReload detected changes in 'config.py'. Reloading...
+Mai 22 10:14:05 iun-dcn-cdb-01 uvicorn[61617]: INFO:     Shutting down
+Mai 22 10:14:05 iun-dcn-cdb-01 uvicorn[61617]: INFO:     Waiting for application shutdown.
+Mai 22 10:14:05 iun-dcn-cdb-01 uvicorn[61617]: INFO:     Application shutdown complete.
+Mai 22 10:14:05 iun-dcn-cdb-01 uvicorn[61617]: INFO:     Finished server process [61617]
+Mai 22 10:14:06 iun-dcn-cdb-01 uvicorn[61653]: INFO:     Started server process [61653]
+Mai 22 10:14:06 iun-dcn-cdb-01 uvicorn[61653]: INFO:     Waiting for application startup.
+Mai 22 10:14:06 iun-dcn-cdb-01 uvicorn[61653]: INFO:     Application startup complete.
+Mai 22 10:14:26 iun-dcn-cdb-01 uvicorn[61615]: WARNING:  StatReload detected changes in 'main.py'. Reloading...
+Mai 22 10:14:26 iun-dcn-cdb-01 uvicorn[61653]: INFO:     Shutting down
+Mai 22 10:14:26 iun-dcn-cdb-01 uvicorn[61653]: INFO:     Waiting for application shutdown.
+Mai 22 10:14:26 iun-dcn-cdb-01 uvicorn[61653]: INFO:     Application shutdown complete.
+Mai 22 10:14:26 iun-dcn-cdb-01 uvicorn[61653]: INFO:     Finished server process [61653]
+Mai 22 10:14:27 iun-dcn-cdb-01 uvicorn[61661]: INFO:     Started server process [61661]
+Mai 22 10:14:27 iun-dcn-cdb-01 uvicorn[61661]: INFO:     Waiting for application startup.
+Mai 22 10:14:27 iun-dcn-cdb-01 uvicorn[61661]: INFO:     Application startup complete.
+Mai 22 10:14:29 iun-dcn-cdb-01 uvicorn[61661]: INFO:     79.211.179.31:0 - "GET /docs HTTP/1.0" 200 OK
+Mai 22 10:14:29 iun-dcn-cdb-01 uvicorn[61661]: INFO:     79.211.179.31:0 - "GET /openapi.json HTTP/1.0" 200 OK
+Mai 22 10:14:45 iun-dcn-cdb-01 uvicorn[61661]: INFO:     79.211.179.31:0 - "GET /openapi.json HTTP/1.0" 200 OK
+Mai 22 10:14:45 iun-dcn-cdb-01 uvicorn[61661]: INFO:     79.211.179.31:0 - "GET /favicon.ico HTTP/1.0" 404 Not Found
+Mai 22 10:17:03 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 10:17:03 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:GET /projekte wurde aufgerufen
+Mai 22 10:17:03 iun-dcn-cdb-01 uvicorn[61661]: INFO:     79.211.179.31:0 - "GET /projekte/ HTTP/1.0" 200 OK
+Mai 22 10:18:01 iun-dcn-cdb-01 uvicorn[61661]: INFO:     172.213.11.150:0 - "GET / HTTP/1.0" 200 OK
+Mai 22 10:18:13 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 10:18:13 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:GET /projekte wurde aufgerufen
+Mai 22 10:18:13 iun-dcn-cdb-01 uvicorn[61661]: INFO:     172.213.11.155:0 - "GET /projekte/ HTTP/1.0" 200 OK
+Mai 22 10:18:42 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 10:18:42 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:GET /projekte wurde aufgerufen
+Mai 22 10:18:42 iun-dcn-cdb-01 uvicorn[61661]: INFO:     172.213.11.154:0 - "GET /projekte/ HTTP/1.0" 200 OK
+Mai 22 10:32:29 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /projekte HTTP/1.0" 307 Temporary Redirect
+Mai 22 10:32:29 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 10:32:29 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:GET /projekte wurde aufgerufen
+Mai 22 10:32:29 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /projekte/ HTTP/1.0" 200 OK
+Mai 22 10:32:29 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 10:32:29 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 10:32:29 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 10:32:29 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 10:32:31 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /projekte HTTP/1.0" 307 Temporary Redirect
+Mai 22 10:32:31 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 10:32:31 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:GET /projekte wurde aufgerufen
+Mai 22 10:32:31 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /projekte/ HTTP/1.0" 200 OK
+Mai 22 10:32:31 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 10:32:31 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 10:32:31 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 10:32:31 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 10:32:32 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 10:32:32 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /meetings HTTP/1.0" 200 OK
+Mai 22 10:32:33 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 10:32:33 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /tasks HTTP/1.0" 200 OK
+Mai 22 10:32:33 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 10:32:33 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 10:32:33 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 10:32:33 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 10:32:34 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /projekte HTTP/1.0" 307 Temporary Redirect
+Mai 22 10:32:34 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 10:32:34 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:GET /projekte wurde aufgerufen
+Mai 22 10:32:34 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /projekte/ HTTP/1.0" 200 OK
+Mai 22 10:32:34 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 10:32:34 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 10:32:34 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 10:32:34 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 10:32:35 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 10:32:35 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /projekte/6821014bafe81fd02e9c1bed HTTP/1.0" 200 OK
+Mai 22 10:32:35 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /projekte/CMPV/dateien HTTP/1.0" 404 Not Found
+Mai 22 10:32:35 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 10:32:35 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /project/6821014bafe81fd02e9c1bed/tasks HTTP/1.0" 200 OK
+Mai 22 10:32:35 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 10:32:35 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 10:32:35 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 10:32:35 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 10:34:06 iun-dcn-cdb-01 uvicorn[61661]: INFO:     91.84.87.137:0 - "GET / HTTP/1.0" 200 OK
+Mai 22 10:34:06 iun-dcn-cdb-01 uvicorn[61661]: INFO:     91.84.87.137:0 - "GET /js/twint_ch.js HTTP/1.0" 404 Not Found
+Mai 22 10:34:06 iun-dcn-cdb-01 uvicorn[61661]: INFO:     91.84.87.137:0 - "GET /js/lkk_ch.js HTTP/1.0" 404 Not Found
+Mai 22 10:34:29 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 10:34:29 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /tasks HTTP/1.0" 200 OK
+Mai 22 10:34:29 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 10:34:29 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 10:34:29 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 10:34:29 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 10:34:30 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 10:34:30 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /meetings HTTP/1.0" 200 OK
+Mai 22 10:34:31 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /projekte HTTP/1.0" 307 Temporary Redirect
+Mai 22 10:34:31 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 10:34:31 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:GET /projekte wurde aufgerufen
+Mai 22 10:34:31 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /projekte/ HTTP/1.0" 200 OK
+Mai 22 10:34:31 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 10:34:31 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 10:34:31 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 10:34:31 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 10:36:28 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /projekte HTTP/1.0" 307 Temporary Redirect
+Mai 22 10:36:28 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 10:36:28 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:GET /projekte wurde aufgerufen
+Mai 22 10:36:28 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /projekte/ HTTP/1.0" 200 OK
+Mai 22 10:36:28 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 10:36:28 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 10:36:28 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 10:36:28 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 10:36:30 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 10:36:30 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /tasks HTTP/1.0" 200 OK
+Mai 22 10:36:30 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 10:36:30 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 10:36:30 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 10:36:30 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 10:36:30 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 10:36:30 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /meetings HTTP/1.0" 200 OK
+Mai 22 10:36:31 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /projekte HTTP/1.0" 307 Temporary Redirect
+Mai 22 10:36:31 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 10:36:31 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:GET /projekte wurde aufgerufen
+Mai 22 10:36:31 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /projekte/ HTTP/1.0" 200 OK
+Mai 22 10:36:31 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 10:36:31 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 10:36:31 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 10:36:31 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 10:47:06 iun-dcn-cdb-01 uvicorn[61661]: INFO:     54.247.57.72:0 - "GET / HTTP/1.0" 200 OK
+Mai 22 10:47:06 iun-dcn-cdb-01 uvicorn[61661]: INFO:     54.247.57.72:0 - "GET / HTTP/1.0" 200 OK
+Mai 22 10:47:06 iun-dcn-cdb-01 uvicorn[61661]: INFO:     54.247.57.72:0 - "GET /favicon.ico HTTP/1.0" 404 Not Found
+Mai 22 10:47:06 iun-dcn-cdb-01 uvicorn[61661]: INFO:     54.247.57.72:0 - "GET / HTTP/1.0" 200 OK
+Mai 22 10:47:06 iun-dcn-cdb-01 uvicorn[61661]: INFO:     54.247.57.72:0 - "HEAD /favicon.ico HTTP/1.0" 404 Not Found
+Mai 22 10:58:55 iun-dcn-cdb-01 uvicorn[61661]: INFO:     154.28.229.244:0 - "GET / HTTP/1.0" 200 OK
+Mai 22 10:59:14 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /users HTTP/1.0" 500 Internal Server Error
+Mai 22 10:59:14 iun-dcn-cdb-01 uvicorn[61661]: ERROR:    Exception in ASGI application
+Mai 22 10:59:14 iun-dcn-cdb-01 uvicorn[61661]: Traceback (most recent call last):
+Mai 22 10:59:14 iun-dcn-cdb-01 uvicorn[61661]:   File "/opt/otto/api/.venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+Mai 22 10:59:14 iun-dcn-cdb-01 uvicorn[61661]:     result = await app(  # type: ignore[func-returns-value]
+Mai 22 10:59:14 iun-dcn-cdb-01 uvicorn[61661]:              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Mai 22 10:59:14 iun-dcn-cdb-01 uvicorn[61661]:   File "/opt/otto/api/.venv/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+Mai 22 10:59:14 iun-dcn-cdb-01 uvicorn[61661]:     return await self.app(scope, receive, send)
+Mai 22 10:59:14 iun-dcn-cdb-01 uvicorn[61661]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Mai 22 10:59:14 iun-dcn-cdb-01 uvicorn[61661]:   File "/opt/otto/api/.venv/lib/python3.12/site-packages/fastapi/applications.py", line 1054, in __call__
+Mai 22 10:59:14 iun-dcn-cdb-01 uvicorn[61661]:     await super().__call__(scope, receive, send)
+Mai 22 10:59:14 iun-dcn-cdb-01 uvicorn[61661]:   File "/opt/otto/api/.venv/lib/python3.12/site-packages/starlette/applications.py", line 112, in __call__
+Mai 22 10:59:14 iun-dcn-cdb-01 uvicorn[61661]:     await self.middleware_stack(scope, receive, send)
+Mai 22 10:59:14 iun-dcn-cdb-01 uvicorn[61661]:   File "/opt/otto/api/.venv/lib/python3.12/site-packages/starlette/middleware/errors.py", line 187, in __call__
+Mai 22 10:59:14 iun-dcn-cdb-01 uvicorn[61661]:     raise exc
+Mai 22 10:59:14 iun-dcn-cdb-01 uvicorn[61661]:   File "/opt/otto/api/.venv/lib/python3.12/site-packages/starlette/middleware/errors.py", line 165, in __call__
+Mai 22 10:59:14 iun-dcn-cdb-01 uvicorn[61661]:     await self.app(scope, receive, _send)
+Mai 22 10:59:14 iun-dcn-cdb-01 uvicorn[61661]:   File "/opt/otto/api/.venv/lib/python3.12/site-packages/starlette/middleware/cors.py", line 85, in __call__
+Mai 22 10:59:14 iun-dcn-cdb-01 uvicorn[61661]:     await self.app(scope, receive, send)
+Mai 22 10:59:14 iun-dcn-cdb-01 uvicorn[61661]:   File "/opt/otto/api/.venv/lib/python3.12/site-packages/starlette/middleware/exceptions.py", line 62, in __call__
+Mai 22 10:59:14 iun-dcn-cdb-01 uvicorn[61661]:     await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+Mai 22 10:59:14 iun-dcn-cdb-01 uvicorn[61661]:   File "/opt/otto/api/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+Mai 22 10:59:14 iun-dcn-cdb-01 uvicorn[61661]:     raise exc
+Mai 22 10:59:14 iun-dcn-cdb-01 uvicorn[61661]:   File "/opt/otto/api/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+Mai 22 10:59:14 iun-dcn-cdb-01 uvicorn[61661]:     await app(scope, receive, sender)
+Mai 22 10:59:14 iun-dcn-cdb-01 uvicorn[61661]:   File "/opt/otto/api/.venv/lib/python3.12/site-packages/starlette/routing.py", line 714, in __call__
+Mai 22 10:59:14 iun-dcn-cdb-01 uvicorn[61661]:     await self.middleware_stack(scope, receive, send)
+Mai 22 10:59:14 iun-dcn-cdb-01 uvicorn[61661]:   File "/opt/otto/api/.venv/lib/python3.12/site-packages/starlette/routing.py", line 734, in app
+Mai 22 10:59:14 iun-dcn-cdb-01 uvicorn[61661]:     await route.handle(scope, receive, send)
+Mai 22 10:59:14 iun-dcn-cdb-01 uvicorn[61661]:   File "/opt/otto/api/.venv/lib/python3.12/site-packages/starlette/routing.py", line 288, in handle
+Mai 22 10:59:14 iun-dcn-cdb-01 uvicorn[61661]:     await self.app(scope, receive, send)
+Mai 22 10:59:14 iun-dcn-cdb-01 uvicorn[61661]:   File "/opt/otto/api/.venv/lib/python3.12/site-packages/starlette/routing.py", line 76, in app
+Mai 22 10:59:14 iun-dcn-cdb-01 uvicorn[61661]:     await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+Mai 22 10:59:14 iun-dcn-cdb-01 uvicorn[61661]:   File "/opt/otto/api/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+Mai 22 10:59:14 iun-dcn-cdb-01 uvicorn[61661]:     raise exc
+Mai 22 10:59:14 iun-dcn-cdb-01 uvicorn[61661]:   File "/opt/otto/api/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+Mai 22 10:59:14 iun-dcn-cdb-01 uvicorn[61661]:     await app(scope, receive, sender)
+Mai 22 10:59:14 iun-dcn-cdb-01 uvicorn[61661]:   File "/opt/otto/api/.venv/lib/python3.12/site-packages/starlette/routing.py", line 73, in app
+Mai 22 10:59:14 iun-dcn-cdb-01 uvicorn[61661]:     response = await f(request)
+Mai 22 10:59:14 iun-dcn-cdb-01 uvicorn[61661]:                ^^^^^^^^^^^^^^^^
+Mai 22 10:59:14 iun-dcn-cdb-01 uvicorn[61661]:   File "/opt/otto/api/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 301, in app
+Mai 22 10:59:14 iun-dcn-cdb-01 uvicorn[61661]:     raw_response = await run_endpoint_function(
+Mai 22 10:59:14 iun-dcn-cdb-01 uvicorn[61661]:                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Mai 22 10:59:14 iun-dcn-cdb-01 uvicorn[61661]:   File "/opt/otto/api/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 212, in run_endpoint_function
+Mai 22 10:59:14 iun-dcn-cdb-01 uvicorn[61661]:     return await dependant.call(**values)
+Mai 22 10:59:14 iun-dcn-cdb-01 uvicorn[61661]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Mai 22 10:59:14 iun-dcn-cdb-01 uvicorn[61661]:   File "/opt/otto/api/controller/user_controller.py", line 34, in get_users
+Mai 22 10:59:14 iun-dcn-cdb-01 uvicorn[61661]:     return [serialize(u async for u in cursor)]
+Mai 22 10:59:14 iun-dcn-cdb-01 uvicorn[61661]:             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Mai 22 10:59:14 iun-dcn-cdb-01 uvicorn[61661]:   File "/opt/otto/api/controller/user_controller.py", line 22, in serialize
+Mai 22 10:59:14 iun-dcn-cdb-01 uvicorn[61661]:     user["id"] = str(user["_id"])
+Mai 22 10:59:14 iun-dcn-cdb-01 uvicorn[61661]:                      ~~~~^^^^^^^
+Mai 22 10:59:14 iun-dcn-cdb-01 uvicorn[61661]: TypeError: 'async_generator' object is not subscriptable
+Mai 22 11:25:10 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /projekte HTTP/1.0" 307 Temporary Redirect
+Mai 22 11:25:10 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 11:25:10 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:GET /projekte wurde aufgerufen
+Mai 22 11:25:10 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /projekte/ HTTP/1.0" 200 OK
+Mai 22 11:25:10 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 11:25:10 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 11:25:10 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 11:25:10 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 11:25:12 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 11:25:12 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /projekte/6821014bafe81fd02e9c1bed HTTP/1.0" 200 OK
+Mai 22 11:25:12 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /projekte/CMPV/dateien HTTP/1.0" 404 Not Found
+Mai 22 11:25:12 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 11:25:12 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /project/6821014bafe81fd02e9c1bed/tasks HTTP/1.0" 200 OK
+Mai 22 11:25:12 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 11:25:12 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 11:25:12 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 11:25:12 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 11:26:00 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 11:26:00 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /tasks HTTP/1.0" 200 OK
+Mai 22 11:26:00 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 11:26:00 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 11:26:00 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 11:26:00 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 11:26:02 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 11:26:02 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /meetings HTTP/1.0" 200 OK
+Mai 22 11:26:03 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 11:26:03 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /meetings/product-owner-meeting HTTP/1.0" 200 OK
+Mai 22 11:26:03 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 11:26:03 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 11:26:03 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 11:26:03 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 11:26:03 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 11:26:03 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /meeting/product-owner-meeting/tasks HTTP/1.0" 200 OK
+Mai 22 11:51:16 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 11:51:16 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /meetings HTTP/1.0" 200 OK
+Mai 22 11:51:29 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 11:51:29 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /meetings/product-owner-meeting HTTP/1.0" 200 OK
+Mai 22 11:51:29 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 11:51:29 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 11:51:29 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 11:51:29 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 11:51:29 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 11:51:29 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /meeting/product-owner-meeting/tasks HTTP/1.0" 200 OK
+Mai 22 11:51:33 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 11:51:33 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /meetings/product-owner-meeting HTTP/1.0" 200 OK
+Mai 22 11:51:33 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 11:51:33 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 11:51:33 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 11:51:33 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 11:51:33 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 11:51:33 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "PUT /meetings/product-owner-meeting HTTP/1.0" 200 OK
+Mai 22 11:51:38 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 11:51:38 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /meetings HTTP/1.0" 200 OK
+Mai 22 11:51:41 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 11:51:41 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /meetings/jourfix-schedule-ease-2025-05-20 HTTP/1.0" 200 OK
+Mai 22 11:51:41 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 11:51:41 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 11:51:41 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 11:51:41 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 11:51:41 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 11:51:41 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /meeting/jourfix-schedule-ease-2025-05-20/tasks HTTP/1.0" 200 OK
+Mai 22 11:51:45 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 11:51:45 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /meetings/jourfix-schedule-ease-2025-05-20 HTTP/1.0" 200 OK
+Mai 22 11:51:45 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 11:51:45 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 11:51:45 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 11:51:45 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 11:51:45 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 11:51:45 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "PUT /meetings/jourfix-schedule-ease-2025-05-20 HTTP/1.0" 200 OK
+Mai 22 11:51:50 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 11:51:50 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /meetings HTTP/1.0" 200 OK
+Mai 22 11:51:55 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 11:51:55 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /meetings/isar-jourfixe-2025-05-15 HTTP/1.0" 200 OK
+Mai 22 11:51:55 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 11:51:55 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 11:51:55 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 11:51:55 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 11:51:55 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 11:51:55 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /meeting/isar-jourfixe-2025-05-15/tasks HTTP/1.0" 200 OK
+Mai 22 11:52:01 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 11:52:01 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /meetings/isar-jourfixe-2025-05-15 HTTP/1.0" 200 OK
+Mai 22 11:52:01 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 11:52:01 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 11:52:01 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 11:52:01 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 11:52:01 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 11:52:01 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "PUT /meetings/isar-jourfixe-2025-05-15 HTTP/1.0" 200 OK
+Mai 22 11:52:06 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 11:52:06 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /meetings HTTP/1.0" 200 OK
+Mai 22 11:52:09 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 11:52:09 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /meetings/product-owner-meeting-kw19 HTTP/1.0" 200 OK
+Mai 22 11:52:09 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 11:52:09 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 11:52:09 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 11:52:09 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 11:52:09 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 11:52:09 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /meeting/product-owner-meeting-kw19/tasks HTTP/1.0" 200 OK
+Mai 22 11:52:13 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 11:52:13 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /meetings/product-owner-meeting-kw19 HTTP/1.0" 200 OK
+Mai 22 11:52:13 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 11:52:13 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 11:52:13 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 11:52:13 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 11:52:13 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 11:52:13 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "PUT /meetings/product-owner-meeting-kw19 HTTP/1.0" 200 OK
+Mai 22 11:52:14 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 11:52:14 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /meetings HTTP/1.0" 200 OK
+Mai 22 11:52:17 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 11:52:17 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /tasks HTTP/1.0" 200 OK
+Mai 22 11:52:17 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 11:52:17 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 11:52:17 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 11:52:17 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 11:52:45 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /projekte HTTP/1.0" 307 Temporary Redirect
+Mai 22 11:52:45 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 11:52:45 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:GET /projekte wurde aufgerufen
+Mai 22 11:52:45 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /projekte/ HTTP/1.0" 200 OK
+Mai 22 11:52:45 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 11:52:45 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 11:52:45 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 11:52:45 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 11:54:10 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /projekte HTTP/1.0" 307 Temporary Redirect
+Mai 22 11:54:10 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 11:54:10 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:GET /projekte wurde aufgerufen
+Mai 22 11:54:10 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /projekte/ HTTP/1.0" 200 OK
+Mai 22 11:54:10 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 11:54:10 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 11:54:10 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 11:54:10 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 11:55:39 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /projekte HTTP/1.0" 307 Temporary Redirect
+Mai 22 11:55:39 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 11:55:39 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:GET /projekte wurde aufgerufen
+Mai 22 11:55:39 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /projekte/ HTTP/1.0" 200 OK
+Mai 22 11:55:39 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 11:55:39 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 11:55:39 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 11:55:39 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 11:55:45 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /projekte HTTP/1.0" 307 Temporary Redirect
+Mai 22 11:55:45 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 11:55:45 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:GET /projekte wurde aufgerufen
+Mai 22 11:55:45 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /projekte/ HTTP/1.0" 200 OK
+Mai 22 11:55:45 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 11:55:45 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 11:55:45 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 11:55:45 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 11:55:47 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 11:55:47 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /meetings HTTP/1.0" 200 OK
+Mai 22 11:55:49 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 11:55:49 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /tasks HTTP/1.0" 200 OK
+Mai 22 11:55:49 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 11:55:49 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 11:55:49 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 11:55:49 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 11:59:56 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 11:59:56 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /meetings HTTP/1.0" 200 OK
+Mai 22 12:01:14 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 12:01:14 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 12:01:14 iun-dcn-cdb-01 uvicorn[61661]: INFO:     79.211.179.31:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 12:01:40 iun-dcn-cdb-01 uvicorn[61661]: INFO:     149.57.180.83:0 - "GET / HTTP/1.0" 200 OK
+Mai 22 12:01:44 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 12:01:44 iun-dcn-cdb-01 uvicorn[61661]: INFO:     79.211.179.31:0 - "POST /meetings HTTP/1.0" 200 OK
+Mai 22 12:01:49 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 12:01:49 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /meetings HTTP/1.0" 200 OK
+Mai 22 12:01:51 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 12:01:51 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /meetings/string HTTP/1.0" 200 OK
+Mai 22 12:01:51 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 12:01:51 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 12:01:51 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 12:01:51 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 12:01:51 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 12:01:51 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /meeting/string/tasks HTTP/1.0" 200 OK
+Mai 22 12:02:37 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 12:02:37 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /meetings/string HTTP/1.0" 200 OK
+Mai 22 12:02:37 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 12:02:37 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 12:02:37 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 12:02:37 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 12:02:37 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 12:02:37 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "PUT /meetings/string HTTP/1.0" 200 OK
+Mai 22 12:04:02 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 12:04:02 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /meetings HTTP/1.0" 200 OK
+Mai 22 12:04:04 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 12:04:04 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /meetings/string HTTP/1.0" 200 OK
+Mai 22 12:04:04 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 12:04:04 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 12:04:04 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 12:04:04 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 12:04:04 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 12:04:04 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /meeting/string/tasks HTTP/1.0" 200 OK
+Mai 22 12:04:56 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 12:04:56 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /meetings/string HTTP/1.0" 200 OK
+Mai 22 12:04:56 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 12:04:56 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 12:04:56 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 12:04:56 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 12:04:56 iun-dcn-cdb-01 uvicorn[61661]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 12:04:56 iun-dcn-cdb-01 uvicorn[61661]: INFO:     192.168.101.1:0 - "PUT /meetings/string HTTP/1.0" 200 OK
+Mai 22 13:15:22 iun-dcn-cdb-01 uvicorn[61615]: WARNING:  StatReload detected changes in 'controller/user_controller.py'. Reloading...
+Mai 22 13:15:22 iun-dcn-cdb-01 uvicorn[61661]: INFO:     Shutting down
+Mai 22 13:15:22 iun-dcn-cdb-01 uvicorn[61661]: INFO:     Waiting for application shutdown.
+Mai 22 13:15:22 iun-dcn-cdb-01 uvicorn[61661]: INFO:     Application shutdown complete.
+Mai 22 13:15:22 iun-dcn-cdb-01 uvicorn[61661]: INFO:     Finished server process [61661]
+Mai 22 13:15:23 iun-dcn-cdb-01 uvicorn[64150]: INFO:     Started server process [64150]
+Mai 22 13:15:23 iun-dcn-cdb-01 uvicorn[64150]: INFO:     Waiting for application startup.
+Mai 22 13:15:23 iun-dcn-cdb-01 uvicorn[64150]: INFO:     Application startup complete.
+Mai 22 13:16:46 iun-dcn-cdb-01 uvicorn[64150]: INFO:     192.168.101.1:0 - "GET /users?username=anger HTTP/1.0" 200 OK
+Mai 22 13:22:15 iun-dcn-cdb-01 uvicorn[61615]: WARNING:  StatReload detected changes in 'controller/user_controller.py'. Reloading...
+Mai 22 13:22:15 iun-dcn-cdb-01 uvicorn[64150]: INFO:     Shutting down
+Mai 22 13:22:15 iun-dcn-cdb-01 uvicorn[64150]: INFO:     Waiting for application shutdown.
+Mai 22 13:22:15 iun-dcn-cdb-01 uvicorn[64150]: INFO:     Application shutdown complete.
+Mai 22 13:22:15 iun-dcn-cdb-01 uvicorn[64150]: INFO:     Finished server process [64150]
+Mai 22 13:22:15 iun-dcn-cdb-01 uvicorn[64355]: INFO:     Started server process [64355]
+Mai 22 13:22:15 iun-dcn-cdb-01 uvicorn[64355]: INFO:     Waiting for application startup.
+Mai 22 13:22:15 iun-dcn-cdb-01 uvicorn[64355]: INFO:     Application startup complete.
+Mai 22 13:22:39 iun-dcn-cdb-01 systemd[1]: Stopping otto-data.service - Otto Data API (FastAPI)...
+Mai 22 13:22:39 iun-dcn-cdb-01 uvicorn[64355]: INFO:     Shutting down
+Mai 22 13:22:40 iun-dcn-cdb-01 uvicorn[64355]: INFO:     Waiting for application shutdown.
+Mai 22 13:22:40 iun-dcn-cdb-01 uvicorn[64355]: INFO:     Application shutdown complete.
+Mai 22 13:22:40 iun-dcn-cdb-01 uvicorn[64355]: INFO:     Finished server process [64355]
+Mai 22 13:22:40 iun-dcn-cdb-01 uvicorn[61615]: INFO:     Stopping reloader process [61615]
+Mai 22 13:22:40 iun-dcn-cdb-01 systemd[1]: otto-data.service: Deactivated successfully.
+Mai 22 13:22:40 iun-dcn-cdb-01 systemd[1]: Stopped otto-data.service - Otto Data API (FastAPI).
+Mai 22 13:22:40 iun-dcn-cdb-01 systemd[1]: [0;1;39m[0;1;31m[0;1;39motto-data.service: Consumed 54min 54.468s CPU time, 75.0M memory peak, 0B memory swap peak.[0m
+Mai 22 13:22:40 iun-dcn-cdb-01 systemd[1]: Started otto-data.service - Otto Data API (FastAPI).
+Mai 22 13:22:40 iun-dcn-cdb-01 uvicorn[64519]: INFO:     Will watch for changes in these directories: ['/opt/otto/api']
+Mai 22 13:22:40 iun-dcn-cdb-01 uvicorn[64519]: INFO:     Uvicorn running on http://localhost:8502 (Press CTRL+C to quit)
+Mai 22 13:22:40 iun-dcn-cdb-01 uvicorn[64519]: INFO:     Started reloader process [64519] using StatReload
+Mai 22 13:22:40 iun-dcn-cdb-01 uvicorn[64523]: INFO:     Started server process [64523]
+Mai 22 13:22:40 iun-dcn-cdb-01 uvicorn[64523]: INFO:     Waiting for application startup.
+Mai 22 13:22:40 iun-dcn-cdb-01 uvicorn[64523]: INFO:     Application startup complete.
+Mai 22 13:22:53 iun-dcn-cdb-01 uvicorn[64523]: INFO:     79.211.179.31:0 - "GET /docs HTTP/1.0" 200 OK
+Mai 22 13:22:53 iun-dcn-cdb-01 uvicorn[64523]: INFO:     79.211.179.31:0 - "GET /openapi.json HTTP/1.0" 200 OK
+Mai 22 13:23:17 iun-dcn-cdb-01 uvicorn[64523]: INFO:     192.168.101.1:0 - "POST /login HTTP/1.0" 401 Unauthorized
+Mai 22 13:24:29 iun-dcn-cdb-01 uvicorn[64523]: INFO:     79.211.179.31:0 - "GET /users?username=anger HTTP/1.0" 200 OK
+Mai 22 13:25:33 iun-dcn-cdb-01 uvicorn[64523]: INFO:     79.211.179.31:0 - "PUT /users/682ef687e33da4fa80766d60 HTTP/1.0" 200 OK
+Mai 22 13:25:40 iun-dcn-cdb-01 uvicorn[64523]: INFO:     79.211.179.31:0 - "GET /users?username=anger HTTP/1.0" 200 OK
+Mai 22 13:25:57 iun-dcn-cdb-01 uvicorn[64523]: INFO:     79.211.179.31:0 - "POST /login HTTP/1.0" 200 OK
+Mai 22 13:26:10 iun-dcn-cdb-01 uvicorn[64523]: INFO:     192.168.101.1:0 - "POST /login HTTP/1.0" 401 Unauthorized
+Mai 22 13:44:22 iun-dcn-cdb-01 uvicorn[64519]: WARNING:  StatReload detected changes in 'controller/user_controller.py'. Reloading...
+Mai 22 13:44:22 iun-dcn-cdb-01 uvicorn[64523]: INFO:     Shutting down
+Mai 22 13:44:22 iun-dcn-cdb-01 uvicorn[64523]: INFO:     Waiting for application shutdown.
+Mai 22 13:44:22 iun-dcn-cdb-01 uvicorn[64523]: INFO:     Application shutdown complete.
+Mai 22 13:44:22 iun-dcn-cdb-01 uvicorn[64523]: INFO:     Finished server process [64523]
+Mai 22 13:44:23 iun-dcn-cdb-01 uvicorn[64836]: INFO:     Started server process [64836]
+Mai 22 13:44:23 iun-dcn-cdb-01 uvicorn[64836]: INFO:     Waiting for application startup.
+Mai 22 13:44:23 iun-dcn-cdb-01 uvicorn[64836]: INFO:     Application startup complete.
+Mai 22 13:44:51 iun-dcn-cdb-01 uvicorn[64836]: INFO:     192.168.101.1:0 - "POST /login HTTP/1.0" 401 Unauthorized
+Mai 22 13:52:33 iun-dcn-cdb-01 uvicorn[64519]: WARNING:  StatReload detected changes in 'controller/user_controller.py'. Reloading...
+Mai 22 13:52:33 iun-dcn-cdb-01 uvicorn[64836]: INFO:     Shutting down
+Mai 22 13:52:33 iun-dcn-cdb-01 uvicorn[64836]: INFO:     Waiting for application shutdown.
+Mai 22 13:52:33 iun-dcn-cdb-01 uvicorn[64836]: INFO:     Application shutdown complete.
+Mai 22 13:52:33 iun-dcn-cdb-01 uvicorn[64836]: INFO:     Finished server process [64836]
+Mai 22 13:52:34 iun-dcn-cdb-01 uvicorn[64968]: INFO:     Started server process [64968]
+Mai 22 13:52:34 iun-dcn-cdb-01 uvicorn[64968]: INFO:     Waiting for application startup.
+Mai 22 13:52:34 iun-dcn-cdb-01 uvicorn[64968]: INFO:     Application startup complete.
+Mai 22 13:53:32 iun-dcn-cdb-01 uvicorn[64968]: INFO:     34.121.216.177:0 - "GET / HTTP/1.0" 200 OK
+Mai 22 13:54:32 iun-dcn-cdb-01 systemd[1]: Stopping otto-data.service - Otto Data API (FastAPI)...
+Mai 22 13:54:32 iun-dcn-cdb-01 uvicorn[64968]: INFO:     Shutting down
+Mai 22 13:54:32 iun-dcn-cdb-01 uvicorn[64968]: INFO:     Waiting for application shutdown.
+Mai 22 13:54:32 iun-dcn-cdb-01 uvicorn[64968]: INFO:     Application shutdown complete.
+Mai 22 13:54:32 iun-dcn-cdb-01 uvicorn[64968]: INFO:     Finished server process [64968]
+Mai 22 13:54:32 iun-dcn-cdb-01 uvicorn[64519]: INFO:     Stopping reloader process [64519]
+Mai 22 13:54:32 iun-dcn-cdb-01 systemd[1]: otto-data.service: Deactivated successfully.
+Mai 22 13:54:32 iun-dcn-cdb-01 systemd[1]: Stopped otto-data.service - Otto Data API (FastAPI).
+Mai 22 13:54:32 iun-dcn-cdb-01 systemd[1]: otto-data.service: Consumed 9min 14.455s CPU time, 72.9M memory peak, 0B memory swap peak.
+Mai 22 13:54:32 iun-dcn-cdb-01 systemd[1]: Started otto-data.service - Otto Data API (FastAPI).
+Mai 22 13:54:32 iun-dcn-cdb-01 uvicorn[65045]: INFO:     Will watch for changes in these directories: ['/opt/otto/api']
+Mai 22 13:54:32 iun-dcn-cdb-01 uvicorn[65045]: INFO:     Uvicorn running on http://localhost:8502 (Press CTRL+C to quit)
+Mai 22 13:54:32 iun-dcn-cdb-01 uvicorn[65045]: INFO:     Started reloader process [65045] using StatReload
+Mai 22 13:54:33 iun-dcn-cdb-01 uvicorn[65048]: INFO:     Started server process [65048]
+Mai 22 13:54:33 iun-dcn-cdb-01 uvicorn[65048]: INFO:     Waiting for application startup.
+Mai 22 13:54:33 iun-dcn-cdb-01 uvicorn[65048]: INFO:     Application startup complete.
+Mai 22 13:54:44 iun-dcn-cdb-01 uvicorn[65048]: INFO:     192.168.101.1:0 - "POST /login HTTP/1.0" 401 Unauthorized
+Mai 22 13:54:52 iun-dcn-cdb-01 uvicorn[65048]: INFO:     79.211.179.31:0 - "GET /docs HTTP/1.0" 200 OK
+Mai 22 13:54:52 iun-dcn-cdb-01 uvicorn[65048]: INFO:     79.211.179.31:0 - "GET /openapi.json HTTP/1.0" 200 OK
+Mai 22 13:55:06 iun-dcn-cdb-01 uvicorn[65048]: INFO:     79.211.179.31:0 - "POST /login HTTP/1.0" 401 Unauthorized
+Mai 22 13:57:18 iun-dcn-cdb-01 uvicorn[65045]: WARNING:  StatReload detected changes in 'controller/user_controller.py'. Reloading...
+Mai 22 13:57:18 iun-dcn-cdb-01 uvicorn[65048]: INFO:     Shutting down
+Mai 22 13:57:18 iun-dcn-cdb-01 uvicorn[65048]: INFO:     Waiting for application shutdown.
+Mai 22 13:57:18 iun-dcn-cdb-01 uvicorn[65048]: INFO:     Application shutdown complete.
+Mai 22 13:57:18 iun-dcn-cdb-01 uvicorn[65048]: INFO:     Finished server process [65048]
+Mai 22 13:57:19 iun-dcn-cdb-01 uvicorn[65093]: INFO:     Started server process [65093]
+Mai 22 13:57:19 iun-dcn-cdb-01 uvicorn[65093]: INFO:     Waiting for application startup.
+Mai 22 13:57:19 iun-dcn-cdb-01 uvicorn[65093]: INFO:     Application startup complete.
+Mai 22 13:57:25 iun-dcn-cdb-01 uvicorn[65093]: ++Sah12# / False
+Mai 22 13:57:25 iun-dcn-cdb-01 uvicorn[65093]: INFO:     79.211.179.31:0 - "POST /login HTTP/1.0" 401 Unauthorized
+Mai 22 13:59:23 iun-dcn-cdb-01 uvicorn[65045]: WARNING:  StatReload detected changes in 'controller/user_controller.py'. Reloading...
+Mai 22 13:59:23 iun-dcn-cdb-01 uvicorn[65093]: INFO:     Shutting down
+Mai 22 13:59:23 iun-dcn-cdb-01 uvicorn[65093]: INFO:     Waiting for application shutdown.
+Mai 22 13:59:23 iun-dcn-cdb-01 uvicorn[65093]: INFO:     Application shutdown complete.
+Mai 22 13:59:23 iun-dcn-cdb-01 uvicorn[65093]: INFO:     Finished server process [65093]
+Mai 22 13:59:24 iun-dcn-cdb-01 uvicorn[65177]: INFO:     Started server process [65177]
+Mai 22 13:59:24 iun-dcn-cdb-01 uvicorn[65177]: INFO:     Waiting for application startup.
+Mai 22 13:59:24 iun-dcn-cdb-01 uvicorn[65177]: INFO:     Application startup complete.
+Mai 22 13:59:27 iun-dcn-cdb-01 uvicorn[65177]: INFO:     79.211.179.31:0 - "POST /login HTTP/1.0" 500 Internal Server Error
+Mai 22 13:59:27 iun-dcn-cdb-01 uvicorn[65177]: ERROR:    Exception in ASGI application
+Mai 22 13:59:27 iun-dcn-cdb-01 uvicorn[65177]: Traceback (most recent call last):
+Mai 22 13:59:27 iun-dcn-cdb-01 uvicorn[65177]:   File "/opt/otto/api/.venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+Mai 22 13:59:27 iun-dcn-cdb-01 uvicorn[65177]:     result = await app(  # type: ignore[func-returns-value]
+Mai 22 13:59:27 iun-dcn-cdb-01 uvicorn[65177]:              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Mai 22 13:59:27 iun-dcn-cdb-01 uvicorn[65177]:   File "/opt/otto/api/.venv/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+Mai 22 13:59:27 iun-dcn-cdb-01 uvicorn[65177]:     return await self.app(scope, receive, send)
+Mai 22 13:59:27 iun-dcn-cdb-01 uvicorn[65177]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Mai 22 13:59:27 iun-dcn-cdb-01 uvicorn[65177]:   File "/opt/otto/api/.venv/lib/python3.12/site-packages/fastapi/applications.py", line 1054, in __call__
+Mai 22 13:59:27 iun-dcn-cdb-01 uvicorn[65177]:     await super().__call__(scope, receive, send)
+Mai 22 13:59:27 iun-dcn-cdb-01 uvicorn[65177]:   File "/opt/otto/api/.venv/lib/python3.12/site-packages/starlette/applications.py", line 112, in __call__
+Mai 22 13:59:27 iun-dcn-cdb-01 uvicorn[65177]:     await self.middleware_stack(scope, receive, send)
+Mai 22 13:59:27 iun-dcn-cdb-01 uvicorn[65177]:   File "/opt/otto/api/.venv/lib/python3.12/site-packages/starlette/middleware/errors.py", line 187, in __call__
+Mai 22 13:59:27 iun-dcn-cdb-01 uvicorn[65177]:     raise exc
+Mai 22 13:59:27 iun-dcn-cdb-01 uvicorn[65177]:   File "/opt/otto/api/.venv/lib/python3.12/site-packages/starlette/middleware/errors.py", line 165, in __call__
+Mai 22 13:59:27 iun-dcn-cdb-01 uvicorn[65177]:     await self.app(scope, receive, _send)
+Mai 22 13:59:27 iun-dcn-cdb-01 uvicorn[65177]:   File "/opt/otto/api/.venv/lib/python3.12/site-packages/starlette/middleware/cors.py", line 93, in __call__
+Mai 22 13:59:27 iun-dcn-cdb-01 uvicorn[65177]:     await self.simple_response(scope, receive, send, request_headers=headers)
+Mai 22 13:59:27 iun-dcn-cdb-01 uvicorn[65177]:   File "/opt/otto/api/.venv/lib/python3.12/site-packages/starlette/middleware/cors.py", line 144, in simple_response
+Mai 22 13:59:27 iun-dcn-cdb-01 uvicorn[65177]:     await self.app(scope, receive, send)
+Mai 22 13:59:27 iun-dcn-cdb-01 uvicorn[65177]:   File "/opt/otto/api/.venv/lib/python3.12/site-packages/starlette/middleware/exceptions.py", line 62, in __call__
+Mai 22 13:59:27 iun-dcn-cdb-01 uvicorn[65177]:     await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+Mai 22 13:59:27 iun-dcn-cdb-01 uvicorn[65177]:   File "/opt/otto/api/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+Mai 22 13:59:27 iun-dcn-cdb-01 uvicorn[65177]:     raise exc
+Mai 22 13:59:27 iun-dcn-cdb-01 uvicorn[65177]:   File "/opt/otto/api/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+Mai 22 13:59:27 iun-dcn-cdb-01 uvicorn[65177]:     await app(scope, receive, sender)
+Mai 22 13:59:27 iun-dcn-cdb-01 uvicorn[65177]:   File "/opt/otto/api/.venv/lib/python3.12/site-packages/starlette/routing.py", line 714, in __call__
+Mai 22 13:59:27 iun-dcn-cdb-01 uvicorn[65177]:     await self.middleware_stack(scope, receive, send)
+Mai 22 13:59:27 iun-dcn-cdb-01 uvicorn[65177]:   File "/opt/otto/api/.venv/lib/python3.12/site-packages/starlette/routing.py", line 734, in app
+Mai 22 13:59:27 iun-dcn-cdb-01 uvicorn[65177]:     await route.handle(scope, receive, send)
+Mai 22 13:59:27 iun-dcn-cdb-01 uvicorn[65177]:   File "/opt/otto/api/.venv/lib/python3.12/site-packages/starlette/routing.py", line 288, in handle
+Mai 22 13:59:27 iun-dcn-cdb-01 uvicorn[65177]:     await self.app(scope, receive, send)
+Mai 22 13:59:27 iun-dcn-cdb-01 uvicorn[65177]:   File "/opt/otto/api/.venv/lib/python3.12/site-packages/starlette/routing.py", line 76, in app
+Mai 22 13:59:27 iun-dcn-cdb-01 uvicorn[65177]:     await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+Mai 22 13:59:27 iun-dcn-cdb-01 uvicorn[65177]:   File "/opt/otto/api/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+Mai 22 13:59:27 iun-dcn-cdb-01 uvicorn[65177]:     raise exc
+Mai 22 13:59:27 iun-dcn-cdb-01 uvicorn[65177]:   File "/opt/otto/api/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+Mai 22 13:59:27 iun-dcn-cdb-01 uvicorn[65177]:     await app(scope, receive, sender)
+Mai 22 13:59:27 iun-dcn-cdb-01 uvicorn[65177]:   File "/opt/otto/api/.venv/lib/python3.12/site-packages/starlette/routing.py", line 73, in app
+Mai 22 13:59:27 iun-dcn-cdb-01 uvicorn[65177]:     response = await f(request)
+Mai 22 13:59:27 iun-dcn-cdb-01 uvicorn[65177]:                ^^^^^^^^^^^^^^^^
+Mai 22 13:59:27 iun-dcn-cdb-01 uvicorn[65177]:   File "/opt/otto/api/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 301, in app
+Mai 22 13:59:27 iun-dcn-cdb-01 uvicorn[65177]:     raw_response = await run_endpoint_function(
+Mai 22 13:59:27 iun-dcn-cdb-01 uvicorn[65177]:                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Mai 22 13:59:27 iun-dcn-cdb-01 uvicorn[65177]:   File "/opt/otto/api/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 212, in run_endpoint_function
+Mai 22 13:59:27 iun-dcn-cdb-01 uvicorn[65177]:     return await dependant.call(**values)
+Mai 22 13:59:27 iun-dcn-cdb-01 uvicorn[65177]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Mai 22 13:59:27 iun-dcn-cdb-01 uvicorn[65177]:   File "/opt/otto/api/controller/user_controller.py", line 77, in login
+Mai 22 13:59:27 iun-dcn-cdb-01 uvicorn[65177]:     hash_password = bcrypt.hash(credentials.password, user.get("password", ""))
+Mai 22 13:59:27 iun-dcn-cdb-01 uvicorn[65177]:                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Mai 22 13:59:27 iun-dcn-cdb-01 uvicorn[65177]: TypeError: GenericHandler.hash() takes 2 positional arguments but 3 were given
+Mai 22 14:00:03 iun-dcn-cdb-01 uvicorn[65045]: WARNING:  StatReload detected changes in 'controller/user_controller.py'. Reloading...
+Mai 22 14:00:03 iun-dcn-cdb-01 uvicorn[65177]: INFO:     Shutting down
+Mai 22 14:00:03 iun-dcn-cdb-01 uvicorn[65177]: INFO:     Waiting for application shutdown.
+Mai 22 14:00:03 iun-dcn-cdb-01 uvicorn[65177]: INFO:     Application shutdown complete.
+Mai 22 14:00:03 iun-dcn-cdb-01 uvicorn[65177]: INFO:     Finished server process [65177]
+Mai 22 14:00:04 iun-dcn-cdb-01 uvicorn[65233]: INFO:     Started server process [65233]
+Mai 22 14:00:04 iun-dcn-cdb-01 uvicorn[65233]: INFO:     Waiting for application startup.
+Mai 22 14:00:04 iun-dcn-cdb-01 uvicorn[65233]: INFO:     Application startup complete.
+Mai 22 14:00:05 iun-dcn-cdb-01 uvicorn[65233]: INFO:     79.211.179.31:0 - "POST /login HTTP/1.0" 500 Internal Server Error
+Mai 22 14:00:05 iun-dcn-cdb-01 uvicorn[65233]: ERROR:    Exception in ASGI application
+Mai 22 14:00:05 iun-dcn-cdb-01 uvicorn[65233]: Traceback (most recent call last):
+Mai 22 14:00:05 iun-dcn-cdb-01 uvicorn[65233]:   File "/opt/otto/api/.venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+Mai 22 14:00:05 iun-dcn-cdb-01 uvicorn[65233]:     result = await app(  # type: ignore[func-returns-value]
+Mai 22 14:00:05 iun-dcn-cdb-01 uvicorn[65233]:              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Mai 22 14:00:05 iun-dcn-cdb-01 uvicorn[65233]:   File "/opt/otto/api/.venv/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+Mai 22 14:00:05 iun-dcn-cdb-01 uvicorn[65233]:     return await self.app(scope, receive, send)
+Mai 22 14:00:05 iun-dcn-cdb-01 uvicorn[65233]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Mai 22 14:00:05 iun-dcn-cdb-01 uvicorn[65233]:   File "/opt/otto/api/.venv/lib/python3.12/site-packages/fastapi/applications.py", line 1054, in __call__
+Mai 22 14:00:05 iun-dcn-cdb-01 uvicorn[65233]:     await super().__call__(scope, receive, send)
+Mai 22 14:00:05 iun-dcn-cdb-01 uvicorn[65233]:   File "/opt/otto/api/.venv/lib/python3.12/site-packages/starlette/applications.py", line 112, in __call__
+Mai 22 14:00:05 iun-dcn-cdb-01 uvicorn[65233]:     await self.middleware_stack(scope, receive, send)
+Mai 22 14:00:05 iun-dcn-cdb-01 uvicorn[65233]:   File "/opt/otto/api/.venv/lib/python3.12/site-packages/starlette/middleware/errors.py", line 187, in __call__
+Mai 22 14:00:05 iun-dcn-cdb-01 uvicorn[65233]:     raise exc
+Mai 22 14:00:05 iun-dcn-cdb-01 uvicorn[65233]:   File "/opt/otto/api/.venv/lib/python3.12/site-packages/starlette/middleware/errors.py", line 165, in __call__
+Mai 22 14:00:05 iun-dcn-cdb-01 uvicorn[65233]:     await self.app(scope, receive, _send)
+Mai 22 14:00:05 iun-dcn-cdb-01 uvicorn[65233]:   File "/opt/otto/api/.venv/lib/python3.12/site-packages/starlette/middleware/cors.py", line 93, in __call__
+Mai 22 14:00:05 iun-dcn-cdb-01 uvicorn[65233]:     await self.simple_response(scope, receive, send, request_headers=headers)
+Mai 22 14:00:05 iun-dcn-cdb-01 uvicorn[65233]:   File "/opt/otto/api/.venv/lib/python3.12/site-packages/starlette/middleware/cors.py", line 144, in simple_response
+Mai 22 14:00:05 iun-dcn-cdb-01 uvicorn[65233]:     await self.app(scope, receive, send)
+Mai 22 14:00:05 iun-dcn-cdb-01 uvicorn[65233]:   File "/opt/otto/api/.venv/lib/python3.12/site-packages/starlette/middleware/exceptions.py", line 62, in __call__
+Mai 22 14:00:05 iun-dcn-cdb-01 uvicorn[65233]:     await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+Mai 22 14:00:05 iun-dcn-cdb-01 uvicorn[65233]:   File "/opt/otto/api/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+Mai 22 14:00:05 iun-dcn-cdb-01 uvicorn[65233]:     raise exc
+Mai 22 14:00:05 iun-dcn-cdb-01 uvicorn[65233]:   File "/opt/otto/api/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+Mai 22 14:00:05 iun-dcn-cdb-01 uvicorn[65233]:     await app(scope, receive, sender)
+Mai 22 14:00:05 iun-dcn-cdb-01 uvicorn[65233]:   File "/opt/otto/api/.venv/lib/python3.12/site-packages/starlette/routing.py", line 714, in __call__
+Mai 22 14:00:05 iun-dcn-cdb-01 uvicorn[65233]:     await self.middleware_stack(scope, receive, send)
+Mai 22 14:00:05 iun-dcn-cdb-01 uvicorn[65233]:   File "/opt/otto/api/.venv/lib/python3.12/site-packages/starlette/routing.py", line 734, in app
+Mai 22 14:00:05 iun-dcn-cdb-01 uvicorn[65233]:     await route.handle(scope, receive, send)
+Mai 22 14:00:05 iun-dcn-cdb-01 uvicorn[65233]:   File "/opt/otto/api/.venv/lib/python3.12/site-packages/starlette/routing.py", line 288, in handle
+Mai 22 14:00:05 iun-dcn-cdb-01 uvicorn[65233]:     await self.app(scope, receive, send)
+Mai 22 14:00:05 iun-dcn-cdb-01 uvicorn[65233]:   File "/opt/otto/api/.venv/lib/python3.12/site-packages/starlette/routing.py", line 76, in app
+Mai 22 14:00:05 iun-dcn-cdb-01 uvicorn[65233]:     await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+Mai 22 14:00:05 iun-dcn-cdb-01 uvicorn[65233]:   File "/opt/otto/api/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+Mai 22 14:00:05 iun-dcn-cdb-01 uvicorn[65233]:     raise exc
+Mai 22 14:00:05 iun-dcn-cdb-01 uvicorn[65233]:   File "/opt/otto/api/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+Mai 22 14:00:05 iun-dcn-cdb-01 uvicorn[65233]:     await app(scope, receive, sender)
+Mai 22 14:00:05 iun-dcn-cdb-01 uvicorn[65233]:   File "/opt/otto/api/.venv/lib/python3.12/site-packages/starlette/routing.py", line 73, in app
+Mai 22 14:00:05 iun-dcn-cdb-01 uvicorn[65233]:     response = await f(request)
+Mai 22 14:00:05 iun-dcn-cdb-01 uvicorn[65233]:                ^^^^^^^^^^^^^^^^
+Mai 22 14:00:05 iun-dcn-cdb-01 uvicorn[65233]:   File "/opt/otto/api/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 301, in app
+Mai 22 14:00:05 iun-dcn-cdb-01 uvicorn[65233]:     raw_response = await run_endpoint_function(
+Mai 22 14:00:05 iun-dcn-cdb-01 uvicorn[65233]:                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Mai 22 14:00:05 iun-dcn-cdb-01 uvicorn[65233]:   File "/opt/otto/api/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 212, in run_endpoint_function
+Mai 22 14:00:05 iun-dcn-cdb-01 uvicorn[65233]:     return await dependant.call(**values)
+Mai 22 14:00:05 iun-dcn-cdb-01 uvicorn[65233]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Mai 22 14:00:05 iun-dcn-cdb-01 uvicorn[65233]:   File "/opt/otto/api/controller/user_controller.py", line 77, in login
+Mai 22 14:00:05 iun-dcn-cdb-01 uvicorn[65233]:     hash_password = bcrypt.hash(credentials.password, user.get("password"))
+Mai 22 14:00:05 iun-dcn-cdb-01 uvicorn[65233]:                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Mai 22 14:00:05 iun-dcn-cdb-01 uvicorn[65233]: TypeError: GenericHandler.hash() takes 2 positional arguments but 3 were given
+Mai 22 14:00:34 iun-dcn-cdb-01 uvicorn[65045]: WARNING:  StatReload detected changes in 'controller/user_controller.py'. Reloading...
+Mai 22 14:00:34 iun-dcn-cdb-01 uvicorn[65233]: INFO:     Shutting down
+Mai 22 14:00:34 iun-dcn-cdb-01 uvicorn[65233]: INFO:     Waiting for application shutdown.
+Mai 22 14:00:34 iun-dcn-cdb-01 uvicorn[65233]: INFO:     Application shutdown complete.
+Mai 22 14:00:34 iun-dcn-cdb-01 uvicorn[65233]: INFO:     Finished server process [65233]
+Mai 22 14:00:34 iun-dcn-cdb-01 uvicorn[65310]: INFO:     Started server process [65310]
+Mai 22 14:00:34 iun-dcn-cdb-01 uvicorn[65310]: INFO:     Waiting for application startup.
+Mai 22 14:00:34 iun-dcn-cdb-01 uvicorn[65310]: INFO:     Application startup complete.
+Mai 22 14:00:36 iun-dcn-cdb-01 uvicorn[65310]: ++Sah12# / $2b$12$XZhZJZSvJBvcI2KdKLdpHu0ZVpMYS0Se3gVFllZuKaJ4slD/UKSwu
+Mai 22 14:00:36 iun-dcn-cdb-01 uvicorn[65310]: INFO:     79.211.179.31:0 - "POST /login HTTP/1.0" 401 Unauthorized
+Mai 22 14:01:09 iun-dcn-cdb-01 uvicorn[65310]: INFO:     79.211.179.31:0 - "GET /users?username=anger HTTP/1.0" 200 OK
+Mai 22 14:02:37 iun-dcn-cdb-01 uvicorn[65045]: WARNING:  StatReload detected changes in 'controller/user_controller.py'. Reloading...
+Mai 22 14:02:37 iun-dcn-cdb-01 uvicorn[65310]: INFO:     Shutting down
+Mai 22 14:02:38 iun-dcn-cdb-01 uvicorn[65310]: INFO:     Waiting for application shutdown.
+Mai 22 14:02:38 iun-dcn-cdb-01 uvicorn[65310]: INFO:     Application shutdown complete.
+Mai 22 14:02:38 iun-dcn-cdb-01 uvicorn[65310]: INFO:     Finished server process [65310]
+Mai 22 14:02:38 iun-dcn-cdb-01 uvicorn[65347]: INFO:     Started server process [65347]
+Mai 22 14:02:38 iun-dcn-cdb-01 uvicorn[65347]: INFO:     Waiting for application startup.
+Mai 22 14:02:38 iun-dcn-cdb-01 uvicorn[65347]: INFO:     Application startup complete.
+Mai 22 14:02:40 iun-dcn-cdb-01 uvicorn[65347]: INFO:     79.211.179.31:0 - "GET /users?username=anger HTTP/1.0" 200 OK
+Mai 22 14:03:54 iun-dcn-cdb-01 uvicorn[65347]: INFO:     79.211.179.31:0 - "PUT /users/682ef687e33da4fa80766d60 HTTP/1.0" 200 OK
+Mai 22 14:04:00 iun-dcn-cdb-01 uvicorn[65347]: INFO:     79.211.179.31:0 - "POST /login HTTP/1.0" 200 OK
+Mai 22 14:04:17 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "POST /login HTTP/1.0" 200 OK
+Mai 22 14:04:19 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /projekte HTTP/1.0" 307 Temporary Redirect
+Mai 22 14:04:19 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 14:04:19 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:GET /projekte wurde aufgerufen
+Mai 22 14:04:19 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /projekte/ HTTP/1.0" 200 OK
+Mai 22 14:04:19 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 14:04:19 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 14:04:19 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 14:04:19 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 14:04:21 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 14:04:21 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /meetings HTTP/1.0" 200 OK
+Mai 22 14:04:24 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 14:04:24 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /meetings/string HTTP/1.0" 200 OK
+Mai 22 14:04:24 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 14:04:24 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 14:04:24 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 14:04:24 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 14:04:24 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 14:04:24 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /meeting/string/tasks HTTP/1.0" 200 OK
+Mai 22 14:04:34 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /projekte HTTP/1.0" 307 Temporary Redirect
+Mai 22 14:04:34 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 14:04:34 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:GET /projekte wurde aufgerufen
+Mai 22 14:04:34 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /projekte/ HTTP/1.0" 200 OK
+Mai 22 14:04:34 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 14:04:34 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 14:04:34 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 14:04:34 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 14:04:36 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 14:04:36 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /projekte/6821014bafe81fd02e9c1bed HTTP/1.0" 200 OK
+Mai 22 14:04:36 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /projekte/CMPV/dateien HTTP/1.0" 404 Not Found
+Mai 22 14:04:36 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 14:04:36 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /project/6821014bafe81fd02e9c1bed/tasks HTTP/1.0" 200 OK
+Mai 22 14:04:36 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 14:04:36 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 14:04:36 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 14:04:36 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 14:04:47 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 14:04:47 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /meetings HTTP/1.0" 200 OK
+Mai 22 14:04:48 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 14:04:48 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /meetings/product-owner-meeting-kw19 HTTP/1.0" 200 OK
+Mai 22 14:04:48 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 14:04:48 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 14:04:48 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 14:04:48 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 14:04:48 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 14:04:48 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /meeting/product-owner-meeting-kw19/tasks HTTP/1.0" 200 OK
+Mai 22 14:07:11 iun-dcn-cdb-01 uvicorn[65347]: ]]Sah12# / $2b$12$bCqIdlbeRZKilBiU0mVVwOQtr8I61oP5JzC0INop9eWpUKLeubCI.
+Mai 22 14:07:11 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "POST /login HTTP/1.0" 401 Unauthorized
+Mai 22 14:07:47 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 14:07:47 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /meetings HTTP/1.0" 200 OK
+Mai 22 14:07:48 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 14:07:48 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /meetings/string HTTP/1.0" 200 OK
+Mai 22 14:07:48 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 14:07:48 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 14:07:48 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 14:07:48 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 14:07:48 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 14:07:48 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /meeting/string/tasks HTTP/1.0" 200 OK
+Mai 22 14:11:07 iun-dcn-cdb-01 uvicorn[65347]: ]]Sah12# / $2b$12$4/MlJMYng.5wbM3SLF2K7O8c24FbBROn7cHGYiyzNyrRmRDr4aViC
+Mai 22 14:11:07 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "POST /login HTTP/1.0" 401 Unauthorized
+Mai 22 14:14:02 iun-dcn-cdb-01 uvicorn[65347]: INFO:     91.84.87.137:0 - "GET / HTTP/1.0" 200 OK
+Mai 22 14:14:02 iun-dcn-cdb-01 uvicorn[65347]: INFO:     91.84.87.137:0 - "GET /js/lkk_ch.js HTTP/1.0" 404 Not Found
+Mai 22 14:14:02 iun-dcn-cdb-01 uvicorn[65347]: INFO:     91.84.87.137:0 - "GET /js/twint_ch.js HTTP/1.0" 404 Not Found
+Mai 22 14:35:22 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /projekte HTTP/1.0" 307 Temporary Redirect
+Mai 22 14:35:22 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 14:35:22 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:GET /projekte wurde aufgerufen
+Mai 22 14:35:22 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /projekte/ HTTP/1.0" 200 OK
+Mai 22 14:35:22 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 14:35:22 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 14:35:22 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 14:35:22 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 14:35:25 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 14:35:25 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /meetings HTTP/1.0" 200 OK
+Mai 22 15:01:06 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /projekte HTTP/1.0" 307 Temporary Redirect
+Mai 22 15:01:06 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 15:01:06 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:GET /projekte wurde aufgerufen
+Mai 22 15:01:06 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /projekte/ HTTP/1.0" 200 OK
+Mai 22 15:01:06 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 15:01:06 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 15:01:06 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 15:01:06 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 15:01:09 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 15:01:09 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /meetings HTTP/1.0" 200 OK
+Mai 22 15:06:41 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 15:06:41 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /meetings/product-owner-meeting HTTP/1.0" 200 OK
+Mai 22 15:06:41 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 15:06:41 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 15:06:41 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 15:06:41 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 15:06:41 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 15:06:41 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /meeting/product-owner-meeting/tasks HTTP/1.0" 200 OK
+Mai 22 15:07:00 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /projekte HTTP/1.0" 307 Temporary Redirect
+Mai 22 15:07:00 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 15:07:00 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:GET /projekte wurde aufgerufen
+Mai 22 15:07:00 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /projekte/ HTTP/1.0" 200 OK
+Mai 22 15:07:00 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 15:07:00 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 15:07:00 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 15:07:00 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 15:07:02 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 15:07:02 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /projekte/6821014bafe81fd02e9c1bed HTTP/1.0" 200 OK
+Mai 22 15:07:02 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /projekte/CMPV/dateien HTTP/1.0" 404 Not Found
+Mai 22 15:07:02 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 15:07:02 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /project/6821014bafe81fd02e9c1bed/tasks HTTP/1.0" 200 OK
+Mai 22 15:07:02 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 15:07:02 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 15:07:02 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 15:07:02 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 15:07:19 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 15:07:19 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /tasks/682cf28425aa5a826e39399c HTTP/1.0" 200 OK
+Mai 22 15:07:19 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 15:07:19 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 15:07:19 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 15:07:19 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 15:07:19 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /projekte HTTP/1.0" 307 Temporary Redirect
+Mai 22 15:07:19 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 15:07:19 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:GET /projekte wurde aufgerufen
+Mai 22 15:07:19 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /projekte/ HTTP/1.0" 200 OK
+Mai 22 15:07:19 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 15:07:19 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /meetings HTTP/1.0" 200 OK
+Mai 22 16:49:49 iun-dcn-cdb-01 uvicorn[65347]: INFO:     52.16.245.145:0 - "GET / HTTP/1.0" 200 OK
+Mai 22 16:49:50 iun-dcn-cdb-01 uvicorn[65347]: INFO:     52.16.245.145:0 - "GET / HTTP/1.0" 200 OK
+Mai 22 16:49:50 iun-dcn-cdb-01 uvicorn[65347]: INFO:     52.16.245.145:0 - "GET /favicon.ico HTTP/1.0" 404 Not Found
+Mai 22 16:49:50 iun-dcn-cdb-01 uvicorn[65347]: INFO:     52.16.245.145:0 - "GET / HTTP/1.0" 200 OK
+Mai 22 16:49:50 iun-dcn-cdb-01 uvicorn[65347]: INFO:     52.16.245.145:0 - "HEAD /favicon.ico HTTP/1.0" 404 Not Found
+Mai 22 17:54:08 iun-dcn-cdb-01 uvicorn[65347]: INFO:     91.84.87.137:0 - "GET / HTTP/1.0" 200 OK
+Mai 22 17:54:08 iun-dcn-cdb-01 uvicorn[65347]: INFO:     91.84.87.137:0 - "GET /js/twint_ch.js HTTP/1.0" 404 Not Found
+Mai 22 17:54:08 iun-dcn-cdb-01 uvicorn[65347]: INFO:     91.84.87.137:0 - "GET /js/lkk_ch.js HTTP/1.0" 404 Not Found
+Mai 22 18:43:51 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /projekte HTTP/1.0" 307 Temporary Redirect
+Mai 22 18:43:51 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 18:43:51 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:GET /projekte wurde aufgerufen
+Mai 22 18:43:51 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /projekte/ HTTP/1.0" 200 OK
+Mai 22 18:43:51 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 18:43:51 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 18:43:51 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 18:43:51 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 18:43:56 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 18:43:56 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /projekte/6821014bafe81fd02e9c1bed HTTP/1.0" 200 OK
+Mai 22 18:43:56 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /projekte/CMPV/dateien HTTP/1.0" 404 Not Found
+Mai 22 18:43:56 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 18:43:56 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /project/6821014bafe81fd02e9c1bed/tasks HTTP/1.0" 200 OK
+Mai 22 18:43:56 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 18:43:56 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 18:43:56 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 18:43:56 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 18:43:56 iun-dcn-cdb-01 uvicorn[65347]: INFO:     79.211.179.31:0 - "GET /docs HTTP/1.0" 200 OK
+Mai 22 18:43:57 iun-dcn-cdb-01 uvicorn[65347]: INFO:     79.211.179.31:0 - "GET /openapi.json HTTP/1.0" 200 OK
+Mai 22 18:45:58 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 18:45:58 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /projekte/6821014bafe81fd02e9c1bed HTTP/1.0" 200 OK
+Mai 22 18:45:58 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /projekte/CMPV/dateien HTTP/1.0" 404 Not Found
+Mai 22 18:45:58 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 18:45:58 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /project/6821014bafe81fd02e9c1bed/tasks HTTP/1.0" 200 OK
+Mai 22 18:45:58 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 18:45:58 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 18:45:58 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 18:45:58 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 18:46:03 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /projekte HTTP/1.0" 307 Temporary Redirect
+Mai 22 18:46:03 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 18:46:03 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:GET /projekte wurde aufgerufen
+Mai 22 18:46:03 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /projekte/ HTTP/1.0" 200 OK
+Mai 22 18:46:03 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 18:46:03 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 18:46:03 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 18:46:03 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 18:51:39 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 18:51:39 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /meetings HTTP/1.0" 200 OK
+Mai 22 18:51:41 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 18:51:41 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /meetings/product-owner-meeting HTTP/1.0" 200 OK
+Mai 22 18:51:41 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 18:51:41 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 18:51:41 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 18:51:41 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 18:51:41 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 18:51:41 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /meeting/product-owner-meeting/tasks HTTP/1.0" 200 OK
+Mai 22 18:52:43 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 18:52:43 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /meetings/product-owner-meeting HTTP/1.0" 200 OK
+Mai 22 18:52:43 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 18:52:43 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 18:52:43 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 18:52:43 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 18:52:43 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 18:52:43 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /meeting/product-owner-meeting/tasks HTTP/1.0" 200 OK
+Mai 22 18:54:09 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 18:54:09 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /meetings/product-owner-meeting HTTP/1.0" 200 OK
+Mai 22 18:54:09 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 18:54:09 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 18:54:09 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 18:54:09 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 18:54:09 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 18:54:09 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /meeting/product-owner-meeting/tasks HTTP/1.0" 200 OK
+Mai 22 18:55:13 iun-dcn-cdb-01 uvicorn[65347]: INFO:     199.204.99.186:0 - "GET / HTTP/1.0" 200 OK
+Mai 22 18:56:06 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 18:56:06 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /meetings/product-owner-meeting HTTP/1.0" 200 OK
+Mai 22 18:56:06 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 18:56:06 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 18:56:06 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 18:56:06 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 18:56:06 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 18:56:06 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /meeting/product-owner-meeting/tasks HTTP/1.0" 200 OK
+Mai 22 18:58:03 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 18:58:03 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /meetings/product-owner-meeting HTTP/1.0" 200 OK
+Mai 22 18:58:03 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 18:58:03 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 18:58:03 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 18:58:03 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 18:58:03 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 18:58:03 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /meeting/product-owner-meeting/tasks HTTP/1.0" 200 OK
+Mai 22 18:59:10 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 18:59:10 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /meetings/product-owner-meeting HTTP/1.0" 200 OK
+Mai 22 18:59:10 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 18:59:10 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 18:59:10 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 18:59:10 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 18:59:10 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 18:59:10 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /meeting/product-owner-meeting/tasks HTTP/1.0" 200 OK
+Mai 22 18:59:19 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 18:59:19 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /tasks HTTP/1.0" 200 OK
+Mai 22 18:59:19 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 18:59:19 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 18:59:19 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 18:59:19 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 18:59:21 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 18:59:21 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /meetings HTTP/1.0" 200 OK
+Mai 22 18:59:24 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /projekte HTTP/1.0" 307 Temporary Redirect
+Mai 22 18:59:24 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 18:59:24 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:GET /projekte wurde aufgerufen
+Mai 22 18:59:24 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /projekte/ HTTP/1.0" 200 OK
+Mai 22 18:59:24 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 18:59:24 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 18:59:24 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 18:59:24 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 19:00:07 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:00:07 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /projekte/6821014bafe81fd02e9c1bed HTTP/1.0" 200 OK
+Mai 22 19:00:07 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /projekte/CMPV/dateien HTTP/1.0" 404 Not Found
+Mai 22 19:00:07 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:00:07 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /project/6821014bafe81fd02e9c1bed/tasks HTTP/1.0" 200 OK
+Mai 22 19:00:07 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 19:00:07 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:00:07 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 19:00:07 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 19:00:11 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:00:11 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /meetings HTTP/1.0" 200 OK
+Mai 22 19:00:13 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:00:13 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /meetings/isar-jourfixe-2025-05-15 HTTP/1.0" 200 OK
+Mai 22 19:00:13 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 19:00:13 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:00:13 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 19:00:13 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 19:00:13 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:00:13 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /meeting/isar-jourfixe-2025-05-15/tasks HTTP/1.0" 200 OK
+Mai 22 19:01:37 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:01:37 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /meetings/isar-jourfixe-2025-05-15 HTTP/1.0" 200 OK
+Mai 22 19:01:37 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 19:01:37 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:01:37 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 19:01:37 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 19:01:37 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:01:37 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /meeting/isar-jourfixe-2025-05-15/tasks HTTP/1.0" 200 OK
+Mai 22 19:03:38 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:03:38 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /meetings/isar-jourfixe-2025-05-15 HTTP/1.0" 200 OK
+Mai 22 19:03:38 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 19:03:38 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:03:38 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 19:03:38 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 19:03:38 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:03:38 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /meeting/isar-jourfixe-2025-05-15/tasks HTTP/1.0" 200 OK
+Mai 22 19:05:23 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:05:23 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /meetings/isar-jourfixe-2025-05-15 HTTP/1.0" 200 OK
+Mai 22 19:05:23 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 19:05:23 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:05:23 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 19:05:23 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 19:05:23 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:05:23 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /meeting/isar-jourfixe-2025-05-15/tasks HTTP/1.0" 200 OK
+Mai 22 19:06:02 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:06:02 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /meetings/isar-jourfixe-2025-05-15 HTTP/1.0" 200 OK
+Mai 22 19:06:02 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 19:06:02 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:06:02 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 19:06:02 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 19:06:02 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:06:02 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /meeting/isar-jourfixe-2025-05-15/tasks HTTP/1.0" 200 OK
+Mai 22 19:07:07 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:07:07 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /meetings/isar-jourfixe-2025-05-15 HTTP/1.0" 200 OK
+Mai 22 19:07:07 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 19:07:07 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:07:07 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 19:07:07 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 19:07:07 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:07:07 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /meeting/isar-jourfixe-2025-05-15/tasks HTTP/1.0" 200 OK
+Mai 22 19:09:49 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:09:49 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /meetings/isar-jourfixe-2025-05-15 HTTP/1.0" 200 OK
+Mai 22 19:09:49 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 19:09:49 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:09:49 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 19:09:49 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 19:09:49 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:09:49 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /meeting/isar-jourfixe-2025-05-15/tasks HTTP/1.0" 200 OK
+Mai 22 19:12:18 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:12:18 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /meetings/isar-jourfixe-2025-05-15 HTTP/1.0" 200 OK
+Mai 22 19:12:18 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 19:12:18 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:12:18 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 19:12:18 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 19:12:18 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:12:18 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /meeting/isar-jourfixe-2025-05-15/tasks HTTP/1.0" 200 OK
+Mai 22 19:12:42 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:12:42 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /tasks HTTP/1.0" 200 OK
+Mai 22 19:12:42 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 19:12:42 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:12:42 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 19:12:42 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 19:12:44 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /projekte HTTP/1.0" 307 Temporary Redirect
+Mai 22 19:12:44 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:12:44 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:GET /projekte wurde aufgerufen
+Mai 22 19:12:44 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /projekte/ HTTP/1.0" 200 OK
+Mai 22 19:12:44 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 19:12:44 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:12:44 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 19:12:44 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 19:12:45 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:12:45 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /projekte/6821014bafe81fd02e9c1bed HTTP/1.0" 200 OK
+Mai 22 19:12:45 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /projekte/CMPV/dateien HTTP/1.0" 404 Not Found
+Mai 22 19:12:45 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:12:45 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /project/6821014bafe81fd02e9c1bed/tasks HTTP/1.0" 200 OK
+Mai 22 19:12:45 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 19:12:45 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:12:45 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 19:12:45 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 19:12:56 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:12:56 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /meetings HTTP/1.0" 200 OK
+Mai 22 19:12:58 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:12:58 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /meetings/product-owner-meeting HTTP/1.0" 200 OK
+Mai 22 19:12:58 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 19:12:58 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:12:58 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 19:12:58 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 19:12:58 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:12:58 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /meeting/product-owner-meeting/tasks HTTP/1.0" 200 OK
+Mai 22 19:15:02 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:15:02 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /meetings/product-owner-meeting HTTP/1.0" 200 OK
+Mai 22 19:15:02 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 19:15:02 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:15:02 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 19:15:02 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 19:15:02 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:15:02 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /meeting/product-owner-meeting/tasks HTTP/1.0" 200 OK
+Mai 22 19:15:04 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:15:04 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /meetings/product-owner-meeting HTTP/1.0" 200 OK
+Mai 22 19:15:04 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 19:15:04 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:15:04 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 19:15:04 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 19:15:04 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:15:04 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /meeting/product-owner-meeting/tasks HTTP/1.0" 200 OK
+Mai 22 19:15:57 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:15:57 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /meetings/product-owner-meeting HTTP/1.0" 200 OK
+Mai 22 19:15:57 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 19:15:57 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:15:57 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 19:15:57 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 19:15:57 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:15:57 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /meeting/product-owner-meeting/tasks HTTP/1.0" 200 OK
+Mai 22 19:18:08 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:18:08 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /meetings/product-owner-meeting HTTP/1.0" 200 OK
+Mai 22 19:18:08 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 19:18:08 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:18:08 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 19:18:08 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 19:18:08 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:18:08 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /meeting/product-owner-meeting/tasks HTTP/1.0" 200 OK
+Mai 22 19:19:42 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:19:42 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /meetings/product-owner-meeting HTTP/1.0" 200 OK
+Mai 22 19:19:42 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 19:19:42 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:19:42 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 19:19:42 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 19:19:42 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:19:42 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /meeting/product-owner-meeting/tasks HTTP/1.0" 200 OK
+Mai 22 19:19:57 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /projekte HTTP/1.0" 307 Temporary Redirect
+Mai 22 19:19:57 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:19:57 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:GET /projekte wurde aufgerufen
+Mai 22 19:19:57 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /projekte/ HTTP/1.0" 200 OK
+Mai 22 19:19:57 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 19:19:57 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:19:57 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 19:19:57 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 19:19:59 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:19:59 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /projekte/6821014bafe81fd02e9c1bed HTTP/1.0" 200 OK
+Mai 22 19:19:59 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /projekte/CMPV/dateien HTTP/1.0" 404 Not Found
+Mai 22 19:19:59 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:19:59 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /project/6821014bafe81fd02e9c1bed/tasks HTTP/1.0" 200 OK
+Mai 22 19:19:59 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 19:19:59 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:19:59 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 19:19:59 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 19:22:21 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:22:21 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /tasks HTTP/1.0" 200 OK
+Mai 22 19:22:21 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 19:22:21 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:22:21 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 19:22:21 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 19:22:24 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:22:24 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /tasks HTTP/1.0" 200 OK
+Mai 22 19:22:24 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 19:22:24 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:22:24 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 19:22:24 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 19:22:27 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:22:27 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /tasks HTTP/1.0" 200 OK
+Mai 22 19:22:27 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 19:22:27 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:22:27 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 19:22:27 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 19:22:29 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:22:29 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /tasks HTTP/1.0" 200 OK
+Mai 22 19:22:29 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 19:22:29 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:22:29 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 19:22:29 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 19:22:42 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:22:42 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /tasks HTTP/1.0" 200 OK
+Mai 22 19:22:42 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 19:22:42 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:22:42 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 19:22:42 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 19:22:47 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:22:47 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /tasks HTTP/1.0" 200 OK
+Mai 22 19:22:47 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 19:22:47 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:22:47 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 19:22:47 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 19:22:55 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:22:55 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /tasks HTTP/1.0" 200 OK
+Mai 22 19:22:55 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 19:22:55 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:22:55 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 19:22:55 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 19:23:01 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:23:01 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "DELETE /tasks/6825a90b7abfa19c551eb179 HTTP/1.0" 200 OK
+Mai 22 19:23:11 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:23:11 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /tasks/682cf41825aa5a826e3939ab HTTP/1.0" 200 OK
+Mai 22 19:23:11 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:23:11 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "PUT /tasks/682cf41825aa5a826e3939ab HTTP/1.0" 200 OK
+Mai 22 19:23:20 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:23:20 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /tasks/682cf3a425aa5a826e3939a4 HTTP/1.0" 200 OK
+Mai 22 19:23:20 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:23:20 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "PUT /tasks/682cf3a425aa5a826e3939a4 HTTP/1.0" 200 OK
+Mai 22 19:23:27 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:23:27 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /tasks HTTP/1.0" 200 OK
+Mai 22 19:23:27 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 19:23:27 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:23:27 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 19:23:27 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 19:24:04 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:24:04 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /tasks/6825b958a177e537353944a6 HTTP/1.0" 200 OK
+Mai 22 19:24:04 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:24:04 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "PUT /tasks/6825b958a177e537353944a6 HTTP/1.0" 200 OK
+Mai 22 19:24:17 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:24:17 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /tasks HTTP/1.0" 200 OK
+Mai 22 19:24:17 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 19:24:17 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:24:17 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 19:24:17 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 19:24:25 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:24:25 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "DELETE /tasks/6825c84fa177e537353944aa HTTP/1.0" 200 OK
+Mai 22 19:24:34 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /projekte HTTP/1.0" 307 Temporary Redirect
+Mai 22 19:24:34 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:24:34 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:GET /projekte wurde aufgerufen
+Mai 22 19:24:34 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /projekte/ HTTP/1.0" 200 OK
+Mai 22 19:24:34 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 19:24:34 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:24:34 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 19:24:34 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 19:24:36 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:24:36 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /projekte/6821014bafe81fd02e9c1bed HTTP/1.0" 200 OK
+Mai 22 19:24:36 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /projekte/CMPV/dateien HTTP/1.0" 404 Not Found
+Mai 22 19:24:36 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:24:36 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /project/6821014bafe81fd02e9c1bed/tasks HTTP/1.0" 200 OK
+Mai 22 19:24:36 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 19:24:36 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:24:36 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 19:24:36 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 19:24:42 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:24:42 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /tasks/682cf28425aa5a826e39399c HTTP/1.0" 200 OK
+Mai 22 19:24:42 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:24:42 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "PUT /tasks/682cf28425aa5a826e39399c HTTP/1.0" 200 OK
+Mai 22 19:24:43 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:24:43 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /tasks/682cf28425aa5a826e39399c HTTP/1.0" 200 OK
+Mai 22 19:24:43 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:24:43 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "PUT /tasks/682cf28425aa5a826e39399c HTTP/1.0" 200 OK
+Mai 22 19:24:55 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:24:55 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /tasks/682cf28925aa5a826e39399e HTTP/1.0" 200 OK
+Mai 22 19:24:55 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:24:55 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "PUT /tasks/682cf28925aa5a826e39399e HTTP/1.0" 200 OK
+Mai 22 19:25:00 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:25:00 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /tasks/682cf28825aa5a826e39399d HTTP/1.0" 200 OK
+Mai 22 19:25:00 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:25:00 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "PUT /tasks/682cf28825aa5a826e39399d HTTP/1.0" 200 OK
+Mai 22 19:25:17 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /projekte HTTP/1.0" 307 Temporary Redirect
+Mai 22 19:25:17 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:25:17 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:GET /projekte wurde aufgerufen
+Mai 22 19:25:17 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /projekte/ HTTP/1.0" 200 OK
+Mai 22 19:25:17 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 19:25:17 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:25:17 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 19:25:17 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 19:25:18 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:25:18 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /projekte/6821014bafe81fd02e9c1bee HTTP/1.0" 200 OK
+Mai 22 19:25:18 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /projekte/TMP/dateien HTTP/1.0" 404 Not Found
+Mai 22 19:25:18 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:25:18 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /project/6821014bafe81fd02e9c1bee/tasks HTTP/1.0" 200 OK
+Mai 22 19:25:18 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 19:25:18 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:25:18 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 19:25:18 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 19:25:22 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:25:22 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /tasks/682cf3a625aa5a826e3939a5 HTTP/1.0" 200 OK
+Mai 22 19:25:22 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:25:22 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "PUT /tasks/682cf3a625aa5a826e3939a5 HTTP/1.0" 200 OK
+Mai 22 19:25:24 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:25:24 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /tasks/682cf3a825aa5a826e3939a6 HTTP/1.0" 200 OK
+Mai 22 19:25:24 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:25:24 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "PUT /tasks/682cf3a825aa5a826e3939a6 HTTP/1.0" 200 OK
+Mai 22 19:25:27 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:25:27 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /tasks/682cf3ac25aa5a826e3939a7 HTTP/1.0" 200 OK
+Mai 22 19:25:27 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:25:27 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "PUT /tasks/682cf3ac25aa5a826e3939a7 HTTP/1.0" 200 OK
+Mai 22 19:25:31 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /projekte HTTP/1.0" 307 Temporary Redirect
+Mai 22 19:25:31 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:25:31 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:GET /projekte wurde aufgerufen
+Mai 22 19:25:31 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /projekte/ HTTP/1.0" 200 OK
+Mai 22 19:25:31 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 19:25:31 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:25:31 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 19:25:31 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 19:25:34 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:25:34 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /projekte/6821014bafe81fd02e9c1bee HTTP/1.0" 200 OK
+Mai 22 19:25:34 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /projekte/TMP/dateien HTTP/1.0" 404 Not Found
+Mai 22 19:25:34 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:25:34 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /project/6821014bafe81fd02e9c1bee/tasks HTTP/1.0" 200 OK
+Mai 22 19:25:34 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 19:25:34 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:25:34 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 19:25:34 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 19:25:35 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /projekte HTTP/1.0" 307 Temporary Redirect
+Mai 22 19:25:35 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:25:35 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:GET /projekte wurde aufgerufen
+Mai 22 19:25:35 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /projekte/ HTTP/1.0" 200 OK
+Mai 22 19:25:35 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 19:25:35 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:25:35 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 19:25:35 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 19:25:38 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:25:38 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /projekte/6821014bafe81fd02e9c1bf0 HTTP/1.0" 200 OK
+Mai 22 19:25:38 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /projekte/KAO/dateien HTTP/1.0" 404 Not Found
+Mai 22 19:25:38 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:25:38 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /project/6821014bafe81fd02e9c1bf0/tasks HTTP/1.0" 200 OK
+Mai 22 19:25:38 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 19:25:38 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:25:38 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 19:25:38 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 19:25:53 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:25:53 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /tasks/682cf45e25aa5a826e3939ae HTTP/1.0" 200 OK
+Mai 22 19:25:53 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:25:53 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "PUT /tasks/682cf45e25aa5a826e3939ae HTTP/1.0" 200 OK
+Mai 22 19:25:58 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:25:58 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "DELETE /tasks/6825e03ca177e537353944c3 HTTP/1.0" 200 OK
+Mai 22 19:26:03 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:26:03 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "DELETE /tasks/682cf46325aa5a826e3939b0 HTTP/1.0" 200 OK
+Mai 22 19:26:07 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:26:07 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "DELETE /tasks/682cf46725aa5a826e3939b1 HTTP/1.0" 200 OK
+Mai 22 19:26:12 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /projekte HTTP/1.0" 307 Temporary Redirect
+Mai 22 19:26:12 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:26:12 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:GET /projekte wurde aufgerufen
+Mai 22 19:26:12 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /projekte/ HTTP/1.0" 200 OK
+Mai 22 19:26:12 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 19:26:12 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:26:12 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 19:26:12 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 19:26:14 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:26:14 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /projekte/6821014bafe81fd02e9c1bf1 HTTP/1.0" 200 OK
+Mai 22 19:26:14 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /projekte/KIP/dateien HTTP/1.0" 404 Not Found
+Mai 22 19:26:14 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:26:14 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /project/6821014bafe81fd02e9c1bf1/tasks HTTP/1.0" 200 OK
+Mai 22 19:26:14 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 19:26:14 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:26:14 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 19:26:14 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 19:26:18 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:26:18 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /tasks/6825dee2a177e537353944bf HTTP/1.0" 200 OK
+Mai 22 19:26:18 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:26:18 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "PUT /tasks/6825dee2a177e537353944bf HTTP/1.0" 200 OK
+Mai 22 19:26:21 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:26:21 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /tasks/6825dee7a177e537353944c0 HTTP/1.0" 200 OK
+Mai 22 19:26:21 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:26:21 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "PUT /tasks/6825dee7a177e537353944c0 HTTP/1.0" 200 OK
+Mai 22 19:26:23 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:26:23 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /tasks/6825deeda177e537353944c1 HTTP/1.0" 200 OK
+Mai 22 19:26:23 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:26:23 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "PUT /tasks/6825deeda177e537353944c1 HTTP/1.0" 200 OK
+Mai 22 19:26:24 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /projekte HTTP/1.0" 307 Temporary Redirect
+Mai 22 19:26:24 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:26:24 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:GET /projekte wurde aufgerufen
+Mai 22 19:26:24 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /projekte/ HTTP/1.0" 200 OK
+Mai 22 19:26:24 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 19:26:24 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:26:24 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 19:26:24 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 19:26:27 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:26:27 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /projekte/6821be0d1edd1fd6f5114249 HTTP/1.0" 200 OK
+Mai 22 19:26:27 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /projekte/MUV45/dateien HTTP/1.0" 404 Not Found
+Mai 22 19:26:27 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:26:27 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /project/6821be0d1edd1fd6f5114249/tasks HTTP/1.0" 200 OK
+Mai 22 19:26:27 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 19:26:27 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:26:27 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 19:26:27 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 19:26:35 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:26:35 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /tasks/6825b8dfa177e537353944a4 HTTP/1.0" 200 OK
+Mai 22 19:26:35 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:26:35 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "PUT /tasks/6825b8dfa177e537353944a4 HTTP/1.0" 200 OK
+Mai 22 19:26:37 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:26:37 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /tasks/6825caa5a177e537353944b3 HTTP/1.0" 200 OK
+Mai 22 19:26:37 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:26:37 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "PUT /tasks/6825caa5a177e537353944b3 HTTP/1.0" 200 OK
+Mai 22 19:26:38 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:26:38 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /tasks/6825cadda177e537353944b4 HTTP/1.0" 200 OK
+Mai 22 19:26:38 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:26:38 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "PUT /tasks/6825cadda177e537353944b4 HTTP/1.0" 200 OK
+Mai 22 19:26:43 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /projekte HTTP/1.0" 307 Temporary Redirect
+Mai 22 19:26:43 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:26:43 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:GET /projekte wurde aufgerufen
+Mai 22 19:26:43 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /projekte/ HTTP/1.0" 200 OK
+Mai 22 19:26:43 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 19:26:43 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:26:43 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 19:26:43 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 19:26:46 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:26:46 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /projekte/6821fbc6b445053e37d995d7 HTTP/1.0" 200 OK
+Mai 22 19:26:46 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /projekte/AKPIE/dateien HTTP/1.0" 404 Not Found
+Mai 22 19:26:46 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:26:46 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /project/6821fbc6b445053e37d995d7/tasks HTTP/1.0" 200 OK
+Mai 22 19:26:46 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 19:26:46 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:26:46 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 19:26:46 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 19:26:53 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:26:53 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /tasks/682786cd7874da3b1467facd HTTP/1.0" 200 OK
+Mai 22 19:26:53 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:26:53 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "PUT /tasks/682786cd7874da3b1467facd HTTP/1.0" 200 OK
+Mai 22 19:27:12 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:27:12 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /tasks/6825c6b6a177e537353944a8 HTTP/1.0" 200 OK
+Mai 22 19:27:12 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:27:12 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "PUT /tasks/6825c6b6a177e537353944a8 HTTP/1.0" 200 OK
+Mai 22 19:27:13 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /projekte HTTP/1.0" 307 Temporary Redirect
+Mai 22 19:27:13 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:27:13 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:GET /projekte wurde aufgerufen
+Mai 22 19:27:13 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /projekte/ HTTP/1.0" 200 OK
+Mai 22 19:27:13 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 19:27:13 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:27:13 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 19:27:13 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 19:27:18 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:27:18 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /projekte/68243f8eebd769edbeee1696 HTTP/1.0" 200 OK
+Mai 22 19:27:18 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /projekte/HAMAP/dateien HTTP/1.0" 404 Not Found
+Mai 22 19:27:18 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:27:18 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /project/68243f8eebd769edbeee1696/tasks HTTP/1.0" 200 OK
+Mai 22 19:27:18 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 19:27:18 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:27:18 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 19:27:18 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 19:27:23 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /projekte HTTP/1.0" 307 Temporary Redirect
+Mai 22 19:27:23 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:27:23 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:GET /projekte wurde aufgerufen
+Mai 22 19:27:23 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /projekte/ HTTP/1.0" 200 OK
+Mai 22 19:27:23 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 19:27:23 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:27:23 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 19:27:23 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 19:27:25 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:27:25 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /projekte/6824474aebd769edbeee1697 HTTP/1.0" 200 OK
+Mai 22 19:27:25 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /projekte/DYNTIX/dateien HTTP/1.0" 404 Not Found
+Mai 22 19:27:25 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:27:25 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /project/6824474aebd769edbeee1697/tasks HTTP/1.0" 200 OK
+Mai 22 19:27:25 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 19:27:25 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:27:25 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 19:27:25 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 19:27:29 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:27:29 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /tasks/6825c9c9a177e537353944ad HTTP/1.0" 200 OK
+Mai 22 19:27:29 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:27:29 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "PUT /tasks/6825c9c9a177e537353944ad HTTP/1.0" 200 OK
+Mai 22 19:27:31 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /projekte HTTP/1.0" 307 Temporary Redirect
+Mai 22 19:27:31 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:27:31 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:GET /projekte wurde aufgerufen
+Mai 22 19:27:31 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /projekte/ HTTP/1.0" 200 OK
+Mai 22 19:27:31 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 19:27:31 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:27:31 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 19:27:31 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 19:27:32 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:27:32 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /projekte/6824b6feebd769edbeee169d HTTP/1.0" 200 OK
+Mai 22 19:27:32 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /projekte/TNN/dateien HTTP/1.0" 404 Not Found
+Mai 22 19:27:32 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:27:33 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /project/6824b6feebd769edbeee169d/tasks HTTP/1.0" 200 OK
+Mai 22 19:27:33 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 19:27:33 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:27:33 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 19:27:33 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 19:30:06 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:30:06 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /meetings HTTP/1.0" 200 OK
+Mai 22 19:31:10 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /projekte HTTP/1.0" 307 Temporary Redirect
+Mai 22 19:31:10 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:31:10 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:GET /projekte wurde aufgerufen
+Mai 22 19:31:10 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /projekte/ HTTP/1.0" 200 OK
+Mai 22 19:31:10 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 19:31:10 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:31:10 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 19:31:10 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 19:31:12 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:31:12 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /tasks HTTP/1.0" 200 OK
+Mai 22 19:31:12 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 19:31:12 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:31:12 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 19:31:12 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 19:31:18 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:31:18 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /meetings HTTP/1.0" 200 OK
+Mai 22 19:32:03 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:32:03 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /meetings HTTP/1.0" 200 OK
+Mai 22 19:34:12 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:34:12 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /meetings HTTP/1.0" 200 OK
+Mai 22 19:34:43 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:34:43 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /meetings HTTP/1.0" 200 OK
+Mai 22 19:35:16 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:35:16 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /meetings HTTP/1.0" 200 OK
+Mai 22 19:35:23 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:35:23 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /meetings HTTP/1.0" 200 OK
+Mai 22 19:35:25 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:35:25 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /meetings HTTP/1.0" 200 OK
+Mai 22 19:35:55 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:35:55 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /meetings HTTP/1.0" 200 OK
+Mai 22 19:35:59 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:35:59 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /meetings/product-owner-meeting HTTP/1.0" 200 OK
+Mai 22 19:35:59 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 19:35:59 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:35:59 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 19:35:59 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 19:35:59 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:35:59 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /meeting/product-owner-meeting/tasks HTTP/1.0" 200 OK
+Mai 22 19:36:05 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /projekte HTTP/1.0" 307 Temporary Redirect
+Mai 22 19:36:05 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:36:05 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:GET /projekte wurde aufgerufen
+Mai 22 19:36:05 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /projekte/ HTTP/1.0" 200 OK
+Mai 22 19:36:05 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 19:36:05 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:36:05 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 19:36:05 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 19:36:09 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:36:09 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /meetings HTTP/1.0" 200 OK
+Mai 22 19:36:11 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:36:11 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /meetings/isar-jourfixe-2025-05-15 HTTP/1.0" 200 OK
+Mai 22 19:36:11 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 19:36:11 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:36:11 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 19:36:11 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 19:36:11 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:36:11 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /meeting/isar-jourfixe-2025-05-15/tasks HTTP/1.0" 200 OK
+Mai 22 19:36:15 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:36:15 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /meetings/isar-jourfixe-2025-05-15 HTTP/1.0" 200 OK
+Mai 22 19:36:15 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 19:36:15 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:36:15 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 19:36:15 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 19:36:15 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:36:15 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "PUT /meetings/isar-jourfixe-2025-05-15 HTTP/1.0" 200 OK
+Mai 22 19:36:29 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /projekte HTTP/1.0" 307 Temporary Redirect
+Mai 22 19:36:29 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:36:29 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:GET /projekte wurde aufgerufen
+Mai 22 19:36:29 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /projekte/ HTTP/1.0" 200 OK
+Mai 22 19:36:29 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 19:36:29 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:36:29 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 19:36:29 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 19:36:31 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:36:31 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /meetings HTTP/1.0" 200 OK
+Mai 22 19:39:38 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:39:38 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /meetings HTTP/1.0" 200 OK
+Mai 22 19:39:39 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:39:39 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /meetings/new HTTP/1.0" 404 Not Found
+Mai 22 19:42:59 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:42:59 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /meetings HTTP/1.0" 200 OK
+Mai 22 19:43:00 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:43:00 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /meetings/new HTTP/1.0" 404 Not Found
+Mai 22 19:45:32 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:45:32 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /meetings HTTP/1.0" 200 OK
+Mai 22 19:45:33 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 19:45:33 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:45:33 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 19:45:33 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 19:46:29 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:46:29 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "POST /meetings HTTP/1.0" 422 Unprocessable Entity
+Mai 22 19:47:01 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:47:01 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "POST /meetings HTTP/1.0" 422 Unprocessable Entity
+Mai 22 19:47:04 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:47:04 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /meetings HTTP/1.0" 200 OK
+Mai 22 19:47:07 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:47:07 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /meetings HTTP/1.0" 200 OK
+Mai 22 19:47:08 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 19:47:08 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:47:08 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 19:47:08 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 19:48:12 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 19:48:12 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:48:12 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 19:48:12 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 19:49:00 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:49:00 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "POST /meetings HTTP/1.0" 422 Unprocessable Entity
+Mai 22 19:49:10 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:49:10 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /meetings HTTP/1.0" 200 OK
+Mai 22 19:51:31 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:51:31 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /meetings HTTP/1.0" 200 OK
+Mai 22 19:51:33 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 19:51:33 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:51:33 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 19:51:33 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 19:51:55 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:51:55 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "POST /meetings HTTP/1.0" 200 OK
+Mai 22 19:51:57 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:51:57 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /meetings HTTP/1.0" 200 OK
+Mai 22 19:51:59 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:51:59 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /meetings HTTP/1.0" 200 OK
+Mai 22 19:52:01 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:52:01 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /meetings HTTP/1.0" 200 OK
+Mai 22 19:52:03 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:52:03 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /meetings/product-owner-meeting HTTP/1.0" 200 OK
+Mai 22 19:52:03 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 19:52:03 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:52:03 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 19:52:03 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 19:52:03 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:52:03 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /meeting/product-owner-meeting/tasks HTTP/1.0" 200 OK
+Mai 22 19:52:04 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:52:04 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /meetings HTTP/1.0" 200 OK
+Mai 22 19:52:23 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:52:23 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /meetings HTTP/1.0" 200 OK
+Mai 22 19:52:24 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:52:24 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /meetings HTTP/1.0" 200 OK
+Mai 22 19:52:44 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:52:44 iun-dcn-cdb-01 uvicorn[65347]: INFO:     79.211.179.31:0 - "GET /meetings HTTP/1.0" 200 OK
+Mai 22 19:53:53 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:53:53 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /meetings HTTP/1.0" 200 OK
+Mai 22 19:54:58 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:54:58 iun-dcn-cdb-01 uvicorn[65347]: INFO:     20.97.188.149:0 - "GET /meetings HTTP/1.0" 200 OK
+Mai 22 19:55:09 iun-dcn-cdb-01 uvicorn[65347]: INFO:     20.97.188.146:0 - "PUT /meetings/ HTTP/1.0" 307 Temporary Redirect
+Mai 22 19:55:09 iun-dcn-cdb-01 uvicorn[65347]: INFO:     20.97.188.146:0 - "PUT /meetings HTTP/1.0" 405 Method Not Allowed
+Mai 22 19:55:54 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:55:54 iun-dcn-cdb-01 uvicorn[65347]: INFO:     20.97.188.155:0 - "POST /meetings HTTP/1.0" 200 OK
+Mai 22 19:56:05 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:56:05 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /meetings HTTP/1.0" 200 OK
+Mai 22 19:56:08 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:56:08 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /meetings/arbeitsgruppen-meeting-2025-05-22 HTTP/1.0" 200 OK
+Mai 22 19:56:08 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 19:56:08 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:56:08 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 19:56:08 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 19:56:08 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:56:08 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /meeting/arbeitsgruppen-meeting-2025-05-22/tasks HTTP/1.0" 200 OK
+Mai 22 19:56:43 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:56:43 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /meetings/arbeitsgruppen-meeting-2025-05-22 HTTP/1.0" 200 OK
+Mai 22 19:56:43 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 19:56:43 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:56:43 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 19:56:43 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 19:56:43 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:56:43 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "PUT /meetings/arbeitsgruppen-meeting-2025-05-22 HTTP/1.0" 200 OK
+Mai 22 19:56:45 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:56:45 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /meetings HTTP/1.0" 200 OK
+Mai 22 19:56:49 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:56:49 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /meetings/arbeitsgruppen-meeting-2025-05-22 HTTP/1.0" 200 OK
+Mai 22 19:56:49 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen HTTP/1.0" 307 Temporary Redirect
+Mai 22 19:56:49 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:56:49 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:GET /personen wurde aufgerufen
+Mai 22 19:56:49 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /personen/ HTTP/1.0" 200 OK
+Mai 22 19:56:49 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:56:49 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /meeting/arbeitsgruppen-meeting-2025-05-22/tasks HTTP/1.0" 200 OK
+Mai 22 19:56:52 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:56:52 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /meetings HTTP/1.0" 200 OK
+Mai 22 19:59:07 iun-dcn-cdb-01 uvicorn[65347]: INFO:root:API Key received: 6Gri7QQEFh9.1vzDjnbzlGATXJrymoD8
+Mai 22 19:59:07 iun-dcn-cdb-01 uvicorn[65347]: INFO:     192.168.101.1:0 - "GET /meetings HTTP/1.0" 200 OK
+Mai 22 20:00:29 iun-dcn-cdb-01 uvicorn[65045]: WARNING:  StatReload detected changes in 'mongo.py'. Reloading...
+Mai 22 20:00:29 iun-dcn-cdb-01 uvicorn[65347]: INFO:     Shutting down
+Mai 22 20:00:29 iun-dcn-cdb-01 uvicorn[65347]: INFO:     Waiting for application shutdown.
+Mai 22 20:00:29 iun-dcn-cdb-01 uvicorn[65347]: INFO:     Application shutdown complete.
+Mai 22 20:00:29 iun-dcn-cdb-01 uvicorn[65347]: INFO:     Finished server process [65347]
+Mai 22 20:00:29 iun-dcn-cdb-01 uvicorn[69627]: Process SpawnProcess-7:
+Mai 22 20:00:29 iun-dcn-cdb-01 uvicorn[69627]: Traceback (most recent call last):
+Mai 22 20:00:29 iun-dcn-cdb-01 uvicorn[69627]:   File "/usr/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+Mai 22 20:00:29 iun-dcn-cdb-01 uvicorn[69627]:     self.run()
+Mai 22 20:00:29 iun-dcn-cdb-01 uvicorn[69627]:   File "/usr/lib/python3.12/multiprocessing/process.py", line 108, in run
+Mai 22 20:00:29 iun-dcn-cdb-01 uvicorn[69627]:     self._target(*self._args, **self._kwargs)
+Mai 22 20:00:29 iun-dcn-cdb-01 uvicorn[69627]:   File "/opt/otto/api/.venv/lib/python3.12/site-packages/uvicorn/_subprocess.py", line 80, in subprocess_started
+Mai 22 20:00:29 iun-dcn-cdb-01 uvicorn[69627]:     target(sockets=sockets)
+Mai 22 20:00:29 iun-dcn-cdb-01 uvicorn[69627]:   File "/opt/otto/api/.venv/lib/python3.12/site-packages/uvicorn/server.py", line 66, in run
+Mai 22 20:00:29 iun-dcn-cdb-01 uvicorn[69627]:     return asyncio.run(self.serve(sockets=sockets))
+Mai 22 20:00:29 iun-dcn-cdb-01 uvicorn[69627]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Mai 22 20:00:29 iun-dcn-cdb-01 uvicorn[69627]:   File "/usr/lib/python3.12/asyncio/runners.py", line 194, in run
+Mai 22 20:00:29 iun-dcn-cdb-01 uvicorn[69627]:     return runner.run(main)
+Mai 22 20:00:29 iun-dcn-cdb-01 uvicorn[69627]:            ^^^^^^^^^^^^^^^^
+Mai 22 20:00:29 iun-dcn-cdb-01 uvicorn[69627]:   File "/usr/lib/python3.12/asyncio/runners.py", line 118, in run
+Mai 22 20:00:29 iun-dcn-cdb-01 uvicorn[69627]:     return self._loop.run_until_complete(task)
+Mai 22 20:00:29 iun-dcn-cdb-01 uvicorn[69627]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Mai 22 20:00:29 iun-dcn-cdb-01 uvicorn[69627]:   File "/usr/lib/python3.12/asyncio/base_events.py", line 687, in run_until_complete
+Mai 22 20:00:29 iun-dcn-cdb-01 uvicorn[69627]:     return future.result()
+Mai 22 20:00:29 iun-dcn-cdb-01 uvicorn[69627]:            ^^^^^^^^^^^^^^^
+Mai 22 20:00:29 iun-dcn-cdb-01 uvicorn[69627]:   File "/opt/otto/api/.venv/lib/python3.12/site-packages/uvicorn/server.py", line 70, in serve
+Mai 22 20:00:29 iun-dcn-cdb-01 uvicorn[69627]:     await self._serve(sockets)
+Mai 22 20:00:29 iun-dcn-cdb-01 uvicorn[69627]:   File "/opt/otto/api/.venv/lib/python3.12/site-packages/uvicorn/server.py", line 77, in _serve
+Mai 22 20:00:29 iun-dcn-cdb-01 uvicorn[69627]:     config.load()
+Mai 22 20:00:29 iun-dcn-cdb-01 uvicorn[69627]:   File "/opt/otto/api/.venv/lib/python3.12/site-packages/uvicorn/config.py", line 435, in load
+Mai 22 20:00:29 iun-dcn-cdb-01 uvicorn[69627]:     self.loaded_app = import_from_string(self.app)
+Mai 22 20:00:29 iun-dcn-cdb-01 uvicorn[69627]:                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Mai 22 20:00:29 iun-dcn-cdb-01 uvicorn[69627]:   File "/opt/otto/api/.venv/lib/python3.12/site-packages/uvicorn/importer.py", line 19, in import_from_string
+Mai 22 20:00:29 iun-dcn-cdb-01 uvicorn[69627]:     module = importlib.import_module(module_str)
+Mai 22 20:00:29 iun-dcn-cdb-01 uvicorn[69627]:              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Mai 22 20:00:29 iun-dcn-cdb-01 uvicorn[69627]:   File "/usr/lib/python3.12/importlib/__init__.py", line 90, in import_module
+Mai 22 20:00:29 iun-dcn-cdb-01 uvicorn[69627]:     return _bootstrap._gcd_import(name[level:], package, level)
+Mai 22 20:00:29 iun-dcn-cdb-01 uvicorn[69627]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Mai 22 20:00:29 iun-dcn-cdb-01 uvicorn[69627]:   File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+Mai 22 20:00:29 iun-dcn-cdb-01 uvicorn[69627]:   File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+Mai 22 20:00:29 iun-dcn-cdb-01 uvicorn[69627]:   File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+Mai 22 20:00:29 iun-dcn-cdb-01 uvicorn[69627]:   File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+Mai 22 20:00:29 iun-dcn-cdb-01 uvicorn[69627]:   File "<frozen importlib._bootstrap_external>", line 995, in exec_module
+Mai 22 20:00:29 iun-dcn-cdb-01 uvicorn[69627]:   File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+Mai 22 20:00:29 iun-dcn-cdb-01 uvicorn[69627]:   File "/opt/otto/api/main.py", line 8, in <module>
+Mai 22 20:00:29 iun-dcn-cdb-01 uvicorn[69627]:     from mongo import projekte_collection, personen_collection
+Mai 22 20:00:29 iun-dcn-cdb-01 uvicorn[69627]:   File "/opt/otto/api/mongo.py", line 17, in <module>
+Mai 22 20:00:29 iun-dcn-cdb-01 uvicorn[69627]:     db.meetings.deleteMany({ id: "" })
+Mai 22 20:00:29 iun-dcn-cdb-01 uvicorn[69627]:   File "/opt/otto/api/.venv/lib/python3.12/site-packages/motor/core.py", line 987, in __call__
+Mai 22 20:00:29 iun-dcn-cdb-01 uvicorn[69627]:     raise TypeError(
+Mai 22 20:00:29 iun-dcn-cdb-01 uvicorn[69627]: TypeError: MotorCollection object is not callable. If you meant to call the 'meetings.deleteMany' method on a MotorCollection object it is failing because no such method exists.

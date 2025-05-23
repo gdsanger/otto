@@ -26,7 +26,7 @@ except Exception as e:
 
 try:
     from controller.mail import router as mail_router
-    app.include_router(calendar_router)
+    app.include_router(mail_router)
 except Exception as e:
     print(f"⚠️ Fehler beim Einbinden von mail_router: {e}")
 

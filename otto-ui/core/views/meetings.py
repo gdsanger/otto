@@ -8,6 +8,7 @@ from django.views.decorators.csrf import csrf_exempt
 from core.const import mandanten_liste, prio_liste, status_liste
 import os
 from dotenv import load_dotenv
+import uuid
 
 load_dotenv()
 
@@ -74,6 +75,47 @@ def meeting_detailview(request, meeting_id):
 
     return render(request, "core/meeting_detailview.html", {
         "meeting": meeting,
+        "personen": personen,
+        "mandanten": mandanten_liste,
+        "status_liste": status_liste,
+        "prio_liste": prio_liste
+    })
+
+
+@login_required
+@csrf_exempt
+def meeting_create(request):
+    if request.method == "POST":
+        try:
+            payload = json.loads(request.body)
+            data = {
+                "id": str(uuid.uuid4()),
+                "name": payload.get("name"),
+                "beschreibung": payload.get("beschreibung"),
+                "datum": payload.get("datum"),
+                "von": payload.get("von"),
+                "bis": payload.get("bis"),
+                "mandant": payload.get("mandant"),
+                "teilnehmer": payload.get("teilnehmer", []),
+                "themen": payload.get("themen"),
+            }
+            if not data["name"] or not data["datum"]:
+                return JsonResponse({"error": "Name und Datum sind Pflichtfelder."}, status=400)
+            res = requests.post(
+                f"{OTTO_API_URL}/meetings",
+                headers={"x-api-key": OTTO_API_KEY, "Content-Type": "application/json"},
+                data=json.dumps(data)
+            )
+            if res.status_code in (200, 201):
+                return JsonResponse({"success": True, "id": res.json().get("meeting", {}).get("id")})
+            return JsonResponse({"error": "Fehler beim Anlegen."}, status=500)
+        except Exception as e:
+            return JsonResponse({"error": str(e)}, status=400)
+
+    personen_res = requests.get(f"{OTTO_API_URL}/personen", headers={"x-api-key": OTTO_API_KEY})
+    personen = personen_res.json() if personen_res.status_code == 200 else []
+    return render(request, "core/meeting_detailview.html", {
+        "meeting": {},
         "personen": personen,
         "mandanten": mandanten_liste,
         "status_liste": status_liste,

@@ -1,9 +1,10 @@
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Depends
 from pydantic import BaseModel
 from passlib.hash import bcrypt
-from datetime import datetime
+from typing import Optional
 from bson import ObjectId
-from api.mongo import mongo
+from mongo import db
+from helper import verify_api_key, serialize_mongo
 
 router = APIRouter()
 
@@ -14,26 +15,40 @@ class UserIn(BaseModel):
     password: str
 
 class UserUpdate(BaseModel):
-    name: str = None
-    email: str = None
-    password: str = None
+    name: Optional[str] = None
+    email: Optional[str] = None
+    password: Optional[str] = None
 
-@router.post("/users")
+def serialize(user):
+    user["id"] = str(user["_id"])
+    user.pop("_id", None)
+    return user
+
+@router.get("/users", dependencies=[Depends(verify_api_key)], tags=["User"])
+def get_users(username: Optional[str] = None):
+    if username:
+        user = db.users.find_one({"username": username})
+        if not user:
+            raise HTTPException(status_code=404, detail="User not found")
+        return serialize(user)
+    return [serialize(u) for u in db.users.find()]
+
+@router.post("/users", dependencies=[Depends(verify_api_key)], tags=["User"])
 def create_user(user: UserIn):
-    if mongo.users.find_one({"username": user.username}):
+    if db.users.find_one({"username": user.username}):
         raise HTTPException(status_code=400, detail="Username bereits vergeben")
 
     hashed_pw = bcrypt.hash(user.password)
     user_dict = user.dict()
     user_dict["password"] = hashed_pw
     user_dict["last_login"] = None
-    mongo.users.insert_one(user_dict)
+    db.users.insert_one(user_dict)
     user_dict.pop("password")
     return user_dict
 
-@router.put("/users/{user_id}")
+@router.put("/users/{user_id}", dependencies=[Depends(verify_api_key)], tags=["User"])
 def update_user(user_id: str, update: UserUpdate):
-    user = mongo.users.find_one({"_id": ObjectId(user_id)})
+    user = db.users.find_one({"_id": ObjectId(user_id)})
     if not user:
         raise HTTPException(status_code=404, detail="Benutzer nicht gefunden")
 
@@ -41,5 +56,5 @@ def update_user(user_id: str, update: UserUpdate):
     if "password" in update_data:
         update_data["password"] = bcrypt.hash(update_data["password"])
 
-    mongo.users.update_one({"_id": ObjectId(user_id)}, {"$set": update_data})
+    db.users.update_one({"_id": ObjectId(user_id)}, {"$set": update_data})
     return {"ok": True}
