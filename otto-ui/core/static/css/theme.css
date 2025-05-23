@@ -1,0 +1,4 @@
+/* theme.css – Otto Bootstrap Farb-Override */
+:root {
+  --bs-primary: #004d40;
+}

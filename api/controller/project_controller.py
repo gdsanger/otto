@@ -64,10 +64,6 @@ async def speichere_projekte(projekt_liste: ProjektListe = Body(...)):
     result = await projekte_collection.insert_many([p.dict() for p in projekt_liste.projekte])
     inserted_ids = [str(i) for i in result.inserted_ids]
 
-    for projekt in projekt_liste.projekte:
-        if projekt.short:
-            await ensure_folder_exists(projekt.short)
-
     return {"inserted_ids": inserted_ids}
 
 @router.put("/projekte/{projekt_id}", dependencies=[Depends(verify_api_key)], tags=["Projekt"])
