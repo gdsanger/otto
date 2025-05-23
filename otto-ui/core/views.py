@@ -1,5 +1,12 @@
 from .views.auth import login_view, logout_view
-from .views.tasks import task_listview, update_task_status, update_task_person, update_task_details, task_detail_or_update, delete_task
+from .views.tasks import (
+    task_listview,
+    update_task_status,
+    update_task_person,
+    update_task_details,
+    task_detail_or_update,
+    delete_task,
+)
 from .views.projects import project_listview, project_detailview
 from .views.meetings import meeting_listview, meeting_detailview
 from django.shortcuts import render
@@ -16,6 +23,7 @@ load_dotenv()
 OTTO_API_KEY = os.getenv("OTTO_API_KEY")
 OTTO_API_URL = os.getenv("OTTO_API_URL")
 
+
 @login_required
 def home(request):
     q = request.GET.get("q", "").lower()
@@ -25,13 +33,19 @@ def home(request):
     meetings = []
     projekte = []
     try:
-        t_res = requests.get(f"{OTTO_API_URL}/tasks", headers={"x-api-key": OTTO_API_KEY})
+        t_res = requests.get(
+            f"{OTTO_API_URL}/tasks", headers={"x-api-key": OTTO_API_KEY}
+        )
         if t_res.status_code == 200:
             tasks = t_res.json()
-        m_res = requests.get(f"{OTTO_API_URL}/meetings", headers={"x-api-key": OTTO_API_KEY})
+        m_res = requests.get(
+            f"{OTTO_API_URL}/meetings", headers={"x-api-key": OTTO_API_KEY}
+        )
         if m_res.status_code == 200:
             meetings = m_res.json()
-        p_res = requests.get(f"{OTTO_API_URL}/projekte", headers={"x-api-key": OTTO_API_KEY})
+        p_res = requests.get(
+            f"{OTTO_API_URL}/projekte", headers={"x-api-key": OTTO_API_KEY}
+        )
         if p_res.status_code == 200:
             projekte = p_res.json()
     except Exception:
@@ -53,9 +67,9 @@ def home(request):
     for t in tasks:
         termin_dt = parse_termin(t)
         if termin_dt != datetime.max and now <= termin_dt <= now + timedelta(days=7):
-            t["_termin"] = termin_dt
+            t["termin_dt"] = termin_dt
             upcoming_tasks.append(t)
-    upcoming_tasks.sort(key=lambda x: x["_termin"])
+    upcoming_tasks.sort(key=lambda x: x["termin_dt"])
 
     # Meetings
     past_meetings = []
@@ -89,13 +103,15 @@ def home(request):
         p_tasks = tasks_by_project.get(tid, [])
         offen = len([t for t in p_tasks if t.get("status") != "✅ abgeschlossen"])
         erledigt = len([t for t in p_tasks if t.get("status") == "✅ abgeschlossen"])
-        project_status.append({
-            "id": tid,
-            "name": p.get("name"),
-            "status": p.get("status"),
-            "offen": offen,
-            "erledigt": erledigt,
-        })
+        project_status.append(
+            {
+                "id": tid,
+                "name": p.get("name"),
+                "status": p.get("status"),
+                "offen": offen,
+                "erledigt": erledigt,
+            }
+        )
 
     context = {
         "task_status_labels": json.dumps(status_labels),
@@ -112,8 +128,10 @@ def home(request):
 
     return render(request, "core/home.html", context)
 
+
 def parse_termin(t):
     from datetime import datetime
+
     try:
         return datetime.fromisoformat(t["termin"]) if t["termin"] else datetime.max
     except:
