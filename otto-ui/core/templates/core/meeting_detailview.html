@@ -96,7 +96,7 @@
             <td>{{ task.prio }}</td>
             <td>{{ task.zuständig }}</td>
             <td>
-              <button type="button" class="btn btn-sm btn-outline-danger" data-task-id="{{ task.id }}">🗑️</button>
+              <button type="button" class="btn btn-sm btn-outline-danger delete-task-btn" data-task-id="{{ task.id }}">🗑️</button>
             </td>
           </tr>
           {% endfor %}       
@@ -207,12 +207,13 @@
     btn.addEventListener('click', function() {
       const taskId = this.getAttribute('data-task-id');
       if (confirm('Soll diese Aufgabe wirklich gelöscht werden?')) {
-        fetch(`/core/task_delete/${taskId}/`, {
+        fetch('/task/delete/', {
           method: 'POST',
           headers: {
-            'Content-Type': 'application/json',
+            'Content-Type': 'application/x-www-form-urlencoded',
             'X-CSRFToken': getCookie('csrftoken'),
           },
+          body: 'task_id=' + encodeURIComponent(taskId)
         }).then(function(r) {
           if (r.ok) {
             location.reload();
