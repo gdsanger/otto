@@ -50,7 +50,13 @@
               <option value="{{ person.id }}" {% if person.id in projekt.bearbeiter %}selected{% endif %}>{{ person.name }}</option>
             {% endfor %}
           </select>
-        </td>        
+        </td>
+        <td>
+          <form hx-post="/project/delete/" hx-confirm="Wirklich löschen?" hx-target="closest tr" hx-swap="outerHTML">
+            <input type="hidden" name="project_id" value="{{ projekt.id }}">
+            <button type="submit" class="btn btn-sm btn-outline-danger">🗑️</button>
+          </form>
+        </td>
       </tr>
       {% endfor %}
     </tbody>

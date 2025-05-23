@@ -1,8 +1,8 @@
 import requests
 import json
 from datetime import datetime
-from django.http import JsonResponse
-from django.shortcuts import render
+from django.http import JsonResponse, HttpResponse
+from django.shortcuts import render, redirect
 from .helpers import login_required
 from django.views.decorators.csrf import csrf_exempt
 from core.const import status_liste, prio_liste
@@ -73,3 +73,22 @@ def project_detailview(request, project_id):
         "status_liste": status_liste,
         "prio_liste": prio_liste
     })
+
+
+@login_required
+@csrf_exempt
+def delete_project(request):
+    if request.method == "POST":
+        project_id = request.POST.get("project_id")
+        if not project_id:
+            return JsonResponse({"error": "Keine Projekt-ID."}, status=400)
+        res = requests.delete(
+            f"{OTTO_API_URL}/projekte/{project_id}",
+            headers={"x-api-key": OTTO_API_KEY},
+        )
+        if res.status_code == 200:
+            if request.headers.get("HX-Request") == "true":
+                return HttpResponse("")
+            return redirect("/projekt/?deleted=1")
+        return JsonResponse({"error": "Fehler beim Löschen."}, status=500)
+    return JsonResponse({"error": "Ungültige Methode."}, status=405)

@@ -8,6 +8,7 @@ urlpatterns = [
     path('', views.home, name='home'),
     path('projekt/', views.project_listview, name='projekt_liste'),
     path("project/<str:project_id>/", views.project_detailview, name="project_detailview"),
+    path("project/delete/", views.delete_project, name="delete_project"),
     path('task/', views.task_listview, name='task_liste'),
     path('task/update/', views.update_task_details, name='update_task_details'),
     path('task/update_status/', views.update_task_status, name='update_task_status'),
