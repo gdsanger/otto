@@ -32,7 +32,7 @@
           <tr>
             <td>{{ t.betreff }}</td>
             <td>{{ t.project_id }}</td>
-            <td>{{ t._termin.strftime('%d.%m.%Y') }}</td>
+            <td>{{ t.termin_dt.strftime('%d.%m.%Y') }}</td>
             <td>{{ t.prio }}</td>
           </tr>
           {% empty %}
