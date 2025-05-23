@@ -55,7 +55,8 @@ def meeting_detailview(request, meeting_id):
                 "von": payload.get("von"),
                 "bis": payload.get("bis"),
                 "mandant": payload.get("mandant"),
-                "teilnehmer": payload.get("personen_ids", []),
+                # Teilnehmer-IDs werden vom Frontend als "teilnehmer" geliefert
+                "teilnehmer": payload.get("teilnehmer", []),
                 "themen": payload.get("themen"),
             }
             update = requests.put(
@@ -114,8 +115,10 @@ def meeting_create(request):
 
     personen_res = requests.get(f"{OTTO_API_URL}/personen", headers={"x-api-key": OTTO_API_KEY})
     personen = personen_res.json() if personen_res.status_code == 200 else []
+    # Leeres Meeting-Objekt mit Default-Werten, um Template-Fehler zu vermeiden
+    empty_meeting = {"teilnehmer": []}
     return render(request, "core/meeting_detailview.html", {
-        "meeting": {},
+        "meeting": empty_meeting,
         "personen": personen,
         "mandanten": mandanten_liste,
         "status_liste": status_liste,
