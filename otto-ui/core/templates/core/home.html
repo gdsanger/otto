@@ -1,11 +1,111 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="container">
-    <h2>Willkommen bei Otto-ui v0.1!</h2>
-   <div class="alert alert-info">
-    Otto-ui v0.1 ist ein neuartiger, kognitiv unterstützter Planungsassistent. Im Kern steht das Konzept **COS – Cognitive Orchestrated Scheduling**:  
-Ein flexibles, KI-gestütztes System zur Erkennung, Strukturierung und Weiterverarbeitung von Aufgaben, Meetings, Entscheidungen und Verantwortlichkeiten – automatisch, nachvollziehbar, assistierend. Otto wird primäre über den ChatGPT Chat genutzt. Die UI dient lediglich dazu dem System zu assistieren. 
-   </div>
+<div class="container-fluid">
+  <h2 class="mb-4">Dashboard</h2>
+
+  <form method="get" class="mb-4">
+    <div class="input-group">
+      <input type="text" name="q" class="form-control" placeholder="Suche nach Aufgaben, Meetings oder Projekten" value="{{ search_query }}">
+      <button class="btn btn-outline-secondary" type="submit">Suchen</button>
+    </div>
+  </form>
+
+  <div class="row">
+    <div class="col-lg-6 mb-4">
+      <h5>Aufgaben nach Status</h5>
+      <canvas id="taskChart" height="200"></canvas>
+    </div>
+    <div class="col-lg-6 mb-4">
+      <h5>Anstehende Aufgaben (nächste 7 Tage)</h5>
+      <table class="table table-sm">
+        <thead>
+          <tr>
+            <th>Betreff</th>
+            <th>Projekt</th>
+            <th>Termin</th>
+            <th>Prio</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for t in upcoming_tasks %}
+          <tr>
+            <td>{{ t.betreff }}</td>
+            <td>{{ t.project_id }}</td>
+            <td>{{ t._termin.strftime('%d.%m.%Y') }}</td>
+            <td>{{ t.prio }}</td>
+          </tr>
+          {% empty %}
+          <tr><td colspan="4">Keine offenen Aufgaben</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-6 mb-4">
+      <h5>Letzte Meetings</h5>
+      <ul class="list-group">
+        {% for m in past_meetings %}
+        <li class="list-group-item">
+          <a href="/meeting/{{ m.id }}/">{{ m.name }}</a> – {{ m.datum }}
+        </li>
+        {% empty %}
+        <li class="list-group-item">Keine Meetings</li>
+        {% endfor %}
+      </ul>
+    </div>
+    <div class="col-lg-6 mb-4">
+      <h5>Kommende Meetings</h5>
+      <ul class="list-group">
+        {% for m in future_meetings %}
+        <li class="list-group-item">
+          <a href="/meeting/{{ m.id }}/">{{ m.name }}</a> – {{ m.datum }}
+        </li>
+        {% empty %}
+        <li class="list-group-item">Keine Meetings</li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+
+  {% if project_status %}
+  <div class="mt-4">
+    <h5>Projekte</h5>
+    <div class="row row-cols-1 row-cols-md-3 g-3">
+      {% for p in project_status %}
+      <div class="col">
+        <div class="card h-100">
+          <div class="card-body">
+            <h6 class="card-title">{{ p.name }}</h6>
+            <p class="card-text mb-0">Status: {{ p.status }}</p>
+            <small>Offen: {{ p.offen }} | Erledigt: {{ p.erledigt }}</small>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %}
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script>
+  const ctx = document.getElementById('taskChart');
+  if(ctx){
+    new Chart(ctx, {
+      type: 'doughnut',
+      data: {
+        labels: {{ task_status_labels|safe }},
+        datasets: [{
+          data: {{ task_status_counts|safe }},
+          backgroundColor: ['#0d6efd','#198754','#ffc107','#dc3545','#6c757d']
+        }]
+      },
+      options: {responsive: true, maintainAspectRatio: false}
+    });
+  }
+</script>
 {% endblock %}
+
