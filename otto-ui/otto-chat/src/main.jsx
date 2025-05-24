@@ -7,8 +7,8 @@ document.addEventListener('DOMContentLoaded', () => {
   if (rootElement) {
     ReactDOM.createRoot(rootElement).render(
       <React.StrictMode>
-        <ChatOtto />
-      </React.StrictMode>
+  <ChatOtto />
+</React.StrictMode>
     )
   }
 })
