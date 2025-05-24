@@ -10,24 +10,27 @@
       <button class="btn btn-outline-secondary" type="submit">Suchen</button>
     </div>
   </form>
-
-  <div class="row">
-    <div class="col-lg-6 mb-4">
-  <div class="card">
+<div class="row">
+  <div class="col-lg-8 nb-4">
+<div class="card">
         <div class="card-body">
-          <h5 class="card-title">Aufgaben nach Status</h5>
- <div style="height: 250px;">
-        <canvas id="taskChart"></canvas>
-      </div>
+          <h5 class="card-title">Projekte</h5>
+           <div class="row row-cols-1 row-cols-md-4 g-3">
+ {% for p in project_status %}
+      <div class="col">
+        <div class="card h-100">
+          <div class="card-body">
+            <h6 class="card-title">{{ p.name }}</h6>
+            <p class="card-text mb-0">Status: {{ p.status }}</p>
+            <small>Offen: {{ p.offen }} | Erledigt: {{ p.erledigt }}</small>
+          </div>
         </div>
-  </div>
-
-
-     
-     
-    </div>
-    <div class="col-lg-6 mb-4">
-      <div class="card">
+      </div>
+      {% endfor %}
+        </div>
+        </div>
+        </div>
+         <div class="card">
         <div class="card-body">
           <h5 class="card-title">Aufgabenübersicht</h5>
            <table class="table table-sm table-hover table-striped">
@@ -52,38 +55,10 @@
       </table>
           </div>  
       </div>
-
-     
-    </div>
   </div>
-
-  <div class="row">
-    <div class="col-lg-6 mb-4">
-      {% if project_status %}
-  <div class="mt-4">
-    <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">Projekte</h5>
-    <div class="row row-cols-1 row-cols-md-3 g-3">
-      {% for p in project_status %}
-      <div class="col">
-        <div class="card h-100">
-          <div class="card-body">
-            <h6 class="card-title">{{ p.name }}</h6>
-            <p class="card-text mb-0">Status: {{ p.status }}</p>
-            <small>Offen: {{ p.offen }} | Erledigt: {{ p.erledigt }}</small>
-          </div>
-        </div>
-      </div>
-      {% endfor %}
-    </div>
-        </div>
-    </div>
-  </div>
-  {% endif %}
-    </div>
-    <div class="col-lg-6 mb-4">
-      <div class="card">
+  <div class="col-lg-4 mb-4">
+  
+  <div class="card">
         <div class="card-body">
           <h5 class="card-title">Meetings</h5>
          
@@ -110,34 +85,8 @@
     </div>
     
   </div>
-
- 
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
-<script>
-  const canvas = document.getElementById('taskChart');
-  if (canvas) {
-    const ctx = canvas.getContext('2d');
-    new Chart(ctx, {
-      type: 'doughnut',
-      data: {
-        labels: {{ grouped_status_labels|safe }},
-        datasets: [{
-          data: {{ grouped_status_counts|safe }},
-          backgroundColor: {{ grouped_status_colors|safe }}
-        }]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: {
-            position: 'bottom'
-          }
-        }
-      }
-    });
-  }
-</script>
+
+
 {% endblock %}

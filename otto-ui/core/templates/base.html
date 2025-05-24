@@ -51,30 +51,40 @@
     </style>
 </head>
 <body class="d-flex flex-column min-vh-100">
-    <header class="header">
-        <div class="container-fluid">
-            <h1 class="h4">Otto UI v0.1</h1>
-        </div>
-    </header>
+<nav class="navbar navbar-expand navbar-dark" style="background-color: #004d40 !important;">
+  <div class="container-fluid">
+    <a class="navbar-brand text-white mb-0 h2" href="/">Otto UI v0.1</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link text-white" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" href="/projekt/">Projekte</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" href="/meeting/">Meetings</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" href="/task/">Aufgaben</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+ 
 
-    <div class="d-flex flex-grow-1">
-        <aside class="sidebar-left">
-            <h5>Navigation</h5>
-            <ul class="nav flex-column">
-                <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
-                <li class="nav-item"><a class="nav-link" href="/projekt/">Projekte</a></li>
-                <li class="nav-item"><a class="nav-link" href="/meeting/">Meetings</a></li>
-                <li class="nav-item"><a class="nav-link" href="/task/">Aufgaben</a></li>
-            </ul>
-        </aside>
+    <div class="d-flex flex-grow-1">     
 
         <main class="main-content">
             {% block content %}{% endblock %}
-            </main> 
+        </main> 
 
-        <aside class="sidebar-right d-flex flex-column h-100">
+        <aside class="sidebar-right d-none d-lg-flex flex-column h-100" style="min-width: 450px !important; flex: 0 0 450px !important;">
             <div id="otto-chat"></div>
-          
         </aside>
     </div>
 
@@ -99,6 +109,6 @@
             }
         });
     </script>
-    <script type="module" src="{% static 'otto_chat/assets/index-BuINe8Bf.js' %}"></script>            
+    <script type="module" src="{% static 'otto_chat/assets/index-B2ppBcPK.js' %}"></script>            
 </body>
 </html>
