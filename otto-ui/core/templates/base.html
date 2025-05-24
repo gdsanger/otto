@@ -1,6 +1,6 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="de">
+<html lang="de" style="height: 100%;">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -50,8 +50,8 @@
         }
     </style>
 </head>
-<body class="d-flex flex-column min-vh-100">
-<nav class="navbar navbar-expand navbar-dark" style="background-color: #004d40 !important;">
+<body class="d-flex flex-column"  style="height: 100%;">
+<nav class="navbar navbar-expand navbar-dark" style="background-color: #004d40 !important;height: 60px;">
   <div class="container-fluid">
     <a class="navbar-brand text-white mb-0 h2" href="/">Otto UI v0.1</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -77,14 +77,14 @@
 </nav>
  
 
-    <div class="d-flex flex-grow-1">     
+    <div class="d-flex flex-grow-1" style="height: 100%;">     
 
         <main class="main-content">
             {% block content %}{% endblock %}
         </main> 
 
-        <aside class="sidebar-right d-none d-lg-flex flex-column h-100" style="min-width: 450px !important; flex: 0 0 450px !important;">
-            <div id="otto-chat"></div>
+        <aside class="sidebar-right flex-column" style="width: 550px !important; flex: 0 0 550px !important; height: 100%;">       
+            <div id="otto-chat" style="height: 100%;"></div>
         </aside>
     </div>
 
@@ -109,6 +109,6 @@
             }
         });
     </script>
-    <script type="module" src="{% static 'otto_chat/assets/index-B2ppBcPK.js' %}"></script>            
+    <script type="module" src="{% static 'otto_chat/assets/index-BzzqB_3B.js' %}"></script>            
 </body>
 </html>

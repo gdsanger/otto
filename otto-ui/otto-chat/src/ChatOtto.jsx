@@ -38,27 +38,37 @@ export default function ChatOtto() {
   }, [context])
 
   const sendMessage = async () => {
-    if (!input.trim()) return
+  if (!input.trim()) return
 
-    const newMessages = [...messages, { role: 'user', content: input }]
-    setMessages(newMessages)
-    setInput('')
-    setLoading(true)
+  const ctxInfo = window.ottoContext
+  const promptContext = ctxInfo
+    ? `${ctxInfo.type} „${ctxInfo.name}“ (ID: ${ctxInfo.id})`
+    : context
 
-    try {
-      const res = await fetch('/chat', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ messages: newMessages })
-      })
-      const data = await res.json()
-      setMessages([...newMessages, { role: 'assistant', content: data.reply }])
-    } catch {
-      setMessages([...newMessages, { role: 'assistant', content: 'Fehler bei der Kommunikation mit Otto.' }])
-    }
-
-    setLoading(false)
+  const systemPrompt = {
+    role: 'system',
+    content: `Du bist Otto, ein Projekt-KI-Assistent. Gib strukturierte, klare Antworten in HTML oder Tabellenform. Nutze Listen und Zwischenüberschriften. Wir befinden uns im Kontext ${promptContext}.`
   }
+
+  const fullMessages = [systemPrompt, ...messages.slice(1), { role: 'user', content: input }]
+  setMessages([...messages, { role: 'user', content: input }])
+  setInput('')
+  setLoading(true)
+
+  try {
+    const res = await fetch('/chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ messages: fullMessages })
+    })
+    const data = await res.json()
+    setMessages([...messages, { role: 'user', content: input }, { role: 'assistant', content: data.reply }])
+  } catch {
+    setMessages([...messages, { role: 'user', content: input }, { role: 'assistant', content: 'Fehler bei der Kommunikation mit Otto.' }])
+  }
+
+  setLoading(false)
+}
 
   useEffect(() => {
     endRef.current?.scrollIntoView({ behavior: 'smooth' })
@@ -86,20 +96,22 @@ export default function ChatOtto() {
   }
 
   return (
-    <div className="d-flex flex-column border rounded overflow-hidden vh-100">
+    <div className="d-flex flex-column border rounded overflow-hidden h-100">
       <div className="flex-grow-1 overflow-auto p-3 bg-white">
-        {messages.slice(1).map((m, i) => (
-          <div
-            key={i}
-            className={`mb-2 p-2 rounded ${
-              m.role === 'user'
-                ? 'bg-light text-end ms-auto w-75'
-                : 'bg-body-secondary text-start w-75'
-            }`}
-          >
-            {m.content}
-          </div>
-        ))}
+       {messages.slice(1).map((m, i) => (
+  <div
+    key={i}
+    className={`mb-2 p-2 rounded ${
+      m.role === 'user'
+        ? 'bg-light text-end ms-auto w-75'
+        : 'bg-body-secondary text-start w-75'
+    }`}
+  >
+    {/<\/?[a-z][\s\S]*>/i.test(m.content)
+      ? <div dangerouslySetInnerHTML={{ __html: m.content }} />
+      : m.content}
+  </div>
+))}
         <div ref={endRef} />
       </div>
       <form

@@ -1,4 +1,11 @@
 {% block content %}
+<script>
+  window.ottoContext = {
+    type: "Aufgaben",
+    name: "{{ task.betreff }}",
+    id: "{{ task.id }}"
+  }
+</script>
 <div class="container mb-3">
     <div class="card">
 <div class="card-header">

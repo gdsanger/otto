@@ -2,6 +2,13 @@
 {% load static %}
 
 {% block content %}
+<script>
+  window.ottoContext = {
+    type: "Meeting",
+    name: "{{ meeting.name }}",
+    id: "{{ meeting.id }}"    
+  }
+</script>
 <div class="container py-4">
   <!-- Toolbar oben -->
 

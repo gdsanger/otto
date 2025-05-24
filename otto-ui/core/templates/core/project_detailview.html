@@ -2,6 +2,13 @@
 {% load static %}
 {% load format_tags %}
 {% block content %}
+<script>
+  window.ottoContext = {
+    type: "Projekt",
+    name: "{{ projekt.name }}",
+    id: "{{ projekt.id }}"   
+  }
+</script>
 <div class="container py-4">  
   <form id="projektForm">
     {% csrf_token %}
