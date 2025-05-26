@@ -19,7 +19,6 @@ urlpatterns = [
     path('task/update/', views.update_task_details, name='update_task_details'),
     path("task/new/", views.task_create, name="task_create"),
     path('task/view/<str:task_id>/', views.task_pageview, name='task_pageview'),
-    path("task/<str:task_id>/", views.task_detail_or_update, name="task_detail"),
     path('meeting/', views.meeting_listview, name='meeting_liste'),
     path('meeting/new/', views.meeting_create, name='meeting_create'),
     path('meeting/<str:meeting_id>/', views.meeting_detailview, name='meeting_detail'),

@@ -1,4 +1,5 @@
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Depends
+from helper import verify_api_key, serialize_mongo
 from pydantic import BaseModel
 import os
 from typing import Optional
@@ -27,7 +28,7 @@ def serialize(user):
     #sanitized.pop("password", None)
     return sanitized
 
-@router.get("/users")
+@router.get("/users", dependencies=[Depends(verify_api_key)], tags=["User"])
 async def get_users(username: Optional[str] = None):
     if username:
         user = await users.find_one({"username": username})
@@ -37,7 +38,7 @@ async def get_users(username: Optional[str] = None):
     cursor = users.find()
     return [serialize(u) async for u in cursor]
 
-@router.post("/users")
+@router.post("/users", dependencies=[Depends(verify_api_key)], tags=["User"])
 async def create_user(user: UserIn):
     existing = await users.find_one({"username": user.username})
     if existing:
@@ -52,7 +53,7 @@ async def create_user(user: UserIn):
     user_dict.pop("password")
     return serialize(user_dict)
 
-@router.put("/users/{user_id}")
+@router.put("/users/{user_id}", dependencies=[Depends(verify_api_key)], tags=["User"])
 async def update_user(user_id: str, update: UserUpdate):
     user = await users.find_one({"_id": ObjectId(user_id)})
     if not user:
@@ -71,7 +72,7 @@ class LoginCredentials(BaseModel):
     password: str
 
 
-@router.post("/login")
+@router.post("/login", tags=["User"])
 async def login(credentials: LoginCredentials):
     user = await users.find_one({"username": credentials.username})
     hash_password = bcrypt.hash(credentials.password)

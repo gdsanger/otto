@@ -62,8 +62,3 @@ async def delete_task(task_id: str):
 async def get_tasks_by_project(project_id: str):
     cursor = db.tasks.find({"project_id": project_id})
     return [serialize_mongo(task) async for task in cursor]
-
-@router.get("/meeting/{meeting_id}/tasks", dependencies=[Depends(verify_api_key)], tags=["Meeting"])
-async def get_tasks_by_meeting(meeting_id: str):
-    cursor = db.tasks.find({"meeting_id": meeting_id})
-    return [serialize_mongo(task) async for task in cursor]

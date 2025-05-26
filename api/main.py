@@ -43,12 +43,6 @@ except Exception as e:
     print(f"⚠️ Fehler beim Einbinden von personen_controller: {e}")
 
 try:
-    from controller.meeting_controller import router as meeting_router
-    app.include_router(meeting_router)
-except Exception as e:
-    print(f"⚠️ Fehler beim Einbinden von meeting_controller: {e}")
-
-try:
     from controller.task_controller import router as task_router
     app.include_router(task_router)
 except Exception as e:
