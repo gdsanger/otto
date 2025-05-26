@@ -104,6 +104,7 @@
         <tr>
           <th>Betreff</th>
           <th>Status</th>
+          <th>Typ</th>
           <th>Termin</th>
           <th>Zuständig</th>
           <th></th>
@@ -117,6 +118,13 @@
             <select class="form-select form-select-sm auto-save" data-task-id="{{ task.id }}" data-field="status">
               {% for s in status_liste %}
                 <option value="{{ s }}" {% if s == task.status %}selected{% endif %}>{{ s }}</option>
+              {% endfor %}
+            </select>
+          </td>
+          <td>
+            <select class="form-select form-select-sm auto-save" data-task-id="{{ task.id }}" data-field="typ">
+              {% for t in typ_liste %}
+                <option value="{{ t }}" {% if t == task.typ %}selected{% endif %}>{{ t }}</option>
               {% endfor %}
             </select>
           </td>
