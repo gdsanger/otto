@@ -104,8 +104,7 @@
       <thead>
         <tr>
           <th>Betreff</th>
-          <th>Status</th>
-          <th>Type</th>
+          <th>Status</th>        
           <th>Typ</th>
           <th>Termin</th>
           <th>Zuständig</th>
@@ -122,14 +121,7 @@
                 <option value="{{ s }}" {% if s == task.status %}selected{% endif %}>{{ s }}</option>
               {% endfor %}
             </select>
-          </td>
-            <td>
-            <select class="form-select form-select-sm auto-save" data-task-id="{{ task.id }}" data-field="tasktype">
-              {% for t in tasktype_liste %}
-                <option value="{{ t }}" {% if t == task.tasktype %}selected{% endif %}>{{ t }}</option>
-              {% endfor %}
-            </select>
-          </td>
+          </td>         
           <td>
             <select class="form-select form-select-sm auto-save" data-task-id="{{ task.id }}" data-field="typ">
               {% for t in typ_liste %}
