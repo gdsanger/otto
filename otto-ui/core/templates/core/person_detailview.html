@@ -1,0 +1,140 @@
+{% extends "base.html" %}
+{% block content %}
+<script>
+  window.ottoContext = {
+    type: "Person",
+    name: "{{ person.name }}",
+    id: "{{ person.id }}"
+  }
+</script>
+<div class="container py-4">
+  <form id="personForm">
+    {% csrf_token %}
+    <div class="card">
+      <div class="card-header">{{ person.name }}</div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-6 mb-3">
+            <label class="form-label">Name</label>
+            <input type="text" name="name" class="form-control" value="{{ person.name }}">
+          </div>
+          <div class="col-6 mb-3">
+            <label class="form-label">Email</label>
+            <input type="email" name="email" class="form-control" value="{{ person.email }}">
+          </div>
+          <div class="col-6 mb-3">
+            <label class="form-label">Mandant</label>
+            <input type="text" name="mandant" class="form-control" value="{{ person.mandant }}">
+          </div>
+          <div class="col-6 mb-3">
+            <label class="form-label">Position</label>
+            <input type="text" name="position" class="form-control" value="{{ person.position }}">
+          </div>
+          <div class="col-6 mb-3">
+            <label class="form-label">Rolle</label>
+            <input type="text" name="rolle" class="form-control" value="{{ person.rolle }}">
+          </div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <button type="submit" class="btn btn-success">Speichern</button>
+      </div>
+    </div>
+    <div id="saveSuccess" class="alert alert-success mt-3 d-none">Gespeichert!</div>
+  </form>
+  <hr class="my-4">
+  <h4>Tasks</h4>
+  {% if tasks %}
+  <table class="table table-sm table-striped">
+    <thead>
+      <tr>
+        <th>Betreff</th>
+        <th>Status</th>
+        <th>Prio</th>
+        <th>Typ</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for task in tasks %}
+      <tr>
+        <td><a href="#" class="task-open" data-task-id="{{ task.id }}">{{ task.betreff }}</a></td>
+        <td>
+          <select class="form-select form-select-sm auto-save" data-task-id="{{ task.id }}" data-field="status">
+            {% for s in status_liste %}
+            <option value="{{ s }}" {% if s == task.status %}selected{% endif %}>{{ s }}</option>
+            {% endfor %}
+          </select>
+        </td>
+        <td>
+          <select class="form-select form-select-sm auto-save" data-task-id="{{ task.id }}" data-field="prio">
+            {% for p in prio_liste %}
+            <option value="{{ p }}" {% if p == task.prio %}selected{% endif %}>{{ p }}</option>
+            {% endfor %}
+          </select>
+        </td>
+        <td>
+          <input type="text" class="form-control form-control-sm auto-save" data-task-id="{{ task.id }}" data-field="typ" value="{{ task.typ }}">
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <p>Keine Tasks vorhanden.</p>
+  {% endif %}
+</div>
+<script>
+  function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+      const cookies = document.cookie.split(';');
+      for (let i = 0; i < cookies.length; i++) {
+        const cookie = cookies[i].trim();
+        if (cookie.substring(0, name.length + 1) === (name + '=')) {
+          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+          break;
+        }
+      }
+    }
+    return cookieValue;
+  }
+
+  const form = document.getElementById('personForm');
+  const successBox = document.getElementById('saveSuccess');
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    const data = {};
+    new FormData(form).forEach((v, k) => data[k] = v);
+    fetch('', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRFToken': getCookie('csrftoken'),
+      },
+      body: JSON.stringify(data)
+    }).then(r => {
+      if (r.ok) {
+        successBox.classList.remove('d-none');
+        setTimeout(() => successBox.classList.add('d-none'), 2000);
+      }
+    });
+  });
+
+  document.querySelectorAll('.auto-save').forEach(el => {
+    el.addEventListener('change', () => {
+      const taskId = el.dataset.taskId;
+      const field = el.dataset.field;
+      const value = el.value;
+      fetch(`/task/${taskId}/`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRFToken': getCookie('csrftoken'),
+        },
+        body: JSON.stringify({ [field]: value })
+      });
+    });
+  });
+</script>
+{% include "components/task_modal.html" %}
+{% endblock %}
