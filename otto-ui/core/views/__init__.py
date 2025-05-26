@@ -59,10 +59,18 @@ def home(request):
     upcoming_tasks = []
     for t in tasks:
         termin_dt = parse_termin(t)
-        if termin_dt != datetime.max and now <= termin_dt <= now + timedelta(days=7):
+        if termin_dt == datetime.max:
+            continue
+
+        status = str(t.get("status", "")).lower()
+        is_done = "abgeschlossen" in status or "erledigt" in status
+
+        if now <= termin_dt <= now + timedelta(days=7) or (termin_dt < now and not is_done):
             t["termin_dt"] = termin_dt
             upcoming_tasks.append(t)
+
     upcoming_tasks.sort(key=lambda x: x["termin_dt"])
+    upcoming_tasks = upcoming_tasks[:20]
 
     # Meetings
     past_meetings = []
