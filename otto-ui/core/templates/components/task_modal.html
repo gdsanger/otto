@@ -87,10 +87,6 @@
 
       let url = form.dataset.targetUrl;
       let method = 'POST';
-      if (form.dataset.taskId) {
-        // Bestehender Task: PUT an /task/<id>/
-        method = 'PUT';
-      }
 
       console.log('Sending request:', {
         url: url,
