@@ -114,7 +114,7 @@
       <tbody>
         {% for task in tasks %}
         <tr id="task-{{ task.id }}">
-          <td><a href="#" class="task-open" data-task-id="{{ task.id }}">{{ task.betreff }}</a></td>
+          <td><a href="/task/view/{{ task.id }}/">{{ task.betreff }}</a></td>
           <td>
             <select class="form-select form-select-sm auto-save" data-task-id="{{ task.id }}" data-field="status">
               {% for s in status_liste %}

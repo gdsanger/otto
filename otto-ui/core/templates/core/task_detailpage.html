@@ -51,6 +51,10 @@
           </select>
         </div>
         <div class="mb-3">
+          <label class="form-label">Termin</label>
+          <input class="form-control" type="date" name="termin" value="{{ task.termin|slice:":10" }}">
+        </div>
+        <div class="mb-3">
           <label class="form-label">Status</label>
           <select class="form-select" name="status">
             {% for status in status_liste %}
