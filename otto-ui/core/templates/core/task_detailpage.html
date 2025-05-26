@@ -8,6 +8,19 @@
   }
 </script>
 <div class="container py-4">
+  <div class="btn-toolbar mb-3" role="toolbar" aria-label="Toolbar">
+    <div class="btn-group me-2" role="group">
+      <button id="backBtn" type="button" class="btn btn-outline-secondary">↩️ Zurück</button>
+      <button id="cloneBtn" type="button" class="btn btn-outline-secondary">📄 Clone</button>
+    </div>
+    <div class="btn-group me-2" role="group">
+      <button type="submit" form="taskForm" class="btn btn-primary">💾 Speichern</button>
+      <button id="saveCloseBtn" type="button" class="btn btn-primary">💾 &amp; Schließen</button>
+    </div>
+    <div class="btn-group" role="group">
+      <button id="deleteBtn" type="button" class="btn btn-outline-danger">🗑️ Löschen</button>
+    </div>
+  </div>
   <div class="card mb-3">
     <div class="card-header">
       <h3 class="mb-0">Aufgabe bearbeiten</h3>
@@ -105,11 +118,11 @@ function getCookie(name){
 }
 const form = document.getElementById('taskForm');
 const successBox = document.getElementById('saveSuccess');
-form.addEventListener('submit', function(e){
-  e.preventDefault();
+
+function saveTask() {
   const data = {};
-  new FormData(form).forEach((v,k)=>{data[k]=v});
-  fetch('', {
+  new FormData(form).forEach((v, k) => { data[k] = v; });
+  return fetch('', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -117,13 +130,64 @@ form.addEventListener('submit', function(e){
     },
     body: JSON.stringify(data)
   }).then(r => {
-    if(r.ok){
+    if (r.ok) {
       successBox.classList.remove('d-none');
-      setTimeout(()=>successBox.classList.add('d-none'),2000);
-    }else{
+      setTimeout(() => successBox.classList.add('d-none'), 2000);
+      return true;
+    } else {
       alert('Fehler beim Speichern');
+      return false;
     }
   });
+}
+
+form.addEventListener('submit', function(e){
+  e.preventDefault();
+  saveTask();
+});
+
+document.getElementById('backBtn').addEventListener('click', () => history.back());
+
+document.getElementById('saveCloseBtn').addEventListener('click', () => {
+  saveTask().then(ok => { if(ok) history.back(); });
+});
+
+document.getElementById('cloneBtn').addEventListener('click', () => {
+  const data = {};
+  new FormData(form).forEach((v,k)=>{ if(k !== 'task_id') data[k]=v; });
+  fetch('/task/new/', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-CSRFToken': getCookie('csrftoken'),
+    },
+    body: JSON.stringify(data)
+  }).then(r => r.ok ? r.json() : Promise.reject()).then(d => {
+    if(d.id) {
+      window.location.href = `/task/view/${d.id}/`;
+    } else {
+      alert('Fehler beim Klonen');
+    }
+  }).catch(() => alert('Fehler beim Klonen'));
+});
+
+document.getElementById('deleteBtn').addEventListener('click', () => {
+  if(confirm('Wirklich löschen?')) {
+    fetch('/task/delete/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'X-CSRFToken': getCookie('csrftoken'),
+      },
+      body: 'task_id=' + encodeURIComponent(form.elements['task_id'].value)
+    }).then(r => {
+      if(r.ok) {
+        history.back();
+      } else {
+        alert('Fehler beim Löschen');
+      }
+    });
+  }
 });
 </script>
 {% endblock %}
