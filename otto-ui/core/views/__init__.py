@@ -110,6 +110,7 @@ def home(request):
                 "id": tid,
                 "name": p.get("name"),
                 "status": p.get("status"),
+                "prio": p.get("prio"),
                 "offen": offen,
                 "erledigt": erledigt,
             }
