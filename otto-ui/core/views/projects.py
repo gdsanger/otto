@@ -5,9 +5,10 @@ from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render, redirect
 from .helpers import login_required
 from django.views.decorators.csrf import csrf_exempt
-from core.const import status_liste, prio_liste
+from core.const import status_liste, prio_liste, tasktype_liste
 import os
 from dotenv import load_dotenv
+from django.views.decorators.http import require_POST
 
 load_dotenv()
 
@@ -31,6 +32,7 @@ def project_listview(request):
         "status_liste": status_liste,
         "prio_liste": prio_liste,
         "personen": personen
+        
     })
 
 
@@ -71,7 +73,8 @@ def project_detailview(request, project_id):
         "tasks": tasks,
         "dateien": dateien,
         "status_liste": status_liste,
-        "prio_liste": prio_liste
+        "prio_liste": prio_liste,
+        "tasktype_liste": tasktype_liste
     })
 
 
@@ -92,3 +95,24 @@ def delete_project(request):
             return redirect("/projekt/?deleted=1")
         return JsonResponse({"error": "Fehler beim Löschen."}, status=500)
     return JsonResponse({"error": "Ungültige Methode."}, status=405)
+
+@require_POST
+@csrf_exempt
+def project_create_task(request):
+    data = json.loads(request.body)
+    response = requests.post(
+        f"{OTTO_API_URL}/tasks",
+        headers={"x-api-key": OTTO_API_KEY},
+        json={
+            "betreff": data["betreff"],
+            "beschreibung": "",
+            "zuständig": data.get("zuständig", "Otto"),
+            "person_id": data.get("person_id"),
+            "aufwand": 1,
+            "prio": data.get("prio", "mittel"),
+            "status": data.get("status", "Offen"),
+            "termin": data.get("termin"),
+            "project_id": data["project_id"]
+        }
+    )
+    return JsonResponse(response.json(), status=response.status_code)

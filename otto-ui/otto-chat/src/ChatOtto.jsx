@@ -5,6 +5,8 @@ export default function ChatOtto() {
   const [messages, setMessages] = useState([])
   const [input, setInput] = useState('')
   const [loading, setLoading] = useState(false)
+  const [availableFunctions, setAvailableFunctions] = useState([])
+  const [selectedFunction, setSelectedFunction] = useState('')
   const endRef = useRef(null)
   const textareaRef = useRef(null)
 
@@ -25,50 +27,65 @@ export default function ChatOtto() {
   useEffect(() => {
     const ctxInfo = window.ottoContext
     const promptContext = ctxInfo
-      ? `${ctxInfo.type} „${ctxInfo.name}“ (ID: ${ctxInfo.id})`
+      ? `${ctxInfo.type} „${ctxInfo.name}“ (ID: ${ctxInfo.id}) - Funktionen: ${ctxInfo.gptFunctions.join(", ")}`
       : context
+
+    const availableFunctions = ctxInfo?.gptFunctions?.length
+      ? `Verfügbare Funktionen: ${ctxInfo.gptFunctions.join(", ")}.`
+      : ""
 
     const systemPrompt = {
       role: 'system',
-      content: `Du bist Otto, ein Projekt-KI-Assistent. Wir befinden uns im Kontext ${promptContext}.`
+      content: `Du bist Otto, ein Projekt-KI-Assistent. Wir befinden uns im Kontext ${promptContext}. ${availableFunctions}`
     }
 
     const saved = localStorage.getItem('ottoChatMessages_' + context)
     setMessages(saved ? JSON.parse(saved) : [systemPrompt])
   }, [context])
 
+  useEffect(() => {
+    const ctxType = window.ottoContext?.type || 'global'
+    fetch(`${window.location.origin}/template?type=${ctxType}`)
+      .then(res => res.json())
+      .then(data => setAvailableFunctions(data))
+  }, [])
+
   const sendMessage = async () => {
-  if (!input.trim()) return
+    if (!input.trim()) return
 
-  const ctxInfo = window.ottoContext
-  const promptContext = ctxInfo
-    ? `${ctxInfo.type} „${ctxInfo.name}“ (ID: ${ctxInfo.id})`
-    : context
+    const ctxInfo = window.ottoContext
+    const promptContext = ctxInfo
+      ? `${ctxInfo.type} „${ctxInfo.name}“ (ID: ${ctxInfo.id}) - Funktionen: ${ctxInfo.gptFunctions.join(", ")}`
+      : context
 
-  const systemPrompt = {
-    role: 'system',
-    content: `Du bist Otto, ein Projekt-KI-Assistent. Gib strukturierte, klare Antworten in HTML oder Tabellenform. Nutze Listen und Zwischenüberschriften. Wir befinden uns im Kontext ${promptContext}.`
+    const systemPrompt = {
+      role: 'system',
+      content: `Du bist Otto, ein Projekt-KI-Assistent. Gib strukturierte, klare Antworten in HTML oder Tabellenform. Nutze Listen und Zwischenüberschriften. Wir befinden uns im Kontext ${promptContext}.`
+    }
+
+    const userContent = selectedFunction
+      ? `⤷ Verwende bitte folgende Funktion für diese Nachricht: ${selectedFunction}\n\n${input}`
+      : input
+
+    const fullMessages = [systemPrompt, ...messages.slice(1), { role: 'user', content: userContent }]
+    setMessages([...messages, { role: 'user', content: input }])
+    setInput('')
+    setLoading(true)
+
+    try {
+      const res = await fetch('/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ messages: fullMessages })
+      })
+      const data = await res.json()
+      setMessages([...messages, { role: 'user', content: input }, { role: 'assistant', content: data.reply }])
+    } catch {
+      setMessages([...messages, { role: 'user', content: input }, { role: 'assistant', content: 'Fehler bei der Kommunikation mit Otto.' }])
+    }
+
+    setLoading(false)
   }
-
-  const fullMessages = [systemPrompt, ...messages.slice(1), { role: 'user', content: input }]
-  setMessages([...messages, { role: 'user', content: input }])
-  setInput('')
-  setLoading(true)
-
-  try {
-    const res = await fetch('/chat', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ messages: fullMessages })
-    })
-    const data = await res.json()
-    setMessages([...messages, { role: 'user', content: input }, { role: 'assistant', content: data.reply }])
-  } catch {
-    setMessages([...messages, { role: 'user', content: input }, { role: 'assistant', content: 'Fehler bei der Kommunikation mit Otto.' }])
-  }
-
-  setLoading(false)
-}
 
   useEffect(() => {
     endRef.current?.scrollIntoView({ behavior: 'smooth' })
@@ -98,20 +115,20 @@ export default function ChatOtto() {
   return (
     <div className="d-flex flex-column border rounded overflow-hidden h-100">
       <div className="flex-grow-1 overflow-auto p-3 bg-white">
-       {messages.slice(1).map((m, i) => (
-  <div
-    key={i}
-    className={`mb-2 p-2 rounded ${
-      m.role === 'user'
-        ? 'bg-light text-end ms-auto w-75'
-        : 'bg-body-secondary text-start w-75'
-    }`}
-  >
-    {/<\/?[a-z][\s\S]*>/i.test(m.content)
-      ? <div dangerouslySetInnerHTML={{ __html: m.content }} />
-      : m.content}
-  </div>
-))}
+        {messages.slice(1).map((m, i) => (
+          <div
+            key={i}
+            className={`mb-2 p-2 rounded ${
+              m.role === 'user'
+                ? 'bg-light text-end ms-auto w-75'
+                : 'bg-body-secondary text-start w-75'
+            }`}
+          >
+            {/<\/?[a-z][\s\S]*>/i.test(m.content)
+              ? <div dangerouslySetInnerHTML={{ __html: m.content }} />
+              : m.content}
+          </div>
+        ))}
         <div ref={endRef} />
       </div>
       <form
@@ -121,25 +138,38 @@ export default function ChatOtto() {
         }}
         className="border-top bg-white p-3"
       >
-        <div className="d-flex align-items-end">
-          <textarea
-            ref={textareaRef}
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            onKeyDown={handleKeyDown}
-            placeholder="Nachricht an Otto..."
-            disabled={loading}
-            rows={1}
-            className="form-control me-2"
-            style={{ resize: 'none' }}
-          />
-          <button
-            type="submit"
-            disabled={loading || !input.trim()}
-            className="btn btn-success"
+        <div className="d-flex flex-column gap-2">
+          <select
+            className="form-select"
+            value={selectedFunction}
+            onChange={(e) => setSelectedFunction(e.target.value)}
           >
-            ✈️
-          </button>
+            <option value="">Funktion auswählen (optional)</option>
+            {availableFunctions.map((fn) => (
+              <option key={fn} value={fn}>{fn}</option>
+            ))}
+          </select>
+
+          <div className="d-flex align-items-end">
+            <textarea
+              ref={textareaRef}
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              onKeyDown={handleKeyDown}
+              placeholder="Nachricht an Otto..."
+              disabled={loading}
+              rows={1}
+              className="form-control me-2"
+              style={{ resize: 'none' }}
+            />
+            <button
+              type="submit"
+              disabled={loading || !input.trim()}
+              className="btn btn-success"
+            >
+              ✈️
+            </button>
+          </div>
         </div>
       </form>
     </div>

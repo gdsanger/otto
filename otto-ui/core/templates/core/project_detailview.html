@@ -4,9 +4,10 @@
 {% block content %}
 <script>
   window.ottoContext = {
-    type: "Projekt",
+    type: "projekt",
     name: "{{ projekt.name }}",
-    id: "{{ projekt.id }}"   
+    id: "{{ projekt.id }}",
+    gptFunctions: ["get_tasks_of_project"]   
   }
 </script>
 <div class="container py-4">  
@@ -104,6 +105,7 @@
         <tr>
           <th>Betreff</th>
           <th>Status</th>
+          <th>Type</th>
           <th>Termin</th>
           <th>Zuständig</th>
           <th></th>
@@ -117,6 +119,13 @@
             <select class="form-select form-select-sm auto-save" data-task-id="{{ task.id }}" data-field="status">
               {% for s in status_liste %}
                 <option value="{{ s }}" {% if s == task.status %}selected{% endif %}>{{ s }}</option>
+              {% endfor %}
+            </select>
+          </td>
+            <td>
+            <select class="form-select form-select-sm auto-save" data-task-id="{{ task.id }}" data-field="tasktype">
+              {% for t in tasktype_liste %}
+                <option value="{{ t }}" {% if t == task.tasktype %}selected{% endif %}>{{ t }}</option>
               {% endfor %}
             </select>
           </td>
@@ -134,6 +143,35 @@
         {% endfor %}
       </tbody>
     </table>
+    <h6 class="mt-4">Neue Aufgabe hinzufügen</h6>
+<form id="taskForm" class="row g-2">
+  {% csrf_token %}
+  <div class="col-12 col-md-4">
+    <input type="text" name="betreff" class="form-control" placeholder="Betreff" required>
+  </div>
+  <div class="col-6 col-md-2">
+    <input type="date" name="termin" class="form-control">
+  </div>
+  <div class="col-6 col-md-2">
+    <select name="status" class="form-select">
+      {% for s in status_liste %}
+      <option value="{{ s }}">{{ s }}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div class="col-12 col-md-3">
+    <select name="person_id" class="form-select">
+      <option value="">Zuständig wählen</option>
+      {% for p in personen %}
+      <option value="{{ p.id }}">{{ p.name }}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div class="col-12 col-md-1">
+    <button type="submit" class="btn btn-success w-100">➕</button>
+  </div>
+</form>
+
   {% else %}
     <p>Keine Tasks vorhanden.</p>
   {% endif %}
@@ -151,7 +189,7 @@
     {% endif %}
     </div>
   </div>
-
+<br/><br/>
 <script>
   function getCookie(name) {
     let cookieValue = null;
@@ -234,6 +272,26 @@
       });
     });
   });
+
+  document.getElementById('taskForm').addEventListener('submit', function (e) {
+  e.preventDefault();
+  const data = Object.fromEntries(new FormData(this));
+  data.project_id = window.ottoContext.id;
+  data.status = data.status || "Offen";
+  data.zuständig = "Otto"; // Optionaler Defaultname
+
+  fetch('/project/createtask/', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-CSRFToken': getCookie('csrftoken')
+    },
+    body: JSON.stringify(data)
+  }).then(r => {
+    if (r.ok) location.reload();
+    else alert('Fehler beim Erstellen der Aufgabe');
+  });
+});
 </script>
 {% include "components/task_modal.html" %}
 {% endblock %}

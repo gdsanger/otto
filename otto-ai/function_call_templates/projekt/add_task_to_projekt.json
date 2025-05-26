@@ -1,0 +1,17 @@
+{
+  "type": "function",
+  "function": {
+    "name": "add_task_to_project",
+    "description": "Erstellt eine neue Aufgabe im angegebenen Projekt. Die Details der Aufgabe werden aus dem Nachrichtenkontext entnommen. Falls keine Werte angegeben sind, werden folgende Standardwerte verwendet: 'status': 'offen', 'prio': 'normal', 'type': 'Aufgabe'.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "project_id": {
+          "type": "string",
+          "description": "Die eindeutige ID des Projekts. Diese befindet sich im Feld 'ID' im ottoContext-Systemprompt."
+        }
+      },
+      "required": ["project_id"]
+    }
+  }
+}

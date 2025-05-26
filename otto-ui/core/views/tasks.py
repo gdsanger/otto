@@ -5,7 +5,7 @@ from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render, redirect
 from .helpers import login_required
 from django.views.decorators.csrf import csrf_exempt
-from core.const import prio_liste, status_liste
+from core.const import prio_liste, status_liste, tasktype_liste
 import os
 from dotenv import load_dotenv
 
@@ -54,11 +54,11 @@ def task_listview(request):
     end = start + per_page
     paginated_tasks = offene_tasks[start:end]
 
-    status_liste = ["offen", "in Arbeit", "laufend", "wartet", "abgeschlossen"]
     page_numbers = range(1, total_pages + 1)
     return render(request, "core/task_listview.html", {
         "tasks": paginated_tasks,
         "status_liste": status_liste,
+        "tasktype_liste": tasktype_liste,
         "personen": personen,
         "page": page,
         "total_pages": total_pages,
@@ -104,6 +104,7 @@ def task_create(request):
         "meetings": meetings,
         "prio_liste": prio_liste,
         "status_liste": status_liste,
+        "tasktype_liste": tasktype_liste
     })
 
 
@@ -126,6 +127,30 @@ def update_task_status(request):
         return HttpResponse("OK") if update_res.status_code == 200 else JsonResponse({"error": "Fehler beim Speichern."}, status=500)
     return JsonResponse({"error": "Ungültige Methode."}, status=405)
 
+@login_required
+@csrf_exempt
+def update_task_type(request):
+    if request.method == "POST":
+        task_id = request.POST.get("task_id")
+        print("task_id", task_id)
+        new_tasktype = request.POST.get("tasktype")
+        print("new_tasktype", new_tasktype)
+        get_res = requests.get(f"{OTTO_API_URL}/tasks/{task_id}", headers={"x-api-key": OTTO_API_KEY})
+        print("get_res", get_res.status_code, get_res.text)
+        if get_res.status_code != 200:
+            return JsonResponse({"error": "Task nicht gefunden."}, status=404)
+        task = get_res.json()
+        task["tasktype"] = new_tasktype
+        update_res = requests.put(
+            f"{OTTO_API_URL}/tasks/{task_id}",
+            headers={"x-api-key": OTTO_API_KEY, "Content-Type": "application/json"},
+            data=json.dumps(task)
+        )
+        if update_res.status_code == 200:
+            return HttpResponse(task["tasktype"])
+        else:
+            return JsonResponse({"error": "Fehler beim Speichern."}, status=500)
+    return JsonResponse({"error": "Ungültige Methode."}, status=405)
 
 @login_required
 @csrf_exempt
@@ -158,6 +183,7 @@ def update_task_details(request):
         task = get_res.json()
         task["betreff"] = request.POST.get("betreff")
         task["beschreibung"] = request.POST.get("beschreibung")
+        task["tasktype"] = request.POST.get("tasktype")
         task["status"] = request.POST.get("status")
         task["prio"] = request.POST.get("prio")
         task["person_id"] = request.POST.get("person_id")

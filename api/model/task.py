@@ -5,7 +5,7 @@ from datetime import date
 class Task(BaseModel):
     betreff: str
     beschreibung: Optional[str] = ""
-    zuständig: str
+    tasktype: Optional[str] = Field(None, description="Typ der Aufgabe, z.B. 'Aufgabe', 'Feature', 'Bug', 'Ticket', 'Requirement', 'Sonstiges'")
     person_id: str = Field(..., description="ID der verantwortlichen Person (personen.id)")
     aufwand: int
     notizen: Optional[str] = ""

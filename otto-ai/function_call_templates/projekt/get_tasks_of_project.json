@@ -1,0 +1,17 @@
+{
+  "type": "function",
+  "function": {
+    "name": "get_tasks_of_project",
+    "description": "Liefert alle Aufgaben, die einem bestimmten Projekt zugeordnet sind.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "project_id": {
+          "type": "string",
+          "description": "Die eindeutige ID des gewünschten Projekts. Diese ist im Feld 'ID' des ottoContext-Systemprompts enthalten."
+        }
+      },
+      "required": ["project_id"]
+    }
+  }
+}

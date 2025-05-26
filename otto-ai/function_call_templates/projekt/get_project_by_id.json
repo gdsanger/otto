@@ -1,0 +1,17 @@
+{
+  "type": "function",
+  "function": {
+    "name": "get_project_by_id",
+    "description": "Liefert ein einzelnes Projektobjekt anhand seiner ID aus dem Otto-System.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "project_id": {
+          "type": "string",
+          "description": "Die eindeutige ID des gewünschten Projekts. Diese ist im Feld 'ID' des ottoContext-Systemprompts enthalten."
+        }
+      },
+      "required": ["project_id"]
+    }
+  }
+}
