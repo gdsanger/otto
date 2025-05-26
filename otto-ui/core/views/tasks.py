@@ -67,6 +67,57 @@ def task_listview(request):
 
 
 @login_required
+def task_archive_listview(request):
+    res = requests.get(f"{OTTO_API_URL}/tasks", headers={"x-api-key": OTTO_API_KEY})
+    tasks = res.json() if res.status_code == 200 else []
+    q = request.GET.get("q", "").lower()
+    try:
+        page = int(request.GET.get("page", 1))
+    except ValueError:
+        page = 1
+    per_page = 20
+    personen_res = requests.get(f"{OTTO_API_URL}/personen", headers={"x-api-key": OTTO_API_KEY})
+    personen = personen_res.json() if personen_res.status_code == 200 else []
+
+    erledigte_tasks = []
+    for t in tasks:
+        if t.get("status", "").lower() == "abgeschlossen":
+            if q and q not in t.get("betreff", "").lower() and q not in t.get("beschreibung", "").lower():
+                continue
+            termin_str = t.get("termin")
+            try:
+                termin_dt = datetime.fromisoformat(termin_str) if termin_str else None
+            except ValueError:
+                termin_dt = None
+            t["termin_dt"] = termin_dt
+            erledigte_tasks.append(t)
+
+    erledigte_tasks.sort(key=lambda x: x["termin_dt"] or datetime.max)
+    for t in erledigte_tasks:
+        t["termin_formatiert"] = t["termin_dt"].strftime("%d.%m.%Y") if t["termin_dt"] else "-"
+
+    total_pages = max(1, (len(erledigte_tasks) + per_page - 1) // per_page)
+    if page < 1:
+        page = 1
+    if page > total_pages:
+        page = total_pages
+    start = (page - 1) * per_page
+    end = start + per_page
+    paginated_tasks = erledigte_tasks[start:end]
+
+    page_numbers = range(1, total_pages + 1)
+    return render(request, "core/task_archive_listview.html", {
+        "tasks": paginated_tasks,
+        "status_liste": status_liste,
+        "typ_liste": typ_liste,
+        "personen": personen,
+        "page": page,
+        "total_pages": total_pages,
+        "page_numbers": page_numbers,
+    })
+
+
+@login_required
 @csrf_exempt
 def task_create(request):
     if request.method == "POST":
