@@ -9,6 +9,7 @@ from .tasks import (
     task_detail_or_update,
     delete_task,
     task_create,
+    task_pageview,
 )
 from .projects import (
     project_listview,
