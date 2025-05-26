@@ -4,6 +4,13 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi import FastAPI, Depends, Header, Request, HTTPException, status, Body, Query
 from config import API_KEY
 from fastapi.security.api_key import APIKeyHeader
+import os
+import sys
+# Ensure project root is on the Python path when running the server from
+# within the ``api`` directory so that modules like ``graph`` are available.
+ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+if ROOT_DIR not in sys.path:
+    sys.path.append(ROOT_DIR)
 from typing import List, Optional
 from mongo import projekte_collection, personen_collection
 from bson import ObjectId
@@ -13,7 +20,6 @@ from email import policy
 from email.parser import BytesParser
 from helper import verify_api_key
 import tempfile
-import os
 from docx import Document
 import logging
 import httpx
