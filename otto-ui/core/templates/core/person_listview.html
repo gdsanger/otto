@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+<script>
+  window.ottoContext = {
+    type: "Person",
+    name: "Übersicht aller Personen",
+    id: ""
+  }
+</script>
+<div class="container-fluid">
+  <h2 class="mb-4">Personen</h2>
+  <form method="get" class="mb-3 d-flex gap-2">
+    <div class="input-group">
+      <input type="text" name="q" class="form-control" placeholder="Suche nach Name oder E-Mail" value="{{ request.GET.q }}">
+      <button class="btn btn-outline-secondary" type="submit">Suchen</button>
+    </div>
+    {% if request.GET.q %}
+    <a href="/person/" class="btn btn-outline-danger">Zurücksetzen</a>
+    {% endif %}
+  </form>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Mandant</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for p in personen %}
+      <tr>
+        <td><a href="/person/{{ p.id }}/">{{ p.name }}</a></td>
+        <td>{{ p.email }}</td>
+        <td>{{ p.mandant }}</td>
+      </tr>
+      {% empty %}
+      <tr><td colspan="3">Keine Personen gefunden.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}
