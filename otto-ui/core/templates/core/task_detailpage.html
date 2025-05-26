@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+{% block content %}
+<script>
+  window.ottoContext = {
+    type: "Aufgaben",
+    name: "{{ task.betreff }}",
+    id: "{{ task.id }}"
+  }
+</script>
+<div class="container py-4">
+  <div class="card mb-3">
+    <div class="card-header">
+      <h3 class="mb-0">Aufgabe bearbeiten</h3>
+    </div>
+    <div class="card-body">
+      <form id="taskForm">
+        {% csrf_token %}
+        <input type="hidden" name="task_id" value="{{ task.id }}">
+        <div class="mb-3">
+          <label class="form-label">Betreff</label>
+          <input class="form-control" type="text" name="betreff" value="{{ task.betreff }}">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Beschreibung</label>
+          <textarea class="form-control" name="beschreibung">{{ task.beschreibung }}</textarea>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Projekt</label>
+          <select class="form-select" name="project_id">
+            <option value="">-- Kein Projekt --</option>
+            {% for projekt in projekte %}
+            <option value="{{ projekt.id }}" {% if task.project_id == projekt.id %}selected{% endif %}>{{ projekt.name }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Meeting</label>
+          <select class="form-select" name="meeting_id">
+            <option value="">-- Kein Meeting --</option>
+            {% for meeting in meetings %}
+            <option value="{{ meeting.id }}" {% if task.meeting_id == meeting.id %}selected{% endif %}>{{ meeting.name }}{% if meeting.datum_formatiert %} ({{ meeting.datum_formatiert }}){% endif %}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Zuständig</label>
+          <select class="form-select" name="person_id">
+            {% for person in personen %}
+            <option value="{{ person.id }}" {% if task.person_id == person.id %}selected{% endif %}>{{ person.name }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Status</label>
+          <select class="form-select" name="status">
+            {% for status in status_liste %}
+            <option value="{{ status }}" {% if task.status == status %}selected{% endif %}>{{ status }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Priorität</label>
+          <select class="form-select" name="prio">
+            {% for p in prio_liste %}
+            <option value="{{ p }}" {% if task.prio == p %}selected{% endif %}>{{ p }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Typ</label>
+          <select class="form-select" name="typ">
+            {% for t in typ_liste %}
+            <option value="{{ t }}" {% if task.typ == t %}selected{% endif %}>{{ t }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Aufwand (Stunden)</label>
+          <input class="form-control" type="number" name="aufwand" value="{{ task.aufwand }}">
+        </div>
+        <button type="submit" class="btn btn-primary">Speichern</button>
+      </form>
+    </div>
+  </div>
+  <div id="saveSuccess" class="alert alert-success d-none">Gespeichert!</div>
+</div>
+<script>
+function getCookie(name){
+  let cookieValue = null;
+  if(document.cookie && document.cookie !== ''){
+    const cookies = document.cookie.split(';');
+    for(let i=0;i<cookies.length;i++){
+      const cookie = cookies[i].trim();
+      if(cookie.substring(0,name.length+1) === (name+'=')){
+        cookieValue = decodeURIComponent(cookie.substring(name.length+1));
+        break;
+      }
+    }
+  }
+  return cookieValue;
+}
+const form = document.getElementById('taskForm');
+const successBox = document.getElementById('saveSuccess');
+form.addEventListener('submit', function(e){
+  e.preventDefault();
+  const data = {};
+  new FormData(form).forEach((v,k)=>{data[k]=v});
+  fetch('', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-CSRFToken': getCookie('csrftoken'),
+    },
+    body: JSON.stringify(data)
+  }).then(r => {
+    if(r.ok){
+      successBox.classList.remove('d-none');
+      setTimeout(()=>successBox.classList.add('d-none'),2000);
+    }else{
+      alert('Fehler beim Speichern');
+    }
+  });
+});
+</script>
+{% endblock %}
