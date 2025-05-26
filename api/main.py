@@ -55,6 +55,12 @@ except Exception as e:
     print(f"⚠️ Fehler beim Einbinden von task_controller: {e}")
 
 try:
+    from controller.context_controller import router as context_router
+    app.include_router(context_router)
+except Exception as e:
+    print(f"⚠️ Fehler beim Einbinden von context_controller: {e}")
+
+try:
     from controller.user_controller import router as user_router
     app.include_router(user_router)
 except Exception as e:
