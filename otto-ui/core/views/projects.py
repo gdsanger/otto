@@ -5,7 +5,7 @@ from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render, redirect
 from .helpers import login_required
 from django.views.decorators.csrf import csrf_exempt
-from core.const import status_liste, prio_liste, typ_liste
+from core.const import status_liste, prio_liste, projekt_typ, typ_liste
 import os
 from dotenv import load_dotenv
 
@@ -30,6 +30,7 @@ def project_listview(request):
         "projekte": projekte,
         "status_liste": status_liste,
         "prio_liste": prio_liste,
+        "projekt_typ": projekt_typ,
         "personen": personen
     })
 
