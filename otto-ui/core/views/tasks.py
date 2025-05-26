@@ -30,7 +30,7 @@ def task_listview(request):
 
     offene_tasks = []
     for t in tasks:
-        if t.get("status", "").lower() != "abgeschlossen":
+        if t.get("status", "").lower() != "✅ abgeschlossen":
             if q and q not in t.get("betreff", "").lower() and q not in t.get("beschreibung", "").lower():
                 continue
             termin_str = t.get("termin")
@@ -81,7 +81,7 @@ def task_archive_listview(request):
 
     erledigte_tasks = []
     for t in tasks:
-        if t.get("status", "").lower() == "abgeschlossen":
+        if t.get("status", "").lower() == "✅ abgeschlossen":
             if q and q not in t.get("betreff", "").lower() and q not in t.get("beschreibung", "").lower():
                 continue
             termin_str = t.get("termin")
