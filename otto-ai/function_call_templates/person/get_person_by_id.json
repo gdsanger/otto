@@ -1,0 +1,17 @@
+{
+  "type": "function",
+  "function": {
+    "name": "get_person_by_id",
+    "description": "Liefert ein einzelnes Persdonenobjekt anhand seiner ID aus dem Otto-System.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "person_id": {
+          "type": "string",
+          "description": "Die eindeutige ID der gewünschten Person. Diese ist im Feld 'ID' des ottoContext-Systemprompts enthalten."
+        }
+      },
+      "required": ["person_id"]
+    }
+  }
+}

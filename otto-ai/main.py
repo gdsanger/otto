@@ -90,9 +90,11 @@ async def chat(request: ChatRequest):
 
 async def call_function_and_respond(name, args, messages, tool_call):
     if name == "get_project_by_id":
-        url = f"{OTTO_API_URL}projekte/{args.get('project_id')}"
-    elif name == "get_tasks_of_project":
-        url = f"{OTTO_API_URL}project/{args.get('project_id')}/tasks"
+        url = f"{OTTO_API_URL}context/projekt/{args.get('project_id')}"
+    elif name == "get_task_by_id":
+        url = f"{OTTO_API_URL}context/aufgabe/{args.get('task_id')}"
+    elif name == "get_person_by_id":
+        url = f"{OTTO_API_URL}context/person/{args.get('person_id')}"
     else:
         return {"reply": f"Unbekannte Funktion: {name}"}
 

@@ -2,7 +2,6 @@ from fastapi import APIRouter, Depends, HTTPException
 from bson import ObjectId
 from helper import verify_api_key, serialize_mongo
 from mongo import projekte_collection, personen_collection, db
-from graph.controller.sharepoint import list_project_files
 
 router = APIRouter()
 
@@ -32,13 +31,7 @@ async def projekt_context(projekt_id: str):
     tasks_cursor = db.tasks.find({"project_id": projekt_id})
     proj_dict["aufgaben"] = [serialize_mongo(t) async for t in tasks_cursor]
 
-    if proj_dict.get("short"):
-        try:
-            proj_dict["dateien"] = await list_project_files(proj_dict["short"])
-        except Exception:
-            proj_dict["dateien"] = []
-    else:
-        proj_dict["dateien"] = []
+    proj_dict["dateien"] = []
 
     return proj_dict
 

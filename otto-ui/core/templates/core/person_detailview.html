@@ -2,9 +2,10 @@
 {% block content %}
 <script>
   window.ottoContext = {
-    type: "Person",
+    type: "person",
     name: "{{ person.name }}",
-    id: "{{ person.id }}"
+    id: "{{ person.id }}",
+    gptFunctions: ["get_person_by_id"]  
   }
 </script>
 <div class="container py-4">
