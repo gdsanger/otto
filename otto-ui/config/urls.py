@@ -19,6 +19,8 @@ urlpatterns = [
     path('meeting/', views.meeting_listview, name='meeting_liste'),
     path('meeting/new/', views.meeting_create, name='meeting_create'),
     path('meeting/<str:meeting_id>/', views.meeting_detailview, name='meeting_detail'),
+    path('person/', views.person_listview, name='person_liste'),
+    path('person/<str:person_id>/', views.person_detailview, name='person_detail'),
     path('login/', login_view, name='login'),
     path('logout/', logout_view, name='logout'),
 
