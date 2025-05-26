@@ -6,9 +6,7 @@ from .tasks import (
     update_task_person,
     update_task_typ,
     update_task_details,
-    task_detail_or_update,
     delete_task,
-    task_create,
     task_pageview,
 )
 from .projects import (

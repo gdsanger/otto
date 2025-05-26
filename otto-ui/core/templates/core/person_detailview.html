@@ -125,7 +125,7 @@
       const taskId = el.dataset.taskId;
       const field = el.dataset.field;
       const value = el.value;
-      fetch(`/task/${taskId}/`, {
+      fetch(`/task/view/${taskId}/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -136,5 +136,4 @@
     });
   });
 </script>
-{% include "components/task_modal.html" %}
 {% endblock %}
