@@ -89,7 +89,16 @@ async def person_context(person_id: str):
         if t_dict.get("project_id"):
             proj = await projekte_collection.find_one({"_id": ObjectId(t_dict["project_id"])})
             if proj:
-                t_dict["projekt"] = serialize_mongo(proj)
+                proj_dict = serialize_mongo(proj)
+                if proj_dict.get("bearbeiter"):
+                    pb = await personen_collection.find_one({"_id": ObjectId(proj_dict["bearbeiter"])})
+                    if pb:
+                        proj_dict["bearbeiter"] = serialize_mongo(pb)
+                if proj_dict.get("stakeholder_ids"):
+                    ids = [ObjectId(pid) for pid in proj_dict["stakeholder_ids"]]
+                    cursor = personen_collection.find({"_id": {"$in": ids}})
+                    proj_dict["stakeholder"] = [serialize_mongo(p) async for p in cursor]
+                t_dict["projekt"] = proj_dict
         tasks.append(t_dict)
 
     person_dict["tasks"] = tasks
