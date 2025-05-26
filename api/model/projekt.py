@@ -12,7 +12,10 @@ class Projekt(BaseModel):
     klassifikation: str
     typ: Optional[str] = None
     status: str
-    prio: str  # z.B. "hoch", "mittel", "niedrig"
+    prio: Optional[str] = Field(
+        "🟢 normal",
+        description="Projektpriorität (z.B. 'hoch', 'mittel', 'niedrig')",
+    )
     bearbeiter: Optional[str] = Field(None, description="Verknüpfung zu Personen ID")
     devops_project_id: Optional[str] = Field(
         default=None,
