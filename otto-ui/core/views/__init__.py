@@ -1,5 +1,5 @@
 from .auth import login_view, logout_view
-from .tasks import task_listview, update_task_status, update_task_person, update_task_details, task_detail_or_update, delete_task, task_create
+from .tasks import task_listview, update_task_status, update_task_person, update_task_typ, update_task_details, task_detail_or_update, delete_task, task_create
 from .projects import project_listview, project_detailview, delete_project
 from .meetings import meeting_listview, meeting_detailview, meeting_create
 from django.shortcuts import render
@@ -100,6 +100,7 @@ def home(request):
             {
                 "id": tid,
                 "name": p.get("name"),
+                "typ": p.get("typ"),
                 "status": p.get("status"),
                 "offen": offen,
                 "erledigt": erledigt,

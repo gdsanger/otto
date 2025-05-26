@@ -10,6 +10,7 @@ class Projekt(BaseModel):
     name: str
     short: Optional[str]
     klassifikation: str
+    typ: Optional[str] = None
     status: str
     prio: str  # z.B. "hoch", "mittel", "niedrig"
     bearbeiter: Optional[str] = Field(None, description="Verknüpfung zu Personen ID")

@@ -26,6 +26,7 @@
       <tr>
         <th>Name</th>
         <th>Status</th>
+        <th>Typ</th>
         <th>Prio</th>
         <th>Bearbeiter</th>
         <th></th>
@@ -41,6 +42,13 @@
           <select class="form-select form-select-sm projekt-update" data-id="{{ projekt.id }}" data-field="status">
             {% for s in status_liste %}
               <option value="{{ s }}" {% if s == projekt.status %}selected{% endif %}>{{ s }}</option>
+            {% endfor %}
+          </select>
+        </td>
+        <td>
+          <select class="form-select form-select-sm projekt-update" data-id="{{ projekt.id }}" data-field="typ">
+            {% for t in projekt_typ %}
+              <option value="{{ t }}" {% if t == projekt.typ %}selected{% endif %}>{{ t }}</option>
             {% endfor %}
           </select>
         </td>
