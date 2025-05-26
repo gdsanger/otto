@@ -326,3 +326,42 @@ def task_detail_or_update(request, task_id):
         "status_liste": status_liste,
         "typ_liste": typ_liste,
     })
+
+@login_required
+@csrf_exempt
+def task_pageview(request, task_id):
+    if request.method == "POST":
+        try:
+            payload = json.loads(request.body)
+            res = requests.get(f"{OTTO_API_URL}/tasks/{task_id}", headers={"x-api-key": OTTO_API_KEY})
+            if res.status_code != 200:
+                return JsonResponse({"error": "Task nicht gefunden"}, status=404)
+            task = res.json()
+            for key, value in payload.items():
+                task[key] = value
+            update = requests.put(
+                f"{OTTO_API_URL}/tasks/{task_id}",
+                headers={"x-api-key": OTTO_API_KEY, "Content-Type": "application/json"},
+                data=json.dumps(task)
+            )
+            return JsonResponse({"success": True}) if update.status_code == 200 else JsonResponse({"error": "Fehler beim Speichern"}, status=500)
+        except Exception as e:
+            return JsonResponse({"error": str(e)}, status=400)
+
+    task_res = requests.get(f"{OTTO_API_URL}/tasks/{task_id}", headers={"x-api-key": OTTO_API_KEY})
+    task = task_res.json()
+    personen_res = requests.get(f"{OTTO_API_URL}/personen", headers={"x-api-key": OTTO_API_KEY})
+    personen = personen_res.json() if personen_res.status_code == 200 else []
+    projekte_res = requests.get(f"{OTTO_API_URL}/projekte", headers={"x-api-key": OTTO_API_KEY})
+    projekte = projekte_res.json() if projekte_res.status_code == 200 else []
+    meetings_res = requests.get(f"{OTTO_API_URL}/meetings", headers={"x-api-key": OTTO_API_KEY})
+    meetings = meetings_res.json() if meetings_res.status_code == 200 else []
+    return render(request, "core/task_detailpage.html", {
+        "task": task,
+        "personen": personen,
+        "projekte": projekte,
+        "meetings": meetings,
+        "prio_liste": prio_liste,
+        "status_liste": status_liste,
+        "typ_liste": typ_liste,
+    })
