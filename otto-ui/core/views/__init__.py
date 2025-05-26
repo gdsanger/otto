@@ -1,7 +1,8 @@
 from .auth import login_view, logout_view
-from .tasks import task_listview, update_task_status, update_task_person, update_task_details, task_detail_or_update, delete_task, task_create, update_task_type
-from .projects import project_listview, project_detailview, delete_project, project_create_task
+from .tasks import task_listview, update_task_status, update_task_person, update_task_typ, update_task_details, task_detail_or_update, delete_task, task_create
+from .projects import project_listview, project_detailview, delete_project
 from .meetings import meeting_listview, meeting_detailview, meeting_create
+from .persons import person_listview, person_detailview
 from django.shortcuts import render
 from .helpers import login_required
 import os
@@ -59,10 +60,18 @@ def home(request):
     upcoming_tasks = []
     for t in tasks:
         termin_dt = parse_termin(t)
-        if termin_dt != datetime.max and now <= termin_dt <= now + timedelta(days=7):
+        if termin_dt == datetime.max:
+            continue
+
+        status = str(t.get("status", "")).lower()
+        is_done = "abgeschlossen" in status or "erledigt" in status
+
+        if now <= termin_dt <= now + timedelta(days=7) or (termin_dt < now and not is_done):
             t["termin_dt"] = termin_dt
             upcoming_tasks.append(t)
+
     upcoming_tasks.sort(key=lambda x: x["termin_dt"])
+    upcoming_tasks = upcoming_tasks[:20]
 
     # Meetings
     past_meetings = []

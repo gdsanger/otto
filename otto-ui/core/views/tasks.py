@@ -5,7 +5,7 @@ from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render, redirect
 from .helpers import login_required
 from django.views.decorators.csrf import csrf_exempt
-from core.const import prio_liste, status_liste, tasktype_liste
+from core.const import prio_liste, status_liste, typ_liste
 import os
 from dotenv import load_dotenv
 
@@ -58,7 +58,7 @@ def task_listview(request):
     return render(request, "core/task_listview.html", {
         "tasks": paginated_tasks,
         "status_liste": status_liste,
-        "tasktype_liste": tasktype_liste,
+        "typ_liste": typ_liste,
         "personen": personen,
         "page": page,
         "total_pages": total_pages,
@@ -104,7 +104,7 @@ def task_create(request):
         "meetings": meetings,
         "prio_liste": prio_liste,
         "status_liste": status_liste,
-        "tasktype_liste": tasktype_liste
+        "typ_liste": typ_liste,
     })
 
 
@@ -174,6 +174,26 @@ def update_task_person(request):
 
 @login_required
 @csrf_exempt
+def update_task_typ(request):
+    if request.method == "POST":
+        task_id = request.POST.get("task_id")
+        new_typ = request.POST.get("typ")
+        get_res = requests.get(f"{OTTO_API_URL}/tasks/{task_id}", headers={"x-api-key": OTTO_API_KEY})
+        if get_res.status_code != 200:
+            return JsonResponse({"error": "Task nicht gefunden."}, status=404)
+        task = get_res.json()
+        task["typ"] = new_typ
+        update_res = requests.put(
+            f"{OTTO_API_URL}/tasks/{task_id}",
+            headers={"x-api-key": OTTO_API_KEY, "Content-Type": "application/json"},
+            data=json.dumps(task)
+        )
+        return HttpResponse("OK") if update_res.status_code == 200 else JsonResponse({"error": "Fehler beim Speichern."}, status=500)
+    return JsonResponse({"error": "Ungültige Methode."}, status=405)
+
+
+@login_required
+@csrf_exempt
 def update_task_details(request):
     if request.method == "POST":
         task_id = request.POST.get("task_id")
@@ -186,6 +206,7 @@ def update_task_details(request):
         task["tasktype"] = request.POST.get("tasktype")
         task["status"] = request.POST.get("status")
         task["prio"] = request.POST.get("prio")
+        task["typ"] = request.POST.get("typ")
         task["person_id"] = request.POST.get("person_id")
         task["project_id"] = request.POST.get("project_id") or None
         task["meeting_id"] = request.POST.get("meeting_id") or None
@@ -252,4 +273,5 @@ def task_detail_or_update(request, task_id):
         "meetings": meetings,
         "prio_liste": prio_liste,
         "status_liste": status_liste,
+        "typ_liste": typ_liste,
     })

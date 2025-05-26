@@ -38,6 +38,7 @@
         <thead>
             <tr>
                 <th>Betreff</th>
+                <th>Typ</th>
                 <th>Status</th>
                 <th>Type</th>
                 <th>Zuständig</th>
@@ -49,6 +50,16 @@
             {% for task in tasks %}
             <tr>
                 <td><a href="#" class="task-open" data-task-id="{{ task.id }}">{{ task.betreff }}</a></td>
+                <td>
+                    <form hx-post="/task/update_typ/" hx-trigger="change" hx-target="closest td" hx-swap="outerHTML">
+                        <input type="hidden" name="task_id" value="{{ task.id }}">
+                        <select class="form-select form-select-sm" name="typ">
+                            {% for t in typ_liste %}
+                                <option value="{{ t }}" {% if task.typ == t %}selected{% endif %}>{{ t }}</option>
+                            {% endfor %}
+                        </select>
+                    </form>
+                </td>
                 <td>
                     <form hx-post="/task/update_status/" hx-trigger="change" hx-target="closest td" hx-swap="outerHTML">
                         <input type="hidden" name="task_id" value="{{ task.id }}">
@@ -89,7 +100,7 @@
                 </td>
             </tr>
             {% empty %}
-            <tr><td colspan="5">Keine offenen Aufgaben gefunden.</td></tr>
+            <tr><td colspan="6">Keine offenen Aufgaben gefunden.</td></tr>
             {% endfor %}
         </tbody>
     </table>
