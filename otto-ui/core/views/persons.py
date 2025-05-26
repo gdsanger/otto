@@ -4,7 +4,7 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from .helpers import login_required
-from core.const import status_liste, prio_liste
+from core.const import status_liste, prio_liste, typ_liste
 import os
 from dotenv import load_dotenv
 
@@ -45,9 +45,19 @@ def person_detailview(request, person_id):
         return render(request, "core/person_detailview.html", {"person": {}, "tasks": []})
     data = res.json()
     tasks = data.get("tasks", [])
+
+    # Projekte laden, um Namen zuzuordnen
+    projekte_res = requests.get(f"{OTTO_API_URL}/projekte", headers={"x-api-key": OTTO_API_KEY})
+    projekte = projekte_res.json() if projekte_res.status_code == 200 else []
+    projekt_map = {p.get("id"): p.get("name") for p in projekte}
+    for t in tasks:
+        pid = t.get("project_id")
+        t["project_name"] = projekt_map.get(pid, "") if pid else ""
+
     return render(request, "core/person_detailview.html", {
         "person": data,
         "tasks": tasks,
         "status_liste": status_liste,
-        "prio_liste": prio_liste
+        "prio_liste": prio_liste,
+        "typ_liste": typ_liste
     })

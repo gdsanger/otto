@@ -48,6 +48,7 @@
   <table class="table table-sm table-striped">
     <thead>
       <tr>
+        <th>Projekt</th>
         <th>Betreff</th>
         <th>Status</th>
         <th>Prio</th>
@@ -57,6 +58,7 @@
     <tbody>
       {% for task in tasks %}
       <tr>
+        <td>{% if task.project_id %}<a href="/project/{{ task.project_id }}/">{{ task.project_name }}</a>{% else %}-{% endif %}</td>
         <td><a href="#" class="task-open" data-task-id="{{ task.id }}">{{ task.betreff }}</a></td>
         <td>
           <select class="form-select form-select-sm auto-save" data-task-id="{{ task.id }}" data-field="status">
@@ -73,7 +75,11 @@
           </select>
         </td>
         <td>
-          <input type="text" class="form-control form-control-sm auto-save" data-task-id="{{ task.id }}" data-field="typ" value="{{ task.typ }}">
+          <select class="form-select form-select-sm auto-save" data-task-id="{{ task.id }}" data-field="typ">
+            {% for t in typ_liste %}
+            <option value="{{ t }}" {% if t == task.typ %}selected{% endif %}>{{ t }}</option>
+            {% endfor %}
+          </select>
         </td>
       </tr>
       {% endfor %}
