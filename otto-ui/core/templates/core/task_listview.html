@@ -48,7 +48,7 @@
         <tbody>
             {% for task in tasks %}
             <tr>
-                <td><a href="#" class="task-open" data-task-id="{{ task.id }}">{{ task.betreff }}</a></td>
+                <td><a href="/task/view/{{ task.id }}/">{{ task.betreff }}</a></td>
                 <td>
                     <form hx-post="/task/update_typ/" hx-trigger="change" hx-target="closest td" hx-swap="outerHTML">
                         <input type="hidden" name="task_id" value="{{ task.id }}">
