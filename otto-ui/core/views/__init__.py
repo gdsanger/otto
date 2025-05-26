@@ -1,5 +1,15 @@
 from .auth import login_view, logout_view
-from .tasks import task_listview, update_task_status, update_task_person, update_task_typ, update_task_details, task_detail_or_update, delete_task, task_create
+from .tasks import (
+    task_listview,
+    task_archive_listview,
+    update_task_status,
+    update_task_person,
+    update_task_typ,
+    update_task_details,
+    task_detail_or_update,
+    delete_task,
+    task_create,
+)
 from .projects import (
     project_listview,
     project_detailview,
