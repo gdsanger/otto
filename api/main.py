@@ -78,6 +78,12 @@ try:
 except Exception as e:
     print(f"⚠️ Fehler beim Einbinden von message_controller: {e}")
 
+try:
+    from controller.sprint_controller import router as sprint_router
+    app.include_router(sprint_router)
+except Exception as e:
+    print(f"⚠️ Fehler beim Einbinden von sprint_controller: {e}")
+
 def custom_openapi():
     if app.openapi_schema:
         return app.openapi_schema

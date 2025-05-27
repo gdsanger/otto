@@ -21,6 +21,7 @@ from .projects import (
 from .meetings import meeting_listview, meeting_detailview, meeting_create
 from .persons import person_listview, person_detailview
 from .messages import message_detailview
+from .sprints import sprint_listview, sprint_detailview
 from django.shortcuts import render
 from .helpers import login_required
 import os

@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block content %}
+<script>
+  window.ottoContext = {
+    type: "sprint",
+    name: "{{ sprint.name }}",
+    id: "{{ sprint.id }}"
+  }
+</script>
+<div class="container py-4">
+  <form id="sprintForm">
+    {% csrf_token %}
+    <div class="card">
+      <div class="card-header">{{ sprint.name }}</div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-12 mb-3">
+            <label class="form-label">Name</label>
+            <input type="text" name="name" class="form-control" value="{{ sprint.name }}">
+          </div>
+          <div class="col-12 mb-3">
+            <label class="form-label">Projekt</label>
+            <select name="projekt_id" class="form-select">
+              <option value="">– bitte w\u00e4hlen –</option>
+              {% for p in projekte %}
+              <option value="{{ p.id }}" {% if p.id == sprint.projekt_id %}selected{% endif %}>{{ p.name }}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Typ</label>
+            <select name="typ" class="form-select">
+              {% for t in sprint_typ %}
+              <option value="{{ t }}" {% if t == sprint.typ %}selected{% endif %}>{{ t }}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="col-md-3 mb-3">
+            <label class="form-label">Startdatum</label>
+            <input type="date" name="startdatum" class="form-control" value="{{ sprint.startdatum }}">
+          </div>
+          <div class="col-md-3 mb-3">
+            <label class="form-label">Enddatum</label>
+            <input type="date" name="enddatum" class="form-control" value="{{ sprint.enddatum }}">
+          </div>
+          <div class="col-12 mb-3">
+            <label class="form-label">Beschreibung</label>
+            <textarea name="beschreibung" class="form-control">{{ sprint.beschreibung }}</textarea>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Status</label>
+            <select name="status" class="form-select">
+              {% for s in sprint_status %}
+              <option value="{{ s }}" {% if s == sprint.status %}selected{% endif %}>{{ s }}</option>
+              {% endfor %}
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="mt-3">
+      <button type="submit" class="btn btn-outline-primary">💾 Speichern</button>
+    </div>
+  </form>
+</div>
+{% endblock %}
