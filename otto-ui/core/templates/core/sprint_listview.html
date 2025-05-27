@@ -10,7 +10,8 @@
 </script>
 <div class="container-fluid">
   <h2 class="mb-4">Sprints</h2>
-  <form method="get" class="mb-3 d-flex gap-2">
+  <form method="get" class="mb-3 d-flex gap-2 align-items-center">
+    <a href="/sprint/new/" class="btn btn-outline-primary">➕ Neuer Sprint</a>
     <div class="input-group">
       <input type="text" name="q" class="form-control" placeholder="Suche nach Sprintname" value="{{ request.GET.q }}">
       <button class="btn btn-outline-secondary" type="submit">Suchen</button>
