@@ -12,10 +12,10 @@
 </script>
 <div class="container-fluid mt-3">
   <div class="row mb-2 align-items-center">
-    <div class="col-sm-4 mb-2 mb-sm-0">
+    <div class="col-sm-3 mb-2 mb-sm-0">
       <input type="text" id="kanban-search" class="form-control" placeholder="Suchen...">
     </div>
-    <div class="col-sm-4 mb-2 mb-sm-0">
+    <div class="col-sm-3 mb-2 mb-sm-0">
       <select id="kanban-person" class="form-select">
         <option value="">Alle Agents</option>
         {% for p in agenten %}
@@ -23,7 +23,19 @@
         {% endfor %}
       </select>
     </div>
-    <div class="col-sm-4 form-check">
+    <div class="col-sm-3 mb-2 mb-sm-0">
+      <select id="kanban-project" class="form-select">
+        <option value="">Alle Projekte</option>
+        {% for projekt in projekte %}
+        <option value="{{ projekt.id }}">{{ projekt.name }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="col-auto form-check mb-2 mb-sm-0">
+      <input class="form-check-input" type="checkbox" id="kanban-without-project">
+      <label class="form-check-label" for="kanban-without-project">Ohne Projekt</label>
+    </div>
+    <div class="col-sm-2 form-check">
       <input class="form-check-input" type="checkbox" id="toggle-completed" checked>
       <label class="form-check-label" for="toggle-completed">Abgeschlossen anzeigen</label>
     </div>
@@ -33,7 +45,7 @@
   <div class="kanban-column status-{{ status|slugify }}" data-status="{{ status }}">
     <div class="kanban-column-header">{{ status }}</div>
     {% for task in tasks %}
-    <div class="card mb-2" draggable="true" data-task-id="{{ task.id }}" data-person-id="{{ task.person_id }}">
+    <div class="card mb-2" draggable="true" data-task-id="{{ task.id }}" data-person-id="{{ task.person_id }}" data-project-id="{{ task.project_id|default:'' }}">
       <div class="card-body p-2">
         <div><strong>{{ task.betreff }}</strong></div>
         <div><small>👤 {{ task.person_name }}</small></div>
@@ -61,18 +73,32 @@
 
     const searchInput = document.getElementById('kanban-search');
     const personSelect = document.getElementById('kanban-person');
+    const projectSelect = document.getElementById('kanban-project');
+    const withoutProject = document.getElementById('kanban-without-project');
     function applyFilters() {
       const q = (searchInput ? searchInput.value.toLowerCase() : '');
       const pid = personSelect ? personSelect.value : '';
+      const projId = projectSelect ? projectSelect.value : '';
+      const noProj = withoutProject ? withoutProject.checked : false;
       document.querySelectorAll('.kanban-column .card').forEach(function(card) {
         const txt = card.textContent.toLowerCase();
         const matchSearch = txt.indexOf(q) !== -1;
         const matchPerson = !pid || card.dataset.personId === pid;
-        card.style.display = (matchSearch && matchPerson) ? '' : 'none';
+        const cardProject = card.dataset.projectId || '';
+        let matchProject = true;
+        if (projId) {
+          matchProject = cardProject === projId;
+        } else if (noProj) {
+          matchProject = !cardProject;
+        }
+        card.style.display = (matchSearch && matchPerson && matchProject) ? '' : 'none';
       });
     }
     if (searchInput) searchInput.addEventListener('input', applyFilters);
     if (personSelect) personSelect.addEventListener('change', applyFilters);
+    if (projectSelect) projectSelect.addEventListener('change', applyFilters);
+    if (withoutProject) withoutProject.addEventListener('change', applyFilters);
+    applyFilters();
 
     const toggleCompleted = document.getElementById('toggle-completed');
     if (toggleCompleted) {
