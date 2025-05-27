@@ -1,7 +1,7 @@
 import os
 import requests
 import json
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from .helpers import login_required
@@ -48,6 +48,34 @@ def sprint_detailview(request, sprint_id):
     projekte = projekte_res.json() if projekte_res.status_code == 200 else []
     return render(request, "core/sprint_detailview.html", {
         "sprint": sprint,
+        "projekte": projekte,
+        "sprint_typ": sprint_typ,
+        "sprint_status": sprint_status,
+    })
+
+
+@login_required
+@csrf_exempt
+def sprint_create(request):
+    if request.method == "POST":
+        try:
+            payload = json.loads(request.body)
+            res = requests.post(
+                f"{OTTO_API_URL}/sprints",
+                headers={"x-api-key": OTTO_API_KEY, "Content-Type": "application/json"},
+                data=json.dumps(payload),
+            )
+            if res.status_code in (200, 201):
+                data = res.json()
+                return JsonResponse({"success": True, "id": data.get("id")})
+            return JsonResponse({"error": "Fehler beim Speichern"}, status=500)
+        except Exception as e:
+            return JsonResponse({"error": str(e)}, status=400)
+
+    projekte_res = requests.get(f"{OTTO_API_URL}/projekte", headers={"x-api-key": OTTO_API_KEY})
+    projekte = projekte_res.json() if projekte_res.status_code == 200 else []
+    return render(request, "core/sprint_detailview.html", {
+        "sprint": {},
         "projekte": projekte,
         "sprint_typ": sprint_typ,
         "sprint_status": sprint_status,
