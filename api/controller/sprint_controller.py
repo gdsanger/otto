@@ -2,11 +2,18 @@ from fastapi import APIRouter, HTTPException, Depends, Body
 from typing import List
 from bson import ObjectId
 from bson.errors import InvalidId
+from datetime import datetime, date
 from model.sprint import Sprint, SprintListe
 from mongo import sprints_collection, projekte_collection
 from helper import verify_api_key, serialize_mongo
 
 router = APIRouter()
+
+def convert_dates(sprint_dict):
+    for key in ["startdatum", "enddatum"]:
+        if isinstance(sprint_dict.get(key), date):
+            sprint_dict[key] = datetime.combine(sprint_dict[key], datetime.min.time())
+    return sprint_dict
 
 @router.get("/sprints", dependencies=[Depends(verify_api_key)], tags=["Sprint"])
 async def list_sprints():
@@ -29,7 +36,8 @@ async def get_sprint(sprint_id: str):
 async def create_sprint(sprint: Sprint):
     if not await projekte_collection.find_one({"_id": ObjectId(sprint.projekt_id)}):
         raise HTTPException(status_code=400, detail="Projekt nicht gefunden")
-    result = await sprints_collection.insert_one(sprint.dict())
+    sprint_dict = convert_dates(sprint.dict())
+    result = await sprints_collection.insert_one(sprint_dict)
     return {"status": "ok", "id": str(result.inserted_id)}
 
 @router.put("/sprints/{sprint_id}", dependencies=[Depends(verify_api_key)], tags=["Sprint"])
@@ -40,7 +48,8 @@ async def update_sprint(sprint_id: str, sprint: Sprint):
         raise HTTPException(status_code=400, detail="Ungültige ID")
     if not await projekte_collection.find_one({"_id": ObjectId(sprint.projekt_id)}):
         raise HTTPException(status_code=400, detail="Projekt nicht gefunden")
-    result = await sprints_collection.replace_one({"_id": oid}, sprint.dict())
+    sprint_dict = convert_dates(sprint.dict())
+    result = await sprints_collection.replace_one({"_id": oid}, sprint_dict)
     if result.matched_count == 0:
         raise HTTPException(status_code=404, detail="Sprint nicht gefunden")
     return {"status": "aktualisiert"}
