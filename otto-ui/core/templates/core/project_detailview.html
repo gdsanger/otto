@@ -329,22 +329,39 @@
   });
 });
 
- const fileInput = document.getElementById('uploadInput');
- if (fileInput) {
-   fileInput.addEventListener('change', () => {
-     const file = fileInput.files[0];
-     if (!file) return;
-     const fd = new FormData();
-     fd.append('file', file);
-     fetch('/project/{{ projekt.short }}/upload/', {
-       method: 'POST',
-       headers: { 'X-CSRFToken': getCookie('csrftoken') },
-       body: fd
-     }).then(r => {
-       if (r.ok) location.reload();
-       else alert('Fehler beim Upload');
-     });
-   });
- }
+const fileInput = document.getElementById('uploadInput');
+if (fileInput) {
+  fileInput.addEventListener('change', () => {
+    const file = fileInput.files[0];
+    if (!file) return;
+    const fd = new FormData();
+    fd.append('file', file);
+    fetch('/project/{{ projekt.short }}/upload/', {
+      method: 'POST',
+      headers: { 'X-CSRFToken': getCookie('csrftoken') },
+      body: fd
+    }).then(r => {
+      if (r.ok) location.reload();
+      else alert('Fehler beim Upload');
+    });
+  });
+}
+
+// Merke zuletzt genutzten Tab in localStorage
+const tabKey = 'projectTab_' + window.ottoContext.id;
+const savedTab = localStorage.getItem(tabKey);
+if (savedTab) {
+  const triggerEl = document.querySelector(`#tabs button[data-bs-target="${savedTab}"]`);
+  if (triggerEl) {
+    bootstrap.Tab.getOrCreateInstance(triggerEl).show();
+  }
+}
+
+document.querySelectorAll('#tabs button[data-bs-toggle="tab"]').forEach(btn => {
+  btn.addEventListener('shown.bs.tab', e => {
+    const target = e.target.getAttribute('data-bs-target');
+    localStorage.setItem(tabKey, target);
+  });
+});
 </script>
 {% endblock %}
