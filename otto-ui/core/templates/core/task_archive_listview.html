@@ -13,13 +13,25 @@
     <h2 class="mb-4">Archiv</h2>
     <div class="card">
     <div class="card-body">
-    <form method="get" class="row mb-3">
+    <form method="get" class="row mb-3 align-items-end">
         <div class="col-sm-4">
             <input type="text" class="form-control" name="q" value="{{ request.GET.q }}" placeholder="Suchen...">
         </div>
+        <div class="col-sm-3">
+            <select class="form-select" name="project_id">
+                <option value="">-- Projekt wählen --</option>
+                {% for projekt in projekte %}
+                    <option value="{{ projekt.id }}" {% if request.GET.project_id == projekt.id %}selected{% endif %}>{{ projekt.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="col-auto form-check">
+            <input class="form-check-input" type="checkbox" name="without_project" id="withoutProjectArchive" value="1" {% if request.GET.without_project %}checked{% endif %}>
+            <label class="form-check-label" for="withoutProjectArchive">Ohne Projekt</label>
+        </div>
         <div class="col-auto">
             <button type="submit" class="btn btn-outline-primary">Suchen</button>
-            {% if request.GET.q %}
+            {% if request.GET.q or request.GET.project_id or request.GET.without_project %}
                 <a href="/task/archiv/" class="btn btn-outline-secondary ms-2">Zurücksetzen</a>
             {% endif %}
         </div>
@@ -98,15 +110,15 @@
     <nav aria-label="Seiten" class="mt-3">
         <ul class="pagination justify-content-center">
             <li class="page-item {% if page <= 1 %}disabled{% endif %}">
-                <a class="page-link" href="?{% if request.GET.q %}q={{ request.GET.q }}&{% endif %}page={{ page|add:-1 }}">Vorherige</a>
+                <a class="page-link" href="?{% if request.GET.q %}q={{ request.GET.q }}&{% endif %}{% if request.GET.project_id %}project_id={{ request.GET.project_id }}&{% endif %}{% if request.GET.without_project %}without_project={{ request.GET.without_project }}&{% endif %}page={{ page|add:-1 }}">Vorherige</a>
             </li>
             {% for p in page_numbers %}
             <li class="page-item {% if p == page %}active{% endif %}">
-                <a class="page-link" href="?{% if request.GET.q %}q={{ request.GET.q }}&{% endif %}page={{ p }}">{{ p }}</a>
+                <a class="page-link" href="?{% if request.GET.q %}q={{ request.GET.q }}&{% endif %}{% if request.GET.project_id %}project_id={{ request.GET.project_id }}&{% endif %}{% if request.GET.without_project %}without_project={{ request.GET.without_project }}&{% endif %}page={{ p }}">{{ p }}</a>
             </li>
             {% endfor %}
             <li class="page-item {% if page >= total_pages %}disabled{% endif %}">
-                <a class="page-link" href="?{% if request.GET.q %}q={{ request.GET.q }}&{% endif %}page={{ page|add:1 }}">Nächste</a>
+                <a class="page-link" href="?{% if request.GET.q %}q={{ request.GET.q }}&{% endif %}{% if request.GET.project_id %}project_id={{ request.GET.project_id }}&{% endif %}{% if request.GET.without_project %}without_project={{ request.GET.without_project }}&{% endif %}page={{ page|add:1 }}">Nächste</a>
             </li>
         </ul>
     </nav>
