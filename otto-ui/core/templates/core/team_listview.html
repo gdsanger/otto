@@ -18,7 +18,7 @@
         <th>Name</th>
       </tr>
     </thead>
-    <tbody>
+    <tbody id="teamTableBody">
       {% for t in teams %}
       <tr>
         <td><a href="/team/{{ t.id }}/">{{ t.name }}</a></td>
@@ -28,5 +28,10 @@
       {% endfor %}
     </tbody>
   </table>
+  <form id="addTeamForm" class="d-flex gap-2" hx-post="/team/new/" hx-target="#teamTableBody" hx-swap="beforeend">
+    {% csrf_token %}
+    <input type="text" name="name" class="form-control" placeholder="Neues Team">
+    <button type="submit" class="btn btn-primary">Hinzufügen</button>
+  </form>
 </div>
 {% endblock %}

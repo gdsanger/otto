@@ -27,6 +27,7 @@ urlpatterns = [
     path('person/', views.person_listview, name='person_liste'),
     path('person/<str:person_id>/', views.person_detailview, name='person_detail'),
     path('team/', views.team_listview, name='team_liste'),
+    path('team/new/', views.team_create, name='team_create'),
     path('team/<str:team_id>/', views.team_detailview, name='team_detail'),
     path('message/<str:message_id>/', views.message_detailview, name='message_detail'),
     path('sprint/', views.sprint_listview, name='sprint_liste'),
