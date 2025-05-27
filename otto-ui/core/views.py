@@ -101,6 +101,7 @@ def home(request):
         project_status.append({
             "id": tid,
             "name": p.get("name"),
+            "short": p.get("short"),
             "status": p.get("status"),
             "prio": p.get("prio"),
             "offen": offen,

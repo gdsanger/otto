@@ -124,6 +124,7 @@ def home(request):
             {
                 "id": tid,
                 "name": p.get("name"),
+                "short": p.get("short"),
                 "typ": p.get("typ"),
                 "status": p.get("status"),
                 "prio": p.get("prio"),
