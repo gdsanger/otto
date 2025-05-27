@@ -1,8 +1,8 @@
 import os
 import requests
 import json
-from django.shortcuts import render
-from django.http import JsonResponse
+from django.shortcuts import render, redirect
+from django.http import JsonResponse, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from .helpers import login_required
 from core.const import sprint_typ, sprint_status
@@ -80,3 +80,19 @@ def sprint_create(request):
         "sprint_typ": sprint_typ,
         "sprint_status": sprint_status,
     })
+
+
+@login_required
+@csrf_exempt
+def delete_sprint(request):
+    if request.method == "POST":
+        sprint_id = request.POST.get("sprint_id")
+        if not sprint_id:
+            return JsonResponse({"error": "Keine Sprint-ID."}, status=400)
+        res = requests.delete(f"{OTTO_API_URL}/sprints/{sprint_id}", headers={"x-api-key": OTTO_API_KEY})
+        if res.status_code == 200:
+            if request.headers.get("HX-Request") == "true":
+                return HttpResponse("")
+            return redirect("/sprint/")
+        return JsonResponse({"error": "Fehler beim L\u00f6schen."}, status=500)
+    return JsonResponse({"error": "Ung\u00fcltige Methode."}, status=405)
