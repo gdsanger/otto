@@ -2,3 +2,12 @@
 :root {
   --bs-primary: #004d40;
 }
+
+.btn-primary {
+  --bs-btn-bg: #004d40;
+  --bs-btn-border-color: #004d40;
+  --bs-btn-hover-bg: #00695c;
+  --bs-btn-hover-border-color: #00695c;
+  --bs-btn-active-bg: #00382e;
+  --bs-btn-active-border-color: #00382e;
+}

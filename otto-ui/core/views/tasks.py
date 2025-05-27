@@ -125,7 +125,7 @@ def task_kanban_view(request):
     personen_res = requests.get(f"{OTTO_API_URL}/personen", headers={"x-api-key": OTTO_API_KEY})
     personen = personen_res.json() if personen_res.status_code == 200 else []
     personen_map = {p.get("id"): p.get("name") for p in personen}
-    agenten = [p for p in personen if p.get("rolle") == "agent"]
+    agenten = [p for p in personen if p.get("rolle") in ["agent", "admin"]]
 
     grouped = {status: [] for status in status_liste}
     for t in tasks:

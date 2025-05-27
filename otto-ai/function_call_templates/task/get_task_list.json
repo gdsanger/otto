@@ -1,0 +1,7 @@
+{
+  "type": "function",
+  "function": {
+    "name": "get_task_list",
+    "description": "Liefert eine alle Task aus dem Otto-System."
+    }
+}

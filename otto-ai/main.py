@@ -95,6 +95,8 @@ async def call_function_and_respond(name, args, messages, tool_call):
         url = f"{OTTO_API_URL}context/aufgabe/{args.get('task_id')}"
     elif name == "get_person_by_id":
         url = f"{OTTO_API_URL}context/person/{args.get('person_id')}"
+    elif name == "get_task_list":
+        url = f"{OTTO_API_URL}tasks"
     else:
         return {"reply": f"Unbekannte Funktion: {name}"}
 
