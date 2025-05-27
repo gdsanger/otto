@@ -27,7 +27,9 @@
       <div class="col">
         <div class="card h-100">
           <div class="card-body">
-            <h6 class="card-title"><a href="/project/{{ p.id }}/">{{ p.name }}</a></h6>
+            <h6 class="card-title">
+              <a href="/project/{{ p.id }}/">{{ p.name }}{% if p.short %} ({{ p.short }}){% endif %}</a>
+            </h6>
             <p class="card-text mb-0">Typ: {{ p.typ }}</p>
             <p class="card-text mb-0">Status: {{ p.status }}</p>
             <p class="card-text mb-0">Prio: {{ p.prio }}</p>
