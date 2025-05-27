@@ -14,6 +14,7 @@ from .tasks import (
 from .projects import (
     project_listview,
     project_detailview,
+    project_create,
     delete_project,
     project_create_task,
     project_upload_file,
