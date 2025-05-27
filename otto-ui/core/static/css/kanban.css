@@ -3,6 +3,9 @@
   gap: 1rem;
   overflow-x: auto;
 }
+#kanban-search {
+  max-width: 300px;
+}
 .kanban-column {
   flex: 1 0 300px;
   display: flex;
