@@ -347,20 +347,22 @@ if (fileInput) {
   });
 }
 
-// Merke zuletzt genutzten Tab in localStorage
-const tabKey = 'projectTab_' + window.ottoContext.id;
-const savedTab = localStorage.getItem(tabKey);
-if (savedTab) {
-  const triggerEl = document.querySelector(`#tabs button[data-bs-target="${savedTab}"]`);
-  if (triggerEl) {
-    bootstrap.Tab.getOrCreateInstance(triggerEl).show();
+document.addEventListener('DOMContentLoaded', () => {
+  // Merke zuletzt genutzten Tab in localStorage
+  const tabKey = 'projectTab_' + window.ottoContext.id;
+  const savedTab = localStorage.getItem(tabKey);
+  if (savedTab) {
+    const triggerEl = document.querySelector(`#tabs button[data-bs-target="${savedTab}"]`);
+    if (triggerEl) {
+      bootstrap.Tab.getOrCreateInstance(triggerEl).show();
+    }
   }
-}
 
-document.querySelectorAll('#tabs button[data-bs-toggle="tab"]').forEach(btn => {
-  btn.addEventListener('shown.bs.tab', e => {
-    const target = e.target.getAttribute('data-bs-target');
-    localStorage.setItem(tabKey, target);
+  document.querySelectorAll('#tabs button[data-bs-toggle="tab"]').forEach(btn => {
+    btn.addEventListener('shown.bs.tab', e => {
+      const target = e.target.getAttribute('data-bs-target');
+      localStorage.setItem(tabKey, target);
+    });
   });
 });
 </script>
