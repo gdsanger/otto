@@ -95,12 +95,15 @@
 
   <hr class="my-4">
 
-  <ul class="nav nav-tabs" id="tabs" role="tablist">  
+  <ul class="nav nav-tabs" id="tabs" role="tablist">
     <li class="nav-item" role="presentation">
       <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#tasks" type="button" role="tab">Tasks</button>
-    </li>  
+    </li>
     <li class="nav-item" role="presentation">
       <button class="nav-link" data-bs-toggle="tab" data-bs-target="#files" type="button" role="tab">Dateien</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" data-bs-toggle="tab" data-bs-target="#messages" type="button" role="tab">Nachrichten</button>
     </li>
   </ul>
 <div class="tab-content mt-3">
@@ -193,6 +196,32 @@
         </ul>
     {% else %}
         <p>Keine Dateien vorhanden.</p>
+   {% endif %}
+    </div>
+    <div class="tab-pane fade" id="messages" role="tabpanel">
+    {% if messages %}
+      <table class="table table-sm table-striped">
+        <thead>
+          <tr>
+            <th>Datum</th>
+            <th>Betreff</th>
+            <th>To</th>
+            <th>Richtung</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for mail in messages %}
+          <tr>
+            <td>{{ mail.datum|slice:':19' }}</td>
+            <td><a href="/message/{{ mail.id }}/">{{ mail.subject }}</a></td>
+            <td>{{ mail.to|join:', ' }}</td>
+            <td>{{ mail.direction }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <p>Keine Nachrichten vorhanden.</p>
     {% endif %}
     </div>
   </div>

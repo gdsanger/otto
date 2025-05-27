@@ -14,6 +14,7 @@ projekte_collection = db.projekte
 personen_collection = db.personen
 meeting_collection = db.meeting
 users = db["users"]
+messages_collection = db.messages
 db.meetings.delete_many({"id": ""})
 
 def get_tagesplan_collection() -> Collection:
