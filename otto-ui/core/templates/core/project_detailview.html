@@ -184,6 +184,7 @@
 </div>
 
    <div class="tab-pane fade" id="files" role="tabpanel">
+    <input type="file" id="uploadInput" class="form-control mb-3">
     {% if dateien %}
         <ul>
         {% for f in dateien %}
@@ -298,5 +299,23 @@
     else alert('Fehler beim Erstellen der Aufgabe');
   });
 });
+
+ const fileInput = document.getElementById('uploadInput');
+ if (fileInput) {
+   fileInput.addEventListener('change', () => {
+     const file = fileInput.files[0];
+     if (!file) return;
+     const fd = new FormData();
+     fd.append('file', file);
+     fetch('/project/{{ projekt.short }}/upload/', {
+       method: 'POST',
+       headers: { 'X-CSRFToken': getCookie('csrftoken') },
+       body: fd
+     }).then(r => {
+       if (r.ok) location.reload();
+       else alert('Fehler beim Upload');
+     });
+   });
+ }
 </script>
 {% endblock %}

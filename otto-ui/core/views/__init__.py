@@ -15,6 +15,7 @@ from .projects import (
     project_detailview,
     delete_project,
     project_create_task,
+    project_upload_file,
 )
 from .meetings import meeting_listview, meeting_detailview, meeting_create
 from .persons import person_listview, person_detailview
