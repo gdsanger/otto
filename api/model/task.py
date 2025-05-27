@@ -8,6 +8,7 @@ class Task(BaseModel):
     beschreibung: Optional[str] = ""
     tasktype: Optional[str] = Field(None, description="Typ der Aufgabe, z.B. 'Aufgabe', 'Feature', 'Bug', 'Ticket', 'Requirement', 'Sonstiges'")
     person_id: str = Field(..., description="ID der verantwortlichen Person (personen.id)")
+    requester_id: Optional[str] = Field(None, description="ID der anfordernden Person (personen.id)")
     aufwand: int
     notizen: Optional[str] = ""
     prio: Optional[str]  # z.B. "hoch", "mittel", "niedrig"

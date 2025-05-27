@@ -15,6 +15,14 @@ OTTO_API_KEY = os.getenv("OTTO_API_KEY")
 OTTO_API_URL = os.getenv("OTTO_API_URL")
 
 
+def load_person_lists():
+    res = requests.get(f"{OTTO_API_URL}/personen", headers={"x-api-key": OTTO_API_KEY})
+    personen = res.json() if res.status_code == 200 else []
+    personen_sorted = sorted(personen, key=lambda p: p.get("name", ""))
+    agenten_sorted = [p for p in personen_sorted if p.get("rolle") in ["agent", "admin"]]
+    return personen_sorted, agenten_sorted
+
+
 @login_required
 def task_listview(request):
     res = requests.get(f"{OTTO_API_URL}/tasks", headers={"x-api-key": OTTO_API_KEY})
@@ -28,8 +36,7 @@ def task_listview(request):
     except ValueError:
         page = 1
     per_page = 20
-    personen_res = requests.get(f"{OTTO_API_URL}/personen", headers={"x-api-key": OTTO_API_KEY})
-    personen = personen_res.json() if personen_res.status_code == 200 else []
+    personen, agenten = load_person_lists()
     projekte_res = requests.get(f"{OTTO_API_URL}/projekte", headers={"x-api-key": OTTO_API_KEY})
     projekte = projekte_res.json() if projekte_res.status_code == 200 else []
     sprints_res = requests.get(f"{OTTO_API_URL}/sprints", headers={"x-api-key": OTTO_API_KEY})
@@ -75,6 +82,7 @@ def task_listview(request):
         "status_liste": status_liste,
         "typ_liste": typ_liste,
         "personen": personen,
+        "agenten": agenten,
         "projekte": projekte,
         "page": page,
         "total_pages": total_pages,
@@ -97,8 +105,7 @@ def task_archive_listview(request):
     except ValueError:
         page = 1
     per_page = 20
-    personen_res = requests.get(f"{OTTO_API_URL}/personen", headers={"x-api-key": OTTO_API_KEY})
-    personen = personen_res.json() if personen_res.status_code == 200 else []
+    personen, agenten = load_person_lists()
     projekte_res = requests.get(f"{OTTO_API_URL}/projekte", headers={"x-api-key": OTTO_API_KEY})
     projekte = projekte_res.json() if projekte_res.status_code == 200 else []
 
@@ -141,6 +148,7 @@ def task_archive_listview(request):
         "status_liste": status_liste,
         "typ_liste": typ_liste,
         "personen": personen,
+        "agenten": agenten,
         "projekte": projekte,
         "page": page,
         "total_pages": total_pages,
@@ -155,10 +163,8 @@ def task_kanban_view(request):
     res = requests.get(f"{OTTO_API_URL}/tasks", headers={"x-api-key": OTTO_API_KEY})
     tasks = res.json() if res.status_code == 200 else []
 
-    personen_res = requests.get(f"{OTTO_API_URL}/personen", headers={"x-api-key": OTTO_API_KEY})
-    personen = personen_res.json() if personen_res.status_code == 200 else []
+    personen, agenten = load_person_lists()
     personen_map = {p.get("id"): p.get("name") for p in personen}
-    agenten = [p for p in personen if p.get("rolle") in ["agent", "admin"]]
 
     projekte_res = requests.get(f"{OTTO_API_URL}/projekte", headers={"x-api-key": OTTO_API_KEY})
     projekte = projekte_res.json() if projekte_res.status_code == 200 else []
@@ -219,8 +225,7 @@ def task_create(request):
     if request.GET.get("project_id"):
         task["project_id"] = request.GET["project_id"]
    
-    personen_res = requests.get(f"{OTTO_API_URL}/personen", headers={"x-api-key": OTTO_API_KEY})
-    personen = personen_res.json() if personen_res.status_code == 200 else []
+    personen, agenten = load_person_lists()
     projekte_res = requests.get(f"{OTTO_API_URL}/projekte", headers={"x-api-key": OTTO_API_KEY})
     projekte = projekte_res.json() if projekte_res.status_code == 200 else []
     sprints_res = requests.get(f"{OTTO_API_URL}/sprints", headers={"x-api-key": OTTO_API_KEY})
@@ -231,6 +236,7 @@ def task_create(request):
     return render(request, "core/task_detailview.html", {
         "task": task,
         "personen": personen,
+        "agenten": agenten,
         "projekte": projekte,      
         "prio_liste": prio_liste,
         "status_liste": status_liste,
@@ -339,7 +345,8 @@ def update_task_details(request):
         task["prio"] = request.POST.get("prio")
         task["typ"] = request.POST.get("typ")
         task["person_id"] = request.POST.get("person_id")
-        task["project_id"] = request.POST.get("project_id") or None      
+        task["requester_id"] = request.POST.get("requester_id")
+        task["project_id"] = request.POST.get("project_id") or None
         aufwand = request.POST.get("aufwand")
         task["aufwand"] = int(aufwand) if aufwand and aufwand.isdigit() else 0
         tid = request.POST.get("tid")
@@ -393,8 +400,7 @@ def task_detail_or_update(request, task_id):
 
     task_res = requests.get(f"{OTTO_API_URL}/tasks/{task_id}", headers={"x-api-key": OTTO_API_KEY})
     task = task_res.json()
-    personen_res = requests.get(f"{OTTO_API_URL}/personen", headers={"x-api-key": OTTO_API_KEY})
-    personen = personen_res.json() if personen_res.status_code == 200 else []
+    personen, agenten = load_person_lists()
     projekte_res = requests.get(f"{OTTO_API_URL}/projekte", headers={"x-api-key": OTTO_API_KEY})
     projekte = projekte_res.json() if projekte_res.status_code == 200 else []
     sprints_res = requests.get(f"{OTTO_API_URL}/sprints", headers={"x-api-key": OTTO_API_KEY})
@@ -404,6 +410,7 @@ def task_detail_or_update(request, task_id):
     return render(request, "core/task_detailview.html", {
         "task": task,
         "personen": personen,
+        "agenten": agenten,
         "projekte": projekte,
         "meetings": meetings,
         "prio_liste": prio_liste,
@@ -435,8 +442,7 @@ def task_pageview(request, task_id):
 
     task_res = requests.get(f"{OTTO_API_URL}/tasks/{task_id}", headers={"x-api-key": OTTO_API_KEY})
     task = task_res.json()
-    personen_res = requests.get(f"{OTTO_API_URL}/personen", headers={"x-api-key": OTTO_API_KEY})
-    personen = personen_res.json() if personen_res.status_code == 200 else []
+    personen, agenten = load_person_lists()
     projekte_res = requests.get(f"{OTTO_API_URL}/projekte", headers={"x-api-key": OTTO_API_KEY})
     projekte = projekte_res.json() if projekte_res.status_code == 200 else []
     sprints_res = requests.get(f"{OTTO_API_URL}/sprints", headers={"x-api-key": OTTO_API_KEY})
@@ -446,6 +452,7 @@ def task_pageview(request, task_id):
     return render(request, "core/task_detailpage.html", {
         "task": task,
         "personen": personen,
+        "agenten": agenten,
         "projekte": projekte,
         "meetings": meetings,
         "prio_liste": prio_liste,

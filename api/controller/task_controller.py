@@ -37,6 +37,8 @@ async def list_tasks():
 async def create_task(task: Task):
     if not await db.personen.find_one({"_id": ObjectId(task.person_id)}):
         raise HTTPException(status_code=400, detail=f"Person mit ID '{task.person_id}' nicht gefunden.")
+    if task.requester_id and not await db.personen.find_one({"_id": ObjectId(task.requester_id)}):
+        raise HTTPException(status_code=400, detail=f"Requester mit ID '{task.requester_id}' nicht gefunden.")
     if task.sprint_id:
         if not await db.sprints.find_one({"_id": ObjectId(task.sprint_id)}):
             raise HTTPException(status_code=400, detail="Sprint nicht gefunden")
@@ -64,6 +66,8 @@ async def get_task(task_id: str):
 async def update_task(task_id: str, task: Task):
     if not await db.personen.find_one({"_id": ObjectId(task.person_id)}):
         raise HTTPException(status_code=400, detail=f"Person mit ID '{task.person_id}' nicht gefunden.")
+    if task.requester_id and not await db.personen.find_one({"_id": ObjectId(task.requester_id)}):
+        raise HTTPException(status_code=400, detail=f"Requester mit ID '{task.requester_id}' nicht gefunden.")
     if task.sprint_id:
         if not await db.sprints.find_one({"_id": ObjectId(task.sprint_id)}):
             raise HTTPException(status_code=400, detail="Sprint nicht gefunden")
