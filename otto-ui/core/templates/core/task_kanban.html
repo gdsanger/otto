@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/kanban.css' %}">
+<script>
+  window.ottoContext = {
+    type: "task",
+    name: "Kanban Board",
+    id: "",
+    gptFunctions: []
+  }
+</script>
+<div class="kanban-board container-fluid mt-3">
+  {% for status,tasks in grouped_list %}
+  <div class="kanban-column status-{{ status|slugify }}" data-status="{{ status }}">
+    <div class="kanban-column-header">{{ status }}</div>
+    {% for task in tasks %}
+    <div class="card mb-2" draggable="true" data-task-id="{{ task.id }}">
+      <div class="card-body p-2">
+        <div><strong>{{ task.betreff }}</strong></div>
+        <div><small>{{ task.person_name }}</small></div>
+        <div><small>{{ task.termin_formatiert }}</small></div>
+        <a href="/task/view/{{ task.id }}/" class="btn btn-sm btn-primary mt-1">Details</a>
+      </div>
+    </div>
+    {% empty %}
+    <p class="p-2">-</p>
+    {% endfor %}
+  </div>
+  {% endfor %}
+</div>
+<script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.kanban-column').forEach(function(col){
+      new Sortable(col, {
+        group: 'tasks',
+        animation: 150,
+        onEnd: function(evt){
+          const taskId = evt.item.dataset.taskId;
+          const newStatus = evt.to.dataset.status;
+          fetch('/task/update_status/', {
+            method: 'POST',
+            headers: {'HX-Request': 'true'},
+            body: new URLSearchParams({task_id: taskId, status: newStatus})
+          });
+        }
+      });
+    });
+  });
+</script>
+{% endblock %}
