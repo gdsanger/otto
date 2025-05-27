@@ -13,6 +13,7 @@ db = client.otto  # DB-Name
 projekte_collection = db.projekte
 personen_collection = db.personen
 meeting_collection = db.meeting
+sprints_collection = db.sprints
 teams_collection = db.teams
 users = db["users"]
 messages_collection = db.messages

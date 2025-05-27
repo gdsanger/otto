@@ -29,6 +29,8 @@ urlpatterns = [
     path('team/', views.team_listview, name='team_liste'),
     path('team/<str:team_id>/', views.team_detailview, name='team_detail'),
     path('message/<str:message_id>/', views.message_detailview, name='message_detail'),
+    path('sprint/', views.sprint_listview, name='sprint_liste'),
+    path('sprint/<str:sprint_id>/', views.sprint_detailview, name='sprint_detail'),
     path('login/', login_view, name='login'),
     path('logout/', logout_view, name='logout'),
 

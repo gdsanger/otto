@@ -11,3 +11,6 @@ typ_liste = [
     "🔄 Change",
 ]
 projekt_typ = ["Meeting", "Projekt"]
+
+sprint_typ = ["minor", "major"]
+sprint_status = ["neu", "aktiv", "abgeschlossen"]
