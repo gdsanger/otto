@@ -61,3 +61,30 @@ def person_detailview(request, person_id):
         "prio_liste": prio_liste,
         "typ_liste": typ_liste
     })
+
+
+@login_required
+@csrf_exempt
+def person_create(request):
+    if request.method == "POST":
+        try:
+            payload = json.loads(request.body)
+            res = requests.post(
+                f"{OTTO_API_URL}/personen",
+                headers={"x-api-key": OTTO_API_KEY, "Content-Type": "application/json"},
+                data=json.dumps({"personen": [payload]}),
+            )
+            if res.status_code in (200, 201):
+                inserted_id = res.json().get("inserted_ids", [None])[0]
+                return JsonResponse({"success": True, "id": inserted_id})
+            return JsonResponse({"error": "Fehler beim Speichern"}, status=500)
+        except Exception as e:
+            return JsonResponse({"error": str(e)}, status=400)
+
+    return render(request, "core/person_detailview.html", {
+        "person": {},
+        "tasks": [],
+        "status_liste": status_liste,
+        "prio_liste": prio_liste,
+        "typ_liste": typ_liste,
+    })
