@@ -8,6 +8,14 @@ from bson import ObjectId
 
 router = APIRouter()
 
+async def get_next_tid():
+    counter = await db.counters.find_one_and_update(
+        {"_id": "task_tid"},
+        {"$inc": {"seq": 1}},
+        upsert=True,
+        return_document=ReturnDocument.AFTER
+    )
+    return counter["seq"]
 
 def convert_dates(task_dict):
     for key in ["termin"]:
@@ -30,6 +38,9 @@ async def create_task(task: Task):
         raise HTTPException(status_code=400, detail=f"Person mit ID '{task.person_id}' nicht gefunden.")
 
     task_dict = convert_dates(task.dict())
+    if "tid" not in task_dict:
+        task_dict["tid"] = await get_next_tid()
+
     result = await db.tasks.insert_one(task_dict)
     return {"status": "ok", "id": str(result.inserted_id)}
 
