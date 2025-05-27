@@ -1,13 +1,13 @@
 from fastapi import APIRouter, Depends, HTTPException, Request, File, UploadFile
 from datetime import date, datetime
 from pydantic import BaseModel
-from graph import verify_api_key, get_graph_token
+from helper import verify_api_key, get_graph_token
 from config import API_KEY, TENANT_ID, CLIENT_ID, CLIENT_SECRET, GRAPH_URL, FOLDER, SITE_ID, DRIVE_ID
 import httpx
 
 router = APIRouter(prefix="/sharepoint")
 
-@router.get("/projekte/{short}/dateien/{filename}/inhalt", dependencies=[Depends(verify_api_key)], tags=["SharePoint"])
+@router.get("/projekte/{short}/dateien/{filename}/inhalt", dependencies=[Depends(verify_api_key)], tags=["Offcie 356"])
 async def get_file_content(short: str, filename: str):
     token = await get_graph_token()
     headers = {"Authorization": f"Bearer {token}"}
@@ -50,7 +50,7 @@ async def get_file_content(short: str, filename: str):
         finally:
             os.unlink(tmp_path)
 
-@router.get("/projekte/{short}/dateien", dependencies=[Depends(verify_api_key)], tags=["SharePoint"])
+@router.get("/projekte/{short}/dateien", dependencies=[Depends(verify_api_key)], tags=["Offcie 356"])
 async def list_project_files(short: str):
     token = await get_graph_token()
     path = f"{FOLDER.rstrip('/')}/{short}:/children"
@@ -74,7 +74,7 @@ async def list_project_files(short: str):
             for f in items if "file" in f
         ]
 
-@router.post("/projekte/{short}/dateien", dependencies=[Depends(verify_api_key)], tags=["SharePoint"])
+@router.post("/projekte/{short}/dateien", dependencies=[Depends(verify_api_key)], tags=["Offcie 356"])
 async def upload_file_to_sharepoint(short: str, file: UploadFile = File(...)):
     token = await get_graph_token()
     if not token:

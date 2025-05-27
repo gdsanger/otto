@@ -14,7 +14,6 @@ import httpx
 
 from controller.calendar import router as calendar_router
 from controller.mail import router as mail_router
-from controller.sharepoint import router as sharepoint_router
 
 app = FastAPI()
 
@@ -30,11 +29,6 @@ try:
 except Exception as e:
     print(f"⚠️ Fehler beim Einbinden von mail_router: {e}")
 
-try:
-    from controller.sharepoint import router as sharepoint_router
-    app.include_router(sharepoint_router)
-except Exception as e:
-    print(f"⚠️ Fehler beim Einbinden von sharepoint_router: {e}")
 
 def custom_openapi():
     if app.openapi_schema:

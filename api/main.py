@@ -66,6 +66,12 @@ try:
 except Exception as e:
     print(f"⚠️ Fehler beim Einbinden von user_controller: {e}")
 
+try:
+    from controller.sharepoint_controller import router as sharepoint_router
+    app.include_router(sharepoint_router)
+except Exception as e:
+    print(f"⚠️ Fehler beim Einbinden von sharepoint_router: {e}")
+
 def custom_openapi():
     if app.openapi_schema:
         return app.openapi_schema

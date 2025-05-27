@@ -60,7 +60,7 @@
       {% for task in tasks %}
       <tr>
         <td>{% if task.project_id %}<a href="/project/{{ task.project_id }}/">{{ task.project_name }}</a>{% else %}-{% endif %}</td>
-        <td><a href="#" class="task-open" data-task-id="{{ task.id }}">{{ task.betreff }}</a></td>
+        <td><a href="/task/view/{{ task.id }}" class="task-open" data-task-id="{{ task.id }}">{{ task.betreff }}</a></td>
         <td>
           <select class="form-select form-select-sm auto-save" data-task-id="{{ task.id }}" data-field="status">
             {% for s in status_liste %}
