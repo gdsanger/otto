@@ -43,6 +43,10 @@ def team_detailview(request, team_id):
     if res.status_code != 200:
         return render(request, "core/team_detailview.html", {"team": {}, "personen": []})
     team = res.json()
+    for ressource in team.get("ressourcen", []):
+        anteil = ressource.get("anteil")
+        if isinstance(anteil, str):
+            ressource["anteil"] = anteil.replace(",", ".")
     personen_res = requests.get(f"{OTTO_API_URL}/personen", headers={"x-api-key": OTTO_API_KEY})
     personen = personen_res.json() if personen_res.status_code == 200 else []
     return render(request, "core/team_detailview.html", {"team": team, "personen": personen})
