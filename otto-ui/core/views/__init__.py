@@ -19,9 +19,9 @@ from .projects import (
     project_create_task,
     project_upload_file,
 )
-from .persons import person_listview, person_detailview
+from .persons import person_listview, person_detailview, person_create
 from .messages import message_detailview
-from .sprints import sprint_listview, sprint_detailview, sprint_create
+from .sprints import sprint_listview, sprint_detailview, sprint_create, delete_sprint
 from django.shortcuts import render
 from .helpers import login_required
 import os
