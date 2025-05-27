@@ -24,13 +24,6 @@ async def get_message(message_id: str):
         raise HTTPException(status_code=404, detail="Message not found")
     return serialize_mongo(msg)
 
-@router.delete("/messages/{message_id}", dependencies=[Depends(verify_api_key)], tags=["Message"])
-async def delete_message(message_id: str):
-    result = await db.messages.delete_one({"_id": ObjectId(message_id)})
-    if result.deleted_count == 0:
-        raise HTTPException(status_code=404, detail="Message not found")
-    return {"status": "deleted"}
-
 @router.get("/project/{project_id}/messages", dependencies=[Depends(verify_api_key)], tags=["Projekt"])
 async def get_messages_by_project(project_id: str):
     cursor = db.messages.find({"project_id": project_id}).sort("datum", -1)

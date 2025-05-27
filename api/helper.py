@@ -5,7 +5,7 @@ from fastapi import Header, Depends, HTTPException
 from config import API_KEY
 from fastapi.security.api_key import APIKeyHeader
 import logging
-from config import CLIENT_ID, CLIENT_SECRET, TENANT_ID
+from config import CLIENT_ID, CLIENT_SECRET, TENANT_ID, FOLDER, GRAPH_URL, SITE_ID, DRIVE_ID
 import httpx
 
 
@@ -38,3 +38,31 @@ async def get_graph_token():
         response = await client.post(url, data=data, headers=headers)
         response.raise_for_status()
         return response.json()["access_token"]
+
+async def ensure_folder_exists(shortname: str):
+    print(f"ensure_folder_exists: {shortname}")
+    token = await get_graph_token()
+    path = f"{FOLDER.rstrip('/')}/{shortname}"
+    check_url = f"{GRAPH_URL}/sites/{SITE_ID}/drives/{DRIVE_ID}/root:/{path}"
+    headers = {"Authorization": f"Bearer {token}"}
+
+    async with httpx.AsyncClient() as client:
+        check = await client.get(check_url, headers=headers)
+
+        if check.status_code == 200:
+            print(f"✔️ Ordner '{shortname}' existiert bereits.")
+            return
+        elif check.status_code == 404:
+            print(f"➕ Ordner '{shortname}' wird erstellt …")
+            create_url = f"{GRAPH_URL}/sites/{SITE_ID}/drives/{DRIVE_ID}/root:/{path}"
+            response = await client.put(
+                create_url,
+                headers={**headers, "Content-Type": "application/json"},
+                json={"folder": {}, "@microsoft.graph.conflictBehavior": "fail"}
+            )
+            if response.status_code in (200, 201):
+                print(f"✅ Ordner '{shortname}' erfolgreich erstellt.")
+            else:
+                print(f"❌ Fehler bei Ordner '{shortname}': {response.status_code} – {response.text}")
+        else:
+            print(f"⚠️ Fehler beim Prüfen von '{shortname}': {check.status_code} – {check.text}")

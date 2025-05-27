@@ -4,7 +4,7 @@ from model.projekt import Projekt, ProjektListe
 from model.aufgabe import Aufgabe
 from typing import List
 from datetime import date
-from helper import verify_api_key, serialize_mongo
+from helper import verify_api_key, serialize_mongo, ensure_folder_exists
 from bson import ObjectId
 from email import policy
 from email.parser import BytesParser
@@ -45,11 +45,12 @@ async def get_projekt(projekt_id: str):
         oid = ObjectId(projekt_id)
     except Exception:
         raise HTTPException(status_code=400, detail="Ungültige Projekt-ID")
-
+   
     projekt = await projekte_collection.find_one({"_id": oid})
+    
     if not projekt:
         raise HTTPException(status_code=404, detail="Projekt nicht gefunden")
-
+    
     return serialize_mongo(projekt)
 
 @router.post("/projekte/", dependencies=[Depends(verify_api_key)], tags=["Projekt"])
@@ -57,13 +58,14 @@ async def speichere_projekte(projekt_liste: ProjektListe = Body(...)):
     logging.info("POST /projekte wurde aufgerufen")
 
     for projekt in projekt_liste.projekte:
+        await ensure_folder_exists(projekt.short)
         for pid in projekt.stakeholder_ids:
             if not await personen_collection.find_one({"_id": ObjectId(pid)}):
                 raise HTTPException(status_code=400, detail=f"Ungültige Personen-ID: {pid}")
 
-    result = await projekte_collection.insert_many([p.dict() for p in projekt_liste.projekte])
+    result = await projekte_collection.insert_many([p.dict() for p in projekt_liste.projekte])   
     inserted_ids = [str(i) for i in result.inserted_ids]
-
+    
     return {"inserted_ids": inserted_ids}
 
 @router.put("/projekte/{projekt_id}", dependencies=[Depends(verify_api_key)], tags=["Projekt"])
@@ -76,8 +78,9 @@ async def update_projekt(projekt_id: str, projekt: Projekt):
     for pid in projekt.stakeholder_ids:
         if not await personen_collection.find_one({"_id": ObjectId(pid)}):
             raise HTTPException(status_code=400, detail=f"Ungültige Personen-ID: {pid}")
-
+    
     result = await projekte_collection.replace_one({"_id": oid}, projekt.dict())
+    await ensure_folder_exists(projekt.short)
     if result.matched_count == 0:
         raise HTTPException(status_code=404, detail="Projekt nicht gefunden")
     return {"status": "aktualisiert"}

@@ -101,11 +101,6 @@ def custom_openapi():
 
 app.openapi = custom_openapi
 
-@app.get("/")
-async def root():
-    return {"message": "KI-Drehkreuz läuft"}
-
-
 def serialize_mongo(doc):
     doc = dict(doc)
     doc["id"] = str(doc["_id"])

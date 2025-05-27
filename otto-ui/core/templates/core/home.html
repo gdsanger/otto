@@ -72,28 +72,8 @@
   
   <div class="card">
         <div class="card-body">
-          <h5 class="card-title">Meetings</h5>
-         
-      <h6>Letzte Meetings</h6>
-      <ul class="list-group">
-        {% for m in past_meetings %}
-        <li class="list-group-item">
-          <a href="/meeting/{{ m.id }}/">{{ m.name }}</a> – {{ m.datum|slice:10 }}
-        </li>
-        {% empty %}
-        <li class="list-group-item">Keine Meetings</li>
-        {% endfor %}
-      </ul>
-       <h6>Kommende Meetings</h6>
-      <ul class="list-group">
-        {% for m in future_meetings %}
-        <li class="list-group-item">
-          <a href="/meeting/{{ m.id }}/">{{ m.name }}</a> – {{ m.datum|slice:10 }}
-        </li>
-        {% empty %}
-        <li class="list-group-item">Keine Meetings</li>
-        {% endfor %}
-      </ul>
+          
+
     </div>
     
   </div>
