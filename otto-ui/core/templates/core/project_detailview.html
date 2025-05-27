@@ -170,6 +170,7 @@
 </td>
          <td>
   <select class="form-select form-select-sm auto-save" data-task-id="{{ task.id }}" data-field="requester_id">
+    <option value="">-- Kein Requester --</option>
     {% for p in personen %}
       <option value="{{ p.id }}" {% if p.id == task.requester_id %}selected{% endif %}>{{ p.name }}</option>
     {% endfor %}
@@ -211,7 +212,7 @@
   </div>
   <div class="col-12 col-md-3">
     <select name="requester_id" class="form-select">
-      <option value="">Requester wählen</option>
+      <option value="">-- Kein Requester --</option>
       {% for p in personen %}
       <option value="{{ p.id }}">{{ p.name }}</option>
       {% endfor %}

@@ -99,6 +99,7 @@
                     <form hx-post="/task/update/" hx-trigger="change" hx-target="closest td" hx-swap="outerHTML">
                         <input type="hidden" name="task_id" value="{{ task.id }}">
                         <select class="form-select form-select-sm" name="requester_id">
+                            <option value="">-- Kein Requester --</option>
                             {% for person in personen %}
                                 <option value="{{ person.id }}" {% if task.requester_id and task.requester_id == person.id %}selected{% endif %}>{{ person.name }}</option>
                             {% endfor %}
