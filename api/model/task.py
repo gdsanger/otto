@@ -3,6 +3,7 @@ from typing import Optional
 from datetime import date
 
 class Task(BaseModel):
+    tid: Optional[int] = None
     betreff: str
     beschreibung: Optional[str] = ""
     tasktype: Optional[str] = Field(None, description="Typ der Aufgabe, z.B. 'Aufgabe', 'Feature', 'Bug', 'Ticket', 'Requirement', 'Sonstiges'")

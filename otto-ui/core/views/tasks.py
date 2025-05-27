@@ -263,6 +263,9 @@ def update_task_details(request):
         task["meeting_id"] = request.POST.get("meeting_id") or None
         aufwand = request.POST.get("aufwand")
         task["aufwand"] = int(aufwand) if aufwand and aufwand.isdigit() else 0
+        tid = request.POST.get("tid")
+        if tid and tid.isdigit():
+            task["tid"] = int(tid)
         update_res = requests.put(
             f"{OTTO_API_URL}/tasks/{task_id}",
             headers={"x-api-key": OTTO_API_KEY, "Content-Type": "application/json"},

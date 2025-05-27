@@ -115,6 +115,7 @@
           <th>Betreff</th>
           <th>Status</th>        
           <th>Typ</th>
+          <th>Aufwand</th>
           <th>Termin</th>
           <th>Zuständig</th>
           <th></th>
@@ -137,6 +138,9 @@
                 <option value="{{ t }}" {% if t == task.typ %}selected{% endif %}>{{ t }}</option>
               {% endfor %}
             </select>
+          </td>
+          <td>
+            <input type="number" class="form-control form-control-sm auto-save" data-task-id="{{ task.id }}" data-field="aufwand" value="{{ task.aufwand }}">
           </td>
           <td>
             <input type="date" class="form-control form-control-sm auto-save" data-task-id="{{ task.id }}" data-field="termin" value="{{ task.termin|slice:":10" }}">
