@@ -276,6 +276,17 @@
       }
     });
 
+    // Personen-IDs aus der Tokenbox als 'stakeholder_ids' senden
+    if (jsonData['personen_ids']) {
+      const ids = Array.isArray(jsonData['personen_ids'])
+        ? jsonData['personen_ids']
+        : [jsonData['personen_ids']];
+      jsonData['stakeholder_ids'] = ids;
+      delete jsonData['personen_ids'];
+    } else {
+      jsonData['stakeholder_ids'] = [];
+    }
+
     fetch('', {
       method: 'POST',
       headers: {
