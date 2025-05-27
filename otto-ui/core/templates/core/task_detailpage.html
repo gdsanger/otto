@@ -9,17 +9,21 @@
   }
 </script>
 <div class="container py-4">
-  <div class="btn-toolbar mb-3" role="toolbar" aria-label="Toolbar">
-    <div class="btn-group me-2" role="group">
-      <button id="backBtn" type="button" class="btn btn-outline-secondary">↩️ Zurück</button>
-      <button id="cloneBtn" type="button" class="btn btn-outline-secondary">📄 Clone</button>
-    </div>
-    <div class="btn-group me-2" role="group">
-      <button type="submit" form="taskForm" class="btn btn-outline-secondary">💾 Speichern</button>
-      <button id="saveCloseBtn" type="button" class="btn btn-outline-secondary">💾 Speichern &amp; Schließen</button>
-    </div>
-    <div class="btn-group" role="group">
-      <button id="deleteBtn" type="button" class="btn btn-outline-danger">🗑️ Löschen</button>
+  <div class="card mb-3">
+    <div class="card-body p-2">
+      <div class="btn-toolbar" role="toolbar" aria-label="Toolbar">
+        <div class="btn-group me-2" role="group">
+          <button id="backBtn" type="button" class="btn btn-outline-secondary">↩️ Zurück</button>
+          <button id="cloneBtn" type="button" class="btn btn-outline-secondary">📄 Clone</button>
+        </div>
+        <div class="btn-group me-2" role="group">
+          <button type="submit" form="taskForm" class="btn btn-outline-secondary">💾 Speichern</button>
+          <button id="saveCloseBtn" type="button" class="btn btn-outline-secondary">💾 Speichern &amp; Schließen</button>
+        </div>
+        <div class="btn-group" role="group">
+          <button id="deleteBtn" type="button" class="btn btn-outline-danger">🗑️ Löschen</button>
+        </div>
+      </div>
     </div>
   </div>
   <div class="card mb-3">
@@ -30,86 +34,91 @@
       <form id="taskForm">
         {% csrf_token %}
         <input type="hidden" name="task_id" value="{{ task.id }}">
-        <div class="mb-3">
-          <label class="form-label">TID</label>
-          <input class="form-control" type="number" name="tid" value="{{ task.tid }}" readonly>
+        <div class="row">
+          <div class="col-9">
+            <div class="mb-3">
+              <label class="form-label">Betreff</label>
+              <input class="form-control" type="text" name="betreff" value="{{ task.betreff }}">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Beschreibung</label>
+              <textarea class="form-control" name="beschreibung">{{ task.beschreibung }}</textarea>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Projekt</label>
+              <select class="form-select" name="project_id">
+                <option value="">-- Kein Projekt --</option>
+                {% for projekt in projekte %}
+                <option value="{{ projekt.id }}" {% if task.project_id == projekt.id %}selected{% endif %}>{{ projekt.name }}</option>
+                {% endfor %}
+              </select>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Sprint</label>
+              <select class="form-select" name="sprint_id">
+                <option value="">-- Kein Sprint --</option>
+                {% for sprint in sprints %}
+                <option value="{{ sprint.id }}" {% if task.sprint_id == sprint.id %}selected{% endif %}>{{ sprint.name }}</option>
+                {% endfor %}
+              </select>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="mb-3">
+              <label class="form-label">TID</label>
+              <input class="form-control" type="number" name="tid" value="{{ task.tid }}" readonly>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Zuständig</label>
+              <select class="form-select" name="person_id">
+                {% for person in agenten %}
+                <option value="{{ person.id }}" {% if task.person_id == person.id %}selected{% endif %}>{{ person.name }}</option>
+                {% endfor %}
+              </select>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Requester</label>
+              <select class="form-select" name="requester_id">
+                <option value="">-- Kein Requester --</option>
+                {% for person in personen %}
+                <option value="{{ person.id }}" {% if task.requester_id == person.id %}selected{% endif %}>{{ person.name }}</option>
+                {% endfor %}
+              </select>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Termin</label>
+              <input class="form-control" type="date" name="termin" value="{{ task.termin|slice:":10" }}">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Status</label>
+              <select class="form-select" name="status">
+                {% for status in status_liste %}
+                <option value="{{ status }}" {% if task.status == status %}selected{% endif %}>{{ status }}</option>
+                {% endfor %}
+              </select>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Priorität</label>
+              <select class="form-select" name="prio">
+                {% for p in prio_liste %}
+                <option value="{{ p }}" {% if task.prio == p %}selected{% endif %}>{{ p }}</option>
+                {% endfor %}
+              </select>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Typ</label>
+              <select class="form-select" name="typ">
+                {% for t in typ_liste %}
+                <option value="{{ t }}" {% if task.typ == t %}selected{% endif %}>{{ t }}</option>
+                {% endfor %}
+              </select>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Aufwand (Stunden)</label>
+              <input class="form-control" type="number" name="aufwand" value="{{ task.aufwand }}">
+            </div>
+          </div>
         </div>
-        <div class="mb-3">
-          <label class="form-label">Betreff</label>
-          <input class="form-control" type="text" name="betreff" value="{{ task.betreff }}">
-        </div>
-        <div class="mb-3">
-          <label class="form-label">Beschreibung</label>
-          <textarea class="form-control" name="beschreibung">{{ task.beschreibung }}</textarea>
-        </div>
-        <div class="mb-3">
-          <label class="form-label">Projekt</label>
-          <select class="form-select" name="project_id">
-            <option value="">-- Kein Projekt --</option>
-            {% for projekt in projekte %}
-            <option value="{{ projekt.id }}" {% if task.project_id == projekt.id %}selected{% endif %}>{{ projekt.name }}</option>
-            {% endfor %}
-          </select>
-        </div>
-        <div class="mb-3">
-          <label class="form-label">Sprint</label>
-          <select class="form-select" name="sprint_id">
-            <option value="">-- Kein Sprint --</option>
-            {% for sprint in sprints %}
-            <option value="{{ sprint.id }}" {% if task.sprint_id == sprint.id %}selected{% endif %}>{{ sprint.name }}</option>
-            {% endfor %}
-          </select>
-        </div>
-        <div class="mb-3">
-          <label class="form-label">Zuständig</label>
-          <select class="form-select" name="person_id">
-            {% for person in agenten %}
-            <option value="{{ person.id }}" {% if task.person_id == person.id %}selected{% endif %}>{{ person.name }}</option>
-            {% endfor %}
-          </select>
-        </div>
-        <div class="mb-3">
-          <label class="form-label">Requester</label>
-          <select class="form-select" name="requester_id">
-            <option value="">-- Kein Requester --</option>
-            {% for person in personen %}
-            <option value="{{ person.id }}" {% if task.requester_id == person.id %}selected{% endif %}>{{ person.name }}</option>
-            {% endfor %}
-          </select>
-        </div>
-        <div class="mb-3">
-          <label class="form-label">Termin</label>
-          <input class="form-control" type="date" name="termin" value="{{ task.termin|slice:":10" }}">
-        </div>
-        <div class="mb-3">
-          <label class="form-label">Status</label>
-          <select class="form-select" name="status">
-            {% for status in status_liste %}
-            <option value="{{ status }}" {% if task.status == status %}selected{% endif %}>{{ status }}</option>
-            {% endfor %}
-          </select>
-        </div>
-        <div class="mb-3">
-          <label class="form-label">Priorität</label>
-          <select class="form-select" name="prio">
-            {% for p in prio_liste %}
-            <option value="{{ p }}" {% if task.prio == p %}selected{% endif %}>{{ p }}</option>
-            {% endfor %}
-          </select>
-        </div>
-        <div class="mb-3">
-          <label class="form-label">Typ</label>
-          <select class="form-select" name="typ">
-            {% for t in typ_liste %}
-            <option value="{{ t }}" {% if task.typ == t %}selected{% endif %}>{{ t }}</option>
-            {% endfor %}
-          </select>
-        </div>
-        <div class="mb-3">
-          <label class="form-label">Aufwand (Stunden)</label>
-          <input class="form-control" type="number" name="aufwand" value="{{ task.aufwand }}">
-        </div>
-        <button type="submit" class="btn btn-primary">Speichern</button>
       </form>
     </div>
   </div>
