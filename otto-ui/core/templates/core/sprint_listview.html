@@ -36,8 +36,8 @@
         <td><a href="/sprint/{{ sprint.id }}/">{{ sprint.name }}</a></td>
         <td>{{ sprint.status }}</td>
         <td>{{ sprint.typ }}</td>
-        <td>{{ sprint.startdatum }}</td>
-        <td>{{ sprint.enddatum }}</td>
+        <td>{{ sprint.startdatum|slice:10 }}</td>
+        <td>{{ sprint.enddatum|slice:10 }}</td>
       </tr>
       {% endfor %}
     </tbody>
