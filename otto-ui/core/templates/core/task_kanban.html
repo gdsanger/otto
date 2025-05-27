@@ -50,6 +50,9 @@
         <div><strong>{{ task.betreff }}</strong></div>
         <div><small>👤 {{ task.person_name }}</small></div>
         <div><small>📅 {{ task.termin_formatiert }}</small></div>
+        {% if task.sprint_name %}
+        <div><small>🏁 {{ task.sprint_name }}</small></div>
+        {% endif %}
         <a href="/task/view/{{ task.id }}/" class="btn btn-sm btn-primary mt-1">Details</a>
       </div>
     </div>

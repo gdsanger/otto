@@ -102,6 +102,8 @@ def project_detailview(request, project_id):
     messages = messages_res.json() if messages_res.status_code == 200 else []
     personen_res = requests.get(f"{OTTO_API_URL}/personen", headers={"x-api-key": OTTO_API_KEY})
     personen = personen_res.json() if personen_res.status_code == 200 else []
+    sprints_res = requests.get(f"{OTTO_API_URL}/sprints", headers={"x-api-key": OTTO_API_KEY})
+    sprints = sprints_res.json() if sprints_res.status_code == 200 else []
 
     return render(request, "core/project_detailview.html", {
         "projekt": projekt,
@@ -111,7 +113,8 @@ def project_detailview(request, project_id):
         "dateien": dateien,
         "status_liste": status_liste,
         "prio_liste": prio_liste,
-        "typ_liste": typ_liste
+        "typ_liste": typ_liste,
+        "sprints": sprints
     })
 
 
@@ -149,7 +152,8 @@ def project_create_task(request):
             "prio": data.get("prio", "mittel"),
             "status": data.get("status", "Offen"),
             "termin": data.get("termin"),
-            "project_id": data["project_id"]
+            "project_id": data["project_id"],
+            "sprint_id": data.get("sprint_id")
         }
     )
     return JsonResponse(response.json(), status=response.status_code)

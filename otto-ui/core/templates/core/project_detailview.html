@@ -188,6 +188,14 @@
       {% endfor %}
     </select>
   </div>
+  <div class="col-12 col-md-3">
+    <select name="sprint_id" class="form-select">
+      <option value="">Sprint wählen</option>
+      {% for s in sprints %}
+      <option value="{{ s.id }}">{{ s.name }}</option>
+      {% endfor %}
+    </select>
+  </div>
   <div class="col-12 col-md-1">
     <button type="submit" class="btn btn-success w-100">➕</button>
   </div>
