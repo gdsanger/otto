@@ -31,6 +31,14 @@
         {% endfor %}
       </select>
     </div>
+    <div class="col-sm-3 mb-2 mb-sm-0">
+      <select id="kanban-sprint" class="form-select">
+        <option value="">Alle Sprints</option>
+        {% for sprint in sprints %}
+        <option value="{{ sprint.id }}">{{ sprint.name }}</option>
+        {% endfor %}
+      </select>
+    </div>
     <div class="col-auto form-check mb-2 mb-sm-0">
       <input class="form-check-input" type="checkbox" id="kanban-without-project">
       <label class="form-check-label" for="kanban-without-project">Ohne Projekt</label>
@@ -45,13 +53,13 @@
   <div class="kanban-column status-{{ status|slugify }}" data-status="{{ status }}">
     <div class="kanban-column-header">{{ status }}</div>
     {% for task in tasks %}
-    <div class="card mb-2" draggable="true" data-task-id="{{ task.id }}" data-person-id="{{ task.person_id }}" data-project-id="{{ task.project_id|default:'' }}">
+    <div class="card mb-2" draggable="true" data-task-id="{{ task.id }}" data-person-id="{{ task.person_id }}" data-project-id="{{ task.project_id|default:'' }}" data-sprint-id="{{ task.sprint_id|default:'' }}">
       <div class="card-body p-2">
         <div><strong>{{ task.betreff }}</strong></div>
         <div><small>👤 {{ task.person_name }}</small></div>
         <div><small>📅 {{ task.termin_formatiert }}</small></div>
         {% if task.sprint_name %}
-        <div><small>🏁 {{ task.sprint_name }}</small></div>
+        <div><small>🏃 {{ task.sprint_name }}</small></div>
         {% endif %}
         <a href="/task/view/{{ task.id }}/" class="btn btn-sm btn-primary mt-1">Details</a>
       </div>
@@ -77,29 +85,34 @@
     const searchInput = document.getElementById('kanban-search');
     const personSelect = document.getElementById('kanban-person');
     const projectSelect = document.getElementById('kanban-project');
+    const sprintSelect = document.getElementById('kanban-sprint');
     const withoutProject = document.getElementById('kanban-without-project');
     function applyFilters() {
       const q = (searchInput ? searchInput.value.toLowerCase() : '');
       const pid = personSelect ? personSelect.value : '';
       const projId = projectSelect ? projectSelect.value : '';
+      const sprintId = sprintSelect ? sprintSelect.value : '';
       const noProj = withoutProject ? withoutProject.checked : false;
       document.querySelectorAll('.kanban-column .card').forEach(function(card) {
         const txt = card.textContent.toLowerCase();
         const matchSearch = txt.indexOf(q) !== -1;
         const matchPerson = !pid || card.dataset.personId === pid;
         const cardProject = card.dataset.projectId || '';
+        const cardSprint = card.dataset.sprintId || '';
         let matchProject = true;
         if (projId) {
           matchProject = cardProject === projId;
         } else if (noProj) {
           matchProject = !cardProject;
         }
-        card.style.display = (matchSearch && matchPerson && matchProject) ? '' : 'none';
+        const matchSprint = !sprintId || cardSprint === sprintId;
+        card.style.display = (matchSearch && matchPerson && matchProject && matchSprint) ? '' : 'none';
       });
     }
     if (searchInput) searchInput.addEventListener('input', applyFilters);
     if (personSelect) personSelect.addEventListener('change', applyFilters);
     if (projectSelect) projectSelect.addEventListener('change', applyFilters);
+    if (sprintSelect) sprintSelect.addEventListener('change', applyFilters);
     if (withoutProject) withoutProject.addEventListener('change', applyFilters);
     applyFilters();
 
