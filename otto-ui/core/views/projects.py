@@ -117,3 +117,24 @@ def project_create_task(request):
         }
     )
     return JsonResponse(response.json(), status=response.status_code)
+
+
+@login_required
+@csrf_exempt
+def project_upload_file(request, short):
+    if request.method != "POST":
+        return JsonResponse({"error": "Ungültige Methode."}, status=405)
+    uploaded = request.FILES.get("file")
+    if not uploaded:
+        return JsonResponse({"error": "Keine Datei."}, status=400)
+    try:
+        res = requests.post(
+            f"{OTTO_API_URL}/sharepoint/projekte/{short}/dateien",
+            headers={"x-api-key": OTTO_API_KEY},
+            files={"file": (uploaded.name, uploaded.read())},
+        )
+        if res.status_code in (200, 201):
+            return JsonResponse(res.json())
+        return JsonResponse({"error": "Fehler beim Upload."}, status=res.status_code)
+    except Exception as e:
+        return JsonResponse({"error": str(e)}, status=500)
