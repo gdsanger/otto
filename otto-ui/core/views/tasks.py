@@ -155,6 +155,9 @@ def task_kanban_view(request):
     personen_map = {p.get("id"): p.get("name") for p in personen}
     agenten = [p for p in personen if p.get("rolle") in ["agent", "admin"]]
 
+    projekte_res = requests.get(f"{OTTO_API_URL}/projekte", headers={"x-api-key": OTTO_API_KEY})
+    projekte = projekte_res.json() if projekte_res.status_code == 200 else []
+
     grouped = {status: [] for status in status_liste}
     for t in tasks:
         status = t.get("status") or status_liste[0]
@@ -179,6 +182,7 @@ def task_kanban_view(request):
         "grouped_list": grouped_list,
         "status_liste": status_liste,
         "agenten": agenten,
+        "projekte": projekte,
     }
     return render(request, "core/task_kanban.html", context)
 
