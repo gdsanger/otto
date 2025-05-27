@@ -7,6 +7,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home, name='home'),
     path('projekt/', views.project_listview, name='projekt_liste'),
+    path('project/new/', views.project_create, name='project_create'),
     path("project/delete/", views.delete_project, name="delete_project"),
     path('project/createtask/', views.project_create_task, name='project_create_task'),
     path('project/<str:short>/upload/', views.project_upload_file, name='project_upload_file'),

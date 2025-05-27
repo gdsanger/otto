@@ -321,25 +321,28 @@
     });
   });
 
-  document.getElementById('taskForm').addEventListener('submit', function (e) {
-  e.preventDefault();
-  const data = Object.fromEntries(new FormData(this));
-  data.project_id = window.ottoContext.id;
-  data.status = data.status || "Offen";
-  data.zuständig = "Otto"; // Optionaler Defaultname
+  const taskForm = document.getElementById('taskForm');
+  if (taskForm) {
+    taskForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      const data = Object.fromEntries(new FormData(this));
+      data.project_id = window.ottoContext.id;
+      data.status = data.status || "Offen";
+      data.zuständig = "Otto"; // Optionaler Defaultname
 
-  fetch('/project/createtask/', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'X-CSRFToken': getCookie('csrftoken')
-    },
-    body: JSON.stringify(data)
-  }).then(r => {
-    if (r.ok) location.reload();
-    else alert('Fehler beim Erstellen der Aufgabe');
-  });
-});
+      fetch('/project/createtask/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRFToken': getCookie('csrftoken')
+        },
+        body: JSON.stringify(data)
+      }).then(r => {
+        if (r.ok) location.reload();
+        else alert('Fehler beim Erstellen der Aufgabe');
+      });
+    });
+  }
 
 const fileInput = document.getElementById('uploadInput');
 if (fileInput) {

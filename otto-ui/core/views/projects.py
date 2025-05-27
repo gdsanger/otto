@@ -39,6 +39,39 @@ def project_listview(request):
 
 @login_required
 @csrf_exempt
+def project_create(request):
+    if request.method == "POST":
+        try:
+            payload = json.loads(request.body)
+            payload.setdefault("klassifikation", "Projekt")
+            res = requests.post(
+                f"{OTTO_API_URL}/projekte",
+                headers={"x-api-key": OTTO_API_KEY, "Content-Type": "application/json"},
+                data=json.dumps({"projekte": [payload]}),
+            )
+            if res.status_code in (200, 201):
+                inserted_id = res.json().get("inserted_ids", [None])[0]
+                return JsonResponse({"success": True, "id": inserted_id})
+            return JsonResponse({"error": "Fehler beim Speichern"}, status=500)
+        except Exception as e:
+            return JsonResponse({"error": str(e)}, status=400)
+
+    personen_res = requests.get(f"{OTTO_API_URL}/personen", headers={"x-api-key": OTTO_API_KEY})
+    personen = personen_res.json() if personen_res.status_code == 200 else []
+    return render(request, "core/project_detailview.html", {
+        "projekt": {},
+        "personen": personen,
+        "tasks": [],
+        "messages": [],
+        "dateien": [],
+        "status_liste": status_liste,
+        "prio_liste": prio_liste,
+        "typ_liste": typ_liste,
+    })
+
+
+@login_required
+@csrf_exempt
 def project_detailview(request, project_id):
     if request.method == "POST":
         payload = json.loads(request.body)
