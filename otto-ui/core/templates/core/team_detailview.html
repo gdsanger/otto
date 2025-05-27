@@ -99,10 +99,12 @@
     rows.forEach((row) => {
       const person = row.querySelector('select').value;
       if (person) {
+        const rawVal = row.querySelector('input[type=number]').value;
+        const normalized = rawVal.replace(',', '.');
         data.ressourcen.push({
           person_id: person,
           extern: row.querySelector('input[type=checkbox]').checked,
-          anteil: parseFloat(row.querySelector('input[type=number]').value) || 0
+          anteil: parseFloat(normalized) || 0
         });
       }
     });
