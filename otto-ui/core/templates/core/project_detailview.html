@@ -7,10 +7,23 @@
     type: "projekt",
     name: "{{ projekt.name }}",
     id: "{{ projekt.id }}",
-    gptFunctions: ["get_projekt_by_id"]   
+    gptFunctions: ["get_projekt_by_id"]
   }
 </script>
-<div class="container py-4">  
+<div class="container py-4">
+  <div class="btn-toolbar mb-3" role="toolbar" aria-label="Toolbar">
+    <div class="btn-group me-2" role="group">
+      <button id="backBtn" type="button" class="btn btn-outline-secondary">↩️ Zurück</button>
+      <button id="cloneBtn" type="button" class="btn btn-outline-secondary">📄 Clone</button>
+    </div>
+    <div class="btn-group me-2" role="group">
+      <button type="submit" form="projektForm" class="btn btn-outline-secondary">💾 Speichern</button>
+      <button id="saveCloseBtn" type="button" class="btn btn-outline-secondary">💾 Speichern &amp; Schließen</button>
+    </div>
+    <div class="btn-group" role="group">
+      <button id="deleteBtn" type="button" class="btn btn-outline-danger">🗑️ Löschen</button>
+    </div>
+  </div>
   <form id="projektForm">
     {% csrf_token %}
     <div class="card">
@@ -260,11 +273,9 @@
   errorBox.className = 'alert alert-danger mt-3 d-none';
   form.appendChild(errorBox);
 
-  form.addEventListener('submit', function(e) {
-    e.preventDefault();
+  function collectFormData() {
     const formData = new FormData(form);
     const jsonData = {};
-
     formData.forEach((value, key) => {
       if (jsonData[key]) {
         if (!Array.isArray(jsonData[key])) {
@@ -275,8 +286,6 @@
         jsonData[key] = value;
       }
     });
-
-    // Personen-IDs aus der Tokenbox als 'stakeholder_ids' senden
     if (jsonData['personen_ids']) {
       const ids = Array.isArray(jsonData['personen_ids'])
         ? jsonData['personen_ids']
@@ -286,8 +295,12 @@
     } else {
       jsonData['stakeholder_ids'] = [];
     }
+    return jsonData;
+  }
 
-    fetch('', {
+  function saveProjekt() {
+    const jsonData = collectFormData();
+    return fetch('', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -299,16 +312,67 @@
         successBox.classList.remove('d-none');
         errorBox.classList.add('d-none');
         setTimeout(() => successBox.classList.add('d-none'), 3000);
+        return true;
       } else {
         r.json().then(data => {
           errorBox.textContent = data.error || 'Unbekannter Fehler';
           errorBox.classList.remove('d-none');
         });
+        return false;
       }
     }).catch(err => {
       errorBox.textContent = 'Netzwerkfehler: ' + err.message;
       errorBox.classList.remove('d-none');
+      return false;
     });
+  }
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    saveProjekt();
+  });
+
+  document.getElementById('backBtn').addEventListener('click', () => history.back());
+
+  document.getElementById('saveCloseBtn').addEventListener('click', () => {
+    saveProjekt().then(ok => { if (ok) history.back(); });
+  });
+
+  document.getElementById('cloneBtn').addEventListener('click', () => {
+    const data = collectFormData();
+    fetch('/project/new/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRFToken': getCookie('csrftoken'),
+      },
+      body: JSON.stringify(data)
+    }).then(r => r.ok ? r.json() : Promise.reject()).then(d => {
+      if (d.id) {
+        window.location.href = `/project/${d.id}/`;
+      } else {
+        alert('Fehler beim Klonen');
+      }
+    }).catch(() => alert('Fehler beim Klonen'));
+  });
+
+  document.getElementById('deleteBtn').addEventListener('click', () => {
+    if (confirm('Wirklich löschen?')) {
+      fetch('/project/delete/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'X-CSRFToken': getCookie('csrftoken'),
+        },
+        body: 'project_id=' + encodeURIComponent(window.ottoContext.id)
+      }).then(r => {
+        if (r.ok) {
+          history.back();
+        } else {
+          alert('Fehler beim Löschen');
+        }
+      });
+    }
   });
 
  document.querySelectorAll('.auto-save').forEach(el => {
