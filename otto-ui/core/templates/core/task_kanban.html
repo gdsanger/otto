@@ -10,7 +10,13 @@
     gptFunctions: []
   }
 </script>
-<div class="kanban-board container-fluid mt-3">
+<div class="container-fluid mt-3">
+  <div class="row mb-2">
+    <div class="col-sm-4">
+      <input type="text" id="kanban-search" class="form-control" placeholder="Suchen...">
+    </div>
+  </div>
+  <div class="kanban-board">
   {% for status,tasks in grouped_list %}
   <div class="kanban-column status-{{ status|slugify }}" data-status="{{ status }}">
     <div class="kanban-column-header">{{ status }}</div>
@@ -18,8 +24,8 @@
     <div class="card mb-2" draggable="true" data-task-id="{{ task.id }}">
       <div class="card-body p-2">
         <div><strong>{{ task.betreff }}</strong></div>
-        <div><small>{{ task.person_name }}</small></div>
-        <div><small>{{ task.termin_formatiert }}</small></div>
+        <div><small>👤 {{ task.person_name }}</small></div>
+        <div><small>📅 {{ task.termin_formatiert }}</small></div>
         <a href="/task/view/{{ task.id }}/" class="btn btn-sm btn-primary mt-1">Details</a>
       </div>
     </div>
@@ -28,10 +34,30 @@
     {% endfor %}
   </div>
   {% endfor %}
+  </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
 <script>
   document.addEventListener('DOMContentLoaded', function() {
+    function showToast() {
+      const el = document.getElementById('snackbar');
+      if (el) {
+        const t = new bootstrap.Toast(el);
+        t.show();
+      }
+    }
+
+    const searchInput = document.getElementById('kanban-search');
+    if (searchInput) {
+      searchInput.addEventListener('input', function(e) {
+        const q = e.target.value.toLowerCase();
+        document.querySelectorAll('.kanban-column .card').forEach(function(card) {
+          const txt = card.textContent.toLowerCase();
+          card.style.display = txt.indexOf(q) !== -1 ? '' : 'none';
+        });
+      });
+    }
+
     document.querySelectorAll('.kanban-column').forEach(function(col){
       new Sortable(col, {
         group: 'tasks',
@@ -43,7 +69,7 @@
             method: 'POST',
             headers: {'HX-Request': 'true'},
             body: new URLSearchParams({task_id: taskId, status: newStatus})
-          });
+          }).then(function(res){ if(res.ok) showToast(); });
         }
       });
     });
