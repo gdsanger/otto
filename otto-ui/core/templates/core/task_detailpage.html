@@ -31,6 +31,10 @@
         {% csrf_token %}
         <input type="hidden" name="task_id" value="{{ task.id }}">
         <div class="mb-3">
+          <label class="form-label">TID</label>
+          <input class="form-control" type="number" name="tid" value="{{ task.tid }}">
+        </div>
+        <div class="mb-3">
           <label class="form-label">Betreff</label>
           <input class="form-control" type="text" name="betreff" value="{{ task.betreff }}">
         </div>
