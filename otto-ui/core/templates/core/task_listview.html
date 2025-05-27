@@ -55,6 +55,7 @@
                 <th>Typ</th>
                 <th>Status</th>              
                 <th>Zuständig</th>
+                <th>Requester</th>
                 <th>Termin</th>
                 <th></th>
             </tr>
@@ -88,8 +89,18 @@
                     <form hx-post="/task/update_person/" hx-trigger="change" hx-target="closest td" hx-swap="outerHTML">
                         <input type="hidden" name="task_id" value="{{ task.id }}">
                         <select class="form-select form-select-sm" name="person_id">
-                            {% for person in personen %}
+                            {% for person in agenten %}
                                 <option value="{{ person.id }}" {% if task.person_id and task.person_id == person.id %}selected{% endif %}>{{ person.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </form>
+                </td>
+                <td>
+                    <form hx-post="/task/update/" hx-trigger="change" hx-target="closest td" hx-swap="outerHTML">
+                        <input type="hidden" name="task_id" value="{{ task.id }}">
+                        <select class="form-select form-select-sm" name="requester_id">
+                            {% for person in personen %}
+                                <option value="{{ person.id }}" {% if task.requester_id and task.requester_id == person.id %}selected{% endif %}>{{ person.name }}</option>
                             {% endfor %}
                         </select>
                     </form>
@@ -103,7 +114,7 @@
                 </td>
             </tr>
             {% empty %}
-            <tr><td colspan="7">Keine offenen Aufgaben gefunden.</td></tr>
+            <tr><td colspan="8">Keine offenen Aufgaben gefunden.</td></tr>
             {% endfor %}
         </tbody>
     </table>

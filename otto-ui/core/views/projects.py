@@ -16,12 +16,19 @@ OTTO_API_KEY = os.getenv("OTTO_API_KEY")
 OTTO_API_URL = os.getenv("OTTO_API_URL")
 
 
+def load_person_lists():
+    res = requests.get(f"{OTTO_API_URL}/personen", headers={"x-api-key": OTTO_API_KEY})
+    personen = res.json() if res.status_code == 200 else []
+    personen_sorted = sorted(personen, key=lambda p: p.get("name", ""))
+    agenten_sorted = [p for p in personen_sorted if p.get("rolle") in ["agent", "admin"]]
+    return personen_sorted, agenten_sorted
+
+
 @login_required
 def project_listview(request):
     res = requests.get(f"{OTTO_API_URL}/projekte", headers={"x-api-key": OTTO_API_KEY})
     projekte = res.json() if res.status_code == 200 else []
-    personen_res = requests.get(f"{OTTO_API_URL}/personen", headers={"x-api-key": OTTO_API_KEY})
-    personen = personen_res.json() if personen_res.status_code == 200 else []
+    personen, agenten = load_person_lists()
 
     q = request.GET.get("q", "").lower()
     if q:
@@ -32,7 +39,8 @@ def project_listview(request):
         "status_liste": status_liste,
         "prio_liste": prio_liste,
         "projekt_typ": projekt_typ,
-        "personen": personen
+        "personen": personen,
+        "agenten": agenten
         
     })
 
@@ -56,11 +64,11 @@ def project_create(request):
         except Exception as e:
             return JsonResponse({"error": str(e)}, status=400)
 
-    personen_res = requests.get(f"{OTTO_API_URL}/personen", headers={"x-api-key": OTTO_API_KEY})
-    personen = personen_res.json() if personen_res.status_code == 200 else []
+    personen, agenten = load_person_lists()
     return render(request, "core/project_detailview.html", {
         "projekt": {},
         "personen": personen,
+        "agenten": agenten,
         "tasks": [],
         "messages": [],
         "dateien": [],
@@ -100,14 +108,14 @@ def project_detailview(request, project_id):
     tasks = tasks_res.json() if tasks_res.status_code == 200 else []
     messages_res = requests.get(f"{OTTO_API_URL}/project/{project_id}/messages", headers={"x-api-key": OTTO_API_KEY})
     messages = messages_res.json() if messages_res.status_code == 200 else []
-    personen_res = requests.get(f"{OTTO_API_URL}/personen", headers={"x-api-key": OTTO_API_KEY})
-    personen = personen_res.json() if personen_res.status_code == 200 else []
+    personen, agenten = load_person_lists()
     sprints_res = requests.get(f"{OTTO_API_URL}/sprints", headers={"x-api-key": OTTO_API_KEY})
     sprints = sprints_res.json() if sprints_res.status_code == 200 else []
 
     return render(request, "core/project_detailview.html", {
         "projekt": projekt,
         "personen": personen,
+        "agenten": agenten,
         "tasks": tasks,
         "messages": messages,
         "dateien": dateien,
@@ -148,6 +156,7 @@ def project_create_task(request):
             "beschreibung": "",
             "zuständig": data.get("zuständig", "Otto"),
             "person_id": data.get("person_id"),
+            "requester_id": data.get("requester_id"),
             "aufwand": 1,
             "prio": data.get("prio", "mittel"),
             "status": data.get("status", "Offen"),

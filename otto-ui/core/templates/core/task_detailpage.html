@@ -63,8 +63,16 @@
         <div class="mb-3">
           <label class="form-label">Zuständig</label>
           <select class="form-select" name="person_id">
-            {% for person in personen %}
+            {% for person in agenten %}
             <option value="{{ person.id }}" {% if task.person_id == person.id %}selected{% endif %}>{{ person.name }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Requester</label>
+          <select class="form-select" name="requester_id">
+            {% for person in personen %}
+            <option value="{{ person.id }}" {% if task.requester_id == person.id %}selected{% endif %}>{{ person.name }}</option>
             {% endfor %}
           </select>
         </div>

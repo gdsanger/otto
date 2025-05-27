@@ -132,6 +132,7 @@
           <th>Aufwand</th>
           <th>Termin</th>
           <th>Zuständig</th>
+          <th>Requester</th>
           <th></th>
         </tr>
       </thead>
@@ -162,8 +163,15 @@
           </td>
          <td>
   <select class="form-select form-select-sm auto-save" data-task-id="{{ task.id }}" data-field="person_id">
-    {% for p in personen %}
+    {% for p in agenten %}
       <option value="{{ p.id }}" {% if p.id == task.person_id %}selected{% endif %}>{{ p.name }}</option>
+    {% endfor %}
+  </select>
+</td>
+         <td>
+  <select class="form-select form-select-sm auto-save" data-task-id="{{ task.id }}" data-field="requester_id">
+    {% for p in personen %}
+      <option value="{{ p.id }}" {% if p.id == task.requester_id %}selected{% endif %}>{{ p.name }}</option>
     {% endfor %}
   </select>
 </td>
@@ -196,6 +204,14 @@
   <div class="col-12 col-md-3">
     <select name="person_id" class="form-select">
       <option value="">Zuständig wählen</option>
+      {% for p in agenten %}
+      <option value="{{ p.id }}">{{ p.name }}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div class="col-12 col-md-3">
+    <select name="requester_id" class="form-select">
+      <option value="">Requester wählen</option>
       {% for p in personen %}
       <option value="{{ p.id }}">{{ p.name }}</option>
       {% endfor %}
