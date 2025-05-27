@@ -61,7 +61,7 @@ def project_detailview(request, project_id):
 
     projekt_res = requests.get(f"{OTTO_API_URL}/projekte/{project_id}", headers={"x-api-key": OTTO_API_KEY})
     projekt = projekt_res.json() if projekt_res.status_code == 200 else {}
-    dateien_res = requests.get(f"{OTTO_API_URL}/projekte/{projekt.get('short', '')}/dateien", headers={"x-api-key": OTTO_API_KEY})
+    dateien_res = requests.get(f"{OTTO_API_URL}/sharepoint/projekte/{projekt.get('short', '')}/dateien", headers={"x-api-key": OTTO_API_KEY})
     dateien = dateien_res.json() if dateien_res.status_code == 200 else []
     tasks_res = requests.get(f"{OTTO_API_URL}/project/{project_id}/tasks", headers={"x-api-key": OTTO_API_KEY})
     tasks = tasks_res.json() if tasks_res.status_code == 200 else []

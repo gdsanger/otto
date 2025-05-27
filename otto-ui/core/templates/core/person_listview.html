@@ -3,9 +3,10 @@
 {% block content %}
 <script>
   window.ottoContext = {
-    type: "Person",
-    name: "Übersicht aller Personen",
-    id: ""
+    type: "person",
+    name: "{{ person.name }}",
+    id: "{{ person.id }}",
+    gptFunctions: []  
   }
 </script>
 <div class="container-fluid">
