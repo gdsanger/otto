@@ -1,7 +1,7 @@
 import requests
 import json
 from django.shortcuts import render
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from .helpers import login_required
 import os
@@ -46,3 +46,39 @@ def team_detailview(request, team_id):
     personen_res = requests.get(f"{OTTO_API_URL}/personen", headers={"x-api-key": OTTO_API_KEY})
     personen = personen_res.json() if personen_res.status_code == 200 else []
     return render(request, "core/team_detailview.html", {"team": team, "personen": personen})
+
+
+@login_required
+@csrf_exempt
+def team_create(request):
+    if request.method != "POST":
+        return JsonResponse({"error": "Ungültige Methode."}, status=405)
+
+    name = request.POST.get("name")
+    if not name:
+        try:
+            payload = json.loads(request.body or "{}")
+            name = payload.get("name")
+        except Exception:
+            name = None
+
+    if not name:
+        return JsonResponse({"error": "Name fehlt."}, status=400)
+
+    try:
+        res = requests.post(
+            f"{OTTO_API_URL}/teams",
+            headers={"x-api-key": OTTO_API_KEY, "Content-Type": "application/json"},
+            data=json.dumps({"teams": [{"name": name, "ressourcen": []}]})
+        )
+        if res.status_code not in (200, 201):
+            return JsonResponse({"error": "Fehler beim Speichern"}, status=res.status_code)
+        inserted_id = res.json().get("inserted_ids", [None])[0]
+    except Exception as e:
+        return JsonResponse({"error": str(e)}, status=500)
+
+    if request.headers.get("HX-Request") == "true":
+        html = f'<tr><td><a href="/team/{inserted_id}/">{name}</a></td></tr>'
+        return HttpResponse(html)
+
+    return JsonResponse({"id": inserted_id}, status=201)
