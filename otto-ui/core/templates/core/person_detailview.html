@@ -9,8 +9,22 @@
   }
 </script>
 <div class="container py-4">
+  <div class="btn-toolbar mb-3" role="toolbar" aria-label="Toolbar">
+    <div class="btn-group me-2" role="group">
+      <button id="backBtn" type="button" class="btn btn-outline-secondary">↩️ Zurück</button>
+      <button id="cloneBtn" type="button" class="btn btn-outline-secondary">📄 Clone</button>
+    </div>
+    <div class="btn-group me-2" role="group">
+      <button type="submit" form="personForm" class="btn btn-outline-secondary">💾 Speichern</button>
+      <button id="saveCloseBtn" type="button" class="btn btn-outline-secondary">💾 Speichern &amp; Schließen</button>
+    </div>
+    <div class="btn-group" role="group">
+      <button id="deleteBtn" type="button" class="btn btn-danger">🗑️ Löschen</button>
+    </div>
+  </div>
   <form id="personForm">
     {% csrf_token %}
+    <input type="hidden" name="person_id" value="{{ person.id }}">
     <div class="card">
       <div class="card-header">{{ person.name }}</div>
       <div class="card-body">
@@ -108,11 +122,11 @@
 
   const form = document.getElementById('personForm');
   const successBox = document.getElementById('saveSuccess');
-  form.addEventListener('submit', function(e) {
-    e.preventDefault();
+
+  function savePerson() {
     const data = {};
-    new FormData(form).forEach((v, k) => data[k] = v);
-    fetch('', {
+    new FormData(form).forEach((v, k) => { data[k] = v; });
+    return fetch('', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -123,8 +137,61 @@
       if (r.ok) {
         successBox.classList.remove('d-none');
         setTimeout(() => successBox.classList.add('d-none'), 2000);
+        return true;
+      } else {
+        alert('Fehler beim Speichern');
+        return false;
       }
     });
+  }
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    savePerson();
+  });
+
+  document.getElementById('backBtn').addEventListener('click', () => history.back());
+
+  document.getElementById('saveCloseBtn').addEventListener('click', () => {
+    savePerson().then(ok => { if (ok) history.back(); });
+  });
+
+  document.getElementById('cloneBtn').addEventListener('click', () => {
+    const data = {};
+    new FormData(form).forEach((v, k) => { if (k !== 'person_id') data[k] = v; });
+    fetch('/person/new/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRFToken': getCookie('csrftoken'),
+      },
+      body: JSON.stringify(data)
+    }).then(r => r.ok ? r.json() : Promise.reject()).then(d => {
+      if (d.id) {
+        window.location.href = `/person/${d.id}/`;
+      } else {
+        alert('Fehler beim Klonen');
+      }
+    }).catch(() => alert('Fehler beim Klonen'));
+  });
+
+  document.getElementById('deleteBtn').addEventListener('click', () => {
+    if (confirm('Wirklich löschen?')) {
+      fetch('/person/delete/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'X-CSRFToken': getCookie('csrftoken'),
+        },
+        body: 'person_id=' + encodeURIComponent(form.elements['person_id'].value)
+      }).then(r => {
+        if (r.ok) {
+          history.back();
+        } else {
+          alert('Fehler beim Löschen');
+        }
+      });
+    }
   });
 
   document.querySelectorAll('.auto-save').forEach(el => {
