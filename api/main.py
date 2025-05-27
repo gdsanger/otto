@@ -72,6 +72,12 @@ try:
 except Exception as e:
     print(f"⚠️ Fehler beim Einbinden von sharepoint_router: {e}")
 
+try:
+    from controller.message_controller import router as message_router
+    app.include_router(message_router)
+except Exception as e:
+    print(f"⚠️ Fehler beim Einbinden von message_controller: {e}")
+
 def custom_openapi():
     if app.openapi_schema:
         return app.openapi_schema

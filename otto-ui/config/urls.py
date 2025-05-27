@@ -24,6 +24,7 @@ urlpatterns = [
     path('meeting/<str:meeting_id>/', views.meeting_detailview, name='meeting_detail'),
     path('person/', views.person_listview, name='person_liste'),
     path('person/<str:person_id>/', views.person_detailview, name='person_detail'),
+    path('message/<str:message_id>/', views.message_detailview, name='message_detail'),
     path('login/', login_view, name='login'),
     path('logout/', logout_view, name='logout'),
 

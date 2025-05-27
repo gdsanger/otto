@@ -65,6 +65,8 @@ def project_detailview(request, project_id):
     dateien = dateien_res.json() if dateien_res.status_code == 200 else []
     tasks_res = requests.get(f"{OTTO_API_URL}/project/{project_id}/tasks", headers={"x-api-key": OTTO_API_KEY})
     tasks = tasks_res.json() if tasks_res.status_code == 200 else []
+    messages_res = requests.get(f"{OTTO_API_URL}/project/{project_id}/messages", headers={"x-api-key": OTTO_API_KEY})
+    messages = messages_res.json() if messages_res.status_code == 200 else []
     personen_res = requests.get(f"{OTTO_API_URL}/personen", headers={"x-api-key": OTTO_API_KEY})
     personen = personen_res.json() if personen_res.status_code == 200 else []
 
@@ -72,6 +74,7 @@ def project_detailview(request, project_id):
         "projekt": projekt,
         "personen": personen,
         "tasks": tasks,
+        "messages": messages,
         "dateien": dateien,
         "status_liste": status_liste,
         "prio_liste": prio_liste,
