@@ -37,11 +37,11 @@
           </div>
           <div class="col-md-3 mb-3">
             <label class="form-label">Startdatum</label>
-            <input type="date" name="startdatum" class="form-control" value="{{ sprint.startdatum }}">
+            <input type="date" name="startdatum" class="form-control" value="{{ sprint.startdatum|slice:":10" }}">
           </div>
           <div class="col-md-3 mb-3">
             <label class="form-label">Enddatum</label>
-            <input type="date" name="enddatum" class="form-control" value="{{ sprint.enddatum }}">
+            <input type="date" name="enddatum" class="form-control" value="{{ sprint.enddatum|slice:":10" }}">
           </div>
           <div class="col-12 mb-3">
             <label class="form-label">Beschreibung</label>

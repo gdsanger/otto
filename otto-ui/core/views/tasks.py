@@ -208,9 +208,7 @@ def task_create(request):
     task = {}
     if request.GET.get("project_id"):
         task["project_id"] = request.GET["project_id"]
-    if request.GET.get("meeting_id"):
-        task["meeting_id"] = request.GET["meeting_id"]
-
+   
     personen_res = requests.get(f"{OTTO_API_URL}/personen", headers={"x-api-key": OTTO_API_KEY})
     personen = personen_res.json() if personen_res.status_code == 200 else []
     projekte_res = requests.get(f"{OTTO_API_URL}/projekte", headers={"x-api-key": OTTO_API_KEY})
@@ -221,8 +219,7 @@ def task_create(request):
     return render(request, "core/task_detailview.html", {
         "task": task,
         "personen": personen,
-        "projekte": projekte,
-        "meetings": meetings,
+        "projekte": projekte,      
         "prio_liste": prio_liste,
         "status_liste": status_liste,
         "typ_liste": typ_liste,
@@ -329,8 +326,7 @@ def update_task_details(request):
         task["prio"] = request.POST.get("prio")
         task["typ"] = request.POST.get("typ")
         task["person_id"] = request.POST.get("person_id")
-        task["project_id"] = request.POST.get("project_id") or None
-        task["meeting_id"] = request.POST.get("meeting_id") or None
+        task["project_id"] = request.POST.get("project_id") or None      
         aufwand = request.POST.get("aufwand")
         task["aufwand"] = int(aufwand) if aufwand and aufwand.isdigit() else 0
         tid = request.POST.get("tid")

@@ -21,6 +21,7 @@ async def get_team(team_id: str):
 
 @router.post("/teams", dependencies=[Depends(verify_api_key)], tags=["Team"])
 async def create_team(team_liste: TeamListe):
+    print(f"Teamliste: {team_liste}")
     result = await db.teams.insert_many([t.dict() for t in team_liste.teams])
     return {"inserted_ids": [str(i) for i in result.inserted_ids]}
 

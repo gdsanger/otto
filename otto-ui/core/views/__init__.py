@@ -18,9 +18,7 @@ from .projects import (
     project_create_task,
     project_upload_file,
 )
-from .meetings import meeting_listview, meeting_detailview, meeting_create
 from .persons import person_listview, person_detailview
-from .teams import team_listview, team_detailview, team_create
 from .messages import message_detailview
 from .sprints import sprint_listview, sprint_detailview, sprint_create
 from django.shortcuts import render
