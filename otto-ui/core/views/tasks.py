@@ -20,6 +20,9 @@ def task_listview(request):
     res = requests.get(f"{OTTO_API_URL}/tasks", headers={"x-api-key": OTTO_API_KEY})
     tasks = res.json() if res.status_code == 200 else []
     q = request.GET.get("q", "").lower()
+    project_id = request.GET.get("project_id")
+    without_project = request.GET.get("without_project")
+    without_project = True if without_project else False
     try:
         page = int(request.GET.get("page", 1))
     except ValueError:
@@ -27,12 +30,20 @@ def task_listview(request):
     per_page = 20
     personen_res = requests.get(f"{OTTO_API_URL}/personen", headers={"x-api-key": OTTO_API_KEY})
     personen = personen_res.json() if personen_res.status_code == 200 else []
+    projekte_res = requests.get(f"{OTTO_API_URL}/projekte", headers={"x-api-key": OTTO_API_KEY})
+    projekte = projekte_res.json() if projekte_res.status_code == 200 else []
 
     offene_tasks = []
     for t in tasks:
         if t.get("status", "").lower() != "✅ abgeschlossen":
             if q and q not in t.get("betreff", "").lower() and q not in t.get("beschreibung", "").lower():
                 continue
+            if project_id:
+                if t.get("project_id") != project_id:
+                    continue
+            elif without_project:
+                if t.get("project_id"):
+                    continue
             termin_str = t.get("termin")
             try:
                 termin_dt = datetime.fromisoformat(termin_str) if termin_str else None
@@ -60,9 +71,12 @@ def task_listview(request):
         "status_liste": status_liste,
         "typ_liste": typ_liste,
         "personen": personen,
+        "projekte": projekte,
         "page": page,
         "total_pages": total_pages,
         "page_numbers": page_numbers,
+        "selected_project": project_id,
+        "without_project": without_project,
     })
 
 
@@ -71,6 +85,9 @@ def task_archive_listview(request):
     res = requests.get(f"{OTTO_API_URL}/tasks", headers={"x-api-key": OTTO_API_KEY})
     tasks = res.json() if res.status_code == 200 else []
     q = request.GET.get("q", "").lower()
+    project_id = request.GET.get("project_id")
+    without_project = request.GET.get("without_project")
+    without_project = True if without_project else False
     try:
         page = int(request.GET.get("page", 1))
     except ValueError:
@@ -78,12 +95,20 @@ def task_archive_listview(request):
     per_page = 20
     personen_res = requests.get(f"{OTTO_API_URL}/personen", headers={"x-api-key": OTTO_API_KEY})
     personen = personen_res.json() if personen_res.status_code == 200 else []
+    projekte_res = requests.get(f"{OTTO_API_URL}/projekte", headers={"x-api-key": OTTO_API_KEY})
+    projekte = projekte_res.json() if projekte_res.status_code == 200 else []
 
     erledigte_tasks = []
     for t in tasks:
         if t.get("status", "").lower() == "✅ abgeschlossen":
             if q and q not in t.get("betreff", "").lower() and q not in t.get("beschreibung", "").lower():
                 continue
+            if project_id:
+                if t.get("project_id") != project_id:
+                    continue
+            elif without_project:
+                if t.get("project_id"):
+                    continue
             termin_str = t.get("termin")
             try:
                 termin_dt = datetime.fromisoformat(termin_str) if termin_str else None
@@ -111,9 +136,12 @@ def task_archive_listview(request):
         "status_liste": status_liste,
         "typ_liste": typ_liste,
         "personen": personen,
+        "projekte": projekte,
         "page": page,
         "total_pages": total_pages,
         "page_numbers": page_numbers,
+        "selected_project": project_id,
+        "without_project": without_project,
     })
 
 
