@@ -383,18 +383,34 @@ def task_detail_or_update(request, task_id):
     if request.method == "POST":
         try:
             payload = json.loads(request.body)
-            res = requests.get(f"{OTTO_API_URL}/tasks/{task_id}", headers={"x-api-key": OTTO_API_KEY})
+            res = requests.get(
+                f"{OTTO_API_URL}/tasks/{task_id}",
+                headers={"x-api-key": OTTO_API_KEY}
+            )
             if res.status_code != 200:
                 return JsonResponse({"error": "Task nicht gefunden"}, status=404)
             task = res.json()
             for key, value in payload.items():
+                if key == "aufwand":
+                    value = int(value) if str(value).isdigit() else 0
+                elif key == "tid":
+                    if str(value).isdigit():
+                        value = int(value)
+                    else:
+                        continue
+                elif key == "termin" and value == "":
+                    value = None
                 task[key] = value
             update = requests.put(
                 f"{OTTO_API_URL}/tasks/{task_id}",
                 headers={"x-api-key": OTTO_API_KEY, "Content-Type": "application/json"},
                 data=json.dumps(task)
             )
-            return JsonResponse({"success": True}) if update.status_code == 200 else JsonResponse({"error": "Fehler beim Speichern"}, status=500)
+            return (
+                JsonResponse({"success": True})
+                if update.status_code == 200
+                else JsonResponse({"error": "Fehler beim Speichern"}, status=500)
+            )
         except Exception as e:
             return JsonResponse({"error": str(e)}, status=400)
 
