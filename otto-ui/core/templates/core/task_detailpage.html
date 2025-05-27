@@ -71,6 +71,7 @@
         <div class="mb-3">
           <label class="form-label">Requester</label>
           <select class="form-select" name="requester_id">
+            <option value="">-- Kein Requester --</option>
             {% for person in personen %}
             <option value="{{ person.id }}" {% if task.requester_id == person.id %}selected{% endif %}>{{ person.name }}</option>
             {% endfor %}
