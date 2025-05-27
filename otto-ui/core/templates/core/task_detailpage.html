@@ -50,7 +50,16 @@
             <option value="{{ projekt.id }}" {% if task.project_id == projekt.id %}selected{% endif %}>{{ projekt.name }}</option>
             {% endfor %}
           </select>
-        </div>      
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Sprint</label>
+          <select class="form-select" name="sprint_id">
+            <option value="">-- Kein Sprint --</option>
+            {% for sprint in sprints %}
+            <option value="{{ sprint.id }}" {% if task.sprint_id == sprint.id %}selected{% endif %}>{{ sprint.name }}</option>
+            {% endfor %}
+          </select>
+        </div>
         <div class="mb-3">
           <label class="form-label">Zuständig</label>
           <select class="form-select" name="person_id">

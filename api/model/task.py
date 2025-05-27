@@ -15,4 +15,5 @@ class Task(BaseModel):
     termin: Optional[date] = None
     status: str  # z.B. "offen", "in Arbeit", "erledigt"
     project_id: Optional[str] = None
+    sprint_id: Optional[str] = None
     meeting_id: Optional[str] = None
