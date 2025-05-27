@@ -61,6 +61,51 @@
     <div class="mt-3">
       <button type="submit" class="btn btn-outline-primary">💾 Speichern</button>
     </div>
+    <div id="saveSuccess" class="alert alert-success mt-3 d-none">Gespeichert!</div>
   </form>
 </div>
+<script>
+  function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+      const cookies = document.cookie.split(';');
+      for (let i = 0; i < cookies.length; i++) {
+        const cookie = cookies[i].trim();
+        if (cookie.substring(0, name.length + 1) === (name + '=')) {
+          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+          break;
+        }
+      }
+    }
+    return cookieValue;
+  }
+
+  const form = document.getElementById('sprintForm');
+  const successBox = document.getElementById('saveSuccess');
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    const data = {};
+    new FormData(form).forEach((v, k) => data[k] = v);
+    fetch('', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRFToken': getCookie('csrftoken'),
+      },
+      body: JSON.stringify(data)
+    }).then(r => {
+      if (r.ok) {
+        successBox.classList.remove('d-none');
+        setTimeout(() => successBox.classList.add('d-none'), 2000);
+        r.json().then(d => {
+          if (d.id) {
+            window.location.href = '/sprint/' + d.id + '/';
+          }
+        }).catch(() => {});
+      } else {
+        r.text().then(t => alert('Fehler beim Speichern: ' + t));
+      }
+    }).catch(err => alert('Netzwerkfehler: ' + err.message));
+  });
+</script>
 {% endblock %}
