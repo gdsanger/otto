@@ -2,6 +2,7 @@ from .auth import login_view, logout_view
 from .tasks import (
     task_listview,
     task_archive_listview,
+    task_kanban_view,
     update_task_status,
     update_task_person,
     update_task_typ,

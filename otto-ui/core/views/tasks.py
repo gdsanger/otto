@@ -118,6 +118,42 @@ def task_archive_listview(request):
 
 
 @login_required
+def task_kanban_view(request):
+    res = requests.get(f"{OTTO_API_URL}/tasks", headers={"x-api-key": OTTO_API_KEY})
+    tasks = res.json() if res.status_code == 200 else []
+
+    personen_res = requests.get(f"{OTTO_API_URL}/personen", headers={"x-api-key": OTTO_API_KEY})
+    personen = personen_res.json() if personen_res.status_code == 200 else []
+    personen_map = {p.get("id"): p.get("name") for p in personen}
+
+    grouped = {status: [] for status in status_liste}
+    for t in tasks:
+        status = t.get("status") or status_liste[0]
+        if status not in grouped:
+            grouped[status] = []
+        termin = t.get("termin")
+        try:
+            termin_dt = datetime.fromisoformat(termin) if termin else None
+        except ValueError:
+            termin_dt = None
+        t["termin_dt"] = termin_dt
+        t["termin_formatiert"] = termin_dt.strftime("%d.%m.%Y") if termin_dt else "-"
+        t["person_name"] = personen_map.get(t.get("person_id"), "-")
+        grouped[status].append(t)
+
+    for lst in grouped.values():
+        lst.sort(key=lambda x: x["termin_dt"] or datetime.max)
+
+    grouped_list = [(status, grouped.get(status, [])) for status in status_liste]
+
+    context = {
+        "grouped_list": grouped_list,
+        "status_liste": status_liste,
+    }
+    return render(request, "core/task_kanban.html", context)
+
+
+@login_required
 @csrf_exempt
 def task_create(request):
     if request.method == "POST":
