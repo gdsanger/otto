@@ -32,73 +32,56 @@
         </div>
         <div class="card-body">
             <div class="row">
-                <div class="col-12">
+                <div class="col-9">
                     <div class="mb-3">
                         <label class="form-label">Name</label>
                         <input type="text" name="name" class="form-control" value="{{ projekt.name }}">
                     </div>
-                </div>
-                <div class="col-12">
-                    <div class="mb-3">
-                        <label class="form-label">Short</label>
-                        <input type="text" name="short" class="form-control" value="{{ projekt.short }}">
-                    </div>
-                </div>
-                <div class="col-12">
                     <div class="mb-3">
                         <label class="form-label">Beschreibung</label>
                         <textarea name="beschreibung" class="form-control">{{ projekt.beschreibung }}</textarea>
                     </div>
-                </div>
-                <div class="col-12">
                     <div class="mb-4">
                         <label class="form-label">Stakeholder</label>
                         {% include "components/person_tokenbox.html" with personen=personen selected=projekt.stakeholder_ids %}
                     </div>
                 </div>
-                <div class="col-6">
-                    <div class="mb-4">
+                <div class="col-3">
+                    <div class="mb-3">
+                        <label class="form-label">Short</label>
+                        <input type="text" name="short" class="form-control" value="{{ projekt.short }}">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Status</label>
+                        <select class="form-select" name="status">
+                        {% for status1 in status_liste %}
+                            <option value="{{ status1 }}" {% if projekt.status == status1 %}selected{% endif %}>{{ status1 }}</option>
+                        {% endfor %}
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Prio</label>
+                        <select class="form-select" name="prio">
+                        {% for prio in prio_liste %}
+                            <option value="{{ prio }}" {% if projekt.prio == prio %}selected{% endif %}>{{ prio }}</option>
+                        {% endfor %}
+                        </select>
+                    </div>
+                    <div class="mb-3">
                         <label class="form-label">Bearbeiter</label>
                         <select name="bearbeiter" class="form-select">
                             <option value="">– bitte wählen –</option>
                             {% for person in personen %}
-                            <option value="{{ person.id }}" {% if person.id == projekt.bearbeiter|default:'' %}selected{% endif %}>
-                                {{ person.name }}
-                            </option>
+                            <option value="{{ person.id }}" {% if person.id == projekt.bearbeiter|default:'' %}selected{% endif %}>{{ person.name }}</option>
                             {% endfor %}
                         </select>
                     </div>
-                </div>  
-                 <div class="col-6">
-                     <div class="mb-3">
-                        <label class="form-label">Status</label>
-                         <select class="form-select" name="status">
-                        {% for status1 in status_liste %}
-                            <option value="{{ status1 }}" {% if projekt.status == status1 %}selected{% endif %}>{{ status1 }}</option>
-                        {% endfor %}
-            </select>
-                    </div>
-                 </div>   
-                  <div class="col-6">
                     <div class="mb-3">
                         <label class="form-label">Geplante Fertigstellung</label>
                         <input type="date" name="geplante_fertigstellung" class="form-control" value="{{ projekt.geplante_fertigstellung|default_if_none:'' }}">
                     </div>
-                  </div>    
-                   <div class="col-6">
-                    <div class="mb-3">
-                        <label class="form-label">Prio</label>
-                         <select class="form-select" name="prio">
-                        {% for prio in prio_liste %}
-                            <option value="{{ prio }}" {% if projekt.prio == prio %}selected{% endif %}>{{ prio }}</option>
-                        {% endfor %}
-            </select>
-                    </div>
-                  </div>                
+                </div>
             </div>
-        </div>
-        <div class="card-footer">
-        <button type="submit" class="btn btn-success">Speichern</button>          
         </div>
     </div>
   <div id="saveSuccess" class="alert alert-success mt-3 d-none">Gespeichert!</div>
