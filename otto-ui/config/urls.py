@@ -24,6 +24,7 @@ urlpatterns = [
     path('task/view/<str:task_id>/', views.task_pageview, name='task_pageview'),
     path('person/', views.person_listview, name='person_liste'),
     path('person/new/', views.person_create, name='person_create'),
+    path('person/delete/', views.delete_person, name='delete_person'),
     path('person/<str:person_id>/', views.person_detailview, name='person_detail'),
     path('message/<str:message_id>/', views.message_detailview, name='message_detail'),
     path('sprint/', views.sprint_listview, name='sprint_liste'),
