@@ -92,6 +92,23 @@
           </ul>
         </li>
       </ul>
+
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle text-white d-flex align-items-center" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-person-circle me-1" viewBox="0 0 16 16">
+              <path d="M11 5a2 2 0 1 1-4 0 2 2 0 0 1 4 0z" />
+              <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8 7a7 7 0 1 0 0-14 7 7 0 0 0 0 14zm0-3a5.978 5.978 0 0 0 4.468-2.094c-.267-.36-.63-.607-1.046-.791A4.1 4.1 0 0 0 8 10a4.1 4.1 0 0 0-3.422 1.115c-.416.184-.779.43-1.046.791A5.978 5.978 0 0 0 8 12z" />
+            </svg>
+            {{ request.session.user.name }}
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+            <li class="dropdown-item-text">{{ request.session.user.username }}</li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="/logout/">Abmelden</a></li>
+          </ul>
+        </li>
+      </ul>
     </div>
   </div>
 </nav>
