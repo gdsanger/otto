@@ -24,6 +24,7 @@
     <thead>
       <tr>
         <th>Name</th>
+        <th>Projekt</th>
         <th>Status</th>
         <th>Typ</th>
         <th>Start</th>
@@ -34,6 +35,7 @@
       {% for sprint in sprints %}
       <tr>
         <td><a href="/sprint/{{ sprint.id }}/">{{ sprint.name }}</a></td>
+        <td>{{ sprint.projekt_name }}</td>
         <td>{{ sprint.status }}</td>
         <td>{{ sprint.typ }}</td>
         <td>{{ sprint.startdatum|slice:10 }}</td>

@@ -141,6 +141,25 @@ function getCookie(name){
 }
 const form = document.getElementById('taskForm');
 const successBox = document.getElementById('saveSuccess');
+const allSprints = JSON.parse('{{ sprints|escapejs }}');
+const sprintSelect = form.querySelector('select[name="sprint_id"]');
+const projectSelect = form.querySelector('select[name="project_id"]');
+const initialSprint = '{{ task.sprint_id|default:"" }}';
+
+function filterSprints() {
+  const projectId = projectSelect.value;
+  sprintSelect.innerHTML = '<option value="">-- Kein Sprint --</option>';
+  allSprints.filter(s => s.projekt_id === projectId).forEach(s => {
+    const opt = document.createElement('option');
+    opt.value = s.id;
+    opt.textContent = s.name;
+    if (s.id === initialSprint) opt.selected = true;
+    sprintSelect.appendChild(opt);
+  });
+}
+
+projectSelect.addEventListener('change', filterSprints);
+document.addEventListener('DOMContentLoaded', filterSprints);
 
 function saveTask() {
   const data = {};
