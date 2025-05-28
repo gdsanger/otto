@@ -347,6 +347,7 @@ def update_task_details(request):
         task["person_id"] = request.POST.get("person_id")
         task["requester_id"] = request.POST.get("requester_id")
         task["project_id"] = request.POST.get("project_id") or None
+        task["sprint_id"] = request.POST.get("sprint_id") or None
         aufwand = request.POST.get("aufwand")
         task["aufwand"] = int(aufwand) if aufwand and aufwand.isdigit() else 0
         tid = request.POST.get("tid")

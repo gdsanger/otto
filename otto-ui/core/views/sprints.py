@@ -18,9 +18,17 @@ OTTO_API_URL = os.getenv("OTTO_API_URL")
 def sprint_listview(request):
     res = requests.get(f"{OTTO_API_URL}/sprints", headers={"x-api-key": OTTO_API_KEY})
     sprints = res.json() if res.status_code == 200 else []
+
+    projekte_res = requests.get(f"{OTTO_API_URL}/projekte", headers={"x-api-key": OTTO_API_KEY})
+    projekte = projekte_res.json() if projekte_res.status_code == 200 else []
+    projekt_map = {p.get("id"): p.get("name") for p in projekte}
+    for s in sprints:
+        s["projekt_name"] = projekt_map.get(s.get("projekt_id"), "")
+
     q = request.GET.get("q", "").lower()
     if q:
         sprints = [s for s in sprints if q in s.get("name", "").lower()]
+
     return render(request, "core/sprint_listview.html", {"sprints": sprints, "sprint_status": sprint_status})
 
 
