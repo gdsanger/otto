@@ -19,7 +19,7 @@ from .projects import (
     project_create_task,
     project_upload_file,
 )
-from .persons import person_listview, person_detailview, person_create
+from .persons import person_listview, person_detailview, person_create, delete_person
 from .messages import message_detailview
 from .sprints import sprint_listview, sprint_detailview, sprint_create, delete_sprint
 from django.shortcuts import render

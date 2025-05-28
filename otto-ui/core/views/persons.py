@@ -1,7 +1,7 @@
 import requests
 import json
 from django.shortcuts import render
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse, HttpResponseRedirect
 from django.views.decorators.csrf import csrf_exempt
 from .helpers import login_required
 from core.const import status_liste, prio_liste, typ_liste
@@ -88,3 +88,22 @@ def person_create(request):
         "prio_liste": prio_liste,
         "typ_liste": typ_liste,
     })
+
+
+@login_required
+@csrf_exempt
+def delete_person(request):
+    if request.method == "POST":
+        person_id = request.POST.get("person_id")
+        if not person_id:
+            return JsonResponse({"error": "Keine Person-ID."}, status=400)
+        res = requests.delete(
+            f"{OTTO_API_URL}/personen/{person_id}",
+            headers={"x-api-key": OTTO_API_KEY},
+        )
+        if res.status_code == 200:
+            if request.headers.get("HX-Request") == "true":
+                return HttpResponse("")
+            return HttpResponseRedirect("/person/")
+        return JsonResponse({"error": "Fehler beim L\u00f6schen."}, status=500)
+    return JsonResponse({"error": "Ung\u00fcltige Methode."}, status=405)
