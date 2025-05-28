@@ -87,7 +87,7 @@
             </div>
             <div class="mb-3">
               <label class="form-label">Termin</label>
-              <input class="form-control" type="date" name="termin" value="{{ task.termin|slice:":10" }}">
+              <input class="form-control" type="date" name="termin" value="{{ task.termin|default_if_none:''|slice:':10' }}">
             </div>
             <div class="mb-3">
               <label class="form-label">Status</label>
