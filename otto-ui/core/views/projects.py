@@ -102,28 +102,71 @@ def project_detailview(request, project_id):
 
     projekt_res = requests.get(f"{OTTO_API_URL}/projekte/{project_id}", headers={"x-api-key": OTTO_API_KEY})
     projekt = projekt_res.json() if projekt_res.status_code == 200 else {}
-    dateien_res = requests.get(f"{OTTO_API_URL}/sharepoint/projekte/{projekt.get('short', '')}/dateien", headers={"x-api-key": OTTO_API_KEY})
+    dateien_res = requests.get(
+        f"{OTTO_API_URL}/sharepoint/projekte/{projekt.get('short', '')}/dateien",
+        headers={"x-api-key": OTTO_API_KEY},
+    )
     dateien = dateien_res.json() if dateien_res.status_code == 200 else []
-    tasks_res = requests.get(f"{OTTO_API_URL}/project/{project_id}/tasks", headers={"x-api-key": OTTO_API_KEY})
+
+    tasks_res = requests.get(
+        f"{OTTO_API_URL}/project/{project_id}/tasks",
+        headers={"x-api-key": OTTO_API_KEY},
+    )
     tasks = tasks_res.json() if tasks_res.status_code == 200 else []
-    messages_res = requests.get(f"{OTTO_API_URL}/project/{project_id}/messages", headers={"x-api-key": OTTO_API_KEY})
+
+    task_q = request.GET.get("task_q", "").lower()
+    try:
+        task_page = int(request.GET.get("task_page", 1))
+    except ValueError:
+        task_page = 1
+    task_per_page = 10
+
+    filtered_tasks = []
+    for t in tasks:
+        if task_q:
+            if task_q not in t.get("betreff", "").lower() and task_q not in t.get("beschreibung", "").lower():
+                continue
+        filtered_tasks.append(t)
+
+    task_total_pages = max(1, (len(filtered_tasks) + task_per_page - 1) // task_per_page)
+    if task_page < 1:
+        task_page = 1
+    if task_page > task_total_pages:
+        task_page = task_total_pages
+    start = (task_page - 1) * task_per_page
+    end = start + task_per_page
+    paginated_tasks = filtered_tasks[start:end]
+    task_page_numbers = range(1, task_total_pages + 1)
+
+    messages_res = requests.get(
+        f"{OTTO_API_URL}/project/{project_id}/messages",
+        headers={"x-api-key": OTTO_API_KEY},
+    )
     messages = messages_res.json() if messages_res.status_code == 200 else []
     personen, agenten = load_person_lists()
     sprints_res = requests.get(f"{OTTO_API_URL}/sprints", headers={"x-api-key": OTTO_API_KEY})
     sprints = sprints_res.json() if sprints_res.status_code == 200 else []
 
-    return render(request, "core/project_detailview.html", {
-        "projekt": projekt,
-        "personen": personen,
-        "agenten": agenten,
-        "tasks": tasks,
-        "messages": messages,
-        "dateien": dateien,
-        "status_liste": status_liste,
-        "prio_liste": prio_liste,
-        "typ_liste": typ_liste,
-        "sprints": sprints
-    })
+    return render(
+        request,
+        "core/project_detailview.html",
+        {
+            "projekt": projekt,
+            "personen": personen,
+            "agenten": agenten,
+            "tasks": paginated_tasks,
+            "messages": messages,
+            "dateien": dateien,
+            "status_liste": status_liste,
+            "prio_liste": prio_liste,
+            "typ_liste": typ_liste,
+            "sprints": sprints,
+            "task_page": task_page,
+            "task_total_pages": task_total_pages,
+            "task_page_numbers": task_page_numbers,
+            "task_q": task_q,
+        },
+    )
 
 
 @login_required
