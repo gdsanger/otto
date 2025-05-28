@@ -153,7 +153,7 @@
             <input type="number" class="form-control form-control-sm auto-save" data-task-id="{{ task.id }}" data-field="aufwand" value="{{ task.aufwand }}">
           </td>
           <td>
-            <input type="date" class="form-control form-control-sm auto-save" data-task-id="{{ task.id }}" data-field="termin" value="{{ task.termin|slice:":10" }}">
+            <input type="date" class="form-control form-control-sm auto-save" data-task-id="{{ task.id }}" data-field="termin" value="{{ task.termin|default_if_none:''|slice:':10' }}">
           </td>
          <td>
   <select class="form-select form-select-sm auto-save" data-task-id="{{ task.id }}" data-field="person_id">
