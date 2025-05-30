@@ -123,6 +123,7 @@
     </div>
   </div>
   <div id="saveSuccess" class="alert alert-success d-none">Gespeichert!</div>
+  {{ sprints|json_script:"sprints-data" }}
 </div>
 <script>
 function getCookie(name){
@@ -140,8 +141,8 @@ function getCookie(name){
   return cookieValue;
 }
 const form = document.getElementById('taskForm');
-const successBox = document.getElementById('saveSuccess');
-const allSprints = JSON.parse('{{ sprints|escapejs }}');
+  const successBox = document.getElementById('saveSuccess');
+  const allSprints = JSON.parse(document.getElementById('sprints-data').textContent);
 const sprintSelect = form.querySelector('select[name="sprint_id"]');
 const projectSelect = form.querySelector('select[name="project_id"]');
 const initialSprint = '{{ task.sprint_id|default:"" }}';
