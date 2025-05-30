@@ -19,7 +19,7 @@ async def get_next_tid():
 
     counter = await db.counters.find_one_and_update(
         {"_id": "task_tid"},
-        {"$inc": {"seq": 1}, "$setOnInsert": {"seq": 999}},
+        {"$inc": {"seq": 1}, "$setOnInsert": {"seq": 1999}},
         upsert=True,
         return_document=ReturnDocument.AFTER,
     )
