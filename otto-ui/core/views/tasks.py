@@ -447,6 +447,15 @@ def task_pageview(request, task_id):
                 return JsonResponse({"error": "Task nicht gefunden"}, status=404)
             task = res.json()
             for key, value in payload.items():
+                if key == "aufwand":
+                    value = int(value) if str(value).isdigit() else 0
+                elif key == "tid":
+                    if str(value).isdigit():
+                        value = int(value)
+                    else:
+                        continue
+                elif key == "termin" and value == "":
+                    value = None
                 task[key] = value
             update = requests.put(
                 f"{OTTO_API_URL}/tasks/{task_id}",
