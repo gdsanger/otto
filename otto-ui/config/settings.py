@@ -23,7 +23,12 @@ SECRET_KEY = 'django-insecure-!r@dk+7i6qd=yl9b0&5!d(d63!36f)l=q#)ywusi=st2#5uob7
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["isarlabs.de", "www.isarlabs.de", "localhost", "127.0.0.1"]
+ALLOWED_HOSTS = ['isarlabs.de', 'www.isarlabs.de', 'localhost']
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://isarlabs.de',
+    'https://www.isarlabs.de'    
+]
 
 # Application definition
 
