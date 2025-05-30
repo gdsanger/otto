@@ -48,7 +48,7 @@ def similar_tasks(query_text: str, exclude_id: str, limit: int = 5):
     res = collection.query(
         query_texts=[query_text],
         n_results=limit + 1,
-        include=["metadatas", "ids"],
+        include=["metadatas"],
     )
 
     tasks = []
