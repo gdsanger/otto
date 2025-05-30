@@ -123,6 +123,23 @@
     </div>
   </div>
   <div id="saveSuccess" class="alert alert-success d-none">Gespeichert!</div>
+  {% if similar_tasks %}
+  <div class="card mb-3">
+    <div class="card-header">
+      <h5 class="mb-0">Ähnliche Aufgaben</h5>
+    </div>
+    <div class="card-body p-2">
+      <ul class="list-unstyled mb-0">
+        {% for t in similar_tasks %}
+        <li>
+          <a href="/task/view/{{ t.id }}/">{{ t.betreff }}</a>
+          {% if t.projekt %}<span class="text-muted">({{ t.projekt }})</span>{% endif %}
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+  {% endif %}
   {{ sprints|json_script:"sprints-data" }}
 </div>
 <script>

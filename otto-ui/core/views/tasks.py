@@ -475,6 +475,11 @@ def task_pageview(request, task_id):
     sprints = sprints_res.json() if sprints_res.status_code == 200 else []
     meetings_res = requests.get(f"{OTTO_API_URL}/meetings", headers={"x-api-key": OTTO_API_KEY})
     meetings = meetings_res.json() if meetings_res.status_code == 200 else []
+    similar_res = requests.get(
+        f"{OTTO_API_URL}/tasks/{task_id}/similar",
+        headers={"x-api-key": OTTO_API_KEY},
+    )
+    similar_tasks = similar_res.json() if similar_res.status_code == 200 else []
     return render(request, "core/task_detailpage.html", {
         "task": task,
         "personen": personen,
@@ -485,4 +490,5 @@ def task_pageview(request, task_id):
         "status_liste": status_liste,
         "typ_liste": typ_liste,
         "sprints": sprints,
+        "similar_tasks": similar_tasks,
     })

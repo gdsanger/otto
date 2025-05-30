@@ -7,7 +7,7 @@ from datetime import datetime, date
 from bson import ObjectId
 from pymongo import ReturnDocument
 from controller.context_controller import aufgabe_context
-from chroma import upsert_task
+from chroma import upsert_task, similar_tasks as chroma_similar_tasks
 import asyncio
 
 router = APIRouter()
@@ -125,3 +125,16 @@ async def get_tasks_by_sprint(sprint_id: str):
     """Return all tasks that belong to the given sprint."""
     cursor = db.tasks.find({"sprint_id": sprint_id})
     return [serialize_mongo(task) async for task in cursor]
+
+
+@router.get("/tasks/{task_id}/similar", dependencies=[Depends(verify_api_key)], tags=["Task"])
+async def get_similar_tasks(task_id: str, limit: int = 5):
+    """Return tasks with a semantic similarity to the given task."""
+    try:
+        context = await aufgabe_context(task_id)
+    except HTTPException:
+        raise
+    except Exception:
+        raise HTTPException(status_code=500, detail="Context error")
+
+    return chroma_similar_tasks(context.get("context_text", ""), task_id, limit)
