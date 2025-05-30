@@ -20,7 +20,8 @@ def upsert_task(task: dict):
             "bearbeiter": task.get("person", {}).get("name"),
             "status": task.get("status"),
             "prio": task.get("prio"),
-            "typ": task.get("typ")
+            "typ": task.get("typ"),
+            "full": task,
         }],
         ids=[task["id"]],
     )
