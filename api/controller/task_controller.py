@@ -12,14 +12,14 @@ router = APIRouter()
 async def get_next_tid():
     """Increment and return the next task id.
 
-    If the counter document does not exist yet, initialize it so the
-    first returned id will be ``1000``. ``$setOnInsert`` avoids an extra
-    database call when the counter is created for the first time.
+    The counter document is created on first use with the value ``1000``.
+    A pipeline update avoids conflicting update operators when
+    the document needs to be initialized and incremented in one step.
     """
 
     counter = await db.counters.find_one_and_update(
         {"_id": "task_tid"},
-        {"$inc": {"seq": 1}, "$setOnInsert": {"seq": 1999}},
+        [{"$set": {"seq": {"$add": [{"$ifNull": ["$seq", 999]}, 1]}}}],
         upsert=True,
         return_document=ReturnDocument.AFTER,
     )
