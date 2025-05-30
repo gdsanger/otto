@@ -103,3 +103,9 @@ async def delete_task(task_id: str):
 async def get_tasks_by_project(project_id: str):
     cursor = db.tasks.find({"project_id": project_id})
     return [serialize_mongo(task) async for task in cursor]
+
+@router.get("/sprint/{sprint_id}/tasks", dependencies=[Depends(verify_api_key)], tags=["Sprint"])
+async def get_tasks_by_sprint(sprint_id: str):
+    """Return all tasks that belong to the given sprint."""
+    cursor = db.tasks.find({"sprint_id": sprint_id})
+    return [serialize_mongo(task) async for task in cursor]

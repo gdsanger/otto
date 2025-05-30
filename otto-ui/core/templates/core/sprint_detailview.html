@@ -75,6 +75,135 @@
     
     <div id="saveSuccess" class="alert alert-success mt-3 d-none">Gespeichert!</div>
   </form>
+
+  <hr class="my-4">
+
+  <form method="get" class="row mb-3">
+    <div class="col-sm-4">
+      <input type="text" class="form-control" name="task_q" value="{{ task_q }}" placeholder="Aufgaben suchen...">
+    </div>
+    <div class="col-auto">
+      <button type="submit" class="btn btn-outline-primary">Suchen</button>
+      {% if task_q %}
+        <a href="?" class="btn btn-outline-secondary ms-2">Zurücksetzen</a>
+      {% endif %}
+    </div>
+  </form>
+  {% if tasks %}
+    <table class="table table-sm table-striped">
+      <thead>
+        <tr>
+          <th>TID</th>
+          <th>Betreff</th>
+          <th>Status</th>
+          <th>Typ</th>
+          <th>Termin</th>
+          <th>Zuständig</th>
+          <th>Requester</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for task in tasks %}
+        <tr id="task-{{ task.id }}">
+          <td>{{ task.tid }}</td>
+          <td><a href="/task/view/{{ task.id }}/">{{ task.betreff }}</a></td>
+          <td>
+            <select class="form-select form-select-sm auto-save" data-task-id="{{ task.id }}" data-field="status">
+              {% for s in status_liste %}
+                <option value="{{ s }}" {% if s == task.status %}selected{% endif %}>{{ s }}</option>
+              {% endfor %}
+            </select>
+          </td>
+          <td>
+            <select class="form-select form-select-sm auto-save" data-task-id="{{ task.id }}" data-field="typ">
+              {% for t in typ_liste %}
+                <option value="{{ t }}" {% if t == task.typ %}selected{% endif %}>{{ t }}</option>
+              {% endfor %}
+            </select>
+          </td>
+          <td>
+            <input type="date" class="form-control form-control-sm auto-save" data-task-id="{{ task.id }}" data-field="termin" value="{{ task.termin|default_if_none:''|slice:':10' }}">
+          </td>
+          <td>
+            <select class="form-select form-select-sm auto-save" data-task-id="{{ task.id }}" data-field="person_id">
+              {% for p in agenten %}
+                <option value="{{ p.id }}" {% if p.id == task.person_id %}selected{% endif %}>{{ p.name }}</option>
+              {% endfor %}
+            </select>
+          </td>
+          <td>
+            <select class="form-select form-select-sm auto-save" data-task-id="{{ task.id }}" data-field="requester_id">
+              <option value="">-- Kein Requester --</option>
+              {% for p in personen %}
+                <option value="{{ p.id }}" {% if p.id == task.requester_id %}selected{% endif %}>{{ p.name }}</option>
+              {% endfor %}
+            </select>
+          </td>
+          <td>
+            <form hx-post="/task/delete/" hx-confirm="Wirklich löschen?" hx-target="closest tr" hx-swap="outerHTML">
+              <input type="hidden" name="task_id" value="{{ task.id }}">
+              <button type="submit" class="btn btn-sm btn-outline-danger">🗑️</button>
+            </form>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <nav aria-label="Seiten" class="mt-3">
+      <ul class="pagination justify-content-center">
+        <li class="page-item {% if task_page <= 1 %}disabled{% endif %}">
+          <a class="page-link" href="?task_q={{ task_q }}&task_page={{ task_page|add:-1 }}">Vorherige</a>
+        </li>
+        {% for p in task_page_numbers %}
+        <li class="page-item {% if p == task_page %}active{% endif %}">
+          <a class="page-link" href="?task_q={{ task_q }}&task_page={{ p }}">{{ p }}</a>
+        </li>
+        {% endfor %}
+        <li class="page-item {% if task_page >= task_total_pages %}disabled{% endif %}">
+          <a class="page-link" href="?task_q={{ task_q }}&task_page={{ task_page|add:1 }}">Nächste</a>
+        </li>
+      </ul>
+    </nav>
+    <h6 class="mt-4">Neue Aufgabe hinzufügen</h6>
+    <form id="taskForm" class="row g-2">
+      {% csrf_token %}
+      <div class="col-12 col-md-4">
+        <input type="text" name="betreff" class="form-control" placeholder="Betreff" required>
+      </div>
+      <div class="col-6 col-md-2">
+        <input type="date" name="termin" class="form-control">
+      </div>
+      <div class="col-6 col-md-2">
+        <select name="status" class="form-select">
+          {% for s in status_liste %}
+          <option value="{{ s }}">{{ s }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="col-12 col-md-3">
+        <select name="person_id" class="form-select">
+          <option value="">Zuständig wählen</option>
+          {% for p in agenten %}
+          <option value="{{ p.id }}">{{ p.name }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="col-12 col-md-3">
+        <select name="requester_id" class="form-select">
+          <option value="">-- Kein Requester --</option>
+          {% for p in personen %}
+          <option value="{{ p.id }}">{{ p.name }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="col-12 col-md-1">
+        <button type="submit" class="btn btn-success w-100">➕</button>
+      </div>
+    </form>
+  {% else %}
+    <p>Keine Tasks vorhanden.</p>
+  {% endif %}
 </div>
 <script>
   function getCookie(name) {
@@ -165,5 +294,43 @@
       });
     }
   });
+
+  document.querySelectorAll('.auto-save').forEach(el => {
+    el.addEventListener('change', () => {
+      const taskId = el.dataset.taskId;
+      const field = el.dataset.field;
+      const value = el.value;
+
+      fetch(`/task/view/${taskId}/`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRFToken': getCookie('csrftoken'),
+        },
+        body: JSON.stringify({ [field]: value })
+      }).then(r => { if(!r.ok) alert('Fehler beim Speichern'); });
+    });
+  });
+
+  const taskForm = document.getElementById('taskForm');
+  if (taskForm) {
+    taskForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      const data = Object.fromEntries(new FormData(this));
+      data.sprint_id = window.ottoContext.id;
+      data.project_id = '{{ sprint.projekt_id }}';
+      data.status = data.status || 'Offen';
+      data.zuständig = 'Otto';
+
+      fetch('/sprint/createtask/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRFToken': getCookie('csrftoken')
+        },
+        body: JSON.stringify(data)
+      }).then(r => { if (r.ok) location.reload(); else alert('Fehler beim Erstellen der Aufgabe'); });
+    });
+  }
 </script>
 {% endblock %}
