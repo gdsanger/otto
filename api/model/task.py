@@ -18,3 +18,4 @@ class Task(BaseModel):
     project_id: Optional[str] = None
     sprint_id: Optional[str] = None
     meeting_id: Optional[str] = None
+    context_text: Optional[str] = None

@@ -5,6 +5,46 @@ from mongo import projekte_collection, personen_collection, sprints_collection, 
 
 router = APIRouter()
 
+
+async def _build_context_text(task_dict: dict) -> str:
+    """Generate a context string for ChromaDB from task details."""
+    person_name = ""
+    department = ""
+    role = ""
+    mandant = ""
+    if task_dict.get("person"):
+        p = task_dict["person"]
+    elif task_dict.get("person_id"):
+        person_doc = await personen_collection.find_one({"_id": ObjectId(task_dict["person_id"])})
+        p = serialize_mongo(person_doc) if person_doc else {}
+    else:
+        p = {}
+
+    if p:
+        person_name = p.get("name", "")
+        department = p.get("position") or p.get("abteilung", "")
+        role = p.get("rolle", "")
+        mandant = p.get("mandant", "")
+
+    project_name = ""
+    if task_dict.get("projekt"):
+        project_name = task_dict["projekt"].get("name", "")
+    elif task_dict.get("project_id"):
+        proj = await projekte_collection.find_one({"_id": ObjectId(task_dict["project_id"])})
+        if proj:
+            project_name = proj.get("name", "")
+
+    context_text = (
+        f"Aufgabe: {task_dict.get('betreff')}, "
+        f"Beschreibung: {task_dict.get('beschreibung')}, "
+        f"Zuständig: {person_name} ({department}, {role}, {mandant}), "
+        f"Projekt: {project_name}, "
+        f"Typ: {task_dict.get('typ')}, "
+        f"Status: {task_dict.get('status')}, "
+        f"Termin: {task_dict.get('termin')}"
+    )
+    return context_text
+
 @router.get("/context/projekt/{projekt_id}", dependencies=[Depends(verify_api_key)], tags=["Context"])
 async def projekt_context(projekt_id: str):
     try:
@@ -29,7 +69,12 @@ async def projekt_context(projekt_id: str):
         proj_dict["stakeholder"] = [serialize_mongo(p) async for p in cursor]
 
     tasks_cursor = db.tasks.find({"project_id": projekt_id})
-    proj_dict["aufgaben"] = [serialize_mongo(t) async for t in tasks_cursor]
+    proj_tasks = []
+    async for t in tasks_cursor:
+        t_dict = serialize_mongo(t)
+        t_dict["context_text"] = await _build_context_text(t_dict)
+        proj_tasks.append(t_dict)
+    proj_dict["aufgaben"] = proj_tasks
 
     sprints_cursor = sprints_collection.find({"projekt_id": projekt_id})
     proj_dict["sprints"] = [serialize_mongo(s) async for s in sprints_cursor]
@@ -70,6 +115,8 @@ async def aufgabe_context(aufgabe_id: str):
                 proj_dict["stakeholder"] = [serialize_mongo(p) async for p in cursor]
             task_dict["projekt"] = proj_dict
 
+    task_dict["context_text"] = await _build_context_text(task_dict)
+
     return task_dict
 
 @router.get("/context/person/{person_id}", dependencies=[Depends(verify_api_key)], tags=["Context"])
@@ -102,6 +149,7 @@ async def person_context(person_id: str):
                     cursor = personen_collection.find({"_id": {"$in": ids}})
                     proj_dict["stakeholder"] = [serialize_mongo(p) async for p in cursor]
                 t_dict["projekt"] = proj_dict
+        t_dict["context_text"] = await _build_context_text(t_dict)
         tasks.append(t_dict)
 
     person_dict["tasks"] = tasks
