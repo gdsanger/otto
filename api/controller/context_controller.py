@@ -113,9 +113,18 @@ async def aufgabe_context(aufgabe_id: str):
                 ids = [ObjectId(pid) for pid in proj_dict["stakeholder_ids"]]
                 cursor = personen_collection.find({"_id": {"$in": ids}})
                 proj_dict["stakeholder"] = [serialize_mongo(p) async for p in cursor]
+            else:
+                proj_dict["stakeholder"] = []
             task_dict["projekt"] = proj_dict
 
+
     task_dict["context_text"] = await _build_context_text(task_dict)
+
+    if task_dict.get("sprint_id"):
+        sprint = await sprints_collection.find_one({"_id": ObjectId(task_dict["sprint_id"])})
+        if sprint:
+            task_dict["sprint"] = serialize_mongo(sprint)
+
 
     return task_dict
 

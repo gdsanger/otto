@@ -8,7 +8,7 @@ from helper import verify_api_key, serialize_mongo, ensure_folder_exists
 from bson import ObjectId
 from email import policy
 from email.parser import BytesParser
-from mongo import projekte_collection, personen_collection
+from mongo import projekte_collection, personen_collection, sprints_collection
 import logging
 
 router = APIRouter()
@@ -35,6 +35,11 @@ async def lade_projekte():
                     "position": p.get("position")
                 })
             projekt_dict["stakeholder"] = stakeholder
+        else:
+            projekt_dict["stakeholder"] = []
+
+        sprints_cursor = sprints_collection.find({"projekt_id": projekt_dict["id"]})
+        projekt_dict["sprints"] = [serialize_mongo(s) async for s in sprints_cursor]
 
         daten.append(projekt_dict)
     return daten
@@ -47,11 +52,23 @@ async def get_projekt(projekt_id: str):
         raise HTTPException(status_code=400, detail="Ungültige Projekt-ID")
    
     projekt = await projekte_collection.find_one({"_id": oid})
-    
+
     if not projekt:
         raise HTTPException(status_code=404, detail="Projekt nicht gefunden")
-    
-    return serialize_mongo(projekt)
+
+    projekt_dict = serialize_mongo(projekt)
+
+    if projekt_dict.get("stakeholder_ids"):
+        ids = [ObjectId(pid) for pid in projekt_dict["stakeholder_ids"]]
+        cursor = personen_collection.find({"_id": {"$in": ids}})
+        projekt_dict["stakeholder"] = [serialize_mongo(p) async for p in cursor]
+    else:
+        projekt_dict["stakeholder"] = []
+
+    sprints_cursor = sprints_collection.find({"projekt_id": projekt_id})
+    projekt_dict["sprints"] = [serialize_mongo(s) async for s in sprints_cursor]
+
+    return projekt_dict
 
 @router.post("/projekte/", dependencies=[Depends(verify_api_key)], tags=["Projekt"])
 async def speichere_projekte(projekt_liste: ProjektListe = Body(...)):
