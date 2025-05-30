@@ -6,6 +6,15 @@ from config import API_KEY
 from fastapi.security.api_key import APIKeyHeader
 import os
 import sys
+import numpy as np
+
+# ----------------------------------------------------------------------------
+# Compatibility helpers
+# ----------------------------------------------------------------------------
+# Some third-party libraries still reference ``np.float_`` which was removed in
+# NumPy 2.0. Provide an alias so imports don't fail.
+if not hasattr(np, "float_"):
+    np.float_ = np.float64
 # Ensure project root is on the Python path when running the server from
 # within the ``api`` directory so that modules like ``graph`` are available.
 ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
