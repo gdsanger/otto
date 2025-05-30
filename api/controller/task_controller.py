@@ -8,6 +8,7 @@ from bson import ObjectId
 from pymongo import ReturnDocument
 from controller.context_controller import aufgabe_context
 from chroma import upsert_task
+from chromadb import HttpClient
 import asyncio
 
 router = APIRouter()
