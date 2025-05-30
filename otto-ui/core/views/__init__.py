@@ -21,7 +21,13 @@ from .projects import (
 )
 from .persons import person_listview, person_detailview, person_create, delete_person
 from .messages import message_detailview
-from .sprints import sprint_listview, sprint_detailview, sprint_create, delete_sprint
+from .sprints import (
+    sprint_listview,
+    sprint_detailview,
+    sprint_create,
+    sprint_create_task,
+    delete_sprint,
+)
 from django.shortcuts import render
 from .helpers import login_required
 import os
