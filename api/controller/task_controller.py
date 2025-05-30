@@ -10,11 +10,18 @@ from pymongo import ReturnDocument
 router = APIRouter()
 
 async def get_next_tid():
+    """Increment and return the next task id.
+
+    If the counter document does not exist yet, initialize it so the
+    first returned id will be ``1000``. ``$setOnInsert`` avoids an extra
+    database call when the counter is created for the first time.
+    """
+
     counter = await db.counters.find_one_and_update(
         {"_id": "task_tid"},
-        {"$inc": {"seq": 1}},
+        {"$inc": {"seq": 1}, "$setOnInsert": {"seq": 999}},
         upsert=True,
-        return_document=ReturnDocument.AFTER
+        return_document=ReturnDocument.AFTER,
     )
     return counter["seq"]
 
@@ -44,7 +51,9 @@ async def create_task(task: Task):
             raise HTTPException(status_code=400, detail="Sprint nicht gefunden")
 
     task_dict = convert_dates(task.dict())
-    if "tid" not in task_dict:
+    # "tid" wird von Pydantic immer im Dictionary vorhanden sein.
+    # Darum auch dann eine neue TID vergeben, wenn der Wert None ist.
+    if task_dict.get("tid") is None:
         task_dict["tid"] = await get_next_tid()
 
     result = await db.tasks.insert_one(task_dict)
@@ -73,7 +82,8 @@ async def update_task(task_id: str, task: Task):
             raise HTTPException(status_code=400, detail="Sprint nicht gefunden")
 
     task_dict = convert_dates(task.dict())
-    if task_dict["tid"] == None:
+    if task_dict.get("tid") is None:
+        # Bei Updates kann "tid" explizit auf None gesetzt sein.
         print("Task TID is None, generating new one")
         task_dict["tid"] = await get_next_tid()
 
