@@ -34,6 +34,22 @@ async def _build_context_text(task_dict: dict) -> str:
         if proj:
             project_name = proj.get("name", "")
 
+    sprint = None
+    if task_dict.get("sprint"):
+        sprint = task_dict["sprint"]
+    elif task_dict.get("sprint_id"):
+        sprint_doc = await sprints_collection.find_one({"_id": ObjectId(task_dict["sprint_id"])})
+        if sprint_doc:
+            sprint = serialize_mongo(sprint_doc)
+
+    sprint_text = ""
+    if sprint:
+        start = sprint.get("startdatum")
+        end = sprint.get("enddatum")
+        sprint_name = sprint.get("name", "")
+        status = sprint.get("status", "")
+        sprint_text = f", Sprint: {sprint_name} ({start} bis {end}, {status})"
+
     context_text = (
         f"Aufgabe: {task_dict.get('betreff')}, "
         f"Beschreibung: {task_dict.get('beschreibung')}, "
@@ -41,7 +57,8 @@ async def _build_context_text(task_dict: dict) -> str:
         f"Projekt: {project_name}, "
         f"Typ: {task_dict.get('typ')}, "
         f"Status: {task_dict.get('status')}, "
-        f"Termin: {task_dict.get('termin')}"
+        f"Termin: {task_dict.get('termin')}" 
+        f"{sprint_text}"
     )
     return context_text
 
