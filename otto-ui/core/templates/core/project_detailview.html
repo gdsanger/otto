@@ -108,9 +108,17 @@
     <div class="col-sm-4">
       <input type="text" class="form-control" name="task_q" value="{{ task_q }}" placeholder="Aufgaben suchen...">
     </div>
+    <div class="col-sm-3">
+      <select class="form-select" name="sprint_id">
+        <option value="">Sprint wählen</option>
+        {% for s in sprints %}
+          <option value="{{ s.id }}" {% if s.id == sprint_id %}selected{% endif %}>{{ s.name }}</option>
+        {% endfor %}
+      </select>
+    </div>
     <div class="col-auto">
       <button type="submit" class="btn btn-outline-primary">Suchen</button>
-      {% if task_q %}
+      {% if task_q or sprint_id %}
         <a href="?" class="btn btn-outline-secondary ms-2">Zurücksetzen</a>
       {% endif %}
     </div>
@@ -183,15 +191,15 @@
     <nav aria-label="Seiten" class="mt-3">
       <ul class="pagination justify-content-center">
         <li class="page-item {% if task_page <= 1 %}disabled{% endif %}">
-          <a class="page-link" href="?task_q={{ task_q }}&task_page={{ task_page|add:-1 }}">Vorherige</a>
+          <a class="page-link" href="?task_q={{ task_q }}{% if sprint_id %}&sprint_id={{ sprint_id }}{% endif %}&task_page={{ task_page|add:-1 }}">Vorherige</a>
         </li>
         {% for p in task_page_numbers %}
         <li class="page-item {% if p == task_page %}active{% endif %}">
-          <a class="page-link" href="?task_q={{ task_q }}&task_page={{ p }}">{{ p }}</a>
+          <a class="page-link" href="?task_q={{ task_q }}{% if sprint_id %}&sprint_id={{ sprint_id }}{% endif %}&task_page={{ p }}">{{ p }}</a>
         </li>
         {% endfor %}
         <li class="page-item {% if task_page >= task_total_pages %}disabled{% endif %}">
-          <a class="page-link" href="?task_q={{ task_q }}&task_page={{ task_page|add:1 }}">Nächste</a>
+          <a class="page-link" href="?task_q={{ task_q }}{% if sprint_id %}&sprint_id={{ sprint_id }}{% endif %}&task_page={{ task_page|add:1 }}">Nächste</a>
         </li>
       </ul>
     </nav>
