@@ -6,6 +6,9 @@ from mongo import db
 from datetime import datetime, date
 from bson import ObjectId
 from pymongo import ReturnDocument
+from controller.context_controller import aufgabe_context
+from chroma import upsert_task
+import asyncio
 
 router = APIRouter()
 
@@ -57,7 +60,13 @@ async def create_task(task: Task):
         task_dict["tid"] = await get_next_tid()
 
     result = await db.tasks.insert_one(task_dict)
-    return {"status": "ok", "id": str(result.inserted_id)}
+    task_id = str(result.inserted_id)
+    try:
+        context = await aufgabe_context(task_id)
+        await asyncio.to_thread(upsert_task, context)
+    except Exception as e:
+        print(f"Chroma update failed: {e}")
+    return {"status": "ok", "id": task_id}
 
 @router.get("/tasks/{task_id}", response_model=Task, dependencies=[Depends(verify_api_key)], tags=["Task"])
 async def get_task(task_id: str):
@@ -90,6 +99,13 @@ async def update_task(task_id: str, task: Task):
     result = await db.tasks.update_one({"_id": ObjectId(task_id)}, {"$set": task_dict})
     if result.matched_count == 0:
         raise HTTPException(status_code=404, detail="Task not found")
+
+    try:
+        context = await aufgabe_context(task_id)
+        await asyncio.to_thread(upsert_task, context)
+    except Exception as e:
+        print(f"Chroma update failed: {e}")
+
     return {"status": "updated"}
 
 @router.delete("/tasks/{task_id}", dependencies=[Depends(verify_api_key)], tags=["Task"])
