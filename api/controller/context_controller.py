@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException
 from bson import ObjectId
 from helper import verify_api_key, serialize_mongo
-from mongo import projekte_collection, personen_collection, db
+from mongo import projekte_collection, personen_collection, sprints_collection, db
 
 router = APIRouter()
 
@@ -30,6 +30,9 @@ async def projekt_context(projekt_id: str):
 
     tasks_cursor = db.tasks.find({"project_id": projekt_id})
     proj_dict["aufgaben"] = [serialize_mongo(t) async for t in tasks_cursor]
+
+    sprints_cursor = sprints_collection.find({"projekt_id": projekt_id})
+    proj_dict["sprints"] = [serialize_mongo(s) async for s in sprints_cursor]
 
     proj_dict["dateien"] = []
 
