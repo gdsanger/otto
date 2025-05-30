@@ -73,11 +73,10 @@ async def update_task(task_id: str, task: Task):
             raise HTTPException(status_code=400, detail="Sprint nicht gefunden")
 
     task_dict = convert_dates(task.dict())
-    if "tid" not in task_dict:
+    if task_dict["tid"] == None:
+        print("Task TID is None, generating new one")
         task_dict["tid"] = await get_next_tid()
-    if task_dict["tid"] = None:
-         task_dict["tid"] = await get_next_tid()
-         
+
     result = await db.tasks.update_one({"_id": ObjectId(task_id)}, {"$set": task_dict})
     if result.matched_count == 0:
         raise HTTPException(status_code=404, detail="Task not found")

@@ -6,8 +6,10 @@ from datetime import datetime, date
 from model.sprint import Sprint, SprintListe
 from mongo import sprints_collection, projekte_collection
 from helper import verify_api_key, serialize_mongo
+import logging
 
 router = APIRouter()
+logger = logging.getLogger(__name__)
 
 def convert_dates(sprint_dict):
     for key in ["startdatum", "enddatum"]:
