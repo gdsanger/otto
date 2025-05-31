@@ -1,0 +1,39 @@
+<html>
+  <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
+    <h2 style="color: #005288;">🔎 Projektzusammenfassung: {{ projekt.name }}</h2>
+    
+    <p><strong>Status:</strong> {{ projekt.status }}<br>
+    <strong>Geplante Fertigstellung:</strong> {{ projekt.geplante_fertigstellung|date:"d.m.Y" }}</p>
+    
+    <p><strong>Beschreibung:</strong><br>
+    {{ projekt.beschreibung }}</p>
+
+    {% if aufgaben %}
+    <h3 style="margin-top: 30px;">📋 Offene Aufgaben</h3>
+    <table cellpadding="6" cellspacing="0" border="0" style="width: 100%; border-collapse: collapse;">
+      <thead style="background-color: #f0f0f0;">
+        <tr>
+          <th align="left">📝 Titel</th>
+          <th align="left">📌 Status</th>
+          <th align="left">📅 Termin</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for task in aufgaben %}
+        <tr style="border-bottom: 1px solid #ddd;">
+          <td>{{ task.betreff }}</td>
+          <td>{{ task.status }}</td>
+          <td>{{ task.termin|date:"d.m.Y" }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+    <p>Aktuell sind keine offenen Aufgaben im Projekt erfasst.</p>
+    {% endif %}
+
+    <p style="margin-top: 30px;">Bei Rückfragen stehe ich jederzeit zur Verfügung.<br>
+    Liebe Grüße<br><br>
+    Christian ∞</p>
+  </body>
+</html>
