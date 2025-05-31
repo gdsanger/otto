@@ -34,9 +34,11 @@ export default function ChatOtto() {
       ? `Verfügbare Funktionen: ${ctxInfo.gptFunctions.join(", ")}.`
       : ""
 
+    const extraContext = ctxInfo?.context ? ` Kontext: ${ctxInfo.context}` : ""
+
     const systemPrompt = {
       role: 'system',
-      content: `Du bist Otto, ein Projekt-KI-Assistent. Wir befinden uns im Kontext ${promptContext}. ${availableFunctions}`
+      content: `Du bist Otto, ein Projekt-KI-Assistent. Wir befinden uns im Kontext ${promptContext}.${extraContext ? extraContext : ''} ${availableFunctions}`
     }
 
     const saved = localStorage.getItem('ottoChatMessages_' + context)
@@ -58,9 +60,11 @@ export default function ChatOtto() {
       ? `${ctxInfo.type} „${ctxInfo.name}“ (ID: ${ctxInfo.id}) - Funktionen: ${ctxInfo.gptFunctions.join(", ")}`
       : context
 
+    const extraContext = ctxInfo?.context ? ` Kontext: ${ctxInfo.context}` : ""
+
     const systemPrompt = {
       role: 'system',
-      content: `Du bist Otto, ein Projekt-KI-Assistent. Gib strukturierte, klare Antworten in HTML oder Tabellenform. Nutze Listen und Zwischenüberschriften. Wir befinden uns im Kontext ${promptContext}.`
+      content: `Du bist Otto, ein Projekt-KI-Assistent. Gib strukturierte, klare Antworten in HTML oder Tabellenform. Nutze Listen und Zwischenüberschriften. Wir befinden uns im Kontext ${promptContext}.${extraContext ? extraContext : ''}`
     }
 
     const userContent = selectedFunction

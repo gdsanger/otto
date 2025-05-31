@@ -1,6 +1,15 @@
 {% extends "base.html" %}
 {% load format_tags %}
 {% block content %}
+<script>
+  window.ottoContext = {
+    type: "message",
+    name: "{{ selected.subject|default:''|escapejs }}",
+    id: "{{ selected.id|default:'' }}",
+    context: "{{ selected.message|default:''|escapejs }}",
+    gptFunctions: []
+  }
+</script>
 <div class="container-fluid">
   <div class="row" style="height: calc(100vh - 120px);">
     <div class="col-4 border-end overflow-auto">
