@@ -89,6 +89,8 @@ async def chat(request: ChatRequest):
 
 
 async def call_function_and_respond(name, args, messages, tool_call):
+    if name == "open_project_form":
+        return {"reply": "Projektformular wird geöffnet", "action": "open_project_form", "values": args}
     if name == "get_project_by_id":
         url = f"{OTTO_API_URL}context/projekt/{args.get('project_id')}"
     elif name == "get_task_by_id":

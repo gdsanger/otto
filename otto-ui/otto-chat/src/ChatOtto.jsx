@@ -89,6 +89,9 @@ export default function ChatOtto() {
         body: JSON.stringify({ messages: fullMessages })
       })
       const data = await res.json()
+      if (data.action === 'open_project_form' && window.ottoUI?.openProjectForm) {
+        window.ottoUI.openProjectForm(data.values || {})
+      }
       setMessages([...messages, { role: 'user', content: input }, { role: 'assistant', content: data.reply }])
     } catch {
       setMessages([...messages, { role: 'user', content: input }, { role: 'assistant', content: 'Fehler bei der Kommunikation mit Otto.' }])
