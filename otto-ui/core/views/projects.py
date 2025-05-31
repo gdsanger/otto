@@ -74,11 +74,18 @@ def project_create(request):
             return JsonResponse({"error": str(e)}, status=400)
 
     personen, agenten = load_person_lists()
+    initial = {
+        "name": request.GET.get("name", ""),
+        "short": request.GET.get("short", ""),
+        "beschreibung": request.GET.get("beschreibung", ""),
+        "status": request.GET.get("status", ""),
+        "prio": request.GET.get("prio", "")
+    }
     return render(
         request,
         "core/project_detailview.html",
         {
-            "projekt": {},
+            "projekt": initial,
             "personen": personen,
             "agenten": agenten,
             "tasks": [],
