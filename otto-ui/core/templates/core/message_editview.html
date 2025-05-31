@@ -16,14 +16,8 @@
     <div class="btn-group me-2" role="group">
       <button type="submit" form="messageForm" class="btn btn-outline-secondary">💾 Speichern</button>
       <button id="saveCloseBtn" type="button" class="btn btn-outline-secondary">💾 Speichern &amp; Schließen</button>
+      <button id="sendBtn" type="button" class="btn btn-outline-primary" {% if message.direction != 'out' or message.status == 'gesendet' %}disabled{% endif %}>📧 Senden</button>
     </div>
-    {% if message.id %}
-    <form method="post" action="/message/send/" class="btn-group" role="group">
-      {% csrf_token %}
-      <input type="hidden" name="message_id" value="{{ message.id }}">
-      <button type="submit" class="btn btn-outline-primary" {% if message.direction != 'out' or message.status == 'gesendet' %}disabled{% endif %}>📧 Senden</button>
-    </form>
-    {% endif %}
   </div>
   <form id="messageForm">
     {% csrf_token %}
@@ -38,6 +32,11 @@
         <input type="text" name="subject" class="form-control" value="{{ message.subject }}">
       </div>
       <div class="card-body">
+        <div class="mb-3">
+          {% if message.project_id %}<p class="mb-1"><strong>Projekt:</strong> {{ message.project_id }}</p>{% endif %}
+          <p class="mb-1"><strong>Status:</strong> {{ message.status }}</p>
+          <p class="mb-1"><strong>Richtung:</strong> {{ message.direction }}</p>
+        </div>
         <div class="mb-3">
           <label class="form-label">To</label>
           <input type="text" name="to" class="form-control" value="{{ message.to|join:', ' }}">
@@ -123,5 +122,24 @@
       else alert('Fehler beim Klonen');
     }).catch(() => alert('Fehler beim Klonen'));
   });
+  const sendBtn = document.getElementById('sendBtn');
+  if (sendBtn) {
+    sendBtn.addEventListener('click', () => {
+      saveMessage().then(d => {
+        const idInput = form.querySelector('input[name="id"]');
+        if (d.id) idInput.value = d.id;
+        const msgId = idInput.value;
+        const body = new URLSearchParams({message_id: msgId});
+        fetch('/message/send/', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'X-CSRFToken': getCookie('csrftoken'),
+          },
+          body: body.toString()
+        }).then(r => r.ok ? location.href = '/message/' + msgId + '/' : r.json().then(j => Promise.reject(j))).catch(() => alert('Fehler beim Senden'));
+      }).catch(() => alert('Fehler beim Speichern'));
+    });
+  }
 </script>
 {% endblock %}
