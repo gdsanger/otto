@@ -4,8 +4,10 @@
 <script>
   window.ottoContext = {
     type: "message",
-    name: "{{ message.subject }}",
-    id: "{{ message.id }}"
+    name: "{{ message.subject|escapejs }}",
+    id: "{{ message.id }}",
+    context: "{{ message.message|escapejs }}",
+    gptFunctions: []
   }
 </script>
 <div class="container py-4">
