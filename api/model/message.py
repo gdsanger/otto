@@ -14,4 +14,7 @@ class Message(BaseModel):
     cc: Optional[List[EmailStr]] = None
     message: str  # HTML Inhalt
     direction: Literal["in", "out"]
+    status: Literal["gesendet", "neu", "fehler"] = "neu"
     project_id: Optional[str] = None
+    task_id: Optional[str] = None
+    sprint_id: Optional[str] = None

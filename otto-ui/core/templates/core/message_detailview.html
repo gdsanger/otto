@@ -9,6 +9,16 @@
       <p><strong>Datum:</strong> {{ message.datum }}</p>
       <p><strong>To:</strong> {{ message.to|join:', ' }}</p>
       <p><strong>Cc:</strong> {{ message.cc|default_if_none:''|join:', ' }}</p>
+      <p><strong>Status:</strong> {{ message.status }}</p>
+      {% if message.project_id %}
+      <p><strong>Projekt:</strong> {{ message.project_id }}</p>
+      {% endif %}
+      {% if message.task_id %}
+      <p><strong>Task:</strong> {{ message.task_id }}</p>
+      {% endif %}
+      {% if message.sprint_id %}
+      <p><strong>Sprint:</strong> {{ message.sprint_id }}</p>
+      {% endif %}
       <div class="mt-3 border p-3" style="background:white;">
         {{ message.message|safe }}
       </div>
