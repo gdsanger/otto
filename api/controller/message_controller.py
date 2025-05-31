@@ -21,6 +21,15 @@ import base64
 
 router = APIRouter()
 
+# Versucht, falsch dekodierte Strings wieder in korrektes UTF-8 zu wandeln
+def fix_encoding(text: str) -> str:
+    if "\ufffd" in text:
+        try:
+            return text.encode("latin1").decode("utf-8")
+        except Exception:
+            return text
+    return text
+
 
 @router.post("/messages", dependencies=[Depends(verify_api_key)], tags=["Message"])
 async def create_message(message: Message):
@@ -124,12 +133,12 @@ async def fetch_inbox():
                 "datum": (
                     datetime.fromisoformat(dt_str) if dt_str else datetime.utcnow()
                 ),
-                "subject": m.get("subject", ""),
+                "subject": fix_encoding(m.get("subject", "")),
                 "sender": m.get("from", {}).get("emailAddress", {}).get("address"),
                 "to": [r["emailAddress"]["address"] for r in m.get("toRecipients", [])],
                 "cc": [r["emailAddress"]["address"] for r in m.get("ccRecipients", [])]
                 or None,
-                "message": m.get("body", {}).get("content", ""),
+                "message": fix_encoding(m.get("body", {}).get("content", "")),
                 "direction": "in",
                 "status": "gesendet",
                 "message_id": m.get("id"),
