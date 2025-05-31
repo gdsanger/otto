@@ -1,0 +1,17 @@
+{
+  "type": "function",
+  "function": {
+    "name": "open_project_form",
+    "description": "Öffnet im Otto-Frontend ein Formular zur Projekterstellung mit vorausgefüllten Feldern.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "name": {"type": "string", "description": "Projektname"},
+        "short": {"type": "string", "description": "Kurzbezeichnung, Wenn keine Kurzbezeichnung angegeben wurde bilde aus dem Projketnamen ein Kürzel mit 3-5 Zeichen."},
+        "beschreibung": {"type": "string", "description": "Projektbeschreibung im HTML-Format (z. B. mit <p>, <ul>, <li>, <strong>)"},
+        "status": {"type": "string", "description": "Projektstatus, wenn kein Status angegeben wurde verwenden wir als Status 'neu'."},
+        "prio": {"type": "string", "description": "Projektpriorität, wenn keine Prio angegeben wurde verwenden wir als Prio 'normal'"}
+      }
+    }
+  }
+}
