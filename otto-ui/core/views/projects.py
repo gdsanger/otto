@@ -174,6 +174,8 @@ def project_detailview(request, project_id):
         headers={"x-api-key": OTTO_API_KEY},
     )
     messages = messages_res.json() if messages_res.status_code == 200 else []
+    templates_dir = os.path.join(os.path.dirname(__file__), '../templates/emails/project')
+    email_templates = [f[:-5] for f in os.listdir(templates_dir) if f.endswith('.html')]
     personen, agenten = load_person_lists()
     sprints_res = requests.get(
         f"{OTTO_API_URL}/sprints", headers={"x-api-key": OTTO_API_KEY}
@@ -199,6 +201,7 @@ def project_detailview(request, project_id):
             "task_total_pages": task_total_pages,
             "task_page_numbers": task_page_numbers,
             "task_q": task_q,
+            "email_templates": email_templates,
         },
     )
 
