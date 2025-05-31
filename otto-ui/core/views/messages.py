@@ -113,11 +113,33 @@ def message_create(request):
             f"{OTTO_API_URL}/projekte/{project_id}", headers={"x-api-key": OTTO_API_KEY}
         )
         projekt = p_res.json() if p_res.status_code == 200 else {}
+
         t_res = requests.get(
             f"{OTTO_API_URL}/project/{project_id}/tasks", headers={"x-api-key": OTTO_API_KEY}
         )
         tasks = t_res.json() if t_res.status_code == 200 else []
         tasks = [t for t in tasks if t.get("status") != "✅ abgeschlossen"]
+
+        # Empfänger ermitteln
+        personen_res = requests.get(
+            f"{OTTO_API_URL}/personen", headers={"x-api-key": OTTO_API_KEY}
+        )
+        personen = personen_res.json() if personen_res.status_code == 200 else []
+        person_map = {p.get("id"): p for p in personen}
+
+        to_list = []
+        for pid in projekt.get("stakeholder_ids", []):
+            person = person_map.get(pid)
+            if person and person.get("email"):
+                to_list.append(person["email"])
+
+        cc_list = []
+        bearbeiter_id = projekt.get("bearbeiter")
+        if bearbeiter_id:
+            person = person_map.get(bearbeiter_id)
+            if person and person.get("email"):
+                cc_list.append(person["email"])
+
         html = render_to_string(
             f"emails/project/{template}.html",
             {"projekt": projekt, "aufgaben": tasks},
@@ -126,6 +148,8 @@ def message_create(request):
             "project_id": project_id,
             "subject": f"Projektzusammenfassung: {projekt.get('name', '')}",
             "message": html,
+            "to": to_list,
+            "cc": cc_list,
         })
 
     return render(request, "core/message_editview.html", {"message": message})
