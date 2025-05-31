@@ -1,26 +1,34 @@
-{#
-Betreff: Update Notifikation {{ projekt.name }} ({{ sprint.name }} / {{ sprint.enddatum|date:"d.m.Y" }})
+{# 
+Betreff: 🛠️ Abgeschlossen: Update {{ projekt.name }} am {{ sprint.enddatum|date:"d.m.Y" }} – ({{ sprint.name }}) 
 #}
 <html>
   <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
-    <h2 style="color: #005288;">🚀 Update für Sprint "{{ sprint.name }}" im Projekt {{ projekt.name }}</h2>
-    <p><strong>Enddatum:</strong> {{ sprint.enddatum|date:"d.m.Y" }}</p>
-    <p>Der Sprint wurde erfolgreich aktualisiert. Nachfolgend finden Sie alle zugehörigen Tasks:</p>
+    <h2 style="color: #005288;">🛠️ Sprint-Update: "{{ sprint.name }}" im Projekt <em>{{ projekt.name }}</em></h2>
+
+    <p>HLiebe Kolleginnen und Kollegen,</p>
+
+    <p>dies ist ein automatisches Update zum aktuellen Sprint. Nachfolgend finden Sie alle zugeordneten Aufgaben in der Übersicht:</p>
 
     {% if tasks %}
       {% for task in tasks %}
-        <p>
-          <strong>{{ task.betreff }}</strong><br>
-          {{ task.beschreibung }}
-        </p>
+        <div style="margin-bottom: 20px;">
+          <strong>📝 {{ task.betreff }}</strong><br>
+          <span style="color: #555;">{{ task.beschreibung }}</span>
+        </div>
         {% if not forloop.last %}
-        <hr style="border: 1px solid #ccc;">
+        <hr style="border: 0; border-top: 1px solid #eee;">
         {% endif %}
       {% endfor %}
     {% else %}
-    <p>Keine Aufgaben für diesen Sprint vorhanden.</p>
+    <p><em>Derzeit sind keine Aufgaben diesem Sprint zugeordnet.</em></p>
     {% endif %}
 
-    <p style="margin-top: 30px;">Viele Grüße<br><br>Christian ∞</p>
+    <p style="margin-top: 30px;">Bei Fragen stehe ich euch jederzeit zur Verfügung.<br><br>
+    Liebe Grüße<br><br>
+    Christian ∞</p>
+    <p>
+      P.S. Ihr könnt diese Information gerne an alle betroffenen Kolleginnen und Kollegen weiterleiten, falls diese nicht im Verteiler sind. 
+    </p>
   </body>
 </html>
+
