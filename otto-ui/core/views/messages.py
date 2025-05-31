@@ -246,3 +246,22 @@ def fetch_messages(request):
         return redirect(request.META.get("HTTP_REFERER", "/message/"))
 
     return JsonResponse({"error": "Fehler beim Abrufen."}, status=500)
+
+
+@login_required
+@csrf_exempt
+def delete_message(request):
+    if request.method == "POST":
+        message_id = request.POST.get("message_id")
+        if not message_id:
+            return JsonResponse({"error": "Keine Message-ID."}, status=400)
+        res = requests.delete(
+            f"{OTTO_API_URL}/messages/{message_id}",
+            headers={"x-api-key": OTTO_API_KEY},
+        )
+        if res.status_code == 200:
+            if request.headers.get("HX-Request") == "true":
+                return HttpResponse("")
+            return redirect("/message/?deleted=1")
+        return JsonResponse({"error": "Fehler beim Löschen."}, status=500)
+    return JsonResponse({"error": "Ungültige Methode."}, status=405)

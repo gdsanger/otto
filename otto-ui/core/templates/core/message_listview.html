@@ -9,13 +9,24 @@
       </ul>
       <div class="list-group">
         {% for m in messages %}
-        <a href="?folder={{ folder }}&message_id={{ m.id }}" class="list-group-item list-group-item-action {% if selected and selected.id == m.id %}active{% endif %}">
-          <div class="d-flex w-100 justify-content-between">
+        <div class="list-group-item list-group-item-action position-relative message-item {% if selected and selected.id == m.id %}active{% endif %}">
+          <a href="?folder={{ folder }}&message_id={{ m.id }}" class="stretched-link text-reset text-decoration-none"></a>
+          <div class="d-flex w-100 justify-content-between pe-4">
             <h6 class="mb-1">{{ m.subject }}</h6>
             <small>{{ m.datum|slice:":10" }}</small>
           </div>
-          <small>{{ m.to|join:', ' }}</small>
-        </a>
+          <small class="pe-4">{{ m.to|join:', ' }}</small>
+          <form
+            hx-post="/message/delete/"
+            hx-confirm="Wirklich löschen?"
+            hx-target="closest .message-item"
+            hx-swap="outerHTML"
+            class="position-absolute bottom-0 end-0 m-1"
+          >
+            <input type="hidden" name="message_id" value="{{ m.id }}">
+            <button type="submit" class="btn btn-sm btn-outline-danger">❌</button>
+          </form>
+        </div>
         {% empty %}
         <p class="m-2">Keine Nachrichten.</p>
         {% endfor %}
