@@ -29,6 +29,7 @@ urlpatterns = [
     path('message/new/', views.message_create, name='message_create'),
     path('message/', views.message_listview, name='message_liste'),
     path('message/send/', views.send_message, name='message_send'),
+    path('message/fetch/', views.fetch_messages, name='message_fetch'),
     path('message/<str:message_id>/', views.message_detailview, name='message_detail'),
     path('sprint/', views.sprint_listview, name='sprint_liste'),
     path('sprint/new/', views.sprint_create, name='sprint_create'),

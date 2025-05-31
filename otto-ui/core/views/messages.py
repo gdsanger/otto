@@ -219,3 +219,23 @@ def send_message(request):
         return JsonResponse({"error": "Fehler beim Senden."}, status=500)
 
     return JsonResponse({"error": "Ungültige Methode."}, status=405)
+
+
+@login_required
+@csrf_exempt
+def fetch_messages(request):
+    """Trigger the backend to fetch new inbox messages."""
+    if request.method != "POST":
+        return JsonResponse({"error": "Ungültige Methode."}, status=405)
+
+    res = requests.post(
+        f"{OTTO_API_URL}/messages/fetch",
+        headers={"x-api-key": OTTO_API_KEY},
+    )
+
+    if res.status_code == 200:
+        if request.headers.get("HX-Request") == "true":
+            return HttpResponse("")
+        return redirect(request.META.get("HTTP_REFERER", "/message/"))
+
+    return JsonResponse({"error": "Fehler beim Abrufen."}, status=500)

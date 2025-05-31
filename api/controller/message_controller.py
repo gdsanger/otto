@@ -48,8 +48,11 @@ async def fetch_inbox():
             if await db.messages.find_one({"message_id": m.get("id")}):
                 continue
 
+            dt_str = m.get("receivedDateTime")
+            if dt_str:
+                dt_str = dt_str.replace("Z", "+00:00")
             doc = {
-                "datum": datetime.fromisoformat(m.get("receivedDateTime")),
+                "datum": datetime.fromisoformat(dt_str) if dt_str else datetime.utcnow(),
                 "subject": m.get("subject", ""),
                 "to": [r["emailAddress"]["address"] for r in m.get("toRecipients", [])],
                 "cc": [r["emailAddress"]["address"] for r in m.get("ccRecipients", [])] or None,
