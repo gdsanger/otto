@@ -26,6 +26,13 @@ def message_listview(request):
 
     messages = [m for m in msgs if m.get("direction") == ("in" if folder == "in" else "out")]
 
+    for m in messages:
+        try:
+            m["_datum"] = datetime.fromisoformat(m.get("datum")) if m.get("datum") else datetime.min
+        except Exception:
+            m["_datum"] = datetime.min
+    messages.sort(key=lambda m: m["_datum"], reverse=True)
+
     selected = None
     if selected_id:
         res_det = requests.get(f"{OTTO_API_URL}/messages/{selected_id}", headers={"x-api-key": OTTO_API_KEY})
