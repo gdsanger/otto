@@ -538,6 +538,7 @@ def add_task_comment(request):
                 {"c": payload, "person_name": person_name},
             )
             return JsonResponse({"success": True, "html": html})
+
         try:
             error_detail = res.json().get("detail")
         except Exception:
@@ -546,5 +547,6 @@ def add_task_comment(request):
             {"error": error_detail or "Fehler beim Speichern."},
             status=res.status_code or 500,
         )
+
 
     return JsonResponse({"error": "Ungültige Methode."}, status=405)

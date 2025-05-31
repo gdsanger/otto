@@ -12,3 +12,15 @@ window.ottoUI.openProjectForm = function(values) {
     console.error('openProjectForm failed', e);
   }
 };
+
+window.ottoUI.openTaskForm = function(values) {
+  try {
+    var params = new URLSearchParams(values || {});
+    if (window.ottoContext && window.ottoContext.id) {
+      params.set('project_id', window.ottoContext.id);
+    }
+    window.location.href = '/task/new/' + (params.toString() ? ('?' + params.toString()) : '');
+  } catch (e) {
+    console.error('openTaskForm failed', e);
+  }
+};

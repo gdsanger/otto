@@ -146,6 +146,7 @@ def project_detailview(request, project_id):
 
     task_q = request.GET.get("task_q", "").lower()
     sprint_id_filter = request.GET.get("sprint_id")
+    show_done = request.GET.get("show_done")
     try:
         task_page = int(request.GET.get("task_page", 1))
     except ValueError:
@@ -154,6 +155,12 @@ def project_detailview(request, project_id):
 
     filtered_tasks = []
     for t in tasks:
+        if show_done:
+            if t.get("status") != "✅ abgeschlossen":
+                continue
+        else:
+            if t.get("status") == "✅ abgeschlossen":
+                continue
         if task_q:
             if (
                 task_q not in t.get("betreff", "").lower()
@@ -208,6 +215,7 @@ def project_detailview(request, project_id):
             "task_total_pages": task_total_pages,
             "task_page_numbers": task_page_numbers,
             "task_q": task_q,
+            "show_done": bool(show_done),
             "email_templates": email_templates,
         },
     )
