@@ -132,3 +132,18 @@ async def update_message(message_id: str, message: Message):
         raise HTTPException(status_code=404, detail="Message not found")
     return {"status": "aktualisiert"}
 
+
+@router.delete("/messages/{message_id}", dependencies=[Depends(verify_api_key)], tags=["Message"])
+async def delete_message(message_id: str):
+    """Delete a message by its MongoDB identifier."""
+    try:
+        oid = ObjectId(message_id)
+    except InvalidId:
+        raise HTTPException(status_code=400, detail="Ungültige ID")
+
+    result = await db.messages.delete_one({"_id": oid})
+    if result.deleted_count == 0:
+        raise HTTPException(status_code=404, detail="Message not found")
+    return {"status": "deleted"}
+
+
