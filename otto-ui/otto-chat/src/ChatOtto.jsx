@@ -91,6 +91,8 @@ export default function ChatOtto() {
       const data = await res.json()
       if (data.action === 'open_project_form' && window.ottoUI?.openProjectForm) {
         window.ottoUI.openProjectForm(data.values || {})
+      } else if (data.action === 'open_task_form' && window.ottoUI?.openTaskForm) {
+        window.ottoUI.openTaskForm(data.values || {})
       }
       setMessages([...messages, { role: 'user', content: input }, { role: 'assistant', content: data.reply }])
     } catch {
