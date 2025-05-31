@@ -1,0 +1,127 @@
+{% extends "base.html" %}
+{% block content %}
+<script>
+  window.ottoContext = {
+    type: "message",
+    name: "{{ message.subject }}",
+    id: "{{ message.id }}"
+  }
+</script>
+<div class="container py-4">
+  <div class="btn-toolbar mb-3" role="toolbar" aria-label="Toolbar">
+    <div class="btn-group me-2" role="group">
+      <button id="backBtn" type="button" class="btn btn-outline-secondary">↩️ Zurück</button>
+      <button id="cloneBtn" type="button" class="btn btn-outline-secondary">📄 Clone</button>
+    </div>
+    <div class="btn-group me-2" role="group">
+      <button type="submit" form="messageForm" class="btn btn-outline-secondary">💾 Speichern</button>
+      <button id="saveCloseBtn" type="button" class="btn btn-outline-secondary">💾 Speichern &amp; Schließen</button>
+    </div>
+    {% if message.id %}
+    <form method="post" action="/message/send/" class="btn-group" role="group">
+      {% csrf_token %}
+      <input type="hidden" name="message_id" value="{{ message.id }}">
+      <button type="submit" class="btn btn-outline-primary" {% if message.direction != 'out' or message.status == 'gesendet' %}disabled{% endif %}>📧 Senden</button>
+    </form>
+    {% endif %}
+  </div>
+  <form id="messageForm">
+    {% csrf_token %}
+    <input type="hidden" name="id" value="{{ message.id }}">
+    <input type="hidden" name="direction" value="{{ message.direction }}">
+    <input type="hidden" name="status" value="{{ message.status }}">
+    {% if message.project_id %}<input type="hidden" name="project_id" value="{{ message.project_id }}">{% endif %}
+    {% if message.task_id %}<input type="hidden" name="task_id" value="{{ message.task_id }}">{% endif %}
+    {% if message.sprint_id %}<input type="hidden" name="sprint_id" value="{{ message.sprint_id }}">{% endif %}
+    <div class="card">
+      <div class="card-header">
+        <input type="text" name="subject" class="form-control" value="{{ message.subject }}">
+      </div>
+      <div class="card-body">
+        <div class="mb-3">
+          <label class="form-label">To</label>
+          <input type="text" name="to" class="form-control" value="{{ message.to|join:', ' }}">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Cc</label>
+          <input type="text" name="cc" class="form-control" value="{{ message.cc|default_if_none:''|join:', ' }}">
+        </div>
+        <textarea id="editor" name="message" class="form-control">{{ message.message|safe }}</textarea>
+      </div>
+    </div>
+  </form>
+  <div id="saveSuccess" class="alert alert-success mt-3 d-none">Gespeichert!</div>
+</div>
+<script src="https://cdn.tiny.cloud/1/kpams0ubmp1xidkpbry2j9afcgmlfpiv96ybkly1llpyi875/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+<script>
+ tinymce.init({
+    selector: '#editor',
+    plugins: 'lists advlist link image table code charmap autolink codesample link searchreplace fullscreen emoticons',
+    toolbar: 'link | undo redo | bold italic | alignleft aligncenter alignright | code codesample searchreplace fullscreen emoticons',
+    license_key: 'gpl',
+    height: 300
+  });
+
+  function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+      const cookies = document.cookie.split(';');
+      for (let i = 0; i < cookies.length; i++) {
+        const cookie = cookies[i].trim();
+        if (cookie.substring(0, name.length + 1) === (name + '=')) {
+          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+          break;
+        }
+      }
+    }
+    return cookieValue;
+  }
+
+  const form = document.getElementById('messageForm');
+  const successBox = document.getElementById('saveSuccess');
+
+  function saveMessage() {
+    tinymce.triggerSave();
+    const data = {};
+    new FormData(form).forEach((v, k) => { data[k] = v; });
+    return fetch('', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRFToken': getCookie('csrftoken'),
+      },
+      body: JSON.stringify(data)
+    }).then(r => r.ok ? r.json() : Promise.reject());
+  }
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    saveMessage().then(d => {
+      successBox.classList.remove('d-none');
+      setTimeout(() => successBox.classList.add('d-none'), 2000);
+      if(d.id) window.location.href = '/message/' + d.id + '/';
+    }).catch(() => alert('Fehler beim Speichern'));
+  });
+
+  document.getElementById('backBtn').addEventListener('click', () => history.back());
+  document.getElementById('saveCloseBtn').addEventListener('click', () => {
+    saveMessage().then(() => history.back());
+  });
+  document.getElementById('cloneBtn').addEventListener('click', () => {
+    tinymce.triggerSave();
+    const data = {};
+    new FormData(form).forEach((v, k) => { if (k !== 'id') data[k] = v; });
+    fetch('/message/new/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRFToken': getCookie('csrftoken'),
+      },
+      body: JSON.stringify(data)
+    }).then(r => r.ok ? r.json() : Promise.reject()).then(d => {
+      if(d.id) window.location.href = '/message/' + d.id + '/';
+      else alert('Fehler beim Klonen');
+    }).catch(() => alert('Fehler beim Klonen'));
+  });
+</script>
+{% endblock %}

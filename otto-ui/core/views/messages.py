@@ -3,6 +3,8 @@ import json
 import requests
 from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render, redirect
+from django.template.loader import render_to_string
+from datetime import datetime
 from django.views.decorators.csrf import csrf_exempt
 from .helpers import login_required
 from dotenv import load_dotenv
@@ -37,13 +39,96 @@ def message_listview(request):
     })
 
 @login_required
+@csrf_exempt
 def message_detailview(request, message_id):
+    if request.method == "POST":
+        payload = json.loads(request.body)
+        res = requests.get(
+            f"{OTTO_API_URL}/messages/{message_id}", headers={"x-api-key": OTTO_API_KEY}
+        )
+        if res.status_code != 200:
+            return JsonResponse({"error": "Nachricht nicht gefunden."}, status=404)
+        message = res.json()
+        payload.setdefault("to", "")
+        payload.setdefault("cc", "")
+        message.update({
+            "subject": payload.get("subject", message.get("subject")),
+            "message": payload.get("message", message.get("message")),
+            "to": [a.strip() for a in payload.get("to", "").split(",") if a.strip()],
+            "cc": [a.strip() for a in payload.get("cc", "").split(",") if a.strip()],
+        })
+        update = requests.put(
+            f"{OTTO_API_URL}/messages/{message_id}",
+            headers={"x-api-key": OTTO_API_KEY, "Content-Type": "application/json"},
+            data=json.dumps(message),
+        )
+        return (
+            JsonResponse({"success": True})
+            if update.status_code == 200
+            else JsonResponse({"error": "Fehler beim Speichern"}, status=500)
+        )
+
     res = requests.get(
         f"{OTTO_API_URL}/messages/{message_id}",
         headers={"x-api-key": OTTO_API_KEY},
     )
     message = res.json() if res.status_code == 200 else {}
-    return render(request, "core/message_detailview.html", {"message": message})
+    return render(request, "core/message_editview.html", {"message": message})
+
+
+@login_required
+@csrf_exempt
+def message_create(request):
+    if request.method == "POST":
+        payload = json.loads(request.body)
+        data = {
+            "datum": datetime.utcnow().isoformat(),
+            "subject": payload.get("subject", ""),
+            "to": [a.strip() for a in payload.get("to", "").split(",") if a.strip()],
+            "cc": [a.strip() for a in payload.get("cc", "").split(",") if a.strip()],
+            "message": payload.get("message", ""),
+            "direction": payload.get("direction", "out"),
+            "status": payload.get("status", "neu"),
+            "project_id": payload.get("project_id"),
+            "task_id": payload.get("task_id"),
+            "sprint_id": payload.get("sprint_id"),
+        }
+        res = requests.post(
+            f"{OTTO_API_URL}/messages",
+            headers={"x-api-key": OTTO_API_KEY, "Content-Type": "application/json"},
+            data=json.dumps(data),
+        )
+        if res.status_code in (200, 201):
+            return JsonResponse({"success": True, "id": res.json().get("id")})
+        return JsonResponse({"error": "Fehler beim Speichern"}, status=500)
+
+    message = {
+        "direction": "out",
+        "status": "neu",
+    }
+    template = request.GET.get("template")
+    project_id = request.GET.get("project_id")
+    if template and project_id:
+        p_res = requests.get(
+            f"{OTTO_API_URL}/projekte/{project_id}", headers={"x-api-key": OTTO_API_KEY}
+        )
+        projekt = p_res.json() if p_res.status_code == 200 else {}
+        t_res = requests.get(
+            f"{OTTO_API_URL}/project/{project_id}/tasks", headers={"x-api-key": OTTO_API_KEY}
+        )
+        tasks = t_res.json() if t_res.status_code == 200 else []
+        tasks = [t for t in tasks if t.get("status") != "✅ abgeschlossen"]
+        html = render_to_string(
+            f"emails/project/{template}.html",
+            {"projekt": projekt, "aufgaben": tasks},
+        )
+        message.update({
+            "project_id": project_id,
+            "subject": f"Projektzusammenfassung: {projekt.get('name', '')}",
+            "message": html,
+        })
+
+    return render(request, "core/message_editview.html", {"message": message})
 
 
 @login_required
