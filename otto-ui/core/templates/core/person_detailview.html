@@ -59,6 +59,21 @@
   </form>
   <hr class="my-4">
   <h4>Tasks</h4>
+  <form method="get" class="row mb-3">
+    <div class="col-sm-4">
+      <input type="text" class="form-control" name="task_q" value="{{ task_q }}" placeholder="Aufgaben suchen...">
+    </div>
+    <div class="col-auto form-check ms-2">
+      <input class="form-check-input" type="checkbox" name="show_done" id="showDone" value="1" {% if show_done %}checked{% endif %}>
+      <label class="form-check-label" for="showDone">Abgeschlossene anzeigen</label>
+    </div>
+    <div class="col-auto">
+      <button type="submit" class="btn btn-outline-primary">Suchen</button>
+      {% if task_q or show_done %}
+        <a href="?" class="btn btn-outline-secondary ms-2">Zurücksetzen</a>
+      {% endif %}
+    </div>
+  </form>
   {% if tasks %}
   <table class="table table-sm table-striped">
     <thead>
@@ -99,8 +114,23 @@
       </tr>
       {% endfor %}
     </tbody>
-  </table>
-  {% else %}
+    </table>
+    <nav aria-label="Seiten" class="mt-3">
+      <ul class="pagination justify-content-center">
+        <li class="page-item {% if task_page <= 1 %}disabled{% endif %}">
+          <a class="page-link" href="?task_q={{ task_q }}{% if show_done %}&show_done=1{% endif %}&task_page={{ task_page|add:-1 }}">Vorherige</a>
+        </li>
+        {% for p in task_page_numbers %}
+        <li class="page-item {% if p == task_page %}active{% endif %}">
+          <a class="page-link" href="?task_q={{ task_q }}{% if show_done %}&show_done=1{% endif %}&task_page={{ p }}">{{ p }}</a>
+        </li>
+        {% endfor %}
+        <li class="page-item {% if task_page >= task_total_pages %}disabled{% endif %}">
+          <a class="page-link" href="?task_q={{ task_q }}{% if show_done %}&show_done=1{% endif %}&task_page={{ task_page|add:1 }}">Nächste</a>
+        </li>
+      </ul>
+    </nav>
+    {% else %}
   <p>Keine Tasks vorhanden.</p>
   {% endif %}
 </div>
