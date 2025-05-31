@@ -40,27 +40,73 @@ def person_detailview(request, person_id):
         )
         return JsonResponse({"success": True}) if update.status_code == 200 else JsonResponse({"error": "Fehler beim Speichern"}, status=500)
 
-    res = requests.get(f"{OTTO_API_URL}/personen/{person_id}", headers={"x-api-key": OTTO_API_KEY})
+    res = requests.get(
+        f"{OTTO_API_URL}/personen/{person_id}", headers={"x-api-key": OTTO_API_KEY}
+    )
     if res.status_code != 200:
         return render(request, "core/person_detailview.html", {"person": {}, "tasks": []})
+
     data = res.json()
     tasks = data.get("tasks", [])
 
+    # Filter- und Paging-Parameter
+    task_q = request.GET.get("task_q", "").lower()
+    show_done = bool(request.GET.get("show_done"))
+    try:
+        task_page = int(request.GET.get("task_page", 1))
+    except ValueError:
+        task_page = 1
+    task_per_page = 20
+
+    filtered_tasks = []
+    for t in tasks:
+        status = t.get("status", "").lower()
+        if show_done:
+            if status != "✅ abgeschlossen".lower():
+                continue
+        else:
+            if status == "✅ abgeschlossen".lower():
+                continue
+        if task_q and task_q not in t.get("betreff", "").lower() and task_q not in t.get("beschreibung", "").lower():
+            continue
+        filtered_tasks.append(t)
+
+    task_total_pages = max(1, (len(filtered_tasks) + task_per_page - 1) // task_per_page)
+    if task_page < 1:
+        task_page = 1
+    if task_page > task_total_pages:
+        task_page = task_total_pages
+    start = (task_page - 1) * task_per_page
+    end = start + task_per_page
+    paginated_tasks = filtered_tasks[start:end]
+    task_page_numbers = range(1, task_total_pages + 1)
+
     # Projekte laden, um Namen zuzuordnen
-    projekte_res = requests.get(f"{OTTO_API_URL}/projekte", headers={"x-api-key": OTTO_API_KEY})
+    projekte_res = requests.get(
+        f"{OTTO_API_URL}/projekte", headers={"x-api-key": OTTO_API_KEY}
+    )
     projekte = projekte_res.json() if projekte_res.status_code == 200 else []
     projekt_map = {p.get("id"): p.get("name") for p in projekte}
-    for t in tasks:
+    for t in paginated_tasks:
         pid = t.get("project_id")
         t["project_name"] = projekt_map.get(pid, "") if pid else ""
 
-    return render(request, "core/person_detailview.html", {
-        "person": data,
-        "tasks": tasks,
-        "status_liste": status_liste,
-        "prio_liste": prio_liste,
-        "typ_liste": typ_liste
-    })
+    return render(
+        request,
+        "core/person_detailview.html",
+        {
+            "person": data,
+            "tasks": paginated_tasks,
+            "status_liste": status_liste,
+            "prio_liste": prio_liste,
+            "typ_liste": typ_liste,
+            "task_page": task_page,
+            "task_total_pages": task_total_pages,
+            "task_page_numbers": task_page_numbers,
+            "task_q": task_q,
+            "show_done": show_done,
+        },
+    )
 
 
 @login_required
