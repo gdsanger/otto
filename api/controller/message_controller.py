@@ -1,6 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException
 from typing import List
 from bson import ObjectId
+from bson.errors import InvalidId
 from helper import verify_api_key, serialize_mongo
 from mongo import db
 from model.message import Message
@@ -69,4 +70,17 @@ async def fetch_inbox():
             await client.post(f"{GRAPH_API_URL}/mail/{m.get('id')}/archive", headers=headers)
 
     return {"inserted": inserted}
+
+
+@router.put("/messages/{message_id}", dependencies=[Depends(verify_api_key)], tags=["Message"])
+async def update_message(message_id: str, message: Message):
+    try:
+        oid = ObjectId(message_id)
+    except InvalidId:
+        raise HTTPException(status_code=400, detail="Ungültige ID")
+
+    result = await db.messages.replace_one({"_id": oid}, message.dict())
+    if result.matched_count == 0:
+        raise HTTPException(status_code=404, detail="Message not found")
+    return {"status": "aktualisiert"}
 
