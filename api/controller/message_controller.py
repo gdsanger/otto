@@ -7,6 +7,7 @@ from helper import (
     ensure_message_folder,
     upload_message_attachment,
 )
+from bson.errors import InvalidId
 from mongo import db
 from model.message import Message
 import os
@@ -87,6 +88,7 @@ async def fetch_inbox():
             doc = {
                 "datum": datetime.fromisoformat(dt_str) if dt_str else datetime.utcnow(),
                 "subject": m.get("subject", ""),
+                "sender": m.get("from", {}).get("emailAddress", {}).get("address"),
                 "to": [r["emailAddress"]["address"] for r in m.get("toRecipients", [])],
                 "cc": [r["emailAddress"]["address"] for r in m.get("ccRecipients", [])] or None,
                 "message": m.get("body", {}).get("content", ""),
@@ -107,4 +109,17 @@ async def fetch_inbox():
             await client.post(f"{GRAPH_API_URL}/mail/{m.get('id')}/archive", headers=headers)
 
     return {"inserted": inserted}
+
+
+@router.put("/messages/{message_id}", dependencies=[Depends(verify_api_key)], tags=["Message"])
+async def update_message(message_id: str, message: Message):
+    try:
+        oid = ObjectId(message_id)
+    except InvalidId:
+        raise HTTPException(status_code=400, detail="Ungültige ID")
+
+    result = await db.messages.replace_one({"_id": oid}, message.dict())
+    if result.matched_count == 0:
+        raise HTTPException(status_code=404, detail="Message not found")
+    return {"status": "aktualisiert"}
 

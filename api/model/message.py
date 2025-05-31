@@ -10,6 +10,7 @@ class Message(BaseModel):
 
     datum: datetime
     subject: str
+    sender: Optional[EmailStr] = None
     to: List[EmailStr]
     cc: Optional[List[EmailStr]] = None
     message: str  # HTML Inhalt

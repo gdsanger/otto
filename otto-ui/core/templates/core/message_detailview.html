@@ -14,6 +14,7 @@
     </div>
     <div class="card-body">
       <p><strong>Datum:</strong> {{ message.datum }}</p>
+      <p><strong>From:</strong> {{ message.sender|default:message.from }}</p>
       <p><strong>To:</strong> {{ message.to|join:', ' }}</p>
       <p><strong>Cc:</strong> {{ message.cc|default_if_none:''|join:', ' }}</p>
       <p><strong>Status:</strong> {{ message.status }}</p>
