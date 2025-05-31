@@ -27,6 +27,7 @@ from .messages import (
     message_create,
     fetch_messages,
     delete_message,
+    update_message_project,
 )
 from .sprints import (
     sprint_listview,
