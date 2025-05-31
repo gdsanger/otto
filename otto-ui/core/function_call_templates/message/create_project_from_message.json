@@ -1,0 +1,21 @@
+{
+  "type": "function",
+  "function": {
+    "name": "create_project_from_message",
+    "description": "Legt über das Backend ein neues Projekt in Otto an und referenziert die Mail mit diesem Projekt.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "message_id": {
+          "type": "string",
+          "description": "Die eindeutige ID der Nachricht. Diese ist im Feld 'ID' des ottoContext-Systemprompts enthalten."
+        },
+        "projektname": {
+          "type": "string",
+          "description": "Ein optionaler Name für das neu erstellte Projekt."
+        }
+      },
+      "required": ["message_id"]
+    }
+  }
+}

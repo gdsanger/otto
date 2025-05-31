@@ -1,0 +1,17 @@
+{
+  "type": "function",
+  "function": {
+    "name": "create_task_from_message",
+    "description": "Legt über dss Backend einen neuen Task in Otto an.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "project_id": {
+          "type": "string",
+          "description": "Die eindeutige ID des gewünschten Projekts. Diese ist im Feld 'ID' des ottoContext-Systemprompts enthalten."
+        }
+      },
+      "required": ["project_id"]
+    }
+  }
+}

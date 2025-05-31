@@ -6,62 +6,6 @@ from mongo import projekte_collection, personen_collection, sprints_collection, 
 router = APIRouter()
 
 
-async def _build_context_text(task_dict: dict) -> str:
-    """Generate a context string for ChromaDB from task details."""
-    person_name = ""
-    department = ""
-    role = ""
-    mandant = ""
-    if task_dict.get("person"):
-        p = task_dict["person"]
-    elif task_dict.get("person_id"):
-        person_doc = await personen_collection.find_one({"_id": ObjectId(task_dict["person_id"])})
-        p = serialize_mongo(person_doc) if person_doc else {}
-    else:
-        p = {}
-
-    if p:
-        person_name = p.get("name", "")
-        department = p.get("position") or p.get("abteilung", "")
-        role = p.get("rolle", "")
-        mandant = p.get("mandant", "")
-
-    project_name = ""
-    if task_dict.get("projekt"):
-        project_name = task_dict["projekt"].get("name", "")
-    elif task_dict.get("project_id"):
-        proj = await projekte_collection.find_one({"_id": ObjectId(task_dict["project_id"])})
-        if proj:
-            project_name = proj.get("name", "")
-
-    sprint = None
-    if task_dict.get("sprint"):
-        sprint = task_dict["sprint"]
-    elif task_dict.get("sprint_id"):
-        sprint_doc = await sprints_collection.find_one({"_id": ObjectId(task_dict["sprint_id"])})
-        if sprint_doc:
-            sprint = serialize_mongo(sprint_doc)
-
-    sprint_text = ""
-    if sprint:
-        start = sprint.get("startdatum")
-        end = sprint.get("enddatum")
-        sprint_name = sprint.get("name", "")
-        status = sprint.get("status", "")
-        sprint_text = f", Sprint: {sprint_name} ({start} bis {end}, {status})"
-
-    context_text = (
-        f"Aufgabe: {task_dict.get('betreff')}, "
-        f"Beschreibung: {task_dict.get('beschreibung')}, "
-        f"Zuständig: {person_name} ({department}, {role}, {mandant}), "
-        f"Projekt: {project_name}, "
-        f"Typ: {task_dict.get('typ')}, "
-        f"Status: {task_dict.get('status')}, "
-        f"Termin: {task_dict.get('termin')}" 
-        f"{sprint_text}"
-    )
-    return context_text
-
 @router.get("/context/projekt/{projekt_id}", dependencies=[Depends(verify_api_key)], tags=["Context"])
 async def projekt_context(projekt_id: str):
     try:

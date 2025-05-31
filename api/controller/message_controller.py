@@ -1,10 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException
-
-
 from typing import List, Tuple, Dict
 import asyncio
-
-
 from bson import ObjectId
 from helper import (
     verify_api_key,
@@ -15,7 +11,7 @@ from helper import (
 from bson.errors import InvalidId
 from mongo import db
 from model.message import Message
-from qdrant_utils import upsert_message_to_qdrant, qdrant_similar_messages
+from qdrant_utils import upsert_message_to_qdrant, qdrant_similar_messages, qdrant_similar_tasks
 import os
 import httpx
 from datetime import datetime
