@@ -20,7 +20,7 @@ from .projects import (
     project_upload_file,
 )
 from .persons import person_listview, person_detailview, person_create, delete_person
-from .messages import message_detailview
+from .messages import message_detailview, message_listview
 from .sprints import (
     sprint_listview,
     sprint_detailview,

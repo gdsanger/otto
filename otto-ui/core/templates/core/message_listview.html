@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container-fluid">
+  <div class="row" style="height: calc(100vh - 120px);">
+    <div class="col-4 border-end overflow-auto">
+      <ul class="nav nav-pills mb-3">
+        <li class="nav-item"><a class="nav-link {% if folder == 'in' %}active{% endif %}" href="?folder=in">Posteingang</a></li>
+        <li class="nav-item"><a class="nav-link {% if folder == 'out' %}active{% endif %}" href="?folder=out">Gesendet</a></li>
+      </ul>
+      <div class="list-group">
+        {% for m in messages %}
+        <a href="?folder={{ folder }}&message_id={{ m.id }}" class="list-group-item list-group-item-action {% if selected and selected.id == m.id %}active{% endif %}">
+          <div class="d-flex w-100 justify-content-between">
+            <h6 class="mb-1">{{ m.subject }}</h6>
+            <small>{{ m.datum|slice:":10" }}</small>
+          </div>
+          <small>{{ m.to|join:', ' }}</small>
+        </a>
+        {% empty %}
+        <p class="m-2">Keine Nachrichten.</p>
+        {% endfor %}
+      </div>
+    </div>
+    <div class="col-8 overflow-auto" id="detailPane">
+      {% if selected %}
+      <div class="card">
+        <div class="card-header">{{ selected.subject }}</div>
+        <div class="card-body">
+          <p><strong>Datum:</strong> {{ selected.datum }}</p>
+          <p><strong>To:</strong> {{ selected.to|join:', ' }}</p>
+          <p><strong>Cc:</strong> {{ selected.cc|default_if_none:''|join:', ' }}</p>
+          <p><strong>Status:</strong> {{ selected.status }}</p>
+          {% if selected.project_id %}<p><strong>Projekt:</strong> {{ selected.project_id }}</p>{% endif %}
+          {% if selected.task_id %}<p><strong>Task:</strong> {{ selected.task_id }}</p>{% endif %}
+          {% if selected.sprint_id %}<p><strong>Sprint:</strong> {{ selected.sprint_id }}</p>{% endif %}
+          <div class="mt-3 border p-3" style="background:white;">{{ selected.message|safe }}</div>
+        </div>
+      </div>
+      {% else %}
+      <p class="m-2">Bitte eine Nachricht auswählen.</p>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -26,6 +26,7 @@ urlpatterns = [
     path('person/new/', views.person_create, name='person_create'),
     path('person/delete/', views.delete_person, name='delete_person'),
     path('person/<str:person_id>/', views.person_detailview, name='person_detail'),
+    path('message/', views.message_listview, name='message_liste'),
     path('message/<str:message_id>/', views.message_detailview, name='message_detail'),
     path('sprint/', views.sprint_listview, name='sprint_liste'),
     path('sprint/new/', views.sprint_create, name='sprint_create'),
