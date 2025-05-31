@@ -44,8 +44,17 @@ async def get_messages_by_project(project_id: str):
 
 async def _fetch_and_store_attachments(client: httpx.AsyncClient, headers: dict, message_id: str) -> List[str]:
     """Retrieve attachments of a message and store them on SharePoint."""
-    att_resp = await client.get(f"{GRAPH_API_URL}/mail/{message_id}/attachments", headers=headers)
-    att_resp.raise_for_status()
+    att_resp = await client.get(
+        f"{GRAPH_API_URL}/mail/{message_id}/attachments", headers=headers
+    )
+    # Some messages may not have an attachments endpoint and return 404.
+    # Treat this case as having no attachments instead of raising an error.
+    try:
+        att_resp.raise_for_status()
+    except httpx.HTTPStatusError as e:
+        if e.response.status_code == 404:
+            return []
+        raise
     attachments = att_resp.json()
     urls: List[str] = []
     if attachments:
