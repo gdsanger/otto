@@ -1,4 +1,5 @@
 import os
+import json
 import requests
 from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render, redirect
@@ -74,9 +75,22 @@ def send_message(request):
         )
 
         if send_res.status_code == 200:
+            msg["status"] = "gesendet"
+            requests.put(
+                f"{OTTO_API_URL}/messages/{message_id}",
+                headers={"x-api-key": OTTO_API_KEY, "Content-Type": "application/json"},
+                data=json.dumps(msg),
+            )
             if request.headers.get("HX-Request") == "true":
                 return HttpResponse("")
             return redirect(request.META.get("HTTP_REFERER", "/message/"))
+
+        msg["status"] = "fehler"
+        requests.put(
+            f"{OTTO_API_URL}/messages/{message_id}",
+            headers={"x-api-key": OTTO_API_KEY, "Content-Type": "application/json"},
+            data=json.dumps(msg),
+        )
         return JsonResponse({"error": "Fehler beim Senden."}, status=500)
 
     return JsonResponse({"error": "Ungültige Methode."}, status=405)
