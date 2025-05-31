@@ -64,6 +64,24 @@
       </div>
     </div>
   </form>
+  {% if similar_tasks %}
+  <div class="card mb-3">
+    <div class="card-header">
+      <h5 class="mb-0">Ähnliche Aufgaben</h5>
+    </div>
+    <div class="card-body p-2">
+      <ul class="list-unstyled mb-0">
+        {% for item in similar_tasks %}
+        <li>
+          <a href="/task/view/{{ item.task.mongo_id }}/">{{ item.task.betreff }}</a>
+          {% if item.task.projekt %}<span class="text-muted">({{ item.task.projekt_name }})</span>{% endif %}
+          <small class="text-muted ms-2">Score: {{ item.score|floatformat:2 }}</small>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+  {% endif %}
   <div id="saveSuccess" class="alert alert-success mt-3 d-none">Gespeichert!</div>
 </div>
 <script src="https://cdn.tiny.cloud/1/kpams0ubmp1xidkpbry2j9afcgmlfpiv96ybkly1llpyi875/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>

@@ -27,16 +27,18 @@ if MESSAGE_COLLECTION_NAME not in existing:
         vectors_config=VectorParams(size=3072, distance=Distance.COSINE),
     )
 
+
 def embed(text: str) -> list[float]:
     """Vektorisiert Text mit OpenAI Embedding."""
     response = openai.embeddings.create(
-        input=[text],
-        model="text-embedding-3-large"  # <-- hier gewechselt
+        input=[text], model="text-embedding-3-large"  # <-- hier gewechselt
     )
     return response.data[0].embedding
 
+
 import asyncio
 from uuid import uuid4
+
 
 async def upsert_task_to_qdrant(task_id: str):
     """Task-Kontext laden und in Qdrant upserten (async, lokal)."""
@@ -55,7 +57,7 @@ async def upsert_task_to_qdrant(task_id: str):
         "typ": task.get("typ"),
         "termin": task.get("termin"),
         "sprint": task.get("sprint", {}).get("name"),
-        "text": task.get("context_text")
+        "text": task.get("context_text"),
     }
 
     await asyncio.to_thread(
@@ -63,12 +65,12 @@ async def upsert_task_to_qdrant(task_id: str):
         collection_name=COLLECTION_NAME,
         points=[
             PointStruct(
-                id=str(uuid4()),  # Qdrant-konformer UUID
-                vector=vector,
-                payload=payload
+                id=str(uuid4()), vector=vector, payload=payload  # Qdrant-konformer UUID
             )
-        ]
+        ],
     )
+
+
 def qdrant_similar_tasks(query_text: str, exclude_id: str, limit: int = 5):
     """Sucht ähnliche Tasks in Qdrant basierend auf dem gegebenen Text."""
     query_vector = embed(query_text)
@@ -76,19 +78,16 @@ def qdrant_similar_tasks(query_text: str, exclude_id: str, limit: int = 5):
         collection_name=COLLECTION_NAME,
         query_vector=query_vector,
         limit=limit + 10,
-        with_payload=True
+        with_payload=True,
     )
     similar = []
     for hit in hits:
         logger.debug(f"Treffer Score: {hit.score:.3f}, ID: {hit.id}")
-        if hit.score < 0.75:
+        if hit.score < 0.7:
             continue
         payload = hit.payload
         if payload.get("mongo_id") != exclude_id:
-            similar.append({
-                "score": hit.score,
-                "task": payload
-            })
+            similar.append({"score": hit.score, "task": payload})
         if len(similar) >= limit:
             break
     return similar
@@ -119,9 +118,7 @@ async def upsert_message_to_qdrant(message_id: str):
     await asyncio.to_thread(
         qdrant.upsert,
         collection_name=MESSAGE_COLLECTION_NAME,
-        points=[
-            PointStruct(id=str(uuid4()), vector=vector, payload=payload)
-        ],
+        points=[PointStruct(id=str(uuid4()), vector=vector, payload=payload)],
     )
 
 
@@ -145,5 +142,3 @@ def qdrant_similar_messages(query_text: str, exclude_id: str, limit: int = 5):
         if len(similar) >= limit:
             break
     return similar
-
-
