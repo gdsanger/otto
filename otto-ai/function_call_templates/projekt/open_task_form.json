@@ -1,0 +1,17 @@
+{
+  "type": "function",
+  "function": {
+    "name": "open_task_form",
+    "description": "Öffnet im Otto-Frontend ein Formular zur Aufgabenerstellung mit vorausgefüllten Feldern. Das Projekt wird aus dem aktuellen Kontext entnommen.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "betreff": {"type": "string", "description": "Titel der Aufgabe"},
+        "beschreibung": {"type": "string", "description": "Aufgabenbeschreibung"},
+        "status": {"type": "string", "description": "Status der Aufgabe"},
+        "prio": {"type": "string", "description": "Priorität der Aufgabe"},
+        "termin": {"type": "string", "description": "Fälligkeitsdatum im ISO-Format"}
+      }
+    }
+  }
+}
