@@ -28,6 +28,7 @@ from .messages import (
     fetch_messages,
     delete_message,
     update_message_project,
+    update_message_status,
 )
 from .sprints import (
     sprint_listview,

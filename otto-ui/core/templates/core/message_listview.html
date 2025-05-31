@@ -16,6 +16,7 @@
       <ul class="nav nav-pills mb-3">
         <li class="nav-item"><a class="nav-link {% if folder == 'in' %}active{% endif %}" href="?folder=in">Posteingang</a></li>
         <li class="nav-item"><a class="nav-link {% if folder == 'out' %}active{% endif %}" href="?folder=out">Gesendet</a></li>
+        <li class="nav-item"><a class="nav-link {% if folder == 'archiv' %}active{% endif %}" href="?folder=archiv">Archiviert</a></li>
       </ul>
       <div class="list-group">
         {% for m in messages %}
@@ -26,13 +27,23 @@
             <small>{{ m.datum|slice:":10" }}</small>
           </div>
           <small class="pe-4">{{ m.to|join:', ' }}</small>
+          {% if m.direction == 'in' and m.status != 'archiviert' %}
+          <a
+            hx-post="/message/update_status/"
+            hx-vals='{"message_id": "{{ m.id }}", "status": "archiviert"}'
+            hx-target="closest .message-item"
+            hx-swap="outerHTML"
+            class="position-absolute bottom-0 end-0 m-1 text-decoration-none"
+            style="font-size: 12px; width: 12px; height: 12px; display: inline-block; z-index: 2;"
+            >🗄️</a>
+          {% endif %}
           <a
             hx-post="/message/delete/"
             hx-vals='{"message_id": "{{ m.id }}"}'
             hx-confirm="Wirklich löschen?"
             hx-target="closest .message-item"
             hx-swap="outerHTML"
-            class="position-absolute bottom-0 end-0 m-1 text-danger text-decoration-none"
+            class="position-absolute bottom-0 end-0 me-4 m-1 text-danger text-decoration-none"
             style="font-size: 12px; width: 12px; height: 12px; display: inline-block; z-index: 2;"
             >❌</a>
         </div>
@@ -53,6 +64,14 @@
           <input type="hidden" name="message_id" value="{{ selected.id }}">
           <button type="submit" class="btn btn-outline-primary" {% if selected.direction != 'out' or selected.status == 'gesendet' %}disabled{% endif %}>📧 Senden</button>
         </form>
+        {% if selected.direction == 'in' and selected.status != 'archiviert' %}
+        <form method="post" action="/message/update_status/" class="btn-group ms-2" role="group">
+          {% csrf_token %}
+          <input type="hidden" name="message_id" value="{{ selected.id }}">
+          <input type="hidden" name="status" value="archiviert">
+          <button type="submit" class="btn btn-outline-secondary">🗄️ Archivieren</button>
+        </form>
+        {% endif %}
         {% endif %}
       </div>
       {% if selected %}
