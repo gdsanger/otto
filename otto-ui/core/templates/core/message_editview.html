@@ -47,7 +47,7 @@
         </div>
         <div class="mb-3">
           <label class="form-label">From</label>
-          <input type="text" name="sender" class="form-control" value="{{ message.sender|default:message.from }}" {% if message.direction == 'in' %}readonly{% endif %}>
+          <input type="text" name="sender" class="form-control" value="{% if message.sender %}{{ message.sender }}{% elif message.from %}{{ message.from }}{% endif %}" {% if message.direction == 'in' %}readonly{% endif %}>
         </div>
         <textarea id="editor" name="message" class="form-control">{{ message.message|safe }}</textarea>
       </div>

@@ -40,7 +40,15 @@
         <div class="card-header">{{ selected.subject }}</div>
         <div class="card-body">
           <p><strong>Datum:</strong> {{ selected.datum }}</p>
-          <p><strong>From:</strong> {{ selected.sender|default:selected.from }}</p>
+          <p><strong>From:</strong>
+            {% if selected.sender %}
+              {{ selected.sender }}
+            {% elif selected.from %}
+              {{ selected.from }}
+            {% else %}
+              -
+            {% endif %}
+          </p>
           <p><strong>To:</strong> {{ selected.to|join:', ' }}</p>
           <p><strong>Cc:</strong> {{ selected.cc|default_if_none:''|join:', ' }}</p>
           <p><strong>Status:</strong> {{ selected.status }}</p>
