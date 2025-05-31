@@ -1,5 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException
 from typing import List
+import asyncio
 from bson import ObjectId
 from helper import (
     verify_api_key,
@@ -10,6 +11,7 @@ from helper import (
 from bson.errors import InvalidId
 from mongo import db
 from model.message import Message
+from qdrant_utils import upsert_message_to_qdrant, qdrant_similar_messages
 import os
 import httpx
 from datetime import datetime
@@ -22,7 +24,9 @@ router = APIRouter()
 @router.post("/messages", dependencies=[Depends(verify_api_key)], tags=["Message"])
 async def create_message(message: Message):
     result = await db.messages.insert_one(message.dict())
-    return {"status": "ok", "id": str(result.inserted_id)}
+    message_id = str(result.inserted_id)
+    asyncio.create_task(upsert_message_to_qdrant(message_id))
+    return {"status": "ok", "id": message_id}
 
 @router.get("/messages", dependencies=[Depends(verify_api_key)], tags=["Message"])
 async def list_messages():
@@ -108,7 +112,8 @@ async def fetch_inbox():
             }
 
             result = await db.messages.insert_one(doc)
-            inserted.append(str(result.inserted_id))
+            message_id = str(result.inserted_id)
+            inserted.append(message_id)
 
             # Fetch and store attachments
             att_urls = await _fetch_and_store_attachments(client, headers, m.get("id"))
@@ -116,6 +121,8 @@ async def fetch_inbox():
                 await db.messages.update_one({"_id": result.inserted_id}, {"$set": {"attachments": att_urls}})
 
             await client.post(f"{GRAPH_API_URL}/mail/{m.get('id')}/archive", headers=headers)
+
+            asyncio.create_task(upsert_message_to_qdrant(message_id))
 
     return {"inserted": inserted}
 
@@ -130,6 +137,7 @@ async def update_message(message_id: str, message: Message):
     result = await db.messages.replace_one({"_id": oid}, message.dict())
     if result.matched_count == 0:
         raise HTTPException(status_code=404, detail="Message not found")
+    asyncio.create_task(upsert_message_to_qdrant(message_id))
     return {"status": "aktualisiert"}
 
 
@@ -145,5 +153,26 @@ async def delete_message(message_id: str):
     if result.deleted_count == 0:
         raise HTTPException(status_code=404, detail="Message not found")
     return {"status": "deleted"}
+
+
+@router.get("/messages/{message_id}/similar", dependencies=[Depends(verify_api_key)], tags=["Message"])
+async def get_similar_messages(message_id: str, limit: int = 5):
+    msg = await db.messages.find_one({"_id": ObjectId(message_id)})
+    if not msg:
+        raise HTTPException(status_code=404, detail="Message not found")
+
+    text = f"{msg.get('subject', '')}\n{msg.get('message', '')}"
+    similar = qdrant_similar_messages(text, message_id, limit)
+    return similar
+
+
+@router.post("/messages/qdrant/reindex", dependencies=[Depends(verify_api_key)], tags=["Qdrant"])
+async def reindex_all_messages():
+    message_ids = await db.messages.distinct("_id")
+    count = 0
+    for mid in message_ids:
+        await upsert_message_to_qdrant(str(mid))
+        count += 1
+    return {"status": "ok", "indexed_messages": count}
 
 
