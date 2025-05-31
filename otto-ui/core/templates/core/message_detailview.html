@@ -8,6 +8,14 @@
       <input type="hidden" name="message_id" value="{{ message.id }}">
       <button type="submit" class="btn btn-outline-primary" {% if message.direction != 'out' or message.status == 'gesendet' %}disabled{% endif %}>📧 Senden</button>
     </form>
+    {% if message.direction == 'in' and message.status != 'archiviert' %}
+    <form method="post" action="/message/update_status/" class="btn-group ms-2" role="group">
+      {% csrf_token %}
+      <input type="hidden" name="message_id" value="{{ message.id }}">
+      <input type="hidden" name="status" value="archiviert">
+      <button type="submit" class="btn btn-outline-secondary">🗄️ Archivieren</button>
+    </form>
+    {% endif %}
   </div>
   <div class="card">
     <div class="card-header">
