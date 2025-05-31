@@ -11,17 +11,23 @@ export default function ChatOtto() {
   const textareaRef = useRef(null)
 
   useEffect(() => {
-    const path = window.location.pathname
-    let newContext = 'global'
-    const projektMatch = path.match(/\/(projekt|project)\/([^\/]+)/)
-    const aufgabeMatch = path.match(/\/aufgabe\/([^\/]+)/)
-    const meetingMatch = path.match(/\/meeting\/([^\/]+)/)
+    const ctx = window.ottoContext
 
-    if (projektMatch) newContext = 'projekt_' + projektMatch[2]
-    else if (aufgabeMatch) newContext = 'aufgabe_' + aufgabeMatch[1]
-    else if (meetingMatch) newContext = 'meeting_' + meetingMatch[1]
+    if (ctx?.id) {
+      setContext(`${ctx.type}_${ctx.id}`)
+    } else {
+      const path = window.location.pathname
+      let newContext = 'global'
+      const projektMatch = path.match(/\/(projekt|project)\/([^\/]+)/)
+      const aufgabeMatch = path.match(/\/aufgabe\/([^\/]+)/)
+      const meetingMatch = path.match(/\/meeting\/([^\/]+)/)
 
-    setContext(newContext)
+      if (projektMatch) newContext = 'projekt_' + projektMatch[2]
+      else if (aufgabeMatch) newContext = 'aufgabe_' + aufgabeMatch[1]
+      else if (meetingMatch) newContext = 'meeting_' + meetingMatch[1]
+
+      setContext(newContext)
+    }
   }, [])
 
   useEffect(() => {
