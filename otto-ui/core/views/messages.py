@@ -114,11 +114,27 @@ def message_create(request):
         )
         projekt = p_res.json() if p_res.status_code == 200 else {}
 
+        # parse planned completion date for proper formatting in template
+        date_str = projekt.get("geplante_fertigstellung")
+        if date_str:
+            try:
+                projekt["geplante_fertigstellung"] = datetime.fromisoformat(date_str).date()
+            except ValueError:
+                projekt["geplante_fertigstellung"] = None
+
         t_res = requests.get(
             f"{OTTO_API_URL}/project/{project_id}/tasks", headers={"x-api-key": OTTO_API_KEY}
         )
         tasks = t_res.json() if t_res.status_code == 200 else []
         tasks = [t for t in tasks if t.get("status") != "✅ abgeschlossen"]
+
+        for t in tasks:
+            termin_str = t.get("termin")
+            if termin_str:
+                try:
+                    t["termin"] = datetime.fromisoformat(termin_str).date()
+                except ValueError:
+                    t["termin"] = None
 
         # Empfänger ermitteln
         personen_res = requests.get(
