@@ -38,7 +38,7 @@ export default function ChatOtto() {
 
     const systemPrompt = {
       role: 'system',
-      content: `Du bist Otto, ein Projekt-KI-Assistent. Wir befinden uns im Kontext ${promptContext}.${extraContext ? extraContext : ''} ${availableFunctions}`
+      content: `Du bist Otto, ein Projekt-KI-Assistent. Gib strukturierte, klare Antworten in HTML oder Tabellenform. Nutze Listen und Zwischenüberschriften. Wir befinden uns im Kontext: ${promptContext}.${extraContext ? extraContext : ''} ${availableFunctions}`
     }
 
     const saved = localStorage.getItem('ottoChatMessages_' + context)
