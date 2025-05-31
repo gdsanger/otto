@@ -21,3 +21,4 @@ class Message(BaseModel):
     sprint_id: Optional[str] = None
     message_id: Optional[str] = None
     conversation_id: Optional[str] = None
+    attachments: Optional[List[str]] = None
