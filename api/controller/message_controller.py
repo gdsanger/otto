@@ -1,13 +1,20 @@
 from fastapi import APIRouter, Depends, HTTPException
 from typing import List
 from bson import ObjectId
-from helper import verify_api_key, serialize_mongo
+from helper import (
+    verify_api_key,
+    serialize_mongo,
+    ensure_message_folder,
+    upload_message_attachment,
+)
 from mongo import db
 from model.message import Message
 import os
 import httpx
 from datetime import datetime
 from config import API_KEY as INTERNAL_API_KEY, GRAPH_API_URL
+
+import base64
 
 router = APIRouter()
 
@@ -32,6 +39,32 @@ async def get_message(message_id: str):
 async def get_messages_by_project(project_id: str):
     cursor = db.messages.find({"project_id": project_id}).sort("datum", -1)
     return [serialize_mongo(m) async for m in cursor]
+
+
+async def _fetch_and_store_attachments(client: httpx.AsyncClient, headers: dict, message_id: str) -> List[str]:
+    """Retrieve attachments of a message and store them on SharePoint."""
+    att_resp = await client.get(f"{GRAPH_API_URL}/mail/{message_id}/attachments", headers=headers)
+    att_resp.raise_for_status()
+    attachments = att_resp.json()
+    urls: List[str] = []
+    if attachments:
+        await ensure_message_folder(message_id)
+        for att in attachments:
+            name = att.get("name")
+            if not name:
+                continue
+            content = None
+            if att.get("contentBytes"):
+                content = base64.b64decode(att["contentBytes"])
+            elif att.get("@microsoft.graph.downloadUrl"):
+                resp = await client.get(att["@microsoft.graph.downloadUrl"])
+                resp.raise_for_status()
+                content = resp.content
+            if content is not None:
+                url = await upload_message_attachment(message_id, name, content)
+                if url:
+                    urls.append(url)
+    return urls
 
 
 @router.post("/messages/fetch", dependencies=[Depends(verify_api_key)], tags=["Message"])
@@ -65,6 +98,11 @@ async def fetch_inbox():
 
             result = await db.messages.insert_one(doc)
             inserted.append(str(result.inserted_id))
+
+            # Fetch and store attachments
+            att_urls = await _fetch_and_store_attachments(client, headers, m.get("id"))
+            if att_urls:
+                await db.messages.update_one({"_id": result.inserted_id}, {"$set": {"attachments": att_urls}})
 
             await client.post(f"{GRAPH_API_URL}/mail/{m.get('id')}/archive", headers=headers)
 

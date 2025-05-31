@@ -5,7 +5,7 @@ from fastapi import Header, Depends, HTTPException
 from config import API_KEY
 from fastapi.security.api_key import APIKeyHeader
 import logging
-from config import CLIENT_ID, CLIENT_SECRET, TENANT_ID, FOLDER, GRAPH_URL, SITE_ID, DRIVE_ID
+from config import CLIENT_ID, CLIENT_SECRET, TENANT_ID, FOLDER, GRAPH_URL, SITE_ID, DRIVE_ID, MESSAGES_FOLDER
 import httpx
 
 
@@ -66,3 +66,32 @@ async def ensure_folder_exists(shortname: str):
                 print(f"❌ Fehler bei Ordner '{shortname}': {response.status_code} – {response.text}")
         else:
             print(f"⚠️ Fehler beim Prüfen von '{shortname}': {check.status_code} – {check.text}")
+
+
+async def ensure_message_folder(message_id: str):
+    """Ensure that the SharePoint folder for the given message exists."""
+    token = await get_graph_token()
+    path = f"{MESSAGES_FOLDER.rstrip('/')}/{message_id}"
+    url = f"{GRAPH_URL}/sites/{SITE_ID}/drives/{DRIVE_ID}/root:/{path}"
+    headers = {"Authorization": f"Bearer {token}"}
+    async with httpx.AsyncClient() as client:
+        check = await client.get(url, headers=headers)
+        if check.status_code == 404:
+            await client.put(
+                url,
+                headers={**headers, "Content-Type": "application/json"},
+                json={"folder": {}, "@microsoft.graph.conflictBehavior": "fail"},
+            )
+
+
+async def upload_message_attachment(message_id: str, filename: str, content: bytes) -> str:
+    """Upload an attachment file to the SharePoint message folder and return the file URL."""
+    token = await get_graph_token()
+    headers = {"Authorization": f"Bearer {token}"}
+    path = f"{MESSAGES_FOLDER.rstrip('/')}/{message_id}/{filename}"
+    url = f"{GRAPH_URL}/sites/{SITE_ID}/drives/{DRIVE_ID}/root:/{path}:/content"
+    async with httpx.AsyncClient() as client:
+        resp = await client.put(url, headers=headers, content=content)
+        resp.raise_for_status()
+        data = resp.json()
+    return data.get("webUrl")
