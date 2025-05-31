@@ -72,7 +72,16 @@
           <p><strong>To:</strong> {{ selected.to|join:', ' }}</p>
           <p><strong>Cc:</strong> {{ selected.cc|default_if_none:''|join:', ' }}</p>
           <p><strong>Status:</strong> {{ selected.status }}</p>
-          {% if selected.project_id %}<p><strong>Projekt:</strong> {{ selected.project_id }}</p>{% endif %}
+          <form hx-post="/message/update_project/" hx-trigger="change" hx-target="this" hx-swap="none" class="mb-2">
+            <input type="hidden" name="message_id" value="{{ selected.id }}">
+            <label class="form-label mb-1"><strong>Projekt:</strong></label>
+            <select class="form-select form-select-sm" name="project_id">
+              <option value="">-- Kein Projekt --</option>
+              {% for projekt in projekte %}
+                <option value="{{ projekt.id }}" {% if selected.project_id == projekt.id %}selected{% endif %}>{{ projekt.name }}</option>
+              {% endfor %}
+            </select>
+          </form>
           {% if selected.task_id %}<p><strong>Task:</strong> {{ selected.task_id }}</p>{% endif %}
           {% if selected.sprint_id %}<p><strong>Sprint:</strong> {{ selected.sprint_id }}</p>{% endif %}
           <div class="mt-3 border p-3" style="background:white;">{{ selected.message|safe }}</div>
