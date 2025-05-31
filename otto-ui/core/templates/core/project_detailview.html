@@ -137,7 +137,7 @@
     </div>
     <div class="col-sm-3">
       <div class="form-check mt-1">
-        <input type="checkbox" class="form-check-input" id="showDone" name="show_done" value="1" {% if show_done %}checked{% endif %}>
+        <input type="checkbox" class="form-check-input" id="showDone" name="show_done" value="1" {% if show_done %}checked{% endif %} onchange="this.form.submit()">
         <label class="form-check-label" for="showDone">Abgeschlossene anzeigen</label>
       </div>
     </div>

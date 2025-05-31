@@ -155,6 +155,12 @@ def project_detailview(request, project_id):
 
     filtered_tasks = []
     for t in tasks:
+        if show_done:
+            if t.get("status") != "✅ abgeschlossen":
+                continue
+        else:
+            if t.get("status") == "✅ abgeschlossen":
+                continue
         if task_q:
             if (
                 task_q not in t.get("betreff", "").lower()
