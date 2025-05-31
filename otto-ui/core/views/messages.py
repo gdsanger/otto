@@ -24,6 +24,11 @@ def message_listview(request):
     res = requests.get(f"{OTTO_API_URL}/messages", headers={"x-api-key": OTTO_API_KEY})
     msgs = res.json() if res.status_code == 200 else []
 
+    proj_res = requests.get(
+        f"{OTTO_API_URL}/projekte", headers={"x-api-key": OTTO_API_KEY}
+    )
+    projekte = proj_res.json() if proj_res.status_code == 200 else []
+
     messages = [
         m for m in msgs if m.get("direction") == ("in" if folder == "in" else "out")
     ]
@@ -63,6 +68,7 @@ def message_listview(request):
             "folder": folder,
             "selected": selected,
             "similar_tasks": similar_tasks,
+            "projekte": projekte,
         },
     )
 
@@ -292,6 +298,39 @@ def fetch_messages(request):
         return redirect(request.META.get("HTTP_REFERER", "/message/"))
 
     return JsonResponse({"error": "Fehler beim Abrufen."}, status=500)
+
+
+@login_required
+@csrf_exempt
+def update_message_project(request):
+    if request.method == "POST":
+        message_id = request.POST.get("message_id")
+        project_id = request.POST.get("project_id") or None
+
+        if not message_id:
+            return JsonResponse({"error": "Keine Message-ID."}, status=400)
+
+        res = requests.get(
+            f"{OTTO_API_URL}/messages/{message_id}",
+            headers={"x-api-key": OTTO_API_KEY},
+        )
+        if res.status_code != 200:
+            return JsonResponse({"error": "Nachricht nicht gefunden."}, status=404)
+
+        message = res.json()
+        message["project_id"] = project_id
+        update = requests.put(
+            f"{OTTO_API_URL}/messages/{message_id}",
+            headers={"x-api-key": OTTO_API_KEY, "Content-Type": "application/json"},
+            data=json.dumps(message),
+        )
+        return (
+            HttpResponse("OK")
+            if update.status_code == 200
+            else JsonResponse({"error": "Fehler beim Speichern."}, status=500)
+        )
+
+    return JsonResponse({"error": "Ungültige Methode."}, status=405)
 
 
 @login_required
