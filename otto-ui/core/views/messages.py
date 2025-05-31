@@ -1,6 +1,7 @@
 import os
 import requests
-from django.shortcuts import render
+from django.http import JsonResponse, HttpResponse
+from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
 from .helpers import login_required
 from dotenv import load_dotenv
@@ -9,6 +10,7 @@ load_dotenv()
 
 OTTO_API_KEY = os.getenv("OTTO_API_KEY")
 OTTO_API_URL = os.getenv("OTTO_API_URL")
+GRAPH_API_URL = os.getenv("GRAPH_API_URL", "https://graph.isarlabs.de")
 
 
 @login_required
@@ -41,3 +43,40 @@ def message_detailview(request, message_id):
     )
     message = res.json() if res.status_code == 200 else {}
     return render(request, "core/message_detailview.html", {"message": message})
+
+
+@login_required
+@csrf_exempt
+def send_message(request):
+    if request.method == "POST":
+        message_id = request.POST.get("message_id")
+        if not message_id:
+            return JsonResponse({"error": "Keine Message-ID."}, status=400)
+
+        res = requests.get(f"{OTTO_API_URL}/messages/{message_id}", headers={"x-api-key": OTTO_API_KEY})
+        if res.status_code != 200:
+            return JsonResponse({"error": "Nachricht nicht gefunden."}, status=404)
+
+        msg = res.json()
+
+        params = {
+            "subject": msg.get("subject", ""),
+            "body": msg.get("message", ""),
+            "to": ",".join(msg.get("to", [])),
+        }
+        if msg.get("cc"):
+            params["cc"] = ",".join(msg.get("cc"))
+
+        send_res = requests.post(
+            f"{GRAPH_API_URL}/mail",
+            headers={"x-api-key": OTTO_API_KEY},
+            params=params,
+        )
+
+        if send_res.status_code == 200:
+            if request.headers.get("HX-Request") == "true":
+                return HttpResponse("")
+            return redirect(request.META.get("HTTP_REFERER", "/message/"))
+        return JsonResponse({"error": "Fehler beim Senden."}, status=500)
+
+    return JsonResponse({"error": "Ungültige Methode."}, status=405)

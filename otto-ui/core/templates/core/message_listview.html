@@ -23,6 +23,13 @@
     </div>
     <div class="col-8 overflow-auto" id="detailPane">
       {% if selected %}
+      <div class="btn-toolbar mb-3" role="toolbar" aria-label="Toolbar">
+        <form method="post" action="/message/send/" class="btn-group" role="group">
+          {% csrf_token %}
+          <input type="hidden" name="message_id" value="{{ selected.id }}">
+          <button type="submit" class="btn btn-outline-primary" {% if selected.direction != 'out' or selected.status == 'gesendet' %}disabled{% endif %}>📧 Senden</button>
+        </form>
+      </div>
       <div class="card">
         <div class="card-header">{{ selected.subject }}</div>
         <div class="card-body">
