@@ -153,3 +153,20 @@ async def archive_message(message_id: str):
         resp.raise_for_status()
 
     return {"status": "archived"}
+
+
+@router.get("/mail/{message_id}/attachments", dependencies=[Depends(verify_api_key)])
+async def get_message_attachments(message_id: str):
+    """Return all attachments for the given message."""
+    token = await get_graph_token()
+    headers = {"Authorization": f"Bearer {token}"}
+    url = f"{GRAPH_URL}/users/{MAIL_INBOX}/messages/{message_id}/attachments"
+
+    async with httpx.AsyncClient(timeout=30.0) as client:
+        resp = await client.get(url, headers=headers)
+        if resp.status_code == 404:
+            return []
+        resp.raise_for_status()
+        data = resp.json()
+
+    return data.get("value", [])
