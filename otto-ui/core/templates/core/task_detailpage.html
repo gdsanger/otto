@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load format_tags %}
 {% block content %}
 <script>
   window.ottoContext = {
@@ -148,6 +149,32 @@
     </div>
   </div>
   {% endif %}
+  <div class="card mb-3">
+    <div class="card-header">
+      <h5 class="mb-0">Kommentare</h5>
+    </div>
+    <div class="card-body">
+      <div id="commentsList">
+        {% for c in comments %}
+          {% with person_name=personen_map|get_item:c.user_id %}
+            {% include 'components/comment_item.html' with c=c person_name=person_name %}
+          {% endwith %}
+        {% empty %}
+        <p class="text-muted">Keine Kommentare vorhanden.</p>
+        {% endfor %}
+      </div>
+      <form id="commentForm" class="mt-3">
+        {% csrf_token %}
+        <input type="hidden" name="task_id" value="{{ task.id }}">
+        <textarea class="form-control mb-2" name="text" rows="2" placeholder="Kommentar..."></textarea>
+        <div class="form-check mb-2">
+          <input class="form-check-input" type="checkbox" value="1" id="sendEmail" name="send_email">
+          <label class="form-check-label" for="sendEmail">Als E-Mail an Requester senden</label>
+        </div>
+        <button type="submit" class="btn btn-outline-primary">Hinzufügen</button>
+      </form>
+    </div>
+  </div>
   {{ sprints|json_script:"sprints-data" }}
 </div>
 <script>
@@ -263,6 +290,28 @@ document.getElementById('deleteBtn').addEventListener('click', () => {
       }
     });
   }
+});
+
+const commentForm = document.getElementById('commentForm');
+commentForm.addEventListener('submit', e => {
+  e.preventDefault();
+  const formData = new FormData(commentForm);
+  fetch('/task/add_comment/', {
+    method: 'POST',
+    headers: {
+      'X-CSRFToken': getCookie('csrftoken')
+    },
+    body: formData
+  }).then(r => r.ok ? r.json() : Promise.reject()).then(d => {
+    if(d.success && d.html){
+      const wrapper = document.createElement('div');
+      wrapper.innerHTML = d.html;
+      document.getElementById('commentsList').appendChild(wrapper.firstElementChild);
+      commentForm.reset();
+    } else if(d.error){
+      alert(d.error);
+    }
+  }).catch(()=>alert('Fehler beim Speichern des Kommentars'));
 });
 </script>
 {% endblock %}

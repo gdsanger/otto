@@ -1,0 +1,13 @@
+<div class="border rounded p-2 mb-2">
+  <div class="small text-muted">
+    <strong>{{ person_name }}</strong>
+    <span class="ms-1">{{ c.datum|slice:":16" }}</span>
+    {% if c.type != 'note' %}
+      <span class="badge bg-secondary ms-1">{{ c.type }}</span>
+    {% endif %}
+    {% if c.message_id %}
+      <a href="/message/{{ c.message_id }}/" class="ms-1">📧</a>
+    {% endif %}
+  </div>
+  <div>{{ c.text|linebreaksbr }}</div>
+</div>
