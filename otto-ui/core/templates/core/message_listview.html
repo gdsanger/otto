@@ -16,16 +16,15 @@
             <small>{{ m.datum|slice:":10" }}</small>
           </div>
           <small class="pe-4">{{ m.to|join:', ' }}</small>
-          <form
+          <a
             hx-post="/message/delete/"
+            hx-vals='{"message_id": "{{ m.id }}"}'
             hx-confirm="Wirklich löschen?"
             hx-target="closest .message-item"
             hx-swap="outerHTML"
-            class="position-absolute bottom-0 end-0 m-1"
-          >
-            <input type="hidden" name="message_id" value="{{ m.id }}">
-            <button type="submit" class="btn btn-sm btn-outline-danger">❌</button>
-          </form>
+            class="position-absolute bottom-0 end-0 m-1 text-danger text-decoration-none"
+            style="font-size: 12px; width: 12px; height: 12px; display: inline-block;"
+            >❌</a>
         </div>
         {% empty %}
         <p class="m-2">Keine Nachrichten.</p>
