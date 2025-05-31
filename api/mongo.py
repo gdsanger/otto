@@ -17,6 +17,7 @@ sprints_collection = db.sprints
 teams_collection = db.teams
 users = db["users"]
 messages_collection = db.messages
+comments_collection = db.comments
 db.meetings.delete_many({"id": ""})
 
 def get_tagesplan_collection() -> Collection:

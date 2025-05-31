@@ -88,6 +88,12 @@ except Exception as e:
     print(f"⚠️ Fehler beim Einbinden von message_controller: {e}")
 
 try:
+    from controller.comment_controller import router as comment_router
+    app.include_router(comment_router)
+except Exception as e:
+    print(f"⚠️ Fehler beim Einbinden von comment_controller: {e}")
+
+try:
     from controller.sprint_controller import router as sprint_router
     app.include_router(sprint_router)
 except Exception as e:
