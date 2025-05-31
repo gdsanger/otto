@@ -3,7 +3,7 @@
 
 import httpx
 from fastapi import APIRouter, Depends
-from config import CLIENT_ID, CLIENT_SECRET, TENANT_ID, MAIL_FROM, MAIL_TO, SITE_ID, DRIVE_ID, FOLDER, GRAPH_URL
+from config import CLIENT_ID, CLIENT_SECRET, TENANT_ID, MAIL_FROM, MAIL_TO, SITE_ID, DRIVE_ID, FOLDER, GRAPH_URL, MAIL_INBOX
 from typing import Optional
 from datetime import date, datetime
 from graph import verify_api_key, get_graph_token
@@ -109,3 +109,47 @@ async def send_mail_via_graph(subject: str, body: str, to: str, cc: Optional[str
             "success": False,
             "error": f"Unerwarteter Fehler beim E-Mail-Versand: {str(e)}"
         }
+
+
+@router.get("/mail/inbox", dependencies=[Depends(verify_api_key)])
+async def fetch_inbox_messages():
+    """Retrieve all messages from the configured inbox."""
+    token = await get_graph_token()
+    headers = {"Authorization": f"Bearer {token}"}
+    url = f"{GRAPH_URL}/users/{MAIL_INBOX}/mailFolders/inbox/messages"
+    params = {
+        "$top": 50,
+        "$select": "id,conversationId,subject,body,toRecipients,ccRecipients,from,receivedDateTime"
+    }
+
+    async with httpx.AsyncClient(timeout=30.0) as client:
+        resp = await client.get(url, headers=headers, params=params)
+        resp.raise_for_status()
+        base_messages = resp.json().get("value", [])
+
+        detailed = []
+        for m in base_messages:
+            mid = m.get("id")
+            detail = await client.get(
+                f"{GRAPH_URL}/users/{MAIL_INBOX}/messages/{mid}",
+                headers=headers
+            )
+            detail.raise_for_status()
+            detailed.append(detail.json())
+
+    return detailed
+
+
+@router.post("/mail/{message_id}/archive", dependencies=[Depends(verify_api_key)])
+async def archive_message(message_id: str):
+    """Move the specified message to the Archive folder."""
+    token = await get_graph_token()
+    headers = {"Authorization": f"Bearer {token}", "Content-Type": "application/json"}
+    url = f"{GRAPH_URL}/users/{MAIL_INBOX}/messages/{message_id}/move"
+    payload = {"destinationId": "Archive"}
+
+    async with httpx.AsyncClient(timeout=30.0) as client:
+        resp = await client.post(url, headers=headers, json=payload)
+        resp.raise_for_status()
+
+    return {"status": "archived"}

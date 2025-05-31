@@ -18,3 +18,5 @@ class Message(BaseModel):
     project_id: Optional[str] = None
     task_id: Optional[str] = None
     sprint_id: Optional[str] = None
+    message_id: Optional[str] = None
+    conversation_id: Optional[str] = None

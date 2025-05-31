@@ -21,3 +21,4 @@ SITE_ID = "6de60bff-46b2-4c09-b690-651e0d0ab8f3"
 DRIVE_ID = "b!_wvmbbJGCUy2kGUeDQq48wGoU_ggXVtOoCg4ZWpY2DYICqDfnPOvSrDLdC6yvpNC"
 FOLDER = "Otto/Projekte/"
 GRAPH_URL = "https://graph.microsoft.com/v1.0"
+GRAPH_API_URL = os.getenv("GRAPH_API_URL", "https://graph.isarlabs.de")
