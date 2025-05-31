@@ -54,6 +54,7 @@ async def fetch_inbox():
             doc = {
                 "datum": datetime.fromisoformat(dt_str) if dt_str else datetime.utcnow(),
                 "subject": m.get("subject", ""),
+                "sender": m.get("from", {}).get("emailAddress", {}).get("address"),
                 "to": [r["emailAddress"]["address"] for r in m.get("toRecipients", [])],
                 "cc": [r["emailAddress"]["address"] for r in m.get("ccRecipients", [])] or None,
                 "message": m.get("body", {}).get("content", ""),

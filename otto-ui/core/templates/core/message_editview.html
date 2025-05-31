@@ -45,6 +45,10 @@
           <label class="form-label">Cc</label>
           <input type="text" name="cc" class="form-control" value="{{ message.cc|default_if_none:''|join:', ' }}">
         </div>
+        <div class="mb-3">
+          <label class="form-label">From</label>
+          <input type="text" name="sender" class="form-control" value="{{ message.sender|default:message.from }}" {% if message.direction == 'in' %}readonly{% endif %}>
+        </div>
         <textarea id="editor" name="message" class="form-control">{{ message.message|safe }}</textarea>
       </div>
     </div>
