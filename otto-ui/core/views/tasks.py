@@ -5,6 +5,7 @@ from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render, redirect
 from .helpers import login_required
 from django.views.decorators.csrf import csrf_exempt
+from django.template.loader import render_to_string
 from core.const import prio_liste, status_liste, typ_liste
 import os
 from dotenv import load_dotenv
@@ -481,6 +482,12 @@ def task_pageview(request, task_id):
         headers={"x-api-key": OTTO_API_KEY},
     )
     similar_tasks = similar_res.json() if similar_res.status_code == 200 else []
+    comments_res = requests.get(
+        f"{OTTO_API_URL}/tasks/{task_id}/comments",
+        headers={"x-api-key": OTTO_API_KEY},
+    )
+    comments = comments_res.json() if comments_res.status_code == 200 else []
+    personen_map = {p.get("id"): p.get("name") for p in personen}
     return render(request, "core/task_detailpage.html", {
         "task": task,
         "personen": personen,
@@ -492,4 +499,52 @@ def task_pageview(request, task_id):
         "typ_liste": typ_liste,
         "sprints": sprints,
         "similar_tasks": similar_tasks,
+        "comments": comments,
+        "personen_map": personen_map,
     })
+
+
+@login_required
+@csrf_exempt
+def add_task_comment(request):
+    if request.method == "POST":
+        task_id = request.POST.get("task_id")
+        text = request.POST.get("text", "").strip()
+        send_email = request.POST.get("send_email") == "1"
+        user = request.session.get("user", {})
+        user_id = user.get("id")
+
+        if not task_id or not text:
+            return JsonResponse({"error": "Ungültige Daten."}, status=400)
+
+        payload = {
+            "datum": datetime.utcnow().isoformat(),
+            "task_id": task_id,
+            "user_id": user_id,
+            "text": text,
+            "type": "note",
+        }
+
+        res = requests.post(
+            f"{OTTO_API_URL}/tasks/{task_id}/comments?send_email={'true' if send_email else 'false'}",
+            headers={"x-api-key": OTTO_API_KEY, "Content-Type": "application/json"},
+            data=json.dumps(payload),
+        )
+
+        if res.status_code in (200, 201):
+            person_name = user.get("name", "")
+            html = render_to_string(
+                "components/comment_item.html",
+                {"c": payload, "person_name": person_name},
+            )
+            return JsonResponse({"success": True, "html": html})
+        try:
+            error_detail = res.json().get("detail")
+        except Exception:
+            error_detail = None
+        return JsonResponse(
+            {"error": error_detail or "Fehler beim Speichern."},
+            status=res.status_code or 500,
+        )
+
+    return JsonResponse({"error": "Ungültige Methode."}, status=405)

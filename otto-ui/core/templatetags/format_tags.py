@@ -32,3 +32,11 @@ def basename(value: str):
         return unquote(name) or value
     except Exception:
         return value
+
+
+@register.filter
+def get_item(mapping, key):
+    try:
+        return mapping.get(key, '')
+    except Exception:
+        return ''

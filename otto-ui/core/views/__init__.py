@@ -10,6 +10,7 @@ from .tasks import (
     delete_task,
     task_create,
     task_pageview,
+    add_task_comment,
 )
 from .projects import (
     project_listview,
