@@ -24,26 +24,48 @@ def message_listview(request):
     res = requests.get(f"{OTTO_API_URL}/messages", headers={"x-api-key": OTTO_API_KEY})
     msgs = res.json() if res.status_code == 200 else []
 
-    messages = [m for m in msgs if m.get("direction") == ("in" if folder == "in" else "out")]
+    messages = [
+        m for m in msgs if m.get("direction") == ("in" if folder == "in" else "out")
+    ]
 
     for m in messages:
         try:
-            m["_datum"] = datetime.fromisoformat(m.get("datum")) if m.get("datum") else datetime.min
+            m["_datum"] = (
+                datetime.fromisoformat(m.get("datum"))
+                if m.get("datum")
+                else datetime.min
+            )
         except Exception:
             m["_datum"] = datetime.min
     messages.sort(key=lambda m: m["_datum"], reverse=True)
 
     selected = None
+    similar_tasks = []
     if selected_id:
-        res_det = requests.get(f"{OTTO_API_URL}/messages/{selected_id}", headers={"x-api-key": OTTO_API_KEY})
+        res_det = requests.get(
+            f"{OTTO_API_URL}/messages/{selected_id}",
+            headers={"x-api-key": OTTO_API_KEY},
+        )
         if res_det.status_code == 200:
             selected = res_det.json()
+            sim_res = requests.get(
+                f"{OTTO_API_URL}/messages/{selected_id}/similar_tasks",
+                headers={"x-api-key": OTTO_API_KEY},
+            )
+            if sim_res.status_code == 200:
+                similar_tasks = sim_res.json()
 
-    return render(request, "core/message_listview.html", {
-        "messages": messages,
-        "folder": folder,
-        "selected": selected,
-    })
+    return render(
+        request,
+        "core/message_listview.html",
+        {
+            "messages": messages,
+            "folder": folder,
+            "selected": selected,
+            "similar_tasks": similar_tasks,
+        },
+    )
+
 
 @login_required
 @csrf_exempt
@@ -58,12 +80,18 @@ def message_detailview(request, message_id):
         message = res.json()
         payload.setdefault("to", "")
         payload.setdefault("cc", "")
-        message.update({
-            "subject": payload.get("subject", message.get("subject")),
-            "message": payload.get("message", message.get("message")),
-            "to": [a.strip() for a in payload.get("to", "").split(",") if a.strip()],
-            "cc": [a.strip() for a in payload.get("cc", "").split(",") if a.strip()],
-        })
+        message.update(
+            {
+                "subject": payload.get("subject", message.get("subject")),
+                "message": payload.get("message", message.get("message")),
+                "to": [
+                    a.strip() for a in payload.get("to", "").split(",") if a.strip()
+                ],
+                "cc": [
+                    a.strip() for a in payload.get("cc", "").split(",") if a.strip()
+                ],
+            }
+        )
         update = requests.put(
             f"{OTTO_API_URL}/messages/{message_id}",
             headers={"x-api-key": OTTO_API_KEY, "Content-Type": "application/json"},
@@ -80,7 +108,18 @@ def message_detailview(request, message_id):
         headers={"x-api-key": OTTO_API_KEY},
     )
     message = res.json() if res.status_code == 200 else {}
-    return render(request, "core/message_editview.html", {"message": message})
+
+    sim_res = requests.get(
+        f"{OTTO_API_URL}/messages/{message_id}/similar_tasks",
+        headers={"x-api-key": OTTO_API_KEY},
+    )
+    similar_tasks = sim_res.json() if sim_res.status_code == 200 else []
+
+    return render(
+        request,
+        "core/message_editview.html",
+        {"message": message, "similar_tasks": similar_tasks},
+    )
 
 
 @login_required
@@ -125,12 +164,15 @@ def message_create(request):
         date_str = projekt.get("geplante_fertigstellung")
         if date_str:
             try:
-                projekt["geplante_fertigstellung"] = datetime.fromisoformat(date_str).date()
+                projekt["geplante_fertigstellung"] = datetime.fromisoformat(
+                    date_str
+                ).date()
             except ValueError:
                 projekt["geplante_fertigstellung"] = None
 
         t_res = requests.get(
-            f"{OTTO_API_URL}/project/{project_id}/tasks", headers={"x-api-key": OTTO_API_KEY}
+            f"{OTTO_API_URL}/project/{project_id}/tasks",
+            headers={"x-api-key": OTTO_API_KEY},
         )
         tasks = t_res.json() if t_res.status_code == 200 else []
         tasks = [t for t in tasks if t.get("status") != "✅ abgeschlossen"]
@@ -167,13 +209,15 @@ def message_create(request):
             f"emails/project/{template}.html",
             {"projekt": projekt, "aufgaben": tasks},
         )
-        message.update({
-            "project_id": project_id,
-            "subject": f"Projektzusammenfassung: {projekt.get('name', '')}",
-            "message": html,
-            "to": to_list,
-            "cc": cc_list,
-        })
+        message.update(
+            {
+                "project_id": project_id,
+                "subject": f"Projektzusammenfassung: {projekt.get('name', '')}",
+                "message": html,
+                "to": to_list,
+                "cc": cc_list,
+            }
+        )
 
     return render(request, "core/message_editview.html", {"message": message})
 
@@ -186,7 +230,9 @@ def send_message(request):
         if not message_id:
             return JsonResponse({"error": "Keine Message-ID."}, status=400)
 
-        res = requests.get(f"{OTTO_API_URL}/messages/{message_id}", headers={"x-api-key": OTTO_API_KEY})
+        res = requests.get(
+            f"{OTTO_API_URL}/messages/{message_id}", headers={"x-api-key": OTTO_API_KEY}
+        )
         if res.status_code != 200:
             return JsonResponse({"error": "Nachricht nicht gefunden."}, status=404)
 

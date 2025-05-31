@@ -1,8 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException
 
 
-
-
 from typing import List, Tuple, Dict
 import asyncio
 
@@ -27,6 +25,7 @@ import base64
 
 router = APIRouter()
 
+
 @router.post("/messages", dependencies=[Depends(verify_api_key)], tags=["Message"])
 async def create_message(message: Message):
     result = await db.messages.insert_one(message.dict())
@@ -34,19 +33,28 @@ async def create_message(message: Message):
     asyncio.create_task(upsert_message_to_qdrant(message_id))
     return {"status": "ok", "id": message_id}
 
+
 @router.get("/messages", dependencies=[Depends(verify_api_key)], tags=["Message"])
 async def list_messages():
     cursor = db.messages.find()
     return [serialize_mongo(m) async for m in cursor]
 
-@router.get("/messages/{message_id}", dependencies=[Depends(verify_api_key)], tags=["Message"])
+
+@router.get(
+    "/messages/{message_id}", dependencies=[Depends(verify_api_key)], tags=["Message"]
+)
 async def get_message(message_id: str):
     msg = await db.messages.find_one({"_id": ObjectId(message_id)})
     if not msg:
         raise HTTPException(status_code=404, detail="Message not found")
     return serialize_mongo(msg)
 
-@router.get("/project/{project_id}/messages", dependencies=[Depends(verify_api_key)], tags=["Projekt"])
+
+@router.get(
+    "/project/{project_id}/messages",
+    dependencies=[Depends(verify_api_key)],
+    tags=["Projekt"],
+)
 async def get_messages_by_project(project_id: str):
     cursor = db.messages.find({"project_id": project_id}).sort("datum", -1)
     return [serialize_mongo(m) async for m in cursor]
@@ -97,7 +105,9 @@ async def _fetch_and_store_attachments(
     return urls, cid_map
 
 
-@router.post("/messages/fetch", dependencies=[Depends(verify_api_key)], tags=["Message"])
+@router.post(
+    "/messages/fetch", dependencies=[Depends(verify_api_key)], tags=["Message"]
+)
 async def fetch_inbox():
     """Fetch messages from the external inbox and store them."""
     headers = {"x-api-key": INTERNAL_API_KEY}
@@ -115,11 +125,14 @@ async def fetch_inbox():
             if dt_str:
                 dt_str = dt_str.replace("Z", "+00:00")
             doc = {
-                "datum": datetime.fromisoformat(dt_str) if dt_str else datetime.utcnow(),
+                "datum": (
+                    datetime.fromisoformat(dt_str) if dt_str else datetime.utcnow()
+                ),
                 "subject": m.get("subject", ""),
                 "sender": m.get("from", {}).get("emailAddress", {}).get("address"),
                 "to": [r["emailAddress"]["address"] for r in m.get("toRecipients", [])],
-                "cc": [r["emailAddress"]["address"] for r in m.get("ccRecipients", [])] or None,
+                "cc": [r["emailAddress"]["address"] for r in m.get("ccRecipients", [])]
+                or None,
                 "message": m.get("body", {}).get("content", ""),
                 "direction": "in",
                 "status": "gesendet",
@@ -132,7 +145,9 @@ async def fetch_inbox():
             inserted.append(message_id)
 
             # Fetch and store attachments
-            att_urls, cid_map = await _fetch_and_store_attachments(client, headers, m.get("id"))
+            att_urls, cid_map = await _fetch_and_store_attachments(
+                client, headers, m.get("id")
+            )
             update_fields = {}
             if att_urls:
                 update_fields["attachments"] = att_urls
@@ -143,16 +158,22 @@ async def fetch_inbox():
                     html = html.replace(f"cid:%3C{cid}%3E", url)
                 update_fields["message"] = html
             if update_fields:
-                await db.messages.update_one({"_id": result.inserted_id}, {"$set": update_fields})
+                await db.messages.update_one(
+                    {"_id": result.inserted_id}, {"$set": update_fields}
+                )
 
-            await client.post(f"{GRAPH_API_URL}/mail/{m.get('id')}/archive", headers=headers)
+            await client.post(
+                f"{GRAPH_API_URL}/mail/{m.get('id')}/archive", headers=headers
+            )
 
             asyncio.create_task(upsert_message_to_qdrant(message_id))
 
     return {"inserted": inserted}
 
 
-@router.put("/messages/{message_id}", dependencies=[Depends(verify_api_key)], tags=["Message"])
+@router.put(
+    "/messages/{message_id}", dependencies=[Depends(verify_api_key)], tags=["Message"]
+)
 async def update_message(message_id: str, message: Message):
     try:
         oid = ObjectId(message_id)
@@ -166,7 +187,9 @@ async def update_message(message_id: str, message: Message):
     return {"status": "aktualisiert"}
 
 
-@router.delete("/messages/{message_id}", dependencies=[Depends(verify_api_key)], tags=["Message"])
+@router.delete(
+    "/messages/{message_id}", dependencies=[Depends(verify_api_key)], tags=["Message"]
+)
 async def delete_message(message_id: str):
     """Delete a message by its MongoDB identifier."""
     try:
@@ -180,7 +203,11 @@ async def delete_message(message_id: str):
     return {"status": "deleted"}
 
 
-@router.get("/messages/{message_id}/similar", dependencies=[Depends(verify_api_key)], tags=["Message"])
+@router.get(
+    "/messages/{message_id}/similar",
+    dependencies=[Depends(verify_api_key)],
+    tags=["Message"],
+)
 async def get_similar_messages(message_id: str, limit: int = 5):
     msg = await db.messages.find_one({"_id": ObjectId(message_id)})
     if not msg:
@@ -191,7 +218,25 @@ async def get_similar_messages(message_id: str, limit: int = 5):
     return similar
 
 
-@router.post("/messages/qdrant/reindex", dependencies=[Depends(verify_api_key)], tags=["Qdrant"])
+@router.get(
+    "/messages/{message_id}/similar_tasks",
+    dependencies=[Depends(verify_api_key)],
+    tags=["Message"],
+)
+async def get_similar_tasks_for_message(message_id: str, limit: int = 5):
+    """Gibt Aufgaben zurück, die semantisch zu dieser Nachricht passen."""
+    msg = await db.messages.find_one({"_id": ObjectId(message_id)})
+    if not msg:
+        raise HTTPException(status_code=404, detail="Message not found")
+
+    text = f"{msg.get('subject', '')}\n{msg.get('message', '')}"
+    similar = qdrant_similar_tasks(text, None, limit)
+    return similar
+
+
+@router.post(
+    "/messages/qdrant/reindex", dependencies=[Depends(verify_api_key)], tags=["Qdrant"]
+)
 async def reindex_all_messages():
     message_ids = await db.messages.distinct("_id")
     count = 0
@@ -199,5 +244,3 @@ async def reindex_all_messages():
         await upsert_message_to_qdrant(str(mid))
         count += 1
     return {"status": "ok", "indexed_messages": count}
-
-
