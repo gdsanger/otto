@@ -348,6 +348,7 @@ def update_task_details(request):
         task["requester_id"] = request.POST.get("requester_id")
         task["project_id"] = request.POST.get("project_id") or None
         task["sprint_id"] = request.POST.get("sprint_id") or None
+        task["erledigt"] = request.POST.get("erledigt") or None
         aufwand = request.POST.get("aufwand")
         task["aufwand"] = int(aufwand) if aufwand and aufwand.isdigit() else 0
         tid = request.POST.get("tid")
@@ -399,7 +400,7 @@ def task_detail_or_update(request, task_id):
                         value = int(value)
                     else:
                         continue
-                elif key == "termin" and value == "":
+                elif key in ["termin", "erledigt"] and value == "":
                     value = None
                 task[key] = value
             update = requests.put(
@@ -454,7 +455,7 @@ def task_pageview(request, task_id):
                         value = int(value)
                     else:
                         continue
-                elif key == "termin" and value == "":
+                elif key in ["termin", "erledigt"] and value == "":
                     value = None
                 task[key] = value
             update = requests.put(

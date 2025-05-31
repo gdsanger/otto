@@ -30,7 +30,7 @@ async def get_next_tid():
     return counter["seq"]
 
 def convert_dates(task_dict):
-    for key in ["termin"]:
+    for key in ["termin", "erledigt"]:
         if isinstance(task_dict.get(key), date):
             task_dict[key] = datetime.combine(task_dict[key], datetime.min.time())
     return task_dict
