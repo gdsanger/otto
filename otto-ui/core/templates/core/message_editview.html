@@ -50,6 +50,16 @@
           <input type="text" name="sender" class="form-control" value="{% if message.sender %}{{ message.sender }}{% elif message.from %}{{ message.from }}{% endif %}" {% if message.direction == 'in' %}readonly{% endif %}>
         </div>
         <textarea id="editor" name="message" class="form-control">{{ message.message|safe }}</textarea>
+        {% if message.attachments %}
+        <div class="mt-3">
+          <strong>Anhänge:</strong>
+          <ul class="list-unstyled">
+            {% for url in message.attachments %}
+            <li><a href="{{ url }}" target="_blank">📎 {{ url|basename }}</a></li>
+            {% endfor %}
+          </ul>
+        </div>
+        {% endif %}
       </div>
     </div>
   </form>

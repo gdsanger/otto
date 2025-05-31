@@ -66,6 +66,16 @@
           {% if selected.task_id %}<p><strong>Task:</strong> {{ selected.task_id }}</p>{% endif %}
           {% if selected.sprint_id %}<p><strong>Sprint:</strong> {{ selected.sprint_id }}</p>{% endif %}
           <div class="mt-3 border p-3" style="background:white;">{{ selected.message|safe }}</div>
+          {% if selected.attachments %}
+          <div class="mt-3">
+            <strong>Anhänge:</strong>
+            <ul class="list-unstyled">
+              {% for url in selected.attachments %}
+              <li><a href="{{ url }}" target="_blank">📎 {{ url|basename }}</a></li>
+              {% endfor %}
+            </ul>
+          </div>
+          {% endif %}
         </div>
       </div>
       {% else %}

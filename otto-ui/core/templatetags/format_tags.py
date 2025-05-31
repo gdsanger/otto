@@ -1,5 +1,6 @@
 from django import template
 from datetime import datetime
+from urllib.parse import urlparse, unquote
 
 register = template.Library()
 
@@ -21,3 +22,13 @@ def filesizeformat(value):
             return f"{value:.1f} {unit}"
         value /= 1024.0
     return f"{value:.1f} PB"
+
+@register.filter
+def basename(value: str):
+    """Return the last path component of a URL."""
+    try:
+        path = urlparse(value).path
+        name = path.rsplit('/', 1)[-1]
+        return unquote(name) or value
+    except Exception:
+        return value

@@ -38,6 +38,16 @@
       <div class="mt-3 border p-3" style="background:white;">
         {{ message.message|safe }}
       </div>
+      {% if message.attachments %}
+      <div class="mt-3">
+        <strong>Anhänge:</strong>
+        <ul class="list-unstyled">
+          {% for url in message.attachments %}
+          <li><a href="{{ url }}" target="_blank">📎 {{ url|basename }}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% endif %}
     </div>
   </div>
 </div>
