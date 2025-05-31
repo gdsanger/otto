@@ -1,6 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException
-from typing import List
+from typing import List, Tuple, Dict
 import asyncio
+
 from bson import ObjectId
 from helper import (
     verify_api_key,
@@ -46,8 +47,14 @@ async def get_messages_by_project(project_id: str):
     return [serialize_mongo(m) async for m in cursor]
 
 
-async def _fetch_and_store_attachments(client: httpx.AsyncClient, headers: dict, message_id: str) -> List[str]:
-    """Retrieve attachments of a message and store them on SharePoint."""
+async def _fetch_and_store_attachments(
+    client: httpx.AsyncClient, headers: dict, message_id: str
+) -> Tuple[List[str], Dict[str, str]]:
+    """Retrieve attachments of a message and store them on SharePoint.
+
+    Returns a tuple containing the list of uploaded attachment URLs and a
+    mapping of cid/contentId values to those URLs for inline images.
+    """
     att_resp = await client.get(
         f"{GRAPH_API_URL}/mail/{message_id}/attachments", headers=headers
     )
@@ -61,6 +68,7 @@ async def _fetch_and_store_attachments(client: httpx.AsyncClient, headers: dict,
         raise
     attachments = att_resp.json()
     urls: List[str] = []
+    cid_map: Dict[str, str] = {}
     if attachments:
         await ensure_message_folder(message_id)
         for att in attachments:
@@ -78,7 +86,10 @@ async def _fetch_and_store_attachments(client: httpx.AsyncClient, headers: dict,
                 url = await upload_message_attachment(message_id, name, content)
                 if url:
                     urls.append(url)
-    return urls
+                    cid = att.get("contentId")
+                    if att.get("isInline") and cid:
+                        cid_map[cid.strip("<>")] = url
+    return urls, cid_map
 
 
 @router.post("/messages/fetch", dependencies=[Depends(verify_api_key)], tags=["Message"])
@@ -116,9 +127,18 @@ async def fetch_inbox():
             inserted.append(message_id)
 
             # Fetch and store attachments
-            att_urls = await _fetch_and_store_attachments(client, headers, m.get("id"))
+            att_urls, cid_map = await _fetch_and_store_attachments(client, headers, m.get("id"))
+            update_fields = {}
             if att_urls:
-                await db.messages.update_one({"_id": result.inserted_id}, {"$set": {"attachments": att_urls}})
+                update_fields["attachments"] = att_urls
+            if cid_map:
+                html = doc["message"]
+                for cid, url in cid_map.items():
+                    html = html.replace(f"cid:{cid}", url)
+                    html = html.replace(f"cid:%3C{cid}%3E", url)
+                update_fields["message"] = html
+            if update_fields:
+                await db.messages.update_one({"_id": result.inserted_id}, {"$set": update_fields})
 
             await client.post(f"{GRAPH_API_URL}/mail/{m.get('id')}/archive", headers=headers)
 
