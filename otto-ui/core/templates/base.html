@@ -150,11 +150,31 @@
                 toast.show();
             }
         });
-    </script>
-    <script>
-        document.getElementById('toggle-chat-sidebar').addEventListener('click', function() {
-            const sidebar = document.querySelector('.sidebar-right');
-            sidebar.classList.toggle('d-none');
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const toggleBtn = document.getElementById('toggle-chat-sidebar');
+
+            function updateSidebar(initial) {
+                const sidebar = document.querySelector('.sidebar-right');
+                if (!sidebar) return;
+                if (initial) {
+                    const stored = localStorage.getItem('chatSidebarHidden');
+                    if (stored === 'true') {
+                        sidebar.classList.add('d-none');
+                    }
+                } else {
+                    const hidden = sidebar.classList.toggle('d-none');
+                    localStorage.setItem('chatSidebarHidden', hidden);
+                }
+            }
+
+            updateSidebar(true);
+
+            if (toggleBtn) {
+                toggleBtn.addEventListener('click', function() {
+                    updateSidebar(false);
+                });
+            }
         });
     </script>
     <script type="module" src="{% static 'otto_chat/assets/index-CBL3uiBv.js' %}"></script>
