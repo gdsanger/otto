@@ -51,16 +51,16 @@
             <div class="mb-2">
               <div class="d-flex justify-content-between align-items-center">
                 <label class="form-label mb-0">Beschreibung</label>
-                <button type="button" class="btn btn-sm btn-outline-secondary ai-btn" data-target="[name=beschreibung]" title="Text korrigieren">🤖</button>
+                <button type="button" class="btn btn-sm btn-outline-secondary ai-btn" data-target="#beschreibungEditor" data-html="1" title="Text korrigieren">🤖</button>
               </div>
-              <textarea class="form-control form-control-sm" name="beschreibung">{{ task.beschreibung }}</textarea>
+              <textarea id="beschreibungEditor" class="form-control form-control-sm" name="beschreibung">{{ task.beschreibung|safe }}</textarea>
             </div>
             <div class="mb-2">
               <div class="d-flex justify-content-between align-items-center">
                 <label class="form-label mb-0">Umsetzung</label>
-                <button type="button" class="btn btn-sm btn-outline-secondary ai-btn" data-target="[name=umsetzung]" title="Text korrigieren">🤖</button>
+                <button type="button" class="btn btn-sm btn-outline-secondary ai-btn" data-target="#umsetzungEditor" data-html="1" title="Text korrigieren">🤖</button>
               </div>
-              <textarea class="form-control form-control-sm" name="umsetzung">{{ task.umsetzung }}</textarea>
+              <textarea id="umsetzungEditor" class="form-control form-control-sm" name="umsetzung">{{ task.umsetzung|safe }}</textarea>
             </div>
             <div class="mb-2">
               <label class="form-label">Projekt</label>
@@ -154,6 +154,7 @@
       </form>
     </div>
   </div>
+  <script src="https://cdn.tiny.cloud/1/kpams0ubmp1xidkpbry2j9afcgmlfpiv96ybkly1llpyi875/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
   <div id="saveSuccess" class="alert alert-success d-none">Gespeichert!</div>
   <div class="card mb-2">
     <div class="card-header">
@@ -253,6 +254,9 @@ projectSelect.addEventListener('change', filterSprints);
 document.addEventListener('DOMContentLoaded', filterSprints);
 
 function saveTask() {
+  if (window.tinymce) {
+    tinymce.triggerSave();
+  }
   const data = {};
   new FormData(form).forEach((v, k) => { data[k] = v; });
   return fetch('', {
@@ -293,6 +297,9 @@ document.getElementById('doneBtn').addEventListener('click', () => {
 });
 
 document.getElementById('cloneBtn').addEventListener('click', () => {
+  if (window.tinymce) {
+    tinymce.triggerSave();
+  }
   const data = {};
   new FormData(form).forEach((v,k)=>{ if(k !== 'task_id') data[k]=v; });
   fetch('/task/new/', {
@@ -378,6 +385,25 @@ document.querySelectorAll('.ai-btn').forEach(btn => {
         alert(d.error);
       }
     }).catch(()=>alert('Fehler bei KI-Anfrage'));
+  });
+});
+
+function plainToHtml(text){
+  if(!text || text.includes('<')) return text || '';
+  return text.split(/\n\n/).map(p => '<p>' + p.replace(/\n/g,'<br>') + '</p>').join('');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const besch = document.getElementById('beschreibungEditor');
+  const umset = document.getElementById('umsetzungEditor');
+  if(besch) besch.value = plainToHtml(besch.value);
+  if(umset) umset.value = plainToHtml(umset.value);
+  tinymce.init({
+    selector: '#beschreibungEditor,#umsetzungEditor',
+    plugins: 'lists advlist link image table code charmap autolink codesample link searchreplace fullscreen emoticons',
+    toolbar: 'link | undo redo | bold italic | alignleft aligncenter alignright | code codesample searchreplace fullscreen emoticons',
+    license_key: 'gpl',
+    height: 300
   });
 });
 </script>
