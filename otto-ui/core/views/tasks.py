@@ -512,6 +512,7 @@ def task_pageview(request, task_id):
         headers={"x-api-key": OTTO_API_KEY},
     )
     task_context = context_res.json() if context_res.status_code == 200 else {}
+    context_text = task_context.get("context_text", "")
     similar_res = requests.get(
         f"{OTTO_API_URL}/tasks/{task_id}/similar",
         headers={"x-api-key": OTTO_API_KEY},
@@ -537,6 +538,7 @@ def task_pageview(request, task_id):
         "comments": comments,
         "personen_map": personen_map,
         "context_json": json.dumps(task_context),
+        "context_text": context_text,
     })
 
 
