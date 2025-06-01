@@ -15,6 +15,18 @@ class Projekt(BaseModel):
         "🟢 normal",
         description="Projektpriorität (z.B. 'hoch', 'mittel', 'niedrig')",
     )
+    system: Optional[str] = Field(
+        default=None,
+        description="Einsatzsystem (z.B. UIS Online, Moodle, ScheduleEase, Sonstige)",
+    )
+    bereich: Optional[str] = Field(
+        default=None,
+        description="Fachbereich oder organisatorischer Bereich",
+    )
+    environment: Optional[str] = Field(
+        default=None,
+        description="Technisches Environment (z.B. .NET, PHP, Python, KI, Sonstige)",
+    )
     bearbeiter: Optional[str] = Field(None, description="Verknüpfung zu Personen ID")
     devops_project_id: Optional[str] = Field(
         default=None,

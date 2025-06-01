@@ -97,6 +97,26 @@
                         <label class="form-label">Geplante Fertigstellung</label>
                         <input type="date" name="geplante_fertigstellung" class="form-control" value="{{ projekt.geplante_fertigstellung|default_if_none:'' }}">
                     </div>
+                    <div class="mb-3">
+                        <label class="form-label">System</label>
+                        <select class="form-select" name="system">
+                        {% for s in system_liste %}
+                            <option value="{{ s }}" {% if projekt.system == s %}selected{% endif %}>{{ s }}</option>
+                        {% endfor %}
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Bereich</label>
+                        <input type="text" name="bereich" class="form-control" value="{{ projekt.bereich }}">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Environment</label>
+                        <select class="form-select" name="environment">
+                        {% for env in environment_liste %}
+                            <option value="{{ env }}" {% if projekt.environment == env %}selected{% endif %}>{{ env }}</option>
+                        {% endfor %}
+                        </select>
+                    </div>
                 </div>
             </div>
         </div>
