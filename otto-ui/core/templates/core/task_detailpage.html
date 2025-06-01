@@ -266,7 +266,7 @@ function saveTask() {
   }
 });
   console.log('Task-Daten:', data);
-  return fetch('', {
+  return fetch(location.pathname, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
