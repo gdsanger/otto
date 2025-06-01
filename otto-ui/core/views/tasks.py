@@ -470,6 +470,7 @@ def task_pageview(request, task_id):
     if request.method == "POST":
         try:
             payload = json.loads(request.body)
+            print("Received payload:", payload)
             res = requests.get(f"{OTTO_API_URL}/tasks/{task_id}", headers={"x-api-key": OTTO_API_KEY})
             if res.status_code != 200:
                 return JsonResponse({"error": "Task nicht gefunden"}, status=404)

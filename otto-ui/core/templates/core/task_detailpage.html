@@ -7,7 +7,7 @@
     name: "{{ task.betreff }}",
     id: "{{ task.id }}",
     project_id: "{{ task.project_id|default_if_none:'' }}",
-    context: {{ context_json|default_if_none:"{}"|safe }},
+    context: "{{ task.beschreibung|default_if_none:''|escapejs }}",
     gptFunctions: ["get_task_by_id"]
   }
 </script>
@@ -260,6 +260,12 @@ function saveTask() {
   }
   const data = {};
   new FormData(form).forEach((v, k) => { data[k] = v; });
+  ['aufwand', 'tid'].forEach(k => {
+  if (data[k] !== undefined && data[k] !== "") {
+    data[k] = parseInt(data[k], 10);
+  }
+});
+  console.log('Task-Daten:', data);
   return fetch('', {
     method: 'POST',
     headers: {
