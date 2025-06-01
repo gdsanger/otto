@@ -10,7 +10,10 @@
         "short": {"type": "string", "description": "Kurzbezeichnung"},
         "beschreibung": {"type": "string", "description": "Projektbeschreibung"},
         "status": {"type": "string", "description": "Projektstatus"},
-        "prio": {"type": "string", "description": "Projektpriorität"}
+        "prio": {"type": "string", "description": "Projektpriorität"},
+        "system": {"type": "string", "description": "Einsatzsystem (z.B. UIS Online, Moodle, ScheduleEase, Sonstige)"},
+        "bereich": {"type": "string", "description": "Fachbereich oder organisatorischer Bereich"},
+        "environment": {"type": "string", "description": "Technisches Environment (z.B. .NET, PHP, Python, KI, Sonstige)"}
       }
     }
   }

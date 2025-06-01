@@ -5,7 +5,7 @@ from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render, redirect
 from .helpers import login_required
 from django.views.decorators.csrf import csrf_exempt
-from core.const import status_liste, prio_liste, projekt_typ, typ_liste
+from core.const import status_liste, prio_liste, projekt_typ, typ_liste, system_liste, environment_liste
 import os
 from dotenv import load_dotenv
 from django.views.decorators.http import require_POST
@@ -50,6 +50,8 @@ def project_listview(request):
             "projekt_typ": projekt_typ,
             "personen": personen,
             "agenten": agenten,
+            "system_liste": system_liste,
+            "environment_liste": environment_liste,
         },
     )
 
@@ -79,7 +81,10 @@ def project_create(request):
         "short": request.GET.get("short", ""),
         "beschreibung": request.GET.get("beschreibung", ""),
         "status": request.GET.get("status", ""),
-        "prio": request.GET.get("prio", "")
+        "prio": request.GET.get("prio", ""),
+        "system": request.GET.get("system", ""),
+        "bereich": request.GET.get("bereich", ""),
+        "environment": request.GET.get("environment", ""),
     }
     return render(
         request,
@@ -94,6 +99,8 @@ def project_create(request):
             "status_liste": status_liste,
             "prio_liste": prio_liste,
             "typ_liste": typ_liste,
+            "system_liste": system_liste,
+            "environment_liste": environment_liste,
         },
     )
 
@@ -209,6 +216,8 @@ def project_detailview(request, project_id):
             "status_liste": status_liste,
             "prio_liste": prio_liste,
             "typ_liste": typ_liste,
+            "system_liste": system_liste,
+            "environment_liste": environment_liste,
             "sprints": sprints,
             "sprint_id": sprint_id_filter,
             "task_page": task_page,
