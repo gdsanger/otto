@@ -141,48 +141,56 @@
     </div>
   </div>
   <div id="saveSuccess" class="alert alert-success d-none">Gespeichert!</div>
-  {% if similar_tasks %}
   <div class="card mb-2">
     <div class="card-header">
-      <h5 class="mb-0">Ähnliche Aufgaben</h5>
-    </div>
-    <div class="card-body p-2">
-      <ul class="list-unstyled mb-0">
-        {% for item in similar_tasks %}
-        <li>
-          <a href="/task/view/{{ item.task.mongo_id }}/">{{ item.task.betreff }}</a>
-          {% if item.task.projekt %}<span class="text-muted">({{ item.task.projekt_name }})</span>{% endif %}
-          <small class="text-muted ms-2">Score: {{ item.score|floatformat:2 }}</small>
+      <ul class="nav nav-tabs card-header-tabs" id="taskDetailTabs" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#commentsTab" type="button" role="tab">Kommentare</button>
         </li>
-        {% endfor %}
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" data-bs-toggle="tab" data-bs-target="#similarTab" type="button" role="tab">Ähnliche Aufgaben</button>
+        </li>
       </ul>
     </div>
-  </div>
-  {% endif %}
-  <div class="card mb-2">
-    <div class="card-header">
-      <h5 class="mb-0">Kommentare</h5>
-    </div>
     <div class="card-body">
-      <div id="commentsList">
-        {% for c in comments %}
-          {% with person_name=personen_map|get_item:c.user_id %}
-            {% include 'components/comment_item.html' with c=c person_name=person_name %}
-          {% endwith %}
-        {% empty %}
-        <p class="text-muted">Keine Kommentare vorhanden.</p>
-        {% endfor %}
-      </div>
-      <form id="commentForm" class="mt-3" data-task-id="{{ task.id }}">
-        {% csrf_token %}
-        <input type="hidden" name="task_id" value="{{ task.id }}">
-        <textarea class="form-control form-control-sm mb-2" name="text" rows="2" placeholder="Kommentar..."></textarea>
-        <div class="form-check mb-2">
-          <input class="form-check-input" type="checkbox" value="1" id="sendEmail" name="send_email">
-          <label class="form-check-label" for="sendEmail">Als E-Mail an Requester senden</label>
+      <div class="tab-content">
+        <div class="tab-pane fade show active" id="commentsTab" role="tabpanel">
+          <div id="commentsList">
+            {% for c in comments %}
+              {% with person_name=personen_map|get_item:c.user_id %}
+                {% include 'components/comment_item.html' with c=c person_name=person_name %}
+              {% endwith %}
+            {% empty %}
+            <p class="text-muted">Keine Kommentare vorhanden.</p>
+            {% endfor %}
+          </div>
+          <form id="commentForm" class="mt-3" data-task-id="{{ task.id }}">
+            {% csrf_token %}
+            <input type="hidden" name="task_id" value="{{ task.id }}">
+            <textarea class="form-control form-control-sm mb-2" name="text" rows="2" placeholder="Kommentar..."></textarea>
+            <div class="form-check mb-2">
+              <input class="form-check-input" type="checkbox" value="1" id="sendEmail" name="send_email">
+              <label class="form-check-label" for="sendEmail">Als E-Mail an Requester senden</label>
+            </div>
+            <button type="submit" class="btn btn-outline-primary">Hinzufügen</button>
+          </form>
         </div>
-        <button type="submit" class="btn btn-outline-primary">Hinzufügen</button>
-      </form>
+        <div class="tab-pane fade" id="similarTab" role="tabpanel">
+          {% if similar_tasks %}
+          <ul class="list-unstyled mb-0">
+            {% for item in similar_tasks %}
+            <li>
+              <a href="/task/view/{{ item.task.mongo_id }}/">{{ item.task.betreff }}</a>
+              {% if item.task.projekt %}<span class="text-muted">({{ item.task.projekt_name }})</span>{% endif %}
+              <small class="text-muted ms-2">Score: {{ item.score|floatformat:2 }}</small>
+            </li>
+            {% endfor %}
+          </ul>
+          {% else %}
+          <p class="text-muted">Keine ähnlichen Aufgaben vorhanden.</p>
+          {% endif %}
+        </div>
+      </div>
     </div>
   </div>
   {{ sprints|json_script:"sprints-data" }}
