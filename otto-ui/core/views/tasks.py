@@ -235,11 +235,11 @@ def task_create(request):
     meetings_res = requests.get(f"{OTTO_API_URL}/meetings", headers={"x-api-key": OTTO_API_KEY})
     meetings = meetings_res.json() if meetings_res.status_code == 200 else []
 
-    return render(request, "core/task_detailview.html", {
+    return render(request, "core/task_detailpage.html", {
         "task": task,
         "personen": personen,
         "agenten": agenten,
-        "projekte": projekte,      
+        "projekte": projekte,
         "prio_liste": prio_liste,
         "status_liste": status_liste,
         "typ_liste": typ_liste,
@@ -428,7 +428,7 @@ def task_detail_or_update(request, task_id):
     sprints = sprints_res.json() if sprints_res.status_code == 200 else []
     meetings_res = requests.get(f"{OTTO_API_URL}/meetings", headers={"x-api-key": OTTO_API_KEY})
     meetings = meetings_res.json() if meetings_res.status_code == 200 else []
-    return render(request, "core/task_detailview.html", {
+    return render(request, "core/task_detailpage.html", {
         "task": task,
         "personen": personen,
         "agenten": agenten,
