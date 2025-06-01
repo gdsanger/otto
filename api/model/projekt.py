@@ -4,7 +4,6 @@
 from pydantic import BaseModel, EmailStr, Field
 from typing import List, Optional, Literal
 from datetime import datetime, date
-from model.aufgabe import Aufgabe
 
 class Projekt(BaseModel):
     name: str

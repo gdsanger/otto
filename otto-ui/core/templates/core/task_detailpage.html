@@ -66,21 +66,19 @@
                 {% endfor %}
               </select>
             </div>
-          </div>
-          <div class="col-3">
-            <div class="mb-3">
-              <label class="form-label">TID</label>
-              <input class="form-control" type="number" name="tid" value="{{ task.tid }}">
-            </div>
-            <div class="mb-3">
-              <label class="form-label">Zuständig</label>
-              <select class="form-select" name="person_id">
-                {% for person in agenten %}
-                <option value="{{ person.id }}" {% if task.person_id == person.id %}selected{% endif %}>{{ person.name }}</option>
-                {% endfor %}
-              </select>
-            </div>
-            <div class="mb-3">
+            <div class="row">
+              <div class="col-6">
+                <div class="mb-3">
+                              <label class="form-label">Zuständig</label>
+                              <select class="form-select" name="person_id">
+                                {% for person in agenten %}
+                                <option value="{{ person.id }}" {% if task.person_id == person.id %}selected{% endif %}>{{ person.name }}</option>
+                                {% endfor %}
+                              </select>
+                    </div>
+              </div>
+              <div class="col-6">
+                <div class="mb-3">
               <label class="form-label">Requester</label>
               <select class="form-select" name="requester_id">
                 <option value="">-- Kein Requester --</option>
@@ -89,6 +87,18 @@
                 {% endfor %}
               </select>
             </div>
+              </div>
+            </div>
+
+
+          </div>
+          <div class="col-3">
+            <div class="mb-3">
+              <label class="form-label">TID</label>
+              <input class="form-control" type="number" name="tid" value="{{ task.tid }}">
+            </div>
+           
+            
             <div class="mb-3">
               <label class="form-label">Termin</label>
               <input class="form-control" type="date" name="termin" value="{{ task.termin|default_if_none:''|slice:':10' }}">

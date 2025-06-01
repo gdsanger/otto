@@ -6,6 +6,7 @@
     type: "message",
     name: "{{ message.subject|escapejs }}",
     id: "{{ message.id }}",
+    project_id: "{{ message.project_id|default_if_none:'' }}",
     context: "{{ message.message|escapejs }}",
     gptFunctions: []
   }

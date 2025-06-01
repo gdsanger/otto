@@ -470,6 +470,7 @@ def task_pageview(request, task_id):
 
     task_res = requests.get(f"{OTTO_API_URL}/tasks/{task_id}", headers={"x-api-key": OTTO_API_KEY})
     task = task_res.json()
+    task["id"] = task_id
     personen, agenten = load_person_lists()
     projekte_res = requests.get(f"{OTTO_API_URL}/projekte", headers={"x-api-key": OTTO_API_KEY})
     projekte = projekte_res.json() if projekte_res.status_code == 200 else []

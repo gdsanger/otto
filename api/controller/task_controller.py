@@ -76,6 +76,7 @@ async def get_task(task_id: str):
     task = await db.tasks.find_one({"_id": oid})
     if not task:
         raise HTTPException(status_code=404, detail="Task not found")
+    print("API RESPONSE:", serialize_mongo(task))
     return serialize_mongo(task)
 
 @router.put("/tasks/{task_id}", dependencies=[Depends(verify_api_key)], tags=["Task"])
