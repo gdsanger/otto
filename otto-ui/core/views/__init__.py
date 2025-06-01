@@ -11,6 +11,7 @@ from .tasks import (
     task_create,
     task_pageview,
     add_task_comment,
+    improve_task_description,
 )
 from .projects import (
     project_listview,
