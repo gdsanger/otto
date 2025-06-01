@@ -12,6 +12,7 @@
         "prio": {"type": "string", "description": "Priorität der Aufgabe, wenn nicht angegeben, dann normal"},
         "termin": {"type": "string", "description": "Fälligkeitsdatum im ISO-Format, wenn nicht dann heute in einer Woche, bzw. am nächsten Werktag"},
         "project_id": {"type": "string", "description": "ID des Projekts, dem die Aufgabe zugewiesen werden soll."},
+        "requester_id": {"type": "string", "description": "ID Person, die die Aufgabe gemeldet hat (Requester), wenn nicht angegeben dann None"}, 
         "aufwand": { "type": "integer", "description": "Default 1" }
         
       }

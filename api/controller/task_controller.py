@@ -46,6 +46,7 @@ async def list_tasks():
 
 @router.post("/tasks", dependencies=[Depends(verify_api_key)], tags=["Task"])
 async def create_task(task: Task):
+    logger.info(f"Creating task: {task}")
     if not await db.personen.find_one({"_id": ObjectId(task.person_id)}):
         raise HTTPException(status_code=400, detail=f"Person mit ID '{task.person_id}' nicht gefunden.")
     if task.requester_id and not await db.personen.find_one({"_id": ObjectId(task.requester_id)}):

@@ -260,11 +260,17 @@ function saveTask() {
   }
   const data = {};
   new FormData(form).forEach((v, k) => { data[k] = v; });
-  ['aufwand', 'tid'].forEach(k => {
-  if (data[k] !== undefined && data[k] !== "") {
+  ['tid', 'aufwand'].forEach(k => {
+  if (data[k] === '') {
+    delete data[k]; // leere Strings bei Integers entfernen
+  } else {
     data[k] = parseInt(data[k], 10);
   }
 });
+
+if (data.erledigt === '') {
+  delete data.erledigt; // leeres Datum entfernen
+}
   console.log('Task-Daten:', data);
   return fetch(location.pathname, {
     method: 'POST',

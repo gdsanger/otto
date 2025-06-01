@@ -10,9 +10,9 @@ from core.const import prio_liste, status_liste, typ_liste
 from .ai import improve_description
 import os
 from dotenv import load_dotenv
-
+import logging
 load_dotenv()
-
+logger = logging.getLogger(__name__)
 OTTO_API_KEY = os.getenv("OTTO_API_KEY")
 OTTO_API_URL = os.getenv("OTTO_API_URL")
 
@@ -224,11 +224,14 @@ def task_kanban_view(request):
 @login_required
 @csrf_exempt
 def task_create(request):
+    logger.info("Task create called")
+    logger.info(f"Request method: {request.body}")    
     if request.method == "POST":
         try:
             payload = json.loads(request.body)
             payload["beschreibung"] = ensure_html(payload.get("beschreibung", ""))
             payload["umsetzung"] = ensure_html(payload.get("umsetzung", ""))
+            logger.info(f"Payload: {payload}")
             res = requests.post(
                 f"{OTTO_API_URL}/tasks",
                 headers={"x-api-key": OTTO_API_KEY, "Content-Type": "application/json"},
@@ -237,6 +240,7 @@ def task_create(request):
             if res.status_code in (200, 201):
                 data = res.json()
                 return JsonResponse({"success": True, "id": data.get("id")})
+            logger.error(f"Error creating task: {res.status_code} - {res.text}")
             return JsonResponse({"error": "Fehler beim Speichern"}, status=500)
         except Exception as e:
             return JsonResponse({"error": str(e)}, status=400)
