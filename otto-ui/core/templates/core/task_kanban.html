@@ -51,7 +51,11 @@
   <div class="kanban-board">
   {% for status,tasks in grouped_list %}
   <div class="kanban-column status-{{ status|slugify }}" data-status="{{ status }}">
-    <div class="kanban-column-header">{{ status }}</div>
+    <div class="kanban-column-header">
+      <button type="button" class="btn btn-sm btn-link toggle-column" title="ein-/ausklappen">▾</button>
+      {{ status }}
+    </div>
+    <div class="kanban-column-body">
     {% for task in tasks %}
     <div class="card mb-2" draggable="true" data-task-id="{{ task.id }}" data-person-id="{{ task.person_id }}" data-project-id="{{ task.project_id|default:'' }}" data-sprint-id="{{ task.sprint_id|default:'' }}">
       <div class="card-body p-2">
@@ -67,6 +71,7 @@
     {% empty %}
     <p class="p-2">-</p>
     {% endfor %}
+    </div>
   </div>
   {% endfor %}
   </div>
@@ -115,6 +120,21 @@
     if (sprintSelect) sprintSelect.addEventListener('change', applyFilters);
     if (withoutProject) withoutProject.addEventListener('change', applyFilters);
     applyFilters();
+
+    document.querySelectorAll('.kanban-column').forEach(function(col){
+      const btn = col.querySelector('.toggle-column');
+      const body = col.querySelector('.kanban-column-body');
+      if (btn && body) {
+        btn.addEventListener('click', function(){
+          col.classList.toggle('collapsed');
+          btn.textContent = col.classList.contains('collapsed') ? '▸' : '▾';
+        });
+        if (body.querySelectorAll('.card').length === 0) {
+          col.classList.add('collapsed');
+          btn.textContent = '▸';
+        }
+      }
+    });
 
     const toggleCompleted = document.getElementById('toggle-completed');
     if (toggleCompleted) {
