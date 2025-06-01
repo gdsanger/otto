@@ -46,7 +46,10 @@
               <input class="form-control form-control-sm" type="text" name="betreff" value="{{ task.betreff }}">
             </div>
             <div class="mb-2">
-              <label class="form-label">Beschreibung</label>
+              <div class="d-flex justify-content-between align-items-center">
+                <label class="form-label mb-0">Beschreibung</label>
+                <button id="improveBtn" type="button" class="btn btn-sm btn-outline-secondary" title="Text korrigieren">🔍</button>
+              </div>
               <textarea class="form-control form-control-sm" name="beschreibung">{{ task.beschreibung }}</textarea>
             </div>
             <div class="mb-2">
@@ -334,6 +337,25 @@ commentForm.addEventListener('submit', e => {
       alert(d.error);
     }
   }).catch(()=>alert('Fehler beim Speichern des Kommentars'));
+});
+
+const improveBtn = document.getElementById('improveBtn');
+improveBtn.addEventListener('click', () => {
+  const textarea = form.elements['beschreibung'];
+  fetch('/task/improve_description/', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'X-CSRFToken': getCookie('csrftoken'),
+    },
+    body: 'text=' + encodeURIComponent(textarea.value)
+  }).then(r => r.ok ? r.json() : Promise.reject()).then(d => {
+    if(d.text){
+      textarea.value = d.text;
+    } else if(d.error){
+      alert(d.error);
+    }
+  }).catch(()=>alert('Fehler bei KI-Anfrage'));
 });
 </script>
 {% endblock %}

@@ -557,3 +557,30 @@ def add_task_comment(request):
 
 
     return JsonResponse({"error": "Ungültige Methode."}, status=405)
+
+
+@login_required
+@csrf_exempt
+def improve_task_description(request):
+    if request.method == "POST":
+        text = request.POST.get("text", "").strip()
+        if not text:
+            return JsonResponse({"error": "Kein Text."}, status=400)
+
+        res = requests.post(
+            f"{OTTO_API_URL}/ai/improve_description",
+            headers={"x-api-key": OTTO_API_KEY, "Content-Type": "application/json"},
+            data=json.dumps({"text": text}),
+        )
+
+        if res.status_code == 200:
+            data = res.json()
+            return JsonResponse({"text": data.get("text", text)})
+
+        try:
+            detail = res.json().get("detail")
+        except Exception:
+            detail = None
+        return JsonResponse({"error": detail or "Fehler bei KI-Anfrage."}, status=res.status_code or 500)
+
+    return JsonResponse({"error": "Ungültige Methode."}, status=405)

@@ -28,6 +28,11 @@ urlpatterns = [
     path("task/update/", views.update_task_details, name="update_task_details"),
     path("task/new/", views.task_create, name="task_create"),
     path("task/add_comment/", views.add_task_comment, name="task_add_comment"),
+    path(
+        "task/improve_description/",
+        views.improve_task_description,
+        name="task_improve_description",
+    ),
     path("task/view/<str:task_id>/", views.task_pageview, name="task_pageview"),
     path("person/", views.person_listview, name="person_liste"),
     path("person/new/", views.person_create, name="person_create"),
