@@ -9,5 +9,5 @@
       <a href="/message/{{ c.message_id }}/" class="ms-1">📧</a>
     {% endif %}
   </div>
-  <div>{{ c.text|linebreaksbr }}</div>
+  <div>{{ c.text|urlize|linebreaksbr }}</div>
 </div>
