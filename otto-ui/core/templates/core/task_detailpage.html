@@ -7,7 +7,7 @@
     name: "{{ task.betreff }}",
     id: "{{ task.id }}",
     project_id: "{{ task.project_id|default_if_none:'' }}",
-    context: "{{ task.beschreibung|default_if_none:''|escapejs }}",
+    context: "{{ context_text|default_if_none:''|escapejs }}",
     gptFunctions: ["get_task_by_id"]
   }
 </script>
@@ -216,6 +216,7 @@
     </div>
   </div>
   {{ sprints|json_script:"sprints-data" }}
+  {{ context_json|json_script:"task-context-data" }}
 </div>
 <script>
 function getCookie(name){
