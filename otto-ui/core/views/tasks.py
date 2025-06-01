@@ -17,6 +17,22 @@ OTTO_API_KEY = os.getenv("OTTO_API_KEY")
 OTTO_API_URL = os.getenv("OTTO_API_URL")
 
 
+def ensure_html(text: str) -> str:
+    """Return text as simple HTML.
+
+    If the text already seems to contain HTML tags, it is returned unchanged.
+    Otherwise line breaks are converted into ``<br>`` and paragraphs are wrapped
+    in ``<p>`` tags so that existing plain text is displayed nicely when rendered
+    with TinyMCE.
+    """
+    if not text:
+        return ""
+    if "<" in text:
+        return text
+    paragraphs = text.split("\n\n")
+    return "".join("<p>" + p.replace("\n", "<br>") + "</p>" for p in paragraphs)
+
+
 def load_person_lists():
     res = requests.get(f"{OTTO_API_URL}/personen", headers={"x-api-key": OTTO_API_KEY})
     personen = res.json() if res.status_code == 200 else []
@@ -211,6 +227,8 @@ def task_create(request):
     if request.method == "POST":
         try:
             payload = json.loads(request.body)
+            payload["beschreibung"] = ensure_html(payload.get("beschreibung", ""))
+            payload["umsetzung"] = ensure_html(payload.get("umsetzung", ""))
             res = requests.post(
                 f"{OTTO_API_URL}/tasks",
                 headers={"x-api-key": OTTO_API_KEY, "Content-Type": "application/json"},
@@ -345,8 +363,8 @@ def update_task_details(request):
             return JsonResponse({"error": "Task nicht gefunden."}, status=404)
         task = get_res.json()
         task["betreff"] = request.POST.get("betreff")
-        task["beschreibung"] = request.POST.get("beschreibung")
-        task["umsetzung"] = request.POST.get("umsetzung")
+        task["beschreibung"] = ensure_html(request.POST.get("beschreibung"))
+        task["umsetzung"] = ensure_html(request.POST.get("umsetzung"))
         task["tasktype"] = request.POST.get("tasktype")
         task["status"] = request.POST.get("status")
         task["prio"] = request.POST.get("prio")
@@ -409,6 +427,8 @@ def task_detail_or_update(request, task_id):
                         continue
                 elif key in ["termin", "erledigt"] and value == "":
                     value = None
+                elif key in ["beschreibung", "umsetzung"]:
+                    value = ensure_html(value)
                 task[key] = value
             update = requests.put(
                 f"{OTTO_API_URL}/tasks/{task_id}",
@@ -464,6 +484,8 @@ def task_pageview(request, task_id):
                         continue
                 elif key in ["termin", "erledigt"] and value == "":
                     value = None
+                elif key in ["beschreibung", "umsetzung"]:
+                    value = ensure_html(value)
                 task[key] = value
             update = requests.put(
                 f"{OTTO_API_URL}/tasks/{task_id}",
