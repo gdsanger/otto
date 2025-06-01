@@ -15,11 +15,16 @@ window.ottoUI.openProjectForm = function(values) {
 
 window.ottoUI.openTaskForm = function(values) {
   try {
-    var params = new URLSearchParams(values || {});
+    var params = Object.keys(values || {})
+      .map(function(key) {
+        var v = values[key];
+        return encodeURIComponent(key) + "=" + encodeURIComponent(v);
+      })
+      .join("&");
     if (window.ottoContext && window.ottoContext.id) {
-      params.set('project_id', window.ottoContext.id);
+      params += (params ? '&' : '') + 'project_id=' + encodeURIComponent(window.ottoContext.id);
     }
-    window.location.href = '/task/new/' + (params.toString() ? ('?' + params.toString()) : '');
+    window.location.href = '/task/new/' + (params ? ('?' + params) : '');
   } catch (e) {
     console.error('openTaskForm failed', e);
   }
