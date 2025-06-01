@@ -117,13 +117,15 @@
 </nav>
  
 
+    <button id="toggle-chat-sidebar" class="btn btn-secondary btn-sm position-fixed" style="top: 70px; right: 10px; z-index: 1050;">Chat</button>
+
     <div class="d-flex flex-grow-1 content-wrapper">
 
         <main class="main-content">
             {% block content %}{% endblock %}
-        </main> 
+        </main>
 
-        <aside class="sidebar-right flex-column" style="width: 650px !important; flex: 0 0 650px !important; height: 100%;">       
+        <aside class="sidebar-right flex-column" style="width: 650px !important; flex: 0 0 650px !important; height: 100%;">
             <div id="otto-chat" style="height: 100%;"></div>
         </aside>
     </div>
@@ -147,6 +149,12 @@
                 const toast = new bootstrap.Toast(toastEl);
                 toast.show();
             }
+        });
+    </script>
+    <script>
+        document.getElementById('toggle-chat-sidebar').addEventListener('click', function() {
+            const sidebar = document.querySelector('.sidebar-right');
+            sidebar.classList.toggle('d-none');
         });
     </script>
     <script type="module" src="{% static 'otto_chat/assets/index-CBL3uiBv.js' %}"></script>
