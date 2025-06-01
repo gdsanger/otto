@@ -7,6 +7,7 @@ from .helpers import login_required
 from django.views.decorators.csrf import csrf_exempt
 from django.template.loader import render_to_string
 from core.const import prio_liste, status_liste, typ_liste
+from .ai import improve_description
 import os
 from dotenv import load_dotenv
 
@@ -562,30 +563,4 @@ def add_task_comment(request):
 @login_required
 @csrf_exempt
 def improve_task_description(request):
-    if request.method == "POST":
-        text = request.POST.get("text", "").strip()
-        html = request.POST.get("html") == "1"
-        if not text:
-            return JsonResponse({"error": "Kein Text."}, status=400)
-
-        payload = {"text": text}
-        if html:
-            payload["html"] = True
-
-        res = requests.post(
-            f"{OTTO_API_URL}/ai/improve_description",
-            headers={"x-api-key": OTTO_API_KEY, "Content-Type": "application/json"},
-            data=json.dumps(payload),
-        )
-
-        if res.status_code == 200:
-            data = res.json()
-            return JsonResponse({"text": data.get("text", text)})
-
-        try:
-            detail = res.json().get("detail")
-        except Exception:
-            detail = None
-        return JsonResponse({"error": detail or "Fehler bei KI-Anfrage."}, status=res.status_code or 500)
-
-    return JsonResponse({"error": "Ungültige Methode."}, status=405)
+    return improve_description(request)
