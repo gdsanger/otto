@@ -1,12 +1,12 @@
 from fastapi import APIRouter, Depends, HTTPException, Body
-from openai import OpenAI
+from openai import AsyncOpenAI
 import os
 import logging
 from helper import verify_api_key
 
 router = APIRouter()
 logger = logging.getLogger(__name__)
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+client = AsyncOpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 @router.post("/ai/improve_description", dependencies=[Depends(verify_api_key)], tags=["AI"])
 async def improve_description(text: str = Body(..., embed=True)):
