@@ -34,7 +34,7 @@ export default function ChatOtto() {
     const ctxInfo = window.ottoContext
     const projectInfo = ctxInfo?.project_id ? `, project_id: ${ctxInfo.project_id}` : ''
     const promptContext = ctxInfo
-      ? `${ctxInfo.type} „${ctxInfo.name}“ (ID: ${ctxInfo.id}${projectInfo}) - Funktionen: ${ctxInfo.gptFunctions.join(", ")}`
+      ? `${ctxInfo.type} „Name: ${ctxInfo.name}“ (ID: ${ctxInfo.id}) - Funktionen: ${ctxInfo.gptFunctions.join(", ")}`
       : context
 
     const availableFunctions = ctxInfo?.gptFunctions?.length
@@ -64,8 +64,8 @@ export default function ChatOtto() {
 
     const ctxInfo = window.ottoContext
     const projectInfoSend = ctxInfo?.project_id ? `, project_id: ${ctxInfo.project_id}` : ''
-    const promptContext = ctxInfo
-      ? `${ctxInfo.type} „${ctxInfo.name}“ (ID: ${ctxInfo.id}${projectInfoSend}) - Funktionen: ${ctxInfo.gptFunctions.join(", ")}`
+   const promptContext = ctxInfo
+      ? `${ctxInfo.type} „Name: ${ctxInfo.name}“ (ID: ${ctxInfo.id}) - Funktionen: ${ctxInfo.gptFunctions.join(", ")}`
       : context
 
     const extraContext = ctxInfo?.context ? ` Kontext: ${ctxInfo.context}` : ""

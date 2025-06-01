@@ -6,11 +6,12 @@
     "parameters": {
       "type": "object",
       "properties": {
-        "betreff": {"type": "string", "description": "Titel der Aufgabe, hier verwenden wir den Betreff der Nachricht"},
-        "beschreibung": {"type": "string", "description": "Aufgabenbeschreibung, hier verwenden wir den Text der Nachricht"},
+        "betreff": {"type": "string", "description": "Titel der Aufgabe, hier verwenden wir das Feld Name aus dem Prompt"},
+        "beschreibung": {"type": "string", "description": "Aufgabenbeschreibung, hier verwenden wir den Kontext aus dem Prompt."},
         "status": {"type": "string", "description": "Status der Aufgabe, wenn nicht angegeben dann neu"},
         "prio": {"type": "string", "description": "Priorität der Aufgabe, wenn nicht angegeben, dann normal"},
-        "termin": {"type": "string", "description": "Fälligkeitsdatum im ISO-Format, wenn nicht angebeben dann None"}
+        "termin": {"type": "string", "description": "Fälligkeitsdatum im ISO-Format, wenn nicht angebeben dann None"},
+        "project_id": {"type": "string", "description": "ID des Projekts, dem die Aufgabe zugewiesen werden soll."}
       }
     }
   }
