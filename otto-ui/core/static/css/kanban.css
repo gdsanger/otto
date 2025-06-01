@@ -19,6 +19,19 @@
 .kanban-column-header {
   font-weight: bold;
   margin-bottom: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.kanban-column.collapsed .kanban-column-body {
+  display: none;
+}
+
+.toggle-column {
+  padding: 0;
+  margin-right: 0.25rem;
+  line-height: 1;
 }
 .status-neu {
   background-color: #e3f2fd;
