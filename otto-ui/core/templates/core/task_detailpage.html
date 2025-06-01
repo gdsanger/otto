@@ -56,6 +56,13 @@
               <textarea class="form-control form-control-sm" name="beschreibung">{{ task.beschreibung }}</textarea>
             </div>
             <div class="mb-2">
+              <div class="d-flex justify-content-between align-items-center">
+                <label class="form-label mb-0">Umsetzung</label>
+                <button type="button" class="btn btn-sm btn-outline-secondary ai-btn" data-target="[name=umsetzung]" title="Text korrigieren">🤖</button>
+              </div>
+              <textarea class="form-control form-control-sm" name="umsetzung">{{ task.umsetzung }}</textarea>
+            </div>
+            <div class="mb-2">
               <label class="form-label">Projekt</label>
               <select class="form-select form-select-sm" name="project_id">
                 <option value="">-- Kein Projekt --</option>

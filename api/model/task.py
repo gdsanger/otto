@@ -6,6 +6,7 @@ class Task(BaseModel):
     tid: Optional[int] = None
     betreff: str
     beschreibung: Optional[str] = ""
+    umsetzung: Optional[str] = ""
     tasktype: Optional[str] = Field(None, description="Typ der Aufgabe, z.B. 'Aufgabe', 'Feature', 'Bug', 'Ticket', 'Requirement', 'Sonstiges'")
     person_id: str = Field(..., description="ID der verantwortlichen Person (personen.id)")
     requester_id: Optional[str] = Field(None, description="ID der anfordernden Person (personen.id)")

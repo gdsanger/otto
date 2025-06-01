@@ -168,6 +168,7 @@ def sprint_create_task(request):
         json={
             "betreff": data["betreff"],
             "beschreibung": "",
+            "umsetzung": "",
             "zuständig": data.get("zuständig", "Otto"),
             "person_id": data.get("person_id"),
             "requester_id": data.get("requester_id"),

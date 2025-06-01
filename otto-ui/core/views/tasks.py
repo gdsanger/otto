@@ -342,6 +342,7 @@ def update_task_details(request):
         task = get_res.json()
         task["betreff"] = request.POST.get("betreff")
         task["beschreibung"] = request.POST.get("beschreibung")
+        task["umsetzung"] = request.POST.get("umsetzung")
         task["tasktype"] = request.POST.get("tasktype")
         task["status"] = request.POST.get("status")
         task["prio"] = request.POST.get("prio")
