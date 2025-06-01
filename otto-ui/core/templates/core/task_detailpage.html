@@ -6,7 +6,8 @@
     type: "task",
     name: "{{ task.betreff }}",
     id: "{{ task.id }}",
-    context: {{ context_json|safe }},
+    project_id: "{{ task.project_id|default_if_none:'' }}",
+    context: {{ context_json|default_if_none:"{}"|safe }},
     gptFunctions: ["get_task_by_id"]
   }
 </script>
