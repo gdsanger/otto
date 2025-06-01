@@ -31,11 +31,10 @@ export default function ChatOtto() {
   }, [])
 
   useEffect(() => {
-    const ctxInfo = window.ottoContext
-    const projectInfo = ctxInfo?.project_id ? `, project_id: ${ctxInfo.project_id}` : ''
+    const ctxInfo = window.ottoContext    
     const promptContext = ctxInfo
-      ? `${ctxInfo.type} „Name: ${ctxInfo.name}“ (ID: ${ctxInfo.id}) - Funktionen: ${ctxInfo.gptFunctions.join(", ")}`
-      : context
+  ? `${ctxInfo.type} „Name: ${ctxInfo.name}“ (ID: ${ctxInfo.id}${ctxInfo.project_id ? `, Projekt-ID: ${ctxInfo.project_id}` : ''})`
+  : context
 
     const availableFunctions = ctxInfo?.gptFunctions?.length
       ? `Verfügbare Funktionen: ${ctxInfo.gptFunctions.join(", ")}.`
@@ -62,11 +61,10 @@ export default function ChatOtto() {
   const sendMessage = async () => {
     if (!input.trim()) return
 
-    const ctxInfo = window.ottoContext
-    const projectInfoSend = ctxInfo?.project_id ? `, project_id: ${ctxInfo.project_id}` : ''
-   const promptContext = ctxInfo
-      ? `${ctxInfo.type} „Name: ${ctxInfo.name}“ (ID: ${ctxInfo.id}) - Funktionen: ${ctxInfo.gptFunctions.join(", ")}`
-      : context
+    const ctxInfo = window.ottoContext    
+    const promptContext = ctxInfo
+  ? `${ctxInfo.type} „Name: ${ctxInfo.name}“ (ID: ${ctxInfo.id}${ctxInfo.project_id ? `, Projekt-ID: ${ctxInfo.project_id}` : ''})`
+  : context
 
     const extraContext = ctxInfo?.context ? ` Kontext: ${ctxInfo.context}` : ""
 
