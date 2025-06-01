@@ -64,6 +64,18 @@ def message_listview(request):
         )
         if res_det.status_code == 200:
             selected = res_det.json()
+            # try to determine requester_id based on sender address
+            sender_addr = (selected.get("sender") or selected.get("from") or "").lower()
+            if sender_addr:
+                personen_res = requests.get(
+                    f"{OTTO_API_URL}/personen",
+                    headers={"x-api-key": OTTO_API_KEY},
+                )
+                if personen_res.status_code == 200:
+                    for p in personen_res.json():
+                        if p.get("email", "").lower() == sender_addr:
+                            selected["requester_id"] = p.get("id")
+                            break
             sim_res = requests.get(
                 f"{OTTO_API_URL}/messages/{selected_id}/similar_tasks",
                 headers={"x-api-key": OTTO_API_KEY},
