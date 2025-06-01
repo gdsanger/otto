@@ -564,13 +564,18 @@ def add_task_comment(request):
 def improve_task_description(request):
     if request.method == "POST":
         text = request.POST.get("text", "").strip()
+        html = request.POST.get("html") == "1"
         if not text:
             return JsonResponse({"error": "Kein Text."}, status=400)
+
+        payload = {"text": text}
+        if html:
+            payload["html"] = True
 
         res = requests.post(
             f"{OTTO_API_URL}/ai/improve_description",
             headers={"x-api-key": OTTO_API_KEY, "Content-Type": "application/json"},
-            data=json.dumps({"text": text}),
+            data=json.dumps(payload),
         )
 
         if res.status_code == 200:
