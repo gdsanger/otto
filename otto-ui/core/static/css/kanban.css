@@ -28,6 +28,13 @@
   display: none;
 }
 
+.kanban-column.collapsed {
+  flex: 0 0 auto;
+  width: auto;
+  white-space: nowrap;
+  overflow-y: hidden;
+}
+
 .toggle-column {
   padding: 0;
   margin-right: 0.25rem;
