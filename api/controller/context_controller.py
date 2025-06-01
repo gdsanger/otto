@@ -1,7 +1,13 @@
 from fastapi import APIRouter, Depends, HTTPException
 from bson import ObjectId
 from helper import verify_api_key, serialize_mongo
-from mongo import projekte_collection, personen_collection, sprints_collection, db
+from mongo import (
+    projekte_collection,
+    personen_collection,
+    sprints_collection,
+    comments_collection,
+    db,
+)
 
 router = APIRouter()
 
@@ -142,6 +148,9 @@ async def aufgabe_context(aufgabe_id: str):
         if sprint:
             task_dict["sprint"] = serialize_mongo(sprint)
 
+    # Kommentare zur Aufgabe laden
+    comments_cursor = comments_collection.find({"task_id": aufgabe_id}).sort("datum", 1)
+    task_dict["comments"] = [serialize_mongo(c) async for c in comments_cursor]
 
     return task_dict
 
