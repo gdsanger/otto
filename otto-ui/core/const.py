@@ -1,6 +1,6 @@
 import json
 
-status_liste = ["✨ neu", "🚧 in Arbeit", "📦 laufend", "⏸️ wartet", "✅ abgeschlossen"]
+status_liste = ["✨ neu", "📝 spezifikation", "🚧 in Arbeit", "📦 laufend", "⏸️ wartet", "🧪 testing", "✅ abgeschlossen"]
 prio_liste = ["🔴 kritisch", "🟠 hoch", "🟢 normal", "🔵 niedrig"]
 mandanten_liste = ["HAM", "DHGS", "SCU", "HSSH", "Triagon", "IFI", "ISARtec", "IUNWorld", "Alle"]
 typ_liste = [
