@@ -223,9 +223,13 @@ def task_create(request):
         except Exception as e:
             return JsonResponse({"error": str(e)}, status=400)
 
-    task = {}
-    if request.GET.get("project_id"):
-        task["project_id"] = request.GET["project_id"]
+    task = {
+        "betreff": request.GET.get("betreff", ""),
+        "beschreibung": request.GET.get("beschreibung", ""),
+        "status": request.GET.get("status", ""),
+        "prio": request.GET.get("prio", ""),
+        "project_id": request.GET.get("project_id", ""),
+    }
    
     personen, agenten = load_person_lists()
     projekte_res = requests.get(f"{OTTO_API_URL}/projekte", headers={"x-api-key": OTTO_API_KEY})
