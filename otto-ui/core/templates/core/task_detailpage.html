@@ -6,6 +6,7 @@
     type: "task",
     name: "{{ task.betreff }}",
     id: "{{ task.id }}",
+    context: {{ context_json|safe }},
     gptFunctions: ["get_task_by_id"]
   }
 </script>
