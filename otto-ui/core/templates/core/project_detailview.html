@@ -42,11 +42,17 @@
             <div class="row">
                 <div class="col-9">
                     <div class="mb-3">
-                        <label class="form-label">Name</label>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <label class="form-label mb-0">Name</label>
+                            <button type="button" class="btn btn-sm btn-outline-secondary ai-btn" data-target="[name=name]" title="Text korrigieren">🤖</button>
+                        </div>
                         <input type="text" name="name" class="form-control" value="{{ projekt.name }}">
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Beschreibung</label>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <label class="form-label mb-0">Beschreibung</label>
+                            <button type="button" class="btn btn-sm btn-outline-secondary ai-btn" data-target="#editor" data-html="1" title="Text korrigieren">🤖</button>
+                        </div>
                         <textarea id="editor" name="beschreibung" class="form-control">{{ projekt.beschreibung|safe }}</textarea>
                     </div>
                     <div class="mb-4">
@@ -56,7 +62,10 @@
                 </div>
                 <div class="col-3">
                     <div class="mb-3">
-                        <label class="form-label">Short</label>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <label class="form-label mb-0">Short</label>
+                            <button type="button" class="btn btn-sm btn-outline-secondary ai-btn" data-target="[name=short]" title="Text korrigieren">🤖</button>
+                        </div>
                         <input type="text" name="short" class="form-control" value="{{ projekt.short }}">
                     </div>
                     <div class="mb-3">
@@ -232,7 +241,10 @@
 <form id="taskForm" class="row g-2">
   {% csrf_token %}
   <div class="col-12 col-md-4">
-    <input type="text" name="betreff" class="form-control" placeholder="Betreff" required>
+    <div class="input-group input-group-sm">
+      <input type="text" name="betreff" class="form-control" placeholder="Betreff" required>
+      <button type="button" class="btn btn-outline-secondary ai-btn" data-target="#taskForm [name=betreff]" title="Text korrigieren">🤖</button>
+    </div>
   </div>
   <div class="col-6 col-md-2">
     <input type="date" name="termin" class="form-control">
@@ -533,7 +545,7 @@ if (showDoneCheckbox) {
   showDoneCheckbox.addEventListener('change', applyShowDone);
 }
 
-document.addEventListener('DOMContentLoaded', () => {
+  document.addEventListener('DOMContentLoaded', () => {
   // Merke zuletzt genutzten Tab in localStorage
   const tabKey = 'projectTab_' + window.ottoContext.id;
   const savedTab = localStorage.getItem(tabKey);
@@ -550,7 +562,33 @@ document.addEventListener('DOMContentLoaded', () => {
       localStorage.setItem(tabKey, target);
     });
   });
-  applyShowDone();
-});
+    applyShowDone();
+  });
+
+  document.querySelectorAll('.ai-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const field = document.querySelector(btn.dataset.target);
+      if(!field) return;
+      const isHtml = btn.dataset.html === '1';
+      if(isHtml && window.tinymce) tinymce.triggerSave();
+      const params = new URLSearchParams();
+      params.set('text', field.value);
+      if(isHtml) params.set('html', '1');
+      fetch('/improve_description/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'X-CSRFToken': getCookie('csrftoken'),
+        },
+        body: params.toString()
+      }).then(r => r.ok ? r.json() : Promise.reject()).then(d => {
+        if(d.text){
+          field.value = d.text;
+        } else if(d.error){
+          alert(d.error);
+        }
+      }).catch(()=>alert('Fehler bei KI-Anfrage'));
+    });
+  });
 </script>
 {% endblock %}

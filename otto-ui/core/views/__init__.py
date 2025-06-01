@@ -13,6 +13,7 @@ from .tasks import (
     add_task_comment,
     improve_task_description,
 )
+from .ai import improve_description
 from .projects import (
     project_listview,
     project_detailview,
