@@ -54,7 +54,7 @@ async def create_task(task: Task):
     if task.sprint_id:
         if not await db.sprints.find_one({"_id": ObjectId(task.sprint_id)}):
             raise HTTPException(status_code=400, detail="Sprint nicht gefunden")
-
+    
     task_dict = convert_dates(task.dict())
     # "tid" wird von Pydantic immer im Dictionary vorhanden sein.
     # Darum auch dann eine neue TID vergeben, wenn der Wert None ist.

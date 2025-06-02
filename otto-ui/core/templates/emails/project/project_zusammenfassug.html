@@ -40,6 +40,7 @@
       <thead style="background-color: #f0f0f0;">
         <tr>
           <th align="left">📝 Titel</th>
+           <th align="left">📌 Typ</th>
           <th align="left">📅 Erledigt am</th>
         </tr>
       </thead>
@@ -47,6 +48,7 @@
         {% for task in erledigte_aufgaben %}
         <tr style="border-bottom: 1px solid #ddd;">
           <td>{{ task.betreff }}</td>
+           <td>{{ task.typ }}</td>
           <td>{{ task.erledigt|date:"d.m.Y" }}</td>
         </tr>
         {% endfor %}
