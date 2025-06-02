@@ -58,6 +58,7 @@ async def _build_context_text(task_dict: dict) -> str:
     context_text = (
         f"Aufgabe: {task_dict.get('betreff')}, "
         f"Beschreibung: {task_dict.get('beschreibung')}, "
+        f"Umsetzung: {task_dict.get('umsetzung')}, "
         f"Zuständig: {person_name} ({department}, {role}, {mandant}), "
         f"Projekt: {project_name}, "
         f"Typ: {task_dict.get('typ')}, "

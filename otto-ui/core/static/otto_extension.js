@@ -21,9 +21,17 @@ window.ottoUI.openTaskForm = function(values) {
         return encodeURIComponent(key) + "=" + encodeURIComponent(v);
       })
       .join("&");
-    if (window.ottoContext && window.ottoContext.id) {
-      params += (params ? '&' : '') + 'project_id=' + encodeURIComponent(window.ottoContext.id);
+
+    // Nur project_id aus dem Context hinzufügen, wenn nicht bereits in values enthalten
+    if (!(values && values.project_id) && window.ottoContext && window.ottoContext.project_id) {
+      params += (params ? '&' : '') + 'project_id=' + encodeURIComponent(window.ottoContext.project_id);
     }
+
+    // requester_id analog
+    if (!(values && values.requester_id) && window.ottoContext && window.ottoContext.requester_id) {
+      params += '&requester_id=' + encodeURIComponent(window.ottoContext.requester_id);
+    }
+
     window.location.href = '/task/new/' + (params ? ('?' + params) : '');
   } catch (e) {
     console.error('openTaskForm failed', e);

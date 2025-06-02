@@ -33,8 +33,10 @@ export default function ChatOtto() {
   useEffect(() => {
     const ctxInfo = window.ottoContext    
     const promptContext = ctxInfo
-  ? `${ctxInfo.type} „Name: ${ctxInfo.name}“ (ID: ${ctxInfo.id}${ctxInfo.project_id ? `, Projekt-ID: ${ctxInfo.project_id}` : ''})`
-  : context
+  ? `${ctxInfo.type} „Name: ${ctxInfo.name}“ (ID: ${ctxInfo.id}${
+      ctxInfo.project_id ? `, project_id: ${ctxInfo.project_id}` : ''
+    }${ctxInfo.requester_id ? `, requester_id: ${ctxInfo.requester_id}` : ''})`
+  : context;
 
     const availableFunctions = ctxInfo?.gptFunctions?.length
       ? `Verfügbare Funktionen: ${ctxInfo.gptFunctions.join(", ")}.`
@@ -62,9 +64,11 @@ export default function ChatOtto() {
     if (!input.trim()) return
 
     const ctxInfo = window.ottoContext    
-    const promptContext = ctxInfo
-  ? `${ctxInfo.type} „Name: ${ctxInfo.name}“ (ID: ${ctxInfo.id}${ctxInfo.project_id ? `, Projekt-ID: ${ctxInfo.project_id}` : ''})`
-  : context
+   const promptContext = ctxInfo
+  ? `${ctxInfo.type} „Name: ${ctxInfo.name}“ (ID: ${ctxInfo.id}${
+      ctxInfo.project_id ? `, Projekt-ID: ${ctxInfo.project_id}` : ''
+    }${ctxInfo.requester_id ? `, Requester-ID: ${ctxInfo.requester_id}` : ''})`
+  : context;
 
     const extraContext = ctxInfo?.context ? ` Kontext: ${ctxInfo.context}` : ""
 
