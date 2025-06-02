@@ -15,6 +15,7 @@
         <tr>
           <th align="left">📝 Titel</th>
           <th align="left">📌 Status</th>
+          <th align="left">📌 Typ</th>
           <th align="left">📅 Termin</th>
         </tr>
       </thead>
@@ -23,6 +24,7 @@
         <tr style="border-bottom: 1px solid #ddd;">
           <td>{{ task.betreff }}</td>
           <td>{{ task.status }}</td>
+          <td>{{ task.typ }}</td>
           <td>{{ task.termin|date:"d.m.Y" }}</td>
         </tr>
         {% endfor %}
@@ -32,7 +34,7 @@
     <p>Aktuell sind keine offenen Aufgaben im Projekt erfasst.</p>
     {% endif %}
 
-    <p style="margin-top: 30px;">Bei Rückfragen stehe ich jederzeit zur Verfügung.<br>
+    <p style="margin-top: 30px;">Bei Rückfragen stehe ich jederzeit zur gerne Verfügung.<br>
     Liebe Grüße<br><br>
     Christian ∞</p>
   </body>
