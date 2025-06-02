@@ -34,6 +34,26 @@
     <p>Aktuell sind keine offenen Aufgaben im Projekt erfasst.</p>
     {% endif %}
 
+    {% if erledigte_aufgaben %}
+    <h3 style="margin-top: 30px;">✅ Abgeschlossene Aufgaben (letzte 7 Tage)</h3>
+    <table cellpadding="6" cellspacing="0" border="0" style="width: 100%; border-collapse: collapse;">
+      <thead style="background-color: #f0f0f0;">
+        <tr>
+          <th align="left">📝 Titel</th>
+          <th align="left">📅 Erledigt am</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for task in erledigte_aufgaben %}
+        <tr style="border-bottom: 1px solid #ddd;">
+          <td>{{ task.betreff }}</td>
+          <td>{{ task.erledigt|date:"d.m.Y" }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% endif %}
+
     <p style="margin-top: 30px;">Bei Rückfragen stehe ich jederzeit zur gerne Verfügung.<br>
     Liebe Grüße<br><br>
     Christian ∞</p>

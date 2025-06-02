@@ -204,7 +204,10 @@ def message_create(request):
             headers={"x-api-key": OTTO_API_KEY},
         )
         tasks = t_res.json() if t_res.status_code == 200 else []
-        tasks = [t for t in tasks if t.get("status") != "✅ abgeschlossen"]
+
+        offene_tasks = []
+        erledigte_tasks = []
+        now = datetime.utcnow().date()
 
         for t in tasks:
             termin_str = t.get("termin")
@@ -213,6 +216,22 @@ def message_create(request):
                     t["termin"] = datetime.fromisoformat(termin_str).date()
                 except ValueError:
                     t["termin"] = None
+
+            erledigt_str = t.get("erledigt")
+            erledigt_dt = None
+            if erledigt_str:
+                try:
+                    erledigt_dt = datetime.fromisoformat(erledigt_str).date()
+                    t["erledigt"] = erledigt_dt
+                except ValueError:
+                    erledigt_dt = None
+                    t["erledigt"] = None
+
+            if t.get("status") == "✅ abgeschlossen":
+                if erledigt_dt and (now - erledigt_dt).days <= 7:
+                    erledigte_tasks.append(t)
+            else:
+                offene_tasks.append(t)
 
         # Empfänger ermitteln
         personen_res = requests.get(
@@ -236,7 +255,11 @@ def message_create(request):
 
         html = render_to_string(
             f"emails/project/{template}.html",
-            {"projekt": projekt, "aufgaben": tasks},
+            {
+                "projekt": projekt,
+                "aufgaben": offene_tasks,
+                "erledigte_aufgaben": erledigte_tasks,
+            },
         )
         message.update(
             {
