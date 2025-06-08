@@ -28,35 +28,47 @@
     </div>
   </div>
 
+  <div class="accordion" id="personAccordion">
   {% for person in board %}
-  <h5 class="mt-4">{{ person.name }}</h5>
-  <div class="kanban-board mb-4 person-board" data-person-id="{{ person.id }}">
-    {% for day in days %}
-    <div class="kanban-column" data-date="{{ day.iso }}">
-      <div class="kanban-column-header">{{ day.label }}</div>
-      <div class="kanban-column-body">
-        {% for task in person.tasks|get_item:day.iso %}
-        <div class="card mb-2" draggable="true" data-task-id="{{ task.id }}">
-          <div class="card-body p-2">
-            <div><strong>{{ task.betreff }}</strong></div>
-            {% if task.project_name %}
-            <div><small>📂 {{ task.project_name }}</small></div>
-            {% endif %}
-            <div><small>📅 {{ task.termin_formatiert }}</small></div>
-            {% if task.aufwand %}
-            <div><small>⏱ {{ task.aufwand }}h</small></div>
-            {% endif %}
-            <div><small>{{ task.status }}</small></div>
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="heading{{ person.id }}">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ person.id }}" aria-expanded="false" aria-controls="collapse{{ person.id }}">
+        {{ person.name }}
+      </button>
+    </h2>
+    <div id="collapse{{ person.id }}" class="accordion-collapse collapse" aria-labelledby="heading{{ person.id }}" data-bs-parent="#personAccordion">
+      <div class="accordion-body p-0">
+        <div class="kanban-board mb-4 person-board" data-person-id="{{ person.id }}">
+          {% for day in days %}
+          <div class="kanban-column" data-date="{{ day.iso }}">
+            <div class="kanban-column-header">{{ day.label }}</div>
+            <div class="kanban-column-body">
+              {% for task in person.tasks|get_item:day.iso %}
+              <div class="card mb-2" draggable="true" data-task-id="{{ task.id }}">
+                <div class="card-body p-2">
+                  <div><strong><a href="/task/view/{{ task.id }}/">{{ task.betreff }}</a></strong></div>
+                  {% if task.project_name %}
+                  <div><small>📂 {{ task.project_name }}</small></div>
+                  {% endif %}
+                  <div><small>📅 {{ task.termin_formatiert }}</small></div>
+                  {% if task.aufwand %}
+                  <div><small>⏱ {{ task.aufwand }}h</small></div>
+                  {% endif %}
+                  <div><small>{{ task.status }}</small></div>
+                </div>
+              </div>
+              {% endfor %}
+            </div>
           </div>
+          {% endfor %}
         </div>
-        {% endfor %}
       </div>
     </div>
-    {% endfor %}
   </div>
   {% empty %}
   <p>Keine Aufgaben gefunden.</p>
   {% endfor %}
+  </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
 <script>
