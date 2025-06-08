@@ -28,6 +28,11 @@
         {% endfor %}
       </ul>
     </div>
+    {% if github_url %}
+    <div class="btn-group me-2" role="group">
+      <a id="githubBtn" href="{{ github_url }}" target="_blank" class="btn btn-outline-secondary">🐙 GitHub</a>
+    </div>
+    {% endif %}
     <div class="btn-group" role="group">
       <button id="deleteBtn" type="button" class="btn btn-outline-danger">🗑️ Löschen</button>
     </div>
@@ -115,6 +120,15 @@
                         {% for env in environment_liste %}
                             <option value="{{ env }}" {% if projekt.environment == env %}selected{% endif %}>{{ env }}</option>
                         {% endfor %}
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">GitHub Repo</label>
+                        <select class="form-select" name="github_repo_id">
+                            <option value="">– bitte wählen –</option>
+                            {% for repo in github_repos %}
+                                <option value="{{ repo.id }}" {% if repo.id == projekt.github_repo_id %}selected{% endif %}>{{ repo.name }}</option>
+                            {% endfor %}
                         </select>
                     </div>
                 </div>

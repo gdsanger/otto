@@ -14,6 +14,9 @@ load_dotenv()
 
 OTTO_API_KEY = os.getenv("OTTO_API_KEY")
 OTTO_API_URL = os.getenv("OTTO_API_URL")
+GITHUB_API_URL = os.getenv("GitHub_API_URL")
+GITHUB_ORGNAME = os.getenv("GitHub_ORGNAME")
+GITHUB_API_KEY = os.getenv("GITHUB_API_KEY")
 
 
 def load_person_lists():
@@ -24,6 +27,21 @@ def load_person_lists():
         p for p in personen_sorted if p.get("rolle") in ["agent", "admin"]
     ]
     return personen_sorted, agenten_sorted
+
+
+def load_github_repos():
+    if not (GITHUB_API_URL and GITHUB_ORGNAME and GITHUB_API_KEY):
+        return []
+    headers = {
+        "Authorization": f"Bearer {GITHUB_API_KEY}",
+        "Accept": "application/vnd.github+json",
+    }
+    url = f"{GITHUB_API_URL}/orgs/{GITHUB_ORGNAME}/repos"
+    try:
+        res = requests.get(url, headers=headers)
+        return res.json() if res.status_code == 200 else []
+    except Exception:
+        return []
 
 
 @login_required
@@ -63,6 +81,8 @@ def project_create(request):
         try:
             payload = json.loads(request.body)
             payload.setdefault("klassifikation", "Projekt")
+            if payload.get("github_repo_id") in ("", None):
+                payload["github_repo_id"] = None
             res = requests.post(
                 f"{OTTO_API_URL}/projekte",
                 headers={"x-api-key": OTTO_API_KEY, "Content-Type": "application/json"},
@@ -76,6 +96,7 @@ def project_create(request):
             return JsonResponse({"error": str(e)}, status=400)
 
     personen, agenten = load_person_lists()
+    github_repos = load_github_repos()
     initial = {
         "name": request.GET.get("name", ""),
         "short": request.GET.get("short", ""),
@@ -101,6 +122,8 @@ def project_create(request):
             "typ_liste": typ_liste,
             "system_liste": system_liste,
             "environment_liste": environment_liste,
+            "github_repos": github_repos,
+            "github_url": None,
         },
     )
 
@@ -118,7 +141,10 @@ def project_detailview(request, project_id):
         projekt = res.json()
 
         for k, v in payload.items():
-            projekt[k] = v
+            if k == "github_repo_id" and (v is None or v == ""):
+                projekt[k] = None
+            else:
+                projekt[k] = v
         if isinstance(projekt.get("bearbeiter"), list):
             projekt["bearbeiter"] = (
                 projekt["bearbeiter"][0] if projekt["bearbeiter"] else None
@@ -198,6 +224,13 @@ def project_detailview(request, project_id):
     templates_dir = os.path.join(os.path.dirname(__file__), '../templates/emails/project')
     email_templates = [f[:-5] for f in os.listdir(templates_dir) if f.endswith('.html')]
     personen, agenten = load_person_lists()
+    github_repos = load_github_repos()
+    github_url = None
+    if projekt.get("github_repo_id"):
+        for r in github_repos:
+            if str(r.get("id")) == str(projekt.get("github_repo_id")):
+                github_url = r.get("html_url")
+                break
     sprints_res = requests.get(
         f"{OTTO_API_URL}/sprints", headers={"x-api-key": OTTO_API_KEY}
     )
@@ -218,6 +251,8 @@ def project_detailview(request, project_id):
             "typ_liste": typ_liste,
             "system_liste": system_liste,
             "environment_liste": environment_liste,
+            "github_repos": github_repos,
+            "github_url": github_url,
             "sprints": sprints,
             "sprint_id": sprint_id_filter,
             "task_page": task_page,
