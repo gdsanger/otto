@@ -37,7 +37,8 @@ def convert_dates(task_dict):
 
 @router.get("/tasks", dependencies=[Depends(verify_api_key)], tags=["Task"])
 async def list_tasks():
-    cursor = db.tasks.find()
+     # Nur nicht abgeschlossene Tasks abrufen
+    cursor = db.tasks.find({"status": {"$ne": "✅ abgeschlossen"}})
     tasks = []
     async for task in cursor:
         t = serialize_mongo(task)

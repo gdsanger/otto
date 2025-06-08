@@ -336,6 +336,69 @@ def update_task_person(request):
         return HttpResponse("OK") if update_res.status_code == 200 else JsonResponse({"error": "Fehler beim Speichern."}, status=500)
     return JsonResponse({"error": "Ungültige Methode."}, status=405)
 
+@login_required
+def task_week_view(request):
+    from datetime import date, timedelta
+    week_str = request.GET.get("week")
+    show_weekend = request.GET.get("weekend") == "1"
+    today = date.today()
+    if week_str:
+        try:
+            start = datetime.strptime(week_str + "-1", "%G-W%V-%u").date()
+        except ValueError:
+            start = today - timedelta(days=today.weekday())
+    else:
+        start = today - timedelta(days=today.weekday())
+    end = start + timedelta(days=6)
+
+    res = requests.get(f"{OTTO_API_URL}/tasks", headers={"x-api-key": OTTO_API_KEY})
+    tasks = res.json() if res.status_code == 200 else []
+    personen, agenten = load_person_lists()
+
+    days = []
+    for i in range(7):
+        d = start + timedelta(days=i)
+        if i < 5 or show_weekend:
+            days.append({"iso": d.isoformat(), "label": d.strftime("%a %d.%m")})
+
+    board = []
+    for p in agenten:
+        per_tasks = {day["iso"]: [] for day in days}
+        for t in tasks:
+            if t.get("person_id") != p.get("id"):
+                continue
+            if t.get("status", "").lower() == "✅ abgeschlossen":
+                continue
+            termin = t.get("termin")
+            try:
+                termin_dt = datetime.fromisoformat(termin) if termin else None
+            except ValueError:
+                termin_dt = None
+            if not termin_dt:
+                continue
+            if termin_dt.date() <= end:
+                disp = termin_dt.date()
+                if disp < start:
+                    disp = start
+                key = disp.isoformat()
+                if key in per_tasks:
+                    t["termin_formatiert"] = termin_dt.strftime("%d.%m.%Y")
+                    per_tasks[key].append(t)
+        if any(per_tasks[d["iso"]] for d in days):
+            board.append({"id": p.get("id"), "name": p.get("name"), "tasks": per_tasks})
+
+    prev_week = (start - timedelta(days=7)).strftime("%G-W%V")
+    next_week = (start + timedelta(days=7)).strftime("%G-W%V")
+
+    context = {
+        "board": board,
+        "days": days,
+        "prev_week": prev_week,
+        "next_week": next_week,
+        "week_label": start.strftime("%d.%m") + " - " + end.strftime("%d.%m.%Y"),
+        "show_weekend": show_weekend,
+    }
+    return render(request, "core/task_weekboard.html", context)
 
 @login_required
 @csrf_exempt

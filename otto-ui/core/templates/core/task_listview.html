@@ -106,7 +106,9 @@
                         </select>
                     </form>
                 </td>
-                <td>{{ task.termin_formatiert }}</td>
+                     <td>
+                    <input type="date" class="form-control form-control-sm auto-save-termin" data-task-id="{{ task.id }}" value="{{ task.termin|default_if_none:''|slice:':10' }}">
+                </td>
                 <td>
                     <form hx-post="/task/delete/" hx-confirm="Wirklich löschen?" hx-target="closest tr" hx-swap="outerHTML">
                         <input type="hidden" name="task_id" value="{{ task.id }}">
@@ -134,5 +136,44 @@
             </li>
         </ul>
     </nav>
+    <script>
+      function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+          const cookies = document.cookie.split(';');
+          for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+              cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+              break;
+            }
+          }
+        }
+        return cookieValue;
+      }
+
+      function showToast() {
+        const el = document.getElementById('snackbar');
+        if (el) {
+          const t = new bootstrap.Toast(el);
+          t.show();
+        }
+      }
+
+      document.querySelectorAll('.auto-save-termin').forEach(el => {
+        el.addEventListener('change', () => {
+          const taskId = el.dataset.taskId;
+          const value = el.value;
+          fetch(`/task/view/${taskId}/`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'X-CSRFToken': getCookie('csrftoken')
+            },
+            body: JSON.stringify({ termin: value })
+          }).then(r => { if (r.ok) showToast(); else alert('Fehler beim Speichern'); });
+        });
+      });
+    </script>
 </div>
 {% endblock %}

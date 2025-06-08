@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% load static %}
+{% load format_tags %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/kanban.css' %}">
+<script>
+  window.ottoContext = {
+    type: "task",
+    name: "Wochenübersicht",
+    id: "",
+    gptFunctions: []
+  }
+</script>
+<div class="container-fluid mt-3">
+  <div class="row mb-3 align-items-center">
+    <div class="col-auto">
+      <a class="btn btn-outline-primary" href="?week={{ prev_week }}{% if show_weekend %}&weekend=1{% endif %}">&laquo; Vorherige Woche</a>
+    </div>
+    <div class="col-auto">
+      <span class="fw-bold">Woche {{ week_label }}</span>
+    </div>
+    <div class="col-auto">
+      <a class="btn btn-outline-primary" href="?week={{ next_week }}{% if show_weekend %}&weekend=1{% endif %}">Nächste Woche &raquo;</a>
+    </div>
+    <div class="col-auto form-check ms-3">
+      <input class="form-check-input" type="checkbox" id="toggle-weekend" {% if show_weekend %}checked{% endif %}>
+      <label class="form-check-label" for="toggle-weekend">Wochenende anzeigen</label>
+    </div>
+  </div>
+
+  {% for person in board %}
+  <h5 class="mt-4">{{ person.name }}</h5>
+  <div class="kanban-board mb-4 person-board" data-person-id="{{ person.id }}">
+    {% for day in days %}
+    <div class="kanban-column" data-date="{{ day.iso }}">
+      <div class="kanban-column-header">{{ day.label }}</div>
+      <div class="kanban-column-body">
+        {% for task in person.tasks|get_item:day.iso %}
+        <div class="card mb-2" draggable="true" data-task-id="{{ task.id }}">
+          <div class="card-body p-2">
+            <div><strong>{{ task.betreff }}</strong></div>
+            <div><small>📅 {{ task.termin_formatiert }}</small></div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% empty %}
+  <p>Keine Aufgaben gefunden.</p>
+  {% endfor %}
+</div>
+<script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function(){
+    document.getElementById('toggle-weekend').addEventListener('change', function(){
+      const url = new URL(window.location);
+      if(this.checked){
+        url.searchParams.set('weekend','1');
+      } else {
+        url.searchParams.delete('weekend');
+      }
+      window.location = url.toString();
+    });
+
+    document.querySelectorAll('.kanban-column').forEach(function(col){
+      new Sortable(col, {
+        group: 'tasks',
+        animation: 150,
+        onEnd: function(evt){
+          const taskId = evt.item.dataset.taskId;
+          const newDate = evt.to.dataset.date;
+          fetch(`/task/view/${taskId}/`, {
+            method: 'POST',
+            headers: { 'Content-Type':'application/json' },
+            body: JSON.stringify({ termin: newDate })
+          }).then(function(res){
+            if(res.ok){
+              const dateLabel = evt.item.querySelector('small');
+              if(dateLabel) dateLabel.textContent = '📅 ' + newDate;
+            }
+          });
+        }
+      });
+    });
+  });
+</script>
+{% endblock %}

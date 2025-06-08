@@ -21,6 +21,7 @@ urlpatterns = [
     path("task/", views.task_listview, name="task_liste"),
     path("task/archiv/", views.task_archive_listview, name="task_archiv"),
     path("task/kanban/", views.task_kanban_view, name="task_kanban"),
+    path("task/week/", views.task_week_view, name="task_week"),
     path("task/update_status/", views.update_task_status, name="update_task_status"),
     path("task/update_person/", views.update_task_person, name="update_task_person"),
     path("task/update_typ/", views.update_task_typ, name="update_task_typ"),

@@ -3,6 +3,7 @@ from .tasks import (
     task_listview,
     task_archive_listview,
     task_kanban_view,
+    task_week_view,
     update_task_status,
     update_task_person,
     update_task_typ,
