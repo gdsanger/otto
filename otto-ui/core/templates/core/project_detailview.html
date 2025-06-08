@@ -130,6 +130,9 @@
                                 <option value="{{ repo.id }}" {% if repo.id == projekt.github_repo_id %}selected{% endif %}>{{ repo.name }}</option>
                             {% endfor %}
                         </select>
+                        {% if github_repos|length == 0 %}
+                        <div class="alert alert-warning mt-2">Keine GitHub-Repositories geladen. Prüfe die API-Konfiguration.</div>
+                        {% endif %}
                     </div>
                 </div>
             </div>

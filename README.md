@@ -40,4 +40,17 @@ Ein flexibles, KI-gestütztes System zur Erkennung, Strukturierung und Weiterver
 - Berechtigungs- und Kontextsicherheitsmodell
 - Progressive Web App / Offlinefähigkeit
 
+## GitHub-Integration
+
+Damit im Projektformular GitHub-Repositories auswählbar sind, müssen folgende
+Umgebungsvariablen gesetzt sein (z.B. in einer `.env` Datei):
+
+```
+GitHub_API_URL=https://api.github.com
+GitHub_ORGNAME=<deine Organisation>
+GitHub_API_KEY=<persönlicher Access Token>
+```
+
+Ohne diese Einstellungen bleibt das Dropdown leer.
+
 Christian Angermeier, Mai 2025

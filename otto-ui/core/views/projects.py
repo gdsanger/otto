@@ -43,9 +43,13 @@ def load_github_repos():
     }
     url = f"{GITHUB_API_URL}/orgs/{GITHUB_ORGNAME}/repos"
     try:
-        res = requests.get(url, headers=headers)
-        return res.json() if res.status_code == 200 else []
-    except Exception:
+        res = requests.get(url, headers=headers, timeout=5)
+        if res.status_code != 200:
+            logger.error("GitHub API returned %s: %s", res.status_code, res.text)
+            return []
+        return res.json()
+    except requests.RequestException as e:
+        logger.error("Failed to load GitHub repos: %s", e)
         return []
 
 
