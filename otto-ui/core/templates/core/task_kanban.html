@@ -57,6 +57,9 @@
       <div class="card-body p-2">
         <div><strong><a href="/task/view/{{ task.id }}/">{{ task.betreff }}</a></strong></div>
         <div><small>👤 {{ task.person_name }}</small></div>
+        {% if task.project_id %}
+        <div><small>📂 <a href="/project/{{ task.project_id }}/">{{ task.project_name }}</a></small></div>
+        {% endif %}
         <div><small>📅 {{ task.termin_formatiert }}</small></div>
         {% if task.sprint_name %}
         <div><small>🏃 {{ task.sprint_name }}</small></div>
