@@ -33,9 +33,14 @@ class Projekt(BaseModel):
         title="Azure DevOps Project ID ",
         description="Die eindeutige ID des verknüpften DevOps-Projekts"
     )
-    geplante_fertigstellung: Optional[str] = None    
+    github_repo_id: Optional[int] = Field(
+        default=None,
+        title="GitHub Repository ID",
+        description="Die ID des verknüpften GitHub-Repositories",
+    )
+    geplante_fertigstellung: Optional[str] = None
     beschreibung: Optional[str] = None
-    stakeholder_ids: Optional[List[str]] = []  
+    stakeholder_ids: Optional[List[str]] = []
 
 class ProjektListe(BaseModel):
     projekte: List[Projekt]
