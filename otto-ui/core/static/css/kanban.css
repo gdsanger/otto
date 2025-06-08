@@ -16,6 +16,9 @@
   padding: 0.5rem;
   border-radius: 4px;
 }
+.kanban-column-body {
+  min-height: 3rem;
+}
 .kanban-column-header {
   font-weight: bold;
   margin-bottom: 0.5rem;
