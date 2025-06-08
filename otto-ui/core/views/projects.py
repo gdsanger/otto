@@ -9,6 +9,8 @@ from core.const import status_liste, prio_liste, projekt_typ, typ_liste, system_
 import os
 from dotenv import load_dotenv
 from django.views.decorators.http import require_POST
+import logging
+logger = logging.getLogger(__name__)
 
 load_dotenv()
 
@@ -31,6 +33,9 @@ def load_person_lists():
 
 def load_github_repos():
     if not (GITHUB_API_URL and GITHUB_ORGNAME and GITHUB_API_KEY):
+        logger.warning(
+            "GitHub API URL, organization name or API key not set. Skipping GitHub repo loading."
+        )
         return []
     headers = {
         "Authorization": f"Bearer {GITHUB_API_KEY}",
