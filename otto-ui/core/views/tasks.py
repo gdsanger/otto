@@ -190,9 +190,12 @@ def task_kanban_view(request):
     sprints = sprints_res.json() if sprints_res.status_code == 200 else []
     sprint_map = {s.get("id"): s.get("name") for s in sprints}
 
-    grouped = {status: [] for status in status_liste}
+    kanban_statuses = [s for s in status_liste if s not in ("✅ abgeschlossen", "📦 laufend")]
+    grouped = {status: [] for status in kanban_statuses}
     for t in tasks:
         status = t.get("status") or status_liste[0]
+        if status in ("✅ abgeschlossen", "📦 laufend"):
+            continue
         if status not in grouped:
             grouped[status] = []
         termin = t.get("termin")
@@ -209,11 +212,11 @@ def task_kanban_view(request):
     for lst in grouped.values():
         lst.sort(key=lambda x: x["termin_dt"] or datetime.max)
 
-    grouped_list = [(status, grouped.get(status, [])) for status in status_liste]
+    grouped_list = [(status, grouped.get(status, [])) for status in kanban_statuses]
 
     context = {
         "grouped_list": grouped_list,
-        "status_liste": status_liste,
+        "status_liste": kanban_statuses,
         "agenten": agenten,
         "projekte": projekte,
         "sprints": sprints,
