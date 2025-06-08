@@ -39,7 +39,14 @@
         <div class="card mb-2" draggable="true" data-task-id="{{ task.id }}">
           <div class="card-body p-2">
             <div><strong>{{ task.betreff }}</strong></div>
+            {% if task.project_name %}
+            <div><small>📂 {{ task.project_name }}</small></div>
+            {% endif %}
             <div><small>📅 {{ task.termin_formatiert }}</small></div>
+            {% if task.aufwand %}
+            <div><small>⏱ {{ task.aufwand }}h</small></div>
+            {% endif %}
+            <div><small>{{ task.status }}</small></div>
           </div>
         </div>
         {% endfor %}

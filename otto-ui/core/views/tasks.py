@@ -353,6 +353,12 @@ def task_week_view(request):
 
     res = requests.get(f"{OTTO_API_URL}/tasks", headers={"x-api-key": OTTO_API_KEY})
     tasks = res.json() if res.status_code == 200 else []
+
+    # Projekte laden, um Namen zuordnen zu können
+    projekte_res = requests.get(f"{OTTO_API_URL}/projekte", headers={"x-api-key": OTTO_API_KEY})
+    projekte = projekte_res.json() if projekte_res.status_code == 200 else []
+    projekt_map = {p.get("id"): p.get("name") for p in projekte}
+
     personen, agenten = load_person_lists()
 
     days = []
@@ -385,6 +391,8 @@ def task_week_view(request):
                 key = disp.isoformat()
                 if key in per_tasks:
                     t["termin_formatiert"] = termin_dt.strftime("%d.%m.%Y")
+                    pid = t.get("project_id")
+                    t["project_name"] = projekt_map.get(pid, "") if pid else ""
                     per_tasks[key].append(t)
         if any(per_tasks[d["iso"]] for d in days):
             board.append({"id": p.get("id"), "name": p.get("name"), "tasks": per_tasks})
