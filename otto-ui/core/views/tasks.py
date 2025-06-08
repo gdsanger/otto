@@ -372,6 +372,7 @@ def task_week_view(request):
     board = []
     for p in agenten:
         per_tasks = {day["iso"]: [] for day in days}
+        total_count = 0
         for t in tasks:
             if t.get("person_id") != p.get("id"):
                 continue
@@ -394,8 +395,14 @@ def task_week_view(request):
                     pid = t.get("project_id")
                     t["project_name"] = projekt_map.get(pid, "") if pid else ""
                     per_tasks[key].append(t)
+                    total_count += 1
         if any(per_tasks[d["iso"]] for d in days):
-            board.append({"id": p.get("id"), "name": p.get("name"), "tasks": per_tasks})
+            board.append({
+                "id": p.get("id"),
+                "name": p.get("name"),
+                "tasks": per_tasks,
+                "count": total_count,
+            })
 
     prev_week = (start - timedelta(days=7)).strftime("%G-W%V")
     next_week = (start + timedelta(days=7)).strftime("%G-W%V")
