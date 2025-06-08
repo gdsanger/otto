@@ -59,7 +59,7 @@
     {% for task in tasks %}
     <div class="card mb-2" draggable="true" data-task-id="{{ task.id }}" data-person-id="{{ task.person_id }}" data-project-id="{{ task.project_id|default:'' }}" data-sprint-id="{{ task.sprint_id|default:'' }}">
       <div class="card-body p-2">
-        <div><strong>{{ task.betreff }}</strong></div>
+        <div><strong><a href="/task/view/{{ task.id }}/">{{ task.betreff }}</a></strong></div>
         <div><small>👤 {{ task.person_name }}</small></div>
         <div><small>📅 {{ task.termin_formatiert }}</small></div>
         {% if task.sprint_name %}
