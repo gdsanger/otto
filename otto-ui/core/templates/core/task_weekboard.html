@@ -64,13 +64,13 @@
       window.location = url.toString();
     });
 
-    document.querySelectorAll('.kanban-column').forEach(function(col){
+    document.querySelectorAll('.kanban-column-body').forEach(function(col){
       new Sortable(col, {
         group: 'tasks',
         animation: 150,
         onEnd: function(evt){
           const taskId = evt.item.dataset.taskId;
-          const newDate = evt.to.dataset.date;
+          const newDate = evt.to.closest('.kanban-column').dataset.date;
           fetch(`/task/view/${taskId}/`, {
             method: 'POST',
             headers: { 'Content-Type':'application/json' },

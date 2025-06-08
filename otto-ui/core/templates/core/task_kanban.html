@@ -146,13 +146,13 @@
       });
     }
 
-    document.querySelectorAll('.kanban-column').forEach(function(col){
+    document.querySelectorAll('.kanban-column-body').forEach(function(col){
       new Sortable(col, {
         group: 'tasks',
         animation: 150,
         onEnd: function(evt){
           const taskId = evt.item.dataset.taskId;
-          const newStatus = evt.to.dataset.status;
+          const newStatus = evt.to.closest('.kanban-column').dataset.status;
           fetch('/task/update_status/', {
             method: 'POST',
             headers: {'HX-Request': 'true'},
