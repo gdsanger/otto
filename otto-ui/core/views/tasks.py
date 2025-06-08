@@ -186,6 +186,7 @@ def task_kanban_view(request):
 
     projekte_res = requests.get(f"{OTTO_API_URL}/projekte", headers={"x-api-key": OTTO_API_KEY})
     projekte = projekte_res.json() if projekte_res.status_code == 200 else []
+    projekt_map = {p.get("id"): p.get("name") for p in projekte}
     sprints_res = requests.get(f"{OTTO_API_URL}/sprints", headers={"x-api-key": OTTO_API_KEY})
     sprints = sprints_res.json() if sprints_res.status_code == 200 else []
     sprint_map = {s.get("id"): s.get("name") for s in sprints}
@@ -207,6 +208,8 @@ def task_kanban_view(request):
         t["termin_formatiert"] = termin_dt.strftime("%d.%m.%Y") if termin_dt else "-"
         t["person_name"] = personen_map.get(t.get("person_id"), "-")
         t["sprint_name"] = sprint_map.get(t.get("sprint_id"))
+        pid = t.get("project_id")
+        t["project_name"] = projekt_map.get(pid, "") if pid else ""
         grouped[status].append(t)
 
     for lst in grouped.values():
