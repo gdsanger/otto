@@ -356,10 +356,12 @@ def task_week_view(request):
     personen, agenten = load_person_lists()
 
     days = []
+    weekday_abbr = ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"]
     for i in range(7):
         d = start + timedelta(days=i)
         if i < 5 or show_weekend:
-            days.append({"iso": d.isoformat(), "label": d.strftime("%a %d.%m")})
+            label = f"{weekday_abbr[d.weekday()]} {d.strftime('%d.%m')}"
+            days.append({"iso": d.isoformat(), "label": label})
 
     board = []
     for p in agenten:
