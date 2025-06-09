@@ -218,7 +218,7 @@ async def get_similar_messages(message_id: str, limit: int = 5):
     if not msg:
         raise HTTPException(status_code=404, detail="Message not found")
 
-    text = f"{msg.get('subject', '')}\n{msg.get('message', '')}"
+    text = f"{msg.get('subject', '')}"
     similar = qdrant_similar_messages(text, message_id, limit)
     return similar
 
@@ -234,7 +234,7 @@ async def get_similar_tasks_for_message(message_id: str, limit: int = 5):
     if not msg:
         raise HTTPException(status_code=404, detail="Message not found")
 
-    text = f"{msg.get('subject', '')}\n{msg.get('message', '')}"
+    text = f"{msg.get('subject', '')}"
     similar = qdrant_similar_tasks(text, None, limit)
     return similar
 

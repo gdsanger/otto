@@ -83,8 +83,8 @@ def qdrant_similar_tasks(query_text: str, exclude_id: str, limit: int = 5):
     similar = []
     for hit in hits:
         logger.debug(f"Treffer Score: {hit.score:.3f}, ID: {hit.id}")
-        if hit.score < 0.7:
-            continue
+        #if hit.score < 0.7:
+        #    continue
         payload = hit.payload
         if payload.get("mongo_id") != exclude_id:
             similar.append({"score": hit.score, "task": payload})

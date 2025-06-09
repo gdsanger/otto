@@ -2,7 +2,7 @@
 
 > _„Planung ist nichts – Planung ist alles.“_
 
-**KiPlaner** ist ein neuartiger, kognitiv unterstützter Planungsassistent. Im Kern steht das Konzept **COS – Cognitive Orchestrated Scheduling**:  
+**Otto** ist ein neuartiger, kognitiv unterstützter Planungsassistent. Im Kern steht das Konzept **COS – Cognitive Orchestrated Scheduling**:  
 Ein flexibles, KI-gestütztes System zur Erkennung, Strukturierung und Weiterverarbeitung von Aufgaben, Meetings, Entscheidungen und Verantwortlichkeiten – automatisch, nachvollziehbar, assistierend.
 
 ## 🌐 Zielsetzung
@@ -13,13 +13,13 @@ Ein flexibles, KI-gestütztes System zur Erkennung, Strukturierung und Weiterver
 - **Erweiterbarkeit** durch modulare Architektur und offene Schnittstellen
 - **Selbstlernend & adaptiv** durch Feedback-Schleifen und Integration lokaler und externer LLMs
 
-## 🧩 COS-Grundmodule (aktuell im KiPlaner)
+## 🧩 COS-Grundmodule (aktuell in Otto)
 
 | Modul                  | Funktion                                                                 |
 |------------------------|--------------------------------------------------------------------------|
 | 🗓️ Meetings             | Agenda-Verwaltung, Protokolltranskripte, automatische Task-Extraktion   |
 | 🧠 KI / LLM             | OpenAI / Ollama-Integration für GPT/Mistral-basierte Auswertung          |
-| 🔍 Vektorsuche          | Kontextbezogene Recherche mit ChromaDB                                  |
+| 🔍 Vektorsuche          | Kontextbezogene Recherche mit qdrant                                  |
 | 🧑 Personen / Mandanten | Benutzer, Rollen, Organisationen, Mandantenfähig                        |
 | 📬 E-Mail Integration   | Microsoft Graph API: Kalender, Mails, Benutzerinformationen              |
 | 📝 Tasks & Projekte     | Strukturierte Planung & Verantwortungszuweisung                         |
@@ -50,7 +50,5 @@ GitHub_API_URL=https://api.github.com
 GitHub_ORGNAME=<deine Organisation>
 GitHub_API_KEY=<persönlicher Access Token>
 ```
-
-Ohne diese Einstellungen bleibt das Dropdown leer.
 
 Christian Angermeier, Mai 2025
