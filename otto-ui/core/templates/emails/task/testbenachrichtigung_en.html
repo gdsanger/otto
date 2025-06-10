@@ -1,0 +1,17 @@
+<html>
+  <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
+    <p>Hello everyone,</p>
+
+    <p>The test phase for {{ projekt.name }} starts now. The testing period lasts for <strong>2 weeks</strong> from today. Please complete the necessary tests within this timeframe.</p>
+
+    <p><strong>Testing Guidelines:</strong><br>
+    {{ task.umsetzung|safe }}</p>
+
+    <p>A final update date will be announced once the test results are available.</p>
+
+    <p>If you have any issues, questions, or suggestions, please contact {{ requester.name }} (<a href="mailto:{{ requester.email }}">{{ requester.email }}</a>).</p>
+
+    <p>Thanks a lot!<br>
+    Christian ∞</p>
+  </body>
+</html>
