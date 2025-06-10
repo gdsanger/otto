@@ -1,0 +1,17 @@
+<html>
+  <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
+    <p>Hallo zusammen,</p>
+
+    <p>für {{ projekt.name }} steht ab sofort die Testphase an. Der Testzeitraum beträgt <strong>2 Wochen</strong> ab heute. Wir bitten euch, innerhalb dieses Zeitraums die notwendigen Tests durchzuführen.</p>
+
+    <p><strong>Hinweise zum Testen:</strong><br>
+    {{ task.umsetzung|safe }}</p>
+
+    <p>Ein finaler Update-Termin wird bekannt gegeben, sobald die Testergebnisse vorliegen.</p>
+
+    <p>Bei Problemen, Fragen oder Anregungen wendet euch bitte an {{ requester.name }} (<a href="mailto:{{ requester.email }}">{{ requester.email }}</a>).</p>
+
+    <p>Vielen Dank!<br><br>
+    Christian ∞</p>
+  </body>
+</html>
