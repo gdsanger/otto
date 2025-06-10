@@ -597,6 +597,8 @@ def task_pageview(request, task_id):
     sprints = sprints_res.json() if sprints_res.status_code == 200 else []
     meetings_res = requests.get(f"{OTTO_API_URL}/meetings", headers={"x-api-key": OTTO_API_KEY})
     meetings = meetings_res.json() if meetings_res.status_code == 200 else []
+    templates_dir = os.path.join(os.path.dirname(__file__), '../templates/emails/task')
+    email_templates = [f[:-5] for f in os.listdir(templates_dir) if f.endswith('.html')]
     context_res = requests.get(
         f"{OTTO_API_URL}/context/aufgabe/{task_id}",
         headers={"x-api-key": OTTO_API_KEY},
@@ -629,6 +631,7 @@ def task_pageview(request, task_id):
         "personen_map": personen_map,
         "context_json": json.dumps(task_context),
         "context_text": context_text,
+        "email_templates": email_templates,
     })
 
 

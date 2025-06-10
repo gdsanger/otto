@@ -183,7 +183,70 @@ def message_create(request):
     }
     template = request.GET.get("template")
     project_id = request.GET.get("project_id")
-    if template and project_id:
+    task_id = request.GET.get("task_id")
+    if template and task_id:
+        t_res = requests.get(
+            f"{OTTO_API_URL}/tasks/{task_id}",
+            headers={"x-api-key": OTTO_API_KEY},
+        )
+        task = t_res.json() if t_res.status_code == 200 else {}
+        project_id = task.get("project_id")
+        projekt = {}
+        if project_id:
+            p_res = requests.get(
+                f"{OTTO_API_URL}/projekte/{project_id}",
+                headers={"x-api-key": OTTO_API_KEY},
+            )
+            if p_res.status_code == 200:
+                projekt = p_res.json()
+
+        personen_res = requests.get(
+            f"{OTTO_API_URL}/personen",
+            headers={"x-api-key": OTTO_API_KEY},
+        )
+        personen = personen_res.json() if personen_res.status_code == 200 else []
+        person_map = {p.get("id"): p for p in personen}
+
+        to_list = []
+        bearer = person_map.get(task.get("person_id"))
+        if bearer and bearer.get("email"):
+            to_list.append(bearer["email"])
+
+        cc_set = set()
+        requester = person_map.get(task.get("requester_id"))
+        if requester and requester.get("email") and requester["email"] not in to_list:
+            cc_set.add(requester["email"])
+
+        proj_bearbeiter = None
+        if projekt:
+            proj_bearbeiter = person_map.get(projekt.get("bearbeiter"))
+            if (
+                proj_bearbeiter
+                and proj_bearbeiter.get("email")
+                and proj_bearbeiter["email"] not in to_list
+            ):
+                cc_set.add(proj_bearbeiter["email"])
+
+        html = render_to_string(
+            f"emails/task/{template}.html",
+            {
+                "projekt": projekt,
+                "task": task,
+                "requester": requester,
+            },
+        )
+        message.update(
+            {
+                "task_id": task_id,
+                "project_id": project_id,
+                "subject": f"Task-Update: {task.get('betreff', '')}",
+                "message": html,
+                "to": to_list,
+                "cc": list(cc_set),
+            }
+        )
+
+    elif template and project_id:
         p_res = requests.get(
             f"{OTTO_API_URL}/projekte/{project_id}", headers={"x-api-key": OTTO_API_KEY}
         )

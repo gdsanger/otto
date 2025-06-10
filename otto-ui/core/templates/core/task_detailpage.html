@@ -24,6 +24,14 @@
           <button id="saveCloseBtn" type="button" class="btn btn-outline-secondary">💾 Speichern &amp; Schließen</button>
         </div>
         <div class="btn-group me-2" role="group">
+          <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">📧 Vorlage</button>
+          <ul class="dropdown-menu">
+            {% for t in email_templates %}
+            <li><a class="dropdown-item" href="/message/new/?template={{ t }}&task_id={{ task.id }}">{{ t }}</a></li>
+            {% endfor %}
+          </ul>
+        </div>
+        <div class="btn-group me-2" role="group">
           <button id="doneBtn" type="button" class="btn btn-outline-success">✅ Erledigt</button>
         </div>
         <div class="btn-group" role="group">
